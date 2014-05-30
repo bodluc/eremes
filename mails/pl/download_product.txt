@@ -1,0 +1,11 @@
+﻿Witaj {firstname} {lastname}, dziekujemy za zakupy w naszym sklepie.
+ 
+Produkty do pobrania
+ 
+Masz {nbProducts} produktow do pobrania.
+ 
+Oto linki do pobrania zakupionych produktow: {virtualProducts}
+ 
+W sekcji "Historia zamowien" w "Twoim koncie" mozesz obejrzec swoje zamowienie i pobrac fakture.
+ 
+{shop_name} oparty na systemie PrestaShop™

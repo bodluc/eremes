@@ -1,0 +1,80 @@
+﻿Pricewars Barghest
+
+Błędy i problemy proszę zgłaszać na kontakt@seigi.eu
+	
+[Problemy]
++ Uwaga! W związku z charakterystyką modułu, potrzebuje on większej ilości pamięci przy generowaniu XML. Serwery z ograniczeniami pamięci mogą mieć problem z modułem (NetArt (nazwa.pl; serwery.pl) jak i Home.pl posiadają takie ograniczenia)
++ Przy mapowaniu kategorii, integracja z nowym ceneo pobiera produkty do danej kategorii, tylko i wyłącznie wtedy, gdy produkt przypisany do danej kategorii jak i ma ją ustawioną jako kategorię główną.
+  Np. Jeśli produkt mamy przypisany do kategorii "Telewizory" i Kategorii "Home" i produkt jest przypisany do kategorii Home jako głównej, nie pojawi się on w kategorii Telewizory.
++ Aby uniknąć problemów z działaniem modułu należy nadać katalogowi modules/Pricewars prawa zapisu(777)
++ Inne problemy jeszcze nie znane :)
+
+[Changelog]	
+v 1.9.0 (31/10/2012)
++ Poprawki w autocomplete dla mapowania. Tak, od tej Pory pole nie będzie się automatycznie czyściło, jak wpiszemy zły znak!! (szkoda tylko, że nikt nie zgłosił tego uciążliwego zachowania i sam musiałem je przypadkiem odkryć)
++ Od tej pory jeśli kategoria nie została zmapowana to kropki się nie będą pojawiać.
++ Brak autofill gdyż były problemy przy pisaniu polskich znaków.
++ Zmienione URL dla autocomplete
+
+v 1.8.3 (14/10/2012)
++ Poprawiony błąd gdzie zapytania mogły generować błąd gdy prefix bazy był inny niż domyślny. - Podziękowania dla DivNet.pl za znalezienie błędu.]
++ Poprawiony błąd w który sie pojawiał w wersji 1.8.2
+
+v 1.8.2 (29/08/2012)
++ Usunięto problem, gdzie nowy XML ceneo nie wyświetlał produktów z powodu braku zdefiniowanych producentów w sklepie.
+
+v 1.8.1 (29/08/2012)
++ Poprawka błędu, gdzie starsze wersje sklepu nie generowały pełnego linku do zdjęcia (brakowało domeny i protokołu).
+
+v 1.8.0 (27/08/2012)
++ Ważna Optymalizacja: Od teraz zamiast długiego drop-down menu przy mapowaniu jest szybsza wyszukiwarka (Javascript)
++ Dodano obsługę Oferciak.pl
++ Dodano obsługę Szoker.pl
++ Dodano obsługę Alejka.pl (tak na prawdę to tylko informację o tym, że obsługuje formaty popularnych porównywarek ;) )
++ Generatory do każdej integracji znajdują się teraz w osobnych plikach/klasach - wszystko w jednym to przesada :)
++ Usunięto tanio.pl z listy zaplanowanych porównywarek - adres przekierowywuje teraz na nokaut.pl
+
+v 1.7.3 (09/05/2012)
++ Dodano atrybut Weight dla Nowego XML ceneo.
++ Jeśli krótki opis jest pusty, to zostanie użyty opis długi.
++ Poprawiony błąd gdzie zamiast nazwy producenta w nowym XML ceneo pojawiała się liczba "1"
+
+v 1.7.1 (27/03/2012)
++ Poprawka błędu: Brak wyświetlanego atrybutu "name" w XML do sklepy24.pl
+
+v 1.7 (27/03/2012)
++ Teraz powinno uwzględniać obniżki cen itp, aczkolwiek może się posypać, testujemy, zobaczymy.
++ Dodana obsługa exportu starej i nowej ceny dla okazje.info. Podziękowania dla p. Pawła
+
+v 1.6 (09/02/2012)
++ Dodana obsługa sklepy24.pl - Podziękowania dla 4vip.pl za ten kawałek kodu :)
+
+v 1.5 (21/01/2012)
++ Mała poprawka linków do zdjęć generowanych w XMLach
++ Dodana możliwośc wyboru jakiej wielkości obrazek chcemy aby był przekazywany do xmla (np. thick, large, small)
+
+v 1.4 (19/12/2011)
++ Nowa wersja XML'a dla skąpca. Z wersji 10 do 12.
++ usunięto pojawiający się napis "usuwanie" przed wygenerowanym XML'em.
+
+v 1.3 (14/12/2011)
++ Dodano możliwośc eksportu produktów z zerowym stanem magazynowym - Dla sklepów, które nie prowadzą stanów magazynowych.
++ Lekka modyfikacja systemu notyfikacji o nowej wersji. Teraz jest bardziej widoczny ;) Jest także możliwość wyłączenia notyfikacji w ogóle.
++ Plus pare mniejszych tweaków i poprawek :)
+
+v 1.2 (9/12/2011)
++ Dodana obsługa dla starszych wersji prestashop - Bez nowego XMLCeneo (testowane na: 1.2.5, 1.3.1, 1.3.7)
++ Pełna obsługa wersji 1.4+ (testowane na: 1.4.3, 1.4.6)
++ Znów lekka poprawka ścieżek na niektórych wersjach
++ Jeśli sklep nie ma języka o kodzie iso 'pl', wtedy pobiera ID domyślnego języka sklepu - niektóre sklepy potrafią mieć polską wersję pod kodem iso 'en' lub 'fr'
+
+v 1.1 (6/12/2011)
++ A jednak były problemy. Teraz nie powinno już być problemu linkami
+
+v 1.0 (5/12/2011)
++ Nie powinno już być problemu z _PS_BASE_URL_ 
++ Pricewars znajduje się teraz w kategorii modułów "Marketing i Reklama"
++ Lekko zmieniony wyglad konfiguracji modułu :)
+
+[Thanks]
+Podziękowania dla 4vip.pl za dodanie obsługi dla sklepy24.pl

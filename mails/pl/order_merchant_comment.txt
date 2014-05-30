@@ -1,0 +1,9 @@
+Witaj {firstname} {lastname},
+ 
+Wiadomosc od {shop_name}
+ 
+Otrzymales nowa wiadomosc dotyczaca zamowienia #{id_order}:
+
+{message}
+ 
+{shop_name} oparty na systemie PrestaShop™

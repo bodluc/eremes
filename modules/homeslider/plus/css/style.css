@@ -1,0 +1,133 @@
+
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+img {
+    display: block;
+}
+
+.slide1 {
+    background: url("../images/image1.jpg") no-repeat scroll left top transparent;
+    height: 210px;
+    padding: 20px 40px;
+    width: 550px;
+}
+
+.slide1 h2 {
+    color: #FFFFFF;
+    font-size: 20px;
+    margin: 0px 0px 20px;
+    text-align: left;
+}
+
+.slide1 p {
+    border-left: 3px solid #FFFFFF;
+    color: #FFFFFF;
+    padding: 0px 0px 0px 10px;
+}
+
+.quote, .quote2, .quote3 {
+    padding: 20px 0px;
+    font: 24px Georgia,serif;
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+
+.quote {
+    color: #333333;
+}
+
+.quote2 {
+    background: none repeat scroll 0% 0% #333333;
+    color: #F1F1F1;
+}
+
+.quote3 {
+    background: none repeat scroll 0% 0% #666666;
+    color: #F1F1F1;
+}
+
+
+
+.plusslider.slider3, .plusslider.slider3 .plusslider-pagination-wrapper {
+    border: medium none;
+    border-radius: 0px 0px 0px 0px;
+
+}
+.plusslider.slider3 {
+        position: absolute;
+    top:185;
+}
+
+#page-wrap {
+    margin: 0px auto;
+    max-width: 100%;
+}
+
+#download {
+    border: 1px solid #485E5B;
+    padding: 5px 10px;
+    font: 20px/80px sans-serif;
+    text-align: center;
+    position: relative;
+    top: -7px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0px 0px 10px #666666;
+    background-color: #506663;
+    background-image: -moz-linear-gradient(100% 100% 90deg, #506663, #627C78);
+}
+
+#download:hover {
+    background: none repeat scroll 0% 0% #435553;
+    border: 1px solid #435553;
+    text-decoration: none;
+}
+
+#features h2 {
+    margin: 20px 0px 10px;
+    font: 36px Georgia,serif;
+    text-align: left;
+}
+
+#features h3 {
+    margin: 20px 0px 10px;
+    font: bold 18px Verdana,sans-serif;
+}
+
+#features p {
+    padding: 3px 0px;
+}
+
+#features li {
+    padding: 6px 0px;
+}
+
+#features li:before {
+    content: "}";
+    margin-right: 5px;
+}
+
+#features pre {
+    background: none repeat scroll 0% 0% #F1F1F1;
+    color: #333333;
+    overflow: auto;
+    padding: 16px 5px 5px;
+    line-height: 22px;
+    font-size: 14px;
+}
+
+#features span.amp {
+    font: 18px Georgia,serif;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}

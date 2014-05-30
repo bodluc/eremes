@@ -1,0 +1,30 @@
+a:55:{s:10:"id_product";s:3:"137";s:11:"id_supplier";s:1:"0";s:15:"id_manufacturer";s:1:"4";s:19:"id_category_default";s:1:"8";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:11:"1462.601626";s:15:"wholesale_price";s:8:"1.218000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:6:"pdx-f4";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 22:44:11";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:1901:"Dane techniczne:  Złącza
+
+Instalacyjne: szybkorozłączne przyłącza (przyłącze zasilania i przyłącza głośników)
+Układ przyłączy: jednostronny
+Rozwiązanie montażowe: łatwość instalacji piętrowej i estetyczny wygląd po zainstalowaniu Ogólne
+Typ wzmacniacza: Wzmacniacz klasy D (cyfrowy)
+Konstrukcja kanałów: 4/3/2 kanałowy
+Zabezpieczenie termiczne
+Zabezpieczenie przed niskim poziomem energii akumulatora
+Zasilanie: Zasilacz DC-DC z modulacją szerokości impulsu (PWM)
+Układ obwodów: Konfiguracja STAR
+Zabezpieczenie prądowe: Automatyczne zabezpieczenie nadprądowe
+Wskaźnik zasilania: Umieszczony u góry niebieski wskaźnik LED zasilania/statusu
+Zwrotnica: Płynna regulacja filtrów górno i dolno-przepustowych
+Stopień przedwzmacniacza: Dyskretny
+Budowa płyty: 6-warstwowa płyta PC z włókna szklanego – epoksydu
+Regulacja wzmocnienia: Płynna regulacja wzmocnienia
+Sterowanie basem: Zdalne sterowanie basem (sprzedawane oddzielnie) SPECYFIKACJE
+Parametry znamionowe mocy RMS  - Na kanał przy 4 Ohm: (@14.4V ≤1%THD+N) 100W x 4  - Na kanał przy 2 Ohm: (@14.4V ≤1%THD+N) 100W x 4  - Zmostkowany przy 4 Ohm: Zmostkowany przy 4Ω (≤1%THD+N) 200W x 2 Regulacja dźwięku
+Zwrotnica: zmienna. 30-400Hz (-12dB / oct ). filtr dolno/górno-przepustowy/OFF (wyłączony) wybieralny Wymiary
+Rozpraszacz ciepła (szer. x wys. x głęb.) mm: 257 mm x 192 mm x 50.8 mm Ogólne
+Wymagane zasilanie: 14.4 V DC (dopuszczalne 11 V do 16 V)
+Czułość wejścia: 0.2 V do 4.0 V (dla mocy znamionowej)
+Przekrój kabla: 25 mm² (BATT i GND). 4 mm² (zdalne sterowanie). maksymalnie do 10 mm² (głośnik)
+Charakterystyka częstotliwościowa: 5 Hz - 100 kHz / 0dB ~ -3dB (odniesienie: 1 W przy 4 Ω)
+Impedancja głośników: 4 lub 2 Ω
+Stosunek sygnał/szum: Stosunek sygnał/szum według CEA 2006 (ważony IHF-A. odniesienie: 1W przy 4Ω) 98 dBA
+ 
+
+";s:17:"description_short";N;s:12:"link_rewrite";s:13:"alpine-pdx-f4";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:14:"Alpine PDX-F4 ";s:13:"available_now";N;s:15:"available_later";N;}

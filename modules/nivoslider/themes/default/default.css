@@ -1,0 +1,103 @@
+
+
+.theme-default .nivoSlider {
+    position: relative;
+    background: url("loading.gif") no-repeat scroll 50% 50% #FFFFFF;
+    margin-bottom: 10px;
+    border-radius: 6px 6px 6px 6px;
+}
+
+.theme-default .nivoSlider img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: none;
+    border-radius: 6px 6px 6px 6px;
+}
+
+.theme-default .nivoSlider a {
+    border: 0px none;
+    display: block;
+}
+
+.theme-default .nivo-controlNav {
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.theme-default .nivo-controlNav a {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url("bullets.png") no-repeat scroll 0% 0% transparent;
+    text-indent: -9999px;
+    border: 0px none;
+    margin: 0px 2px;
+}
+
+.theme-default .nivo-controlNav a.active {
+    background-position: 0px -22px;
+}
+
+.theme-default .nivo-directionNav a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: url("arrows.png") no-repeat scroll 0% 0% transparent;
+    text-indent: -9999px;
+    border: 0px none;
+    opacity: 0;
+    transition: all 200ms ease-in-out 0s;
+}
+
+.theme-default:hover .nivo-directionNav a {
+    opacity: 1;
+}
+
+.theme-default a.nivo-nextNav {
+    background-position: -30px 0px;
+    right: 15px;
+}
+
+.theme-default a.nivo-prevNav {
+    left: 15px;
+}
+
+div.nivo-caption strong {
+    font-size: 28px;
+    border-radius: 10px 10px 10px 10px;
+    background: none repeat scroll 0px 0px rgba(255, 255, 255, 0.44);
+    padding: 10px;
+    position: absolute;
+    top: 0px;
+}
+
+.theme-default .nivo-caption {
+    font-family: 'oswald',arial;
+}
+
+.theme-default .nivo-caption a {
+    color: #FFFFFF;
+    border-bottom: 1px dotted #FFFFFF;
+}
+
+.theme-default .nivo-caption a:hover {
+    color: #FFFFFF;
+}
+
+.theme-default .nivo-controlNav.nivo-thumbs-enabled {
+    width: 180px;
+    padding: 0;
+}
+
+.theme-default .nivo-controlNav.nivo-thumbs-enabled a {
+    width: auto;
+    height: auto;
+    background: none repeat scroll 0% 0% transparent;
+}
+
+.theme-default .nivo-controlNav.nivo-thumbs-enabled img {
+    display: block;
+    width: 177px;
+    height: auto;
+}

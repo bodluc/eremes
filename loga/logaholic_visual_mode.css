@@ -1,0 +1,75 @@
+/* Logaholic Web Analytics software             Copyright(c) 2005-2011 Logaholic B.V.
+ *                                                               All rights Reserved.
+ * This code is subject to the Logaholic license. Unauthorized copying is prohibited.
+ * support@logaholic.com                         http://www.logaholic.com/License.txt
+*/ 
+.greenborder {
+	border-color: #7CDD7C;
+	border-style : solid;
+	border-bottom-width : thin;
+	border-top-width : thin;
+	border-left-width : thin;
+	border-right-width : thin;
+}
+.redborder {
+	border-color: #FD9E9E;
+	border-style : solid;
+	border-bottom-width : thin;
+	border-top-width : thin;
+	border-left-width : thin;
+	border-right-width : thin;
+}
+.qdate {
+	background-color:#F4FCF4;
+	color:black;
+}
+.logaholic_page_form {
+	font-family:arial;
+	font-size:12px
+}
+.logaholic_outer_CTR_bar {
+	position:absolute;
+	font-size:11px;
+	font-family:arial;
+	margin-top:10px;
+	margin-left:-20px;
+	width:60px;
+	height:15px;
+	overflow:hidden;
+	background-color:#FFFFCC;
+	border-width:1px;
+	border-color:black;
+	border-style:solid;
+	filter:alpha(opacity=65);
+	-moz-opacity:.65;
+	opacity:.65;
+}
+.logaholic_CTR_pct_bar {
+	position:absolute;
+	left:0px;
+	top:0px;
+	background-color:green;
+	height:15px;
+	overflow:hidden;
+}
+.logaholic_CTR_pct_text {
+	width:60px;
+	position:absolute;
+	left:10px;
+	height:15px;
+	line-height:15px;
+	vertical-align:middle;
+	text-align:center;
+	color:red;
+	font-size:11px;
+	font-weight:bold;
+	font-family:arial;
+}
+.toplinegreen {
+	border-color: #007900;
+	border-style : solid;
+	border-bottom-width : 0px;
+	border-top-width : thin;
+	border-left-width : 0px;
+	border-right-width : 0px;
+}

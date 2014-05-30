@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>beetailerwidget</name>
+            <displayName><![CDATA[Beetailer Social Widget]]></displayName>
+            <version><![CDATA[1.7]]></version>
+            <description><![CDATA[Beetailer Widget allows to your users comment and share your products in Facebook, Twitter, and Google+]]></description>
+            <author><![CDATA[Beeshopy Inc.]]></author>
+            <tab><![CDATA[social_networks]]></tab>
+	<confirmUninstall>Are you sure you want to delete the module?</confirmUninstall>
+            <is_configurable>1</is_configurable>
+            <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+        </module>

@@ -1,0 +1,473 @@
+a:10:{i:0;a:59:{s:10:"id_product";s:3:"444";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"9";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"340.650406";s:15:"wholesale_price";s:10:"285.980000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:4:"2065";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:755:"
+Subwoofer 30cm z obudową zamkniętą 
+30 
+litrów z MDF.
+&nbsp;&nbsp;
+
+  
+  Głośnik: PowerBass S-124x 
+  (30 cm) 
+  
+  Impedancja: 1x4 Ohm 
+  
+  
+  Moc RMS/Max: 300/600 W&nbsp;&nbsp;&nbsp;&nbsp; 
+  
+  
+  Zalecana moc wzmacniacza: 200-300 
+  W RMS
+  
+  Obudowa: zamknięta 
+  30 
+  litrów&nbsp; 
+  
+  
+  Wytłumienie: watolina 
+  
+  
+  Tkanina obiciowa: czarny melanż 
+  (ciemno szara) 
+  
+  Złącze: pozłacane, zakręcane 
+  terminale&nbsp;&nbsp;&nbsp; 
+  
+  
+  Przewód: 2x3,5mm² &nbsp;
+  
+  Wykonanie: płyta MDF 18mm cięta z 
+  dokładnością +/- 1mm, klejona, skręcana i uszczelniana, przednia i tylna 
+  ścianka pochylone pod kątem 15 stopni, podfrezowanie pod głośnik, zaokrąglone 
+  krawędzie i narożniki&nbsp; 
+  
+&nbsp;
+&nbsp;
+";s:17:"description_short";s:44:"1x30cm, 300/600W, 1x4ohm, obudowa zamknięta";s:12:"link_rewrite";s:23:"powerbass-s-12c-bassbox";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:23:"Powerbass S-12C BassBox";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"516";s:6:"legend";N;s:17:"manufacturer_name";s:10:"Power Bass";s:3:"new";s:1:"1";}i:1;a:59:{s:10:"id_product";s:3:"445";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"9";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"267.479675";s:15:"wholesale_price";s:10:"212.800000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:4:"0228";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:716:"
+Subwoofer 25cm z obudową zamkniętą 
+20 
+litrów.
+&nbsp;&nbsp;
+
+  
+  Głośnik: PowerBass S-104x 
+  (25 cm) 
+  
+  
+  Impedancja: 1x4 Ohm&nbsp;&nbsp;&nbsp;&nbsp; 
+  
+  Moc RMS/Max: 275/550 
+W
+  
+  Zalecana moc wzmacniacza: 150-275 
+  W RMS
+  
+  Obudowa: zamknięta 
+  20 
+  litrów&nbsp;&nbsp; 
+  
+  
+  Wytłumienie: watolina 
+  
+  
+  Tkanina obiciowa: szary 
+  melanż&nbsp; 
+  
+  Złącze: pozłacane, zakręcane 
+  terminale&nbsp;&nbsp;&nbsp; 
+  
+  
+  Przewód: 2x3,5mm² &nbsp;
+  
+  Wykonanie: płyta wiórowa 18mm 
+  cięta z dokładnością +/- 1mm, klejona, skręcana i uszczelniana, tylna ścianka 
+  pochylona pod kątem 20 stopni, boki obudowy cofnięte o 10mm&nbsp;&nbsp;&nbsp; 
+  
+&nbsp;
+&nbsp;
+&nbsp;
+";s:17:"description_short";s:44:"1x25cm, 275/550W, 1x4ohm, obudowa zamknięta";s:12:"link_rewrite";s:26:"powerbass-s-10-eco-bassbox";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:26:"Powerbass S-10 Eco BassBox";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"517";s:6:"legend";N;s:17:"manufacturer_name";s:10:"Power Bass";s:3:"new";s:1:"1";}i:2;a:59:{s:10:"id_product";s:3:"446";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"9";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"373.170732";s:15:"wholesale_price";s:10:"304.270000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:4:"0255";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:954:"
+Subwoofer 30cm z obudową wentylowaną 
+50 litrów z MDF.
+&nbsp;&nbsp;
+
+  
+  Głośnik: PowerBass S-124x (30cm) 
+  
+  
+  Impedancja: 1x4 Ohm&nbsp;&nbsp; 
+  
+  Moc RMS/Max: 300/600 W&nbsp; 
+  
+  Zalecana moc wzmacniacza: 150-250 
+  W RMS 
+  
+  Filtr subsoniczny (gdy jest 
+  stosowany):&nbsp; 33 Hz&nbsp;&nbsp;&nbsp;&nbsp; 
+  
+  
+  Obudowa: wentylowana 
+  50 
+  litrów (bass-reflex)&nbsp; 
+  
+  Port: wykładniczy 100x150mm, 
+  zaokrąglony z przodu&nbsp; 
+  
+  
+  Wytłumienie: perforowana gąbka 
+  akustyczna&nbsp; 
+  
+  
+  Tkanina obiciowa: czarny melanż 
+  (ciemno szara) 
+  
+  Złącze: pozłacane, zakręcane 
+  terminale&nbsp;&nbsp;&nbsp; 
+  
+  
+  Przewód: 2x3,5mm² &nbsp;
+  
+  Wykonanie: płyta MDF 18mm cięta z 
+  dokładnością +/- 1mm, klejona, skręcana i uszczelniana, tylna ścianka 
+  pochylona pod kątem 15 stopni, podfrezowanie pod głośnik, zaokrąglone 
+  krawędzie i narożniki.&nbsp;&nbsp;&nbsp; 
+  
+&nbsp;
+&nbsp;
+&nbsp;
+
+
+";s:17:"description_short";s:45:"1x30cm, 300/600W, 1x4ohm, obudowa bass-reflex";s:12:"link_rewrite";s:23:"powerbass-s-12p-bassbox";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:23:"Powerbass S-12P BassBox";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"518";s:6:"legend";N;s:17:"manufacturer_name";s:10:"Power Bass";s:3:"new";s:1:"1";}i:3;a:59:{s:10:"id_product";s:3:"447";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"9";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"324.390244";s:15:"wholesale_price";s:10:"255.490000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:6:"PB-210";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:811:"
+Subwoofer 1x25cm z obudową 
+wentylowaną PB USA.
+&nbsp;
+
+  
+  1 głośnik 25cm PS-10&nbsp;&nbsp;
+  
+  Moc RMS: 250 W 
+  
+  
+  Moc Max: 500 W 
+  
+  
+  Impedancja: 4 Ohm&nbsp; 
+  
+  Pasmo przenoszenia: 33-150 Hz&nbsp;&nbsp; 
+  
+  Skuteczność (1W/1m): 96 
+  dB&nbsp;&nbsp;
+  
+  Oryginalna skrzynia basowa PB USA 
+  - bass-reflex&nbsp;&nbsp; 
+  
+  
+  Wykończenie 2-kolorowym winylem 
+  
+  
+  Chromowany aeroport BR z łagodnymi 
+  kołnierzami&nbsp;&nbsp; 
+  
+  
+  Wykonanie: płyta 18mm (przednia 
+  ścianka MDF 22mm), klejona, skręcana i uszczelniana, pochylona tylna ścianka, 
+  podfrezowanie pod głośnik, zaokrąglane narożniki, logo "Powerbass"&nbsp;&nbsp;&nbsp;&nbsp; 
+  
+&nbsp;
+Wymiary: 
+
+- wysokość: 
+31cm
+- szerokość: 
+42,5cm
+- głębokość na górze: 
+29cm
+- głębokość na dole: 
+35cm
+
+";s:17:"description_short";s:45:"1x25cm, 250/500W, 1x4ohm, obudowa bass-reflex";s:12:"link_rewrite";s:16:"powerbass-wb-110";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:16:"Powerbass WB-110";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"519";s:6:"legend";N;s:17:"manufacturer_name";s:10:"Power Bass";s:3:"new";s:1:"1";}i:4;a:59:{s:10:"id_product";s:3:"448";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"9";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"356.910569";s:15:"wholesale_price";s:10:"292.070000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:6:"PB-211";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:805:"&nbsp;
+Subwoofer 1x30cm z obudową 
+wentylowaną PB USA. 
+&nbsp;&nbsp;
+
+  
+  1 głośnik 30cm PS-12&nbsp; 
+  
+  Moc RMS: 275 W 
+  
+  
+  Moc Max: 550 W 
+  
+  
+  Impedancja: 4 Ohm&nbsp; 
+  
+  Pasmo przenoszenia: 30-120 Hz&nbsp; 
+  
+  Skuteczność (1W/1m): 98 
+  dB
+  
+  Oryginalna skrzynia basowa PB USA 
+  - bass-reflex&nbsp;&nbsp; 
+  
+  
+  Wykończenie 2-kolorowym winylem 
+  
+  
+  Chromowany aeroport BR z łagodnymi 
+  kołnierzami&nbsp;&nbsp; 
+  
+  
+  Wykonanie: płyta 18mm (przednia 
+  ścianka MDF 22mm), klejona, skręcana i uszczelniana, pochylona tylna ścianka, 
+  podfrezowanie pod głośnik, zaokrąglane narożniki, logo "Powerbass"&nbsp;&nbsp;&nbsp; 
+  
+&nbsp;&nbsp;
+Wymiary: 
+
+- wysokość: 
+34,5cm
+- szerokość: 
+47,5cm
+- głębokość na górze: 
+31,5cm
+- głębokość na dole: 
+37cm
+
+";s:17:"description_short";s:45:"1x30cm, 275/550W, 1x4ohm, obudowa bass-reflex";s:12:"link_rewrite";s:16:"powerbass-wb-112";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:16:"Powerbass WB-112";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"521";s:6:"legend";N;s:17:"manufacturer_name";s:10:"Power Bass";s:3:"new";s:1:"1";}i:5;a:59:{s:10:"id_product";s:3:"449";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"9";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"486.991870";s:15:"wholesale_price";s:10:"377.440000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:6:"PB-215";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:792:"
+Subwoofer 2x25cm z obudową 
+wentylowaną PB USA.
+&nbsp;
+
+  
+  &nbsp;
+  
+  2 głośniki 25cm PS-10&nbsp; 
+  
+  Moc RMS: 500 W 
+  
+  
+  Moc Max: 1000 W 
+  
+  
+  Impedancja: 1x4 Ohm&nbsp; (1 wspólne złącze) 
+  
+  
+  Pasmo przenoszenia: 33-150 Hz 
+  
+  
+  Oryginalna skrzynia basowa PB USA 
+  - bass-reflex&nbsp;&nbsp; 
+  
+  
+  Wykończenie 2-kolorowym winylem 
+  
+  
+  Chromowane aeroporty BR z 
+  łagodnymi kołnierzami&nbsp;&nbsp; 
+  
+  
+  Wykonanie: płyta 18mm (przednia 
+  ścianka MDF 22mm), klejona, skręcana i uszczelniana, pochylona tylna ścianka, 
+  podfrezowanie pod głośnik, zaokrąglane narożniki, logo "Powerbass"&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp;
+Wymiary: 
+
+- wysokość: 
+31cm
+- szerokość: 
+80cm
+- głębokość na górze: 
+29cm
+- głębokość na dole: 35cm 
+
+
+";s:17:"description_short";s:46:"2x25cm, 500/1000W, 1x4ohm, obudowa bass-reflex";s:12:"link_rewrite";s:15:"powerbass-wb-10";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:15:"Powerbass WB-10";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"523";s:6:"legend";N;s:17:"manufacturer_name";s:10:"Power Bass";s:3:"new";s:1:"1";}i:6;a:59:{s:10:"id_product";s:3:"450";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"9";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"568.290000";s:15:"wholesale_price";s:10:"426.220000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:6:"PB-216";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:797:"
+Subwoofer 2x30cm z obudową 
+wentylowaną PB USA.
+&nbsp;&nbsp;
+
+  
+  2 głośniki 30cm PS-12&nbsp; 
+  
+  Moc RMS: 550 W 
+  
+  
+  Moc Max: 1100 W 
+  
+  
+  Impedancja: 4 Ohm&nbsp; (1 wspólne złącze) 
+  
+  
+  Pasmo przenoszenia: 30-120 Hz 
+  
+  
+  Oryginalna skrzynia basowa PB USA 
+  - bass-reflex&nbsp;&nbsp; 
+  
+  
+  Wykończenie 2-kolorowym winylem 
+  
+  
+  Chromowane aeroporty BR z 
+  łagodnymi kołnierzami&nbsp;&nbsp; 
+  
+  
+  Wykonanie: płyta 18mm (przednia 
+  ścianka z MDF 22mm), klejona, skręcana i uszczelniana, pochylona tylna 
+  ścianka, podfrezowanie pod głośnik, zaokrąglane narożniki, logo 
+  "Powerbass"&nbsp;&nbsp;&nbsp;&nbsp; 
+  
+&nbsp;
+&nbsp;
+Wymiary: 
+
+- wysokość: 
+34,5cm
+- szerokość: 
+85cm
+- głębokość na górze: 
+31,5cm
+- głębokość na dole: 37cm 
+
+
+";s:17:"description_short";s:46:"2x30cm, 550/1100W, 1x4ohm, obudowa bass-reflex";s:12:"link_rewrite";s:15:"powerbass-wb-12";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:15:"Powerbass WB-12";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"525";s:6:"legend";N;s:17:"manufacturer_name";s:10:"Power Bass";s:3:"new";s:1:"1";}i:7;a:59:{s:10:"id_product";s:3:"451";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"7";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"649.593496";s:15:"wholesale_price";s:10:"475.080000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:6:"UD-050";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:884:"&nbsp;
+Subwoofer aktywny (głośnik i 
+wzmacniacz we wspólnej obudowie).
+&nbsp;
+
+  
+  Moc wbudowanego 
+  wzmacniacza:&nbsp;- 120W RMS&nbsp;- 240W Max
+  
+  Głośnik 2-cewkowy o średnicy 
+  20 cm (2x2 
+  Ohm)
+  
+  Wejścia RCA 
+  (x2)
+  
+  Wejścia sygnału o poziomie 
+  głośnikowym
+  
+  Automatyczne uruchamianie - Auto 
+  Turn ON/OFF
+  
+  Regulowany filtr dolnoprzepustowy: 
+  50 - 100 Hz
+  
+  Stosunek sygnał/szum: 91 
+  dB
+  
+  Przełącznik zmiany fazy: 0°/ 
+  180°
+  
+  Odlewana aluminiowa obudowa 
+  
+  
+  Super płaski, świetny do montażu 
+  pod fotelem, pod deską rozdzielczą, w boczku bagażnika&nbsp; 
+  
+  Wymiary:&nbsp; 345 x 240 x 68 mm 
+  
+  
+  Napięcie 
+  pracy:&nbsp;10-16V&nbsp;
+  
+  Waga: 5 kg
+  
+  Zabezpieczenie przeciążeniowe, 
+  termiczne, zwarciowe 
+  
+  W komplecie: zdalny regulator 
+  wzmocnienia, zestaw przewodów i akcesoria 
+  montażowe
+
+";s:17:"description_short";s:29:"1x20cm, 120/240W, sub.aktywny";s:12:"link_rewrite";s:22:"u-dimension-glow-08100";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:23:"u-Dimension GLOW 08.100";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"527";s:6:"legend";N;s:17:"manufacturer_name";s:11:"u-Dimension";s:3:"new";s:1:"1";}i:8;a:59:{s:10:"id_product";s:3:"452";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"7";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"812.195122";s:15:"wholesale_price";s:10:"607.200000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:6:"UD-051";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:802:"
+Subwoofer aktywny (głośnik i 
+wzmacniacz we wspólnej obudowie).
+&nbsp;
+
+  
+  Moc wbudowanego 
+  wzmacniacza:&nbsp;- 180W RMS&nbsp;- 360W Max.
+  
+  Głośnik 3-cewkowy o średnicy 
+  25 cm (3x2 
+  Ohm)
+  
+  Wejścia RCA 
+  (x2)
+  
+  Wejścia sygnału o poziomie 
+  głośnikowym
+  
+  Regulowany filtr dolnoprzepustowy: 
+  50 - 100 Hz
+  
+  Stosunek sygnał/szum: 91 
+  dB
+  
+  Przełącznik zmiany fazy: 0°/ 
+  180°
+  
+  Odlewana aluminiowa obudowa 
+  
+  
+  Niewielkie wymiary, świetny do 
+  montażu pod fotelem, w boczku bagażnika, itp. 
+  
+  Wymiary: 369 x 275 x 
+  82 mm 
+  
+  
+  Napięcie pracy: 
+  10-16V&nbsp;
+  
+  Waga: 6,5 
+  kg
+  
+  Zabezpieczenie przeciążeniowe, 
+  termiczne, zwarciowe
+  
+  W komplecie: zdalny regulator 
+  wzmocnienia, zestaw przewodów i akcesoria 
+  montażowe
+
+";s:17:"description_short";s:29:"1x25cm, 180/360W, sub.aktywny";s:12:"link_rewrite";s:22:"u-dimension-glow-10100";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:23:"u-Dimension GLOW 10.100";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"529";s:6:"legend";N;s:17:"manufacturer_name";s:11:"u-Dimension";s:3:"new";s:1:"1";}i:9;a:59:{s:10:"id_product";s:3:"453";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"7";s:19:"id_category_default";s:2:"29";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"617.073171";s:15:"wholesale_price";s:10:"487.190000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:7:"UD-0075";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 23:08:49";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:837:"Subwoofer 27cm z obudową zamkniętą z MDF.
+  
+
+
+1 głośnik 2-cewkowy RM-210SL (1x27cm)  
+
+
+Moc RMS: 300 W 
+
+
+Moc Max: 450 W 
+
+
+Impedancja: 2x2 Ohm  
+
+
+Dwie pary zakręcanych terminali przewodów - możliwa konfiguracja: 1x1 Ohm lub 1x4 Ohm lub 2x2 Ohm 
+
+
+QTC = 0,73   
+
+
+Obudowa zamknięta (German Engineering, Made in EU) 
+
+
+Wykończenie: czarna tkanina bagażnikowa z haftowanym logo  "u-Dimension"
+
+
+2 stalowe pręty zabezpieczające głośnik   
+
+
+Wykonanie: płyta MDF=18mm (przednia ścianka MDF=25mm), klejona, skręcana, wzmacniana i uszczelniana, pochylona tylna ścianka, podfrezowanie pod głośnik, haftowane logo "u-Dimension" na przedniej ściance    
+
+
+  
+Wymiary: 
+- wysokość: 31cm
+- szerokość: 59cm
+- głębokość na górze: 19cm
+- głębokość na dole: 29cm";s:17:"description_short";s:44:"1x27cm, 300/450W, 2x2ohm, obudowa zamknięta";s:12:"link_rewrite";s:23:"u-dimension-rmsc-10-box";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:23:"u-Dimension RMSC-10 Box";s:13:"available_now";N;s:15:"available_later";N;s:8:"id_image";s:3:"531";s:6:"legend";N;s:17:"manufacturer_name";s:11:"u-Dimension";s:3:"new";s:1:"1";}}

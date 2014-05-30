@@ -1,0 +1,36 @@
+#tmnivoslider {height:425px;padding:10px 0 0 0; margin-left: 50px;}
+#slider {width:100%;height: 420px;overflow:hidden;z-index: 0;}
+
+.nivoSlider {position:relative;}
+.nivoSlider img {position:absolute;top:0px;left:0px;}
+.nivoSlider a.nivo-imageLink {position:absolute;top:0px;left:0px;width:100%;height:100%;border:0;padding:0;margin:0;z-index:60;display:none;}
+
+.nivo-slice {display:block;position:absolute;z-index:50;height:100%;}
+
+.nivo-html-caption {display:none;}
+
+.nivo-caption {width:360px;color:#a0a0a0;position:absolute;right:0;top:-10px;z-index:89;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader() !important;}
+.nivo-caption > p {margin:0;padding:0px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader() !important;}
+.nivo-caption h2 {margin:0;padding:0;color:#343434; font:bold 70px Arial;text-transform:uppercase}
+.nivo-caption h3 {margin:0;padding:0;color:#94c414; font: 55px Arial;margin-top:-10px;text-transform:uppercase}
+.nivo-caption h4 {margin:0;padding:0;color:#a0a0a0; font:12px Arial;text-transform: capitalize;}
+.nivo-caption h5 {margin:0;padding:0;color:#94c414; font:bold 28px Arial;}
+.nivo-caption a.slide_btn {display:block;margin:10px 0 0 0;background:#eee;text-decoration:none;text-align:center;}
+
+.nivo-directionNav a {position:absolute;top:40%;z-index:99;cursor:pointer;}
+.nivo-prevNav {left:5px;display:block;width:61px;height:61px;text-indent:-9999px;background: url('../img/nivo_nav.png') top left no-repeat;}
+.nivo-nextNav {right:5px;display:block;width:61px;height:61px;text-indent:-9999px;background: url('../img/nivo_nav.png') top right no-repeat;}
+
+.nivo-controlNav {position:absolute;left:180px;bottom:-2px;z-index:100;padding:14px 0;   }
+.nivo-controlNav a {border-right: 1px solid #eaeaea ;width:121px;height:70px;display:block;padding:0px 0 0 0;overflow:hidden;float:left;cursor:pointer;position:relative;}
+.nivo-controlNav a img {width:auto; height:70px; position:absolute; right:0;  bottom:0; top:auto}
+.nivo-controlNav a + a {margin:0 0 0 18px;}
+.nivo-controlNav a.active {border-radius:5px;box-shadow:2px 2px 4px #515151;border:1px solid #aaa}
+
+#tmpics {width:240px;position:absolute;right:20px;top:230px;z-index:100;}
+/* tmmanufacturer.tpl */
+#tmmanufacturer {height:90px;padding:20px 0 0 20px;background:url() 0 0 repeat-x;}
+#tmmanufacturer ul {}
+#tmmanufacturer ul li {float:left;padding:0 20px 0 0;list-style: none;}
+#tmmanufacturer ul li a {width:140px;height:70px;display:block;background:url() 0 0 no-repeat;}
+#tmmanufacturer ul li a:hover {background-position:0 -70px;}

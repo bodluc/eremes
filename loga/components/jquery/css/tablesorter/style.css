@@ -1,0 +1,45 @@
+/* tables */
+table.tablesorter thead tr th {
+	text-align: left;
+    font-weight: normal;
+    border-right: 1px solid #D3D3D3;
+    border-top: 1px solid silver; 
+    border-bottom: 1px solid silver;
+}
+table.tablesorter thead tr th:Hover {
+    background-image: url(bg.gif);
+    background-color: #EDEDED;
+}
+table.tablesorter thead tr .header {
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+} 
+table.tablesorter tbody tr {
+    font-family:arial;
+    font-size:11px;
+    text-decoration:none;
+}
+table.tablesorter .even {
+    background-color: red;
+}
+table.tablesorter .odd {
+    background-color: #6E6E6E;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortUp:Hover {
+    background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown:Hover {
+    background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+    background-color: #E1E1E1;
+    border-top: 1px solid #D3D3D3; 
+    border-bottom: 1px solid #D3D3D3;
+}

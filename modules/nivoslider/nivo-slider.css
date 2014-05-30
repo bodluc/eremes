@@ -1,0 +1,151 @@
+
+
+.slider-wrapper {
+    
+}
+
+#nivoslider-wrapper {
+    
+}
+
+.nivo-caption .logo {
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    bottom: 5px;
+    border-radius: 10px 10px 10px 10px;
+    left: 5px;
+}
+
+.nivoSlider {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.nivoSlider img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    max-width: none;
+}
+
+.nivo-main-image {
+    display: block ! important;
+    position: relative ! important;
+    width: 500px! important;
+}
+
+.nivoSlider a.nivo-imageLink {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: 0px none;
+    padding: 0px;
+    margin: 0px;
+    z-index: 6;
+    display: none;
+}
+
+.nivo-slice {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    height: 100%;
+    top: 0px;
+}
+
+.nivo-box {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.nivo-box img {
+    display: block;
+}
+
+.nivo-caption {
+    float: right;
+    right: 0px;
+    top: 0px;
+    z-index: 8;
+    overflow: hidden;
+    display: none;
+    -moz-box-sizing: border-box;
+    width: 100px;
+    height: 370px;
+    background: red;
+}
+
+.nivo-caption .price p1 {
+}
+
+.nivo-caption .price .p2 {
+    font-size: 20px;
+}
+
+.nivo-caption .price .p1 {
+    color: white;
+    font-size: 27px;
+    margin-right: 7px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.nivo-caption .price .p3 {
+    font-size: 22px;
+}
+
+.nivo-caption .price {
+    position: absolute;
+    text-align: center;
+    background: url("img/price.png") repeat scroll 0px 0px transparent;
+    width: 112px;
+    height: 88px;
+    bottom: 29px;
+    right: 0px;
+}
+
+.nivo-caption p {
+    padding: 5px;
+    margin: 0px;
+}
+
+.nivo-caption a {
+    display: inline ! important;
+}
+
+.nivo-html-caption {
+    display: none;
+    
+}
+
+.nivo-directionNav a {
+    position: absolute;
+    top: 45%;
+    z-index: 9;
+    cursor: pointer;
+}
+
+.nivo-prevNav {
+    left: 0px;
+}
+
+.nivo-nextNav {
+    right: 0px;
+}
+
+.nivo-controlNav {position:absolute;left:0px;bottom:-2px;z-index:100;padding:14px 0; width:770px; background:url(../img/bg-thumbs.png) repeat-x left top;border-top:1px solid #cdcdcd; padding-left:247px }
+
+.nivo-controlNav a {
+    cursor: pointer;
+}
+
+.nivo-controlNav a.active {
+    font-weight: bold;
+}

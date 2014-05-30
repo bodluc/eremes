@@ -1,0 +1,18 @@
+a:55:{s:10:"id_product";s:2:"57";s:11:"id_supplier";s:1:"6";s:15:"id_manufacturer";s:1:"0";s:19:"id_category_default";s:2:"20";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:10:"324.390244";s:15:"wholesale_price";s:10:"243.410000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:8:"10-20424";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 22:37:26";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:460:"Dane techniczne:
+
+Woofer size 10 cm (4")
+Power handling capacity 50 W RMS / 80 W max
+Impedance 4 ohm
+Frequency range 65 - 20.000 Hz
+Sensitivity 94 dB (1W/1m)
+Size of filter box 125 x 44 x 35 mm (4.92 x 1.73 x 1.38")
+Outer diameter of woofer 100 mm (4")
+Magnet size 80 mm (3.15")
+Mounting depth 58 mm ( 2.28")
+Mounting hole 102 mm (4")
+Weight 2.05 kg / 4.5 lbs
+Tweeter 20 mm (0.8") silk dome
+Crossover Filter box with 6/12 dB slope (LP/HP)
+ 
+
+";s:17:"description_short";N;s:12:"link_rewrite";s:7:"dls-424";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:8:"DLS 424 ";s:13:"available_now";N;s:15:"available_later";N;}

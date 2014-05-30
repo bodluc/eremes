@@ -1,0 +1,9 @@
+Witaj {firstname} {lastname},
+ 
+Zwrot #{id_order_return}
+ 
+Status twojego zwrotu zostal zmieniony na "{state_order_return}".
+ 
+W sekcji "Historia zamowien" w "Twoim koncie" mozesz obejrzec swoj zwrot.
+ 
+{shop_name} oparty na systemie PrestaShop™

@@ -1,0 +1,52 @@
+<settings>
+<General_Properties>
+    <imagesXML value="/themes/default/dock/images.xml"/>
+    <direction value="horizontal"/>
+    <minThumbWidth value="32"/>
+    <minThumbHeight value="20"/>
+    <maxThumbWidth value="70"/>
+    <maxThumbHeight value="50"/>
+    <spacing value="3"/>
+    <expandingDirection value="up/right"/>
+    <imagesEasingSpeed value="70"/>
+    <imagesInfluence value="200"/>
+    <backgroundColor value="0xffffffff"/>
+    <dockWidth value="970"/>
+    <dockHeight value="60"/>
+    <startingPixel value="0"/>
+    <gotoStartingPixelOnRollOut value="true"/>
+	<showAbout value="false"/>
+</General_Properties>
+<Scrolling_Properties>
+    <scrollSpeed value="25"/>
+    <smoothScrolling value="true"/>
+    <autoScroll value="false"/>
+    <autoScrollSpeed value="10"/>
+    <onScrollEnd value="goBackwards"/>
+</Scrolling_Properties>
+<Reflection_Properties>
+    <useReflection value="true"/>
+    <reflectionAlpha value="30"/>
+    <reflectionSpread value="30"/>
+    <reflectionDistance value="1"/>
+</Reflection_Properties>
+<Roll_Over_Properties>
+    <rollOverBehavior value="smooth"/>
+    <brightnessOver value="25"/>
+    <brightnessOut value="-25"/>
+    <brightnessSpeed value="7"/>
+</Roll_Over_Properties>
+<Tooltip_Properties>
+    <position value="bottom"/>
+    <appearance value="center"/>
+    <backColor value="0x00AEEF"/>
+	<backColor2 value="0x00AEEF"/> <!-- available only in AS3 version -->	
+    <backAlpha value="100"/>
+    <cornerRadius value="3"/>
+    <easingFunction value="Regular"/>
+    <easingDuration value="0.5"/>
+    <fontFace value="Verdana"/>
+    <fontSize value="11"/>
+    <fontColor value="0xffffff"/>
+</Tooltip_Properties>
+</settings>

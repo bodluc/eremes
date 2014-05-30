@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>ratyzagiel</name>
+            <displayName><![CDATA[Zakupy na raty Żagiel]]></displayName>
+            <version><![CDATA[1.4.2 <a style="color: #9BBD23;" href="http://pl.seigi.eu/barghest.html" target="_blank">Barghest &#10148;</a>]]></version>
+            <description><![CDATA[Umożliwia zakupy na raty dzięki systemowi Żagiel S.A]]></description>
+            <author><![CDATA[seigi.eu (Barghest)]]></author>
+            <tab><![CDATA[payments_gateways]]></tab>
+            <is_configurable>1</is_configurable>
+            <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+        </module>

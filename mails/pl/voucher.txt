@@ -1,0 +1,10 @@
+Witaj {firstname} {lastname},
+ 
+Zamowienie #{id_order}
+ 
+Dzieki zlozeniu zamowienia #{id_order} otrzymales od nas rabat na nastepne zamowienia.
+ 
+Oto twoj kod rabatowy: {voucher_num}, na kwote {voucher_amount}.
+Przy nastepnym zamowieniu wklej ten kod podczas skladania zamowienia przed zaplaceniem.
+ 
+{shop_name} oparty na systemie PrestaShop™

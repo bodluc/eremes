@@ -1,0 +1,10 @@
+- Just uncompress the module on your Modules folder
+- Enable the module clicking on the Modules tab (Social Networks) in your Prestashop admin panel
+- Click on configure in order to change the widget default settings.
+- That's it. Now you will see the comments under your products information.
+- Enjoy
+
+Remember, you can import your Prestashop store on Facebook and share the social widget information using http://www.beetailer.com :)
+
+The Beetailer Team.
+

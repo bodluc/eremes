@@ -1,0 +1,85 @@
+a:55:{s:10:"id_product";s:2:"10";s:11:"id_supplier";s:1:"3";s:15:"id_manufacturer";s:1:"7";s:19:"id_category_default";s:1:"8";s:15:"id_shop_default";s:1:"1";s:18:"id_tax_rules_group";s:1:"1";s:7:"on_sale";s:1:"0";s:11:"online_only";s:1:"0";s:5:"ean13";N;s:3:"upc";N;s:6:"ecotax";s:8:"0.000000";s:8:"quantity";s:1:"0";s:16:"minimal_quantity";s:1:"1";s:5:"price";s:11:"2600.813008";s:15:"wholesale_price";s:11:"1901.910000";s:5:"unity";N;s:16:"unit_price_ratio";s:8:"0.000000";s:24:"additional_shipping_cost";s:4:"0.00";s:9:"reference";s:6:"UD-022";s:18:"supplier_reference";N;s:8:"location";N;s:5:"width";s:1:"0";s:6:"height";s:1:"0";s:5:"depth";s:1:"0";s:6:"weight";s:1:"0";s:12:"out_of_stock";s:1:"2";s:17:"quantity_discount";s:1:"0";s:12:"customizable";s:1:"0";s:16:"uploadable_files";s:1:"0";s:11:"text_fields";s:1:"0";s:6:"active";s:1:"1";s:19:"available_for_order";s:1:"1";s:14:"available_date";s:10:"0000-00-00";s:9:"condition";s:3:"new";s:10:"show_price";s:1:"1";s:7:"indexed";s:1:"1";s:10:"visibility";s:4:"both";s:13:"cache_is_pack";s:1:"0";s:21:"cache_has_attachments";s:1:"0";s:10:"is_virtual";s:1:"0";s:23:"cache_default_attribute";s:1:"0";s:8:"date_add";s:19:"2012-06-14 22:37:26";s:8:"date_upd";s:19:"0000-00-00 00:00:00";s:25:"advanced_stock_management";s:1:"0";s:7:"id_shop";s:1:"1";s:7:"id_lang";s:1:"6";s:11:"description";s:3045:"W tym topowym modelu serii ProX Competition zastosowano szereg nowych rozwiązań technicznych, wysokiej klasy komponenty w tym selekcjonowane kondensatory ELNA oraz bardzo wydajne przetwornice umożliwiające mu stabilną pracę przy obciążeniu 1Ω. Nowością są również wysokiej jakości wbudowane filtry górno i dolnoprzepustowe 12dB/okt o przełączanym zakresie pracy (50Hz-500Hz / 500Hz-5kHz), solidne i trwałe, przykręcane gniazda RCA oraz całkowicie izolowane, śrubowe zaciski przewodów głośnikowych i zasilających. W celu uzyskania najwyższej jakości dźwięku producent zdecydował się nie stosować żadnych kompromisów i wyposażył go w najwyższej jakości przedwzmacniacze z wejściami różnicowymi, do budowy których użyto komponentów Burr-Brown. 
+ 
+  
+ 
+DANE TECHNICZNE: 
+
+
+Ilość kanałów:  4
+
+
+Moc wyj. RMS/4Ω, nap. zasil. 12V:  4x105W
+
+
+Moc wyj. RMS/2Ω, nap. zasil. 12V:  4x165W
+
+
+Moc wyj. RMS/1Ω, nap. zasil. 12V:  4x210W
+
+
+Moc wyj. RMS/4Ω, nap. zasil. 12V:  2x330W (mostek)
+
+
+Moc wyj. RMS/2Ω, nap. zasil. 12V:  2x420W (mostek)
+
+
+
+
+Analogowa klasa AB
+
+
+Pasmo przenoszenia (-1dB):  5Hz – 30kHz
+
+
+Maksymalny poziom zniekształceń THD:  0,03 %
+
+
+Sygnał/Szum (S/N Ratio IHF-A):  105 dB
+
+
+Separacja kanałów:  75 dB
+
+
+Czułość wejściowa:  150mV – 6V
+
+
+Impedancja wejściowa:  47 kΩ
+
+
+Współczynnik tłumienia:  &gt;400
+
+
+Zastosowane podzespoły BURR-BROWN
+
+
+Filtry: HP/LP/OFF (12dB/okt.) z przełącznikiem zakresu regulacji  - High Pass: 50Hz-500Hz / 500Hz-5kHz (Przód + Tył)  - Low Pass: 50Hz-500Hz / 500Hz-5kHz (Przód + Tył)
+
+
+Balansowane wejścia (różnicowe) RCA
+
+
+Regulacja czułości wejściowej: kan. 1/2 i 3/4
+
+
+Izolowane terminale zasilania (21,4mm²) i głośników
+
+
+Bezpiecznik: 3x25A zewnętrzny
+
+
+Wymiary (szer./wys./głęb.) mm: 308/57/440
+
+
+Waga: 7,5 kg
+
+
+Napięcie pracy: 11-16V
+
+
+  
+UWAGA!
+Błąd w informacji podanej przez producenta w Instrukcji Obsługi oraz na opakowaniu, dotyczącej wartości mocy w trybie "mostek / 4 Ohm". Jest wydrukowane 2x315W, a powinno być 2x330W RMS.
+ 
+ 
+ 
+Seria ProX Competition, to przede wszystkim duża moc oraz znakomite brzmienie. W skład serii wchodzą dwa cyfrowe monobloki stabilnie pracujące przy obciążeniu 1Ω oraz trzy analogowe wzmacniacze charakteryzujący się wysokimi parametrami technicznymi i najwyższej jakości dźwiękiem (stabilna praca przy obciążeniu 1Ω, kondensatory ELNA, komponenty BURR-BROWN). Monoblok o najwyższej mocy został wyposażony w unikalną funkcję ProX-Link, dzięki której można razem ze sobą połączyć i synchronicznie wysterować dwa wzmacniacze tego samego typu, osiągając przy obciążeniu 2 Ohm gigantyczną moc 4000W RMS. Do każdego egzemplarza jest dołączany indywidualny certyfikat kontroli jakości, zawierający między innymi rzeczywistą wartość mocy wyjściowej, która często znacznie przewyższa oficjalnie podawaną wartość katalogową.";s:17:"description_short";s:36:"4-kanałowy: 4x105-210W / 2x330-420W";s:12:"link_rewrite";s:26:"u-dimension-prox-8404-comp";s:16:"meta_description";N;s:13:"meta_keywords";N;s:10:"meta_title";N;s:4:"name";s:27:"u-Dimension ProX 840.4 Comp";s:13:"available_now";N;s:15:"available_later";N;}

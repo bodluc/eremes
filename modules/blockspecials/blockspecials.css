@@ -1,0 +1,57 @@
+
+
+#special_block_right p {
+    padding-bottom: 0px;
+    font-weight: bold;
+    text-align: right;
+}
+
+#special_block_right .products li {
+    width: 130px;
+    border: medium none;
+    padding: 5px 0px;
+}
+
+#special_block_right li h5 {
+    padding: 0px 0px 3px;
+    font-size: 12px;
+}
+
+#special_block_right .products li a {
+    padding: 0px;
+    background: none repeat scroll 0% 0% transparent;
+}
+
+#special_block_right li.product_image {
+    padding-right: 10px;
+    width: 62px;
+}
+
+#special_block_right .products span.price-discount {
+    font-size: 14px;
+    text-decoration: line-through;
+}
+
+#special_block_right .products span.reduction {
+    display: block;
+    float: right;
+    padding: 0px 0px 0px 10px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #FFFFFF;
+    background: url("img/bg_reduction.png") no-repeat scroll 0px 0px transparent;
+}
+
+#special_block_right .products span.reduction span {
+    display: block;
+    padding: 1px 5px 1px 0px;
+    background: url("img/bg_reduction.png") no-repeat scroll 100% 0px transparent;
+}
+
+#special_block_right .products span.price {
+    display: block;
+    padding: 3px 0px 0px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #990000;
+}

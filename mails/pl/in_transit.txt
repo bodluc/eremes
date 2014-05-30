@@ -1,0 +1,15 @@
+﻿Witaj {firstname} {lastname},
+
+Twoje zamowienie jest obecnie w tranzycie.
+
+Mozesz sledzic przesylkę klikajac na ponizszy link: {followup}
+
+Mozna rowniez dokonac przegladu niniejszego zamowienia i pobrac faktury  z "Historia zamowien", klikajac "Moje konto" na naszej witrynie. 
+
+Dziekujemy za zakupy w naszym sklepie internetowym {shop_name}!
+
+{shop_name} - {shop_url}
+
+
+
+{shop_url} oparty na systemie PrestaShop™
