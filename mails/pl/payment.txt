@@ -1,9 +1,22 @@
+
+[{shop_url}] 
+
 Witaj {firstname} {lastname},
- 
-Zamowienie #{id_order}
- 
-Platnosc za twoje zamowienie zostala pomyslnie przyjeta.
- 
-W sekcji "Historia zamowien" w "Twoim koncie" mozesz obejrzec swoje zamowienie i pobrac fakture.
- 
-{shop_name} oparty na systemie PrestaShop™
+
+Dziękujemy za zakupy {shop_name}! 
+
+Twoja płatność za zamówienie o numerze {order_name} została
+pomyślnie przetworzona. 
+
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
+"Historia zamówień" [{history_url}] na koncie
+klienta klikając w "Moje konto"
+[{my_account_url}] w naszym sklepie. 
+
+Jeśli posiadasz konto gościa, możesz śledzić swoje
+zamówienie w sekcji "Śledzenie Zamówienia"
+[{guest_tracking_url}?id_order={order_name}]. 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

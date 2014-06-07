@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -41,6 +40,7 @@ class GuestCore extends ObjectModel
 	public $real_player;
 	public $windows_media;
 	public $accept_language;
+	public $mobile_theme;
 
 	/**
 	 * @see ObjectModel::$definition
@@ -63,6 +63,7 @@ class GuestCore extends ObjectModel
 			'real_player' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'windows_media' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 			'accept_language' => 		array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 8),
+			'mobile_theme' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
 		),
 	);
 
@@ -78,7 +79,7 @@ class GuestCore extends ObjectModel
 		$acceptLanguage = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '';
 		$this->id_operating_system = $this->getOs($userAgent);
 		$this->id_web_browser = $this->getBrowser($userAgent);
-		$this->accept_language = $this->getLanguage($acceptLanguage);
+		$this->mobile_theme = Context::getContext()->getMobileDevice();
 	}
 	
 	protected function getLanguage($acceptLanguage)
@@ -102,14 +103,17 @@ class GuestCore extends ObjectModel
 	protected function getBrowser($userAgent)
 	{
 		$browserArray = array(
-			'Google Chrome' => 'Chrome/',
+			'Chrome' => 'Chrome/',
 			'Safari' => 'Safari',
-			'Firefox 3.x' => 'Firefox/3',
-			'Firefox 2.x' => 'Firefox/2',
+			'Safari iPad' => 'iPad',
+			'Firefox' => 'Firefox/',
 			'Opera' => 'Opera',
-			'IE 8.x' => 'MSIE 8',
-			'IE 7.x' => 'MSIE 7',
-			'IE 6.x' => 'MSIE 6'
+			'IE 11' => 'Trident',
+			'IE 10' => 'MSIE 10',
+			'IE 9' => 'MSIE 9',
+			'IE 8' => 'MSIE 8',
+			'IE 7' => 'MSIE 7',
+			'IE 6' => 'MSIE 6'
 		);
 		foreach ($browserArray as $k => $value)
 			if (strstr($userAgent, $value))
@@ -127,9 +131,12 @@ class GuestCore extends ObjectModel
 	protected function getOs($userAgent)
 	{
 		$osArray = array(
-			'Windows Vista' => 'Windows NT 6',
+			'Windows 8' => 'Windows NT 6.2',
+			'Windows 7' => 'Windows NT 6.1',
+			'Windows Vista' => 'Windows NT 6.0',
 			'Windows XP' => 'Windows NT 5',
 			'MacOsX' => 'Mac OS X',
+			'Android' => 'Android',
 			'Linux' => 'X11'
 		);
 		foreach ($osArray as $k => $value)
@@ -179,12 +186,7 @@ class GuestCore extends ObjectModel
 	{
 		$guest = new Guest(isset($cookie->id_customer) ? Guest::getFromCustomer((int)($cookie->id_customer)) : null);
 		$guest->userAgent();
-		if ($guest->id_operating_system || $guest->id_web_browser)
-		{
-			$guest->save();
-			$cookie->id_guest = (int)($guest->id);
-		}
+		$guest->save();
+		$cookie->id_guest = (int)($guest->id);
 	}
 }
-
-

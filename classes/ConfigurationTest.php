@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 16744 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -37,31 +36,36 @@ class ConfigurationTestCore
 	 */
 	public static function getDefaultTests()
 	{
-		return array(
-			'system' => array(
-				'fopen', 'fclose', 'fread', 'fwrite',
-				'rename', 'file_exists', 'unlink', 'rmdir', 'mkdir',
-				'getcwd', 'chdir', 'chmod'
-				),
-
-			'phpversion' => false,
+		$tests = array(
 			'upload' => false,
-			'gd' => false,
-			'mysql_support' => false,
-			'config_dir' => 'config',
 			'cache_dir' => 'cache',
-			'sitemap' => 'sitemap.xml',
 			'log_dir' => 'log',
 			'img_dir' => 'img',
-			'mails_dir' => 'mails',
 			'module_dir' => 'modules',
-			'theme_lang_dir' => 'themes/'._THEME_NAME_.'/lang',
+			'theme_lang_dir' => 'themes/'._THEME_NAME_.'/lang/',
 			'theme_pdf_lang_dir' => 'themes/'._THEME_NAME_.'/pdf/lang/',
-			'theme_cache_dir' => 'themes/'._THEME_NAME_.'/cache',
+			'theme_cache_dir' => 'themes/'._THEME_NAME_.'/cache/',
 			'translations_dir' => 'translations',
 			'customizable_products_dir' => 'upload',
 			'virtual_products_dir' => 'download'
 		);
+
+		if (!defined('_PS_HOST_MODE_'))
+			$tests = array_merge($tests, array(
+				'system' => array(
+					'fopen', 'fclose', 'fread', 'fwrite',
+					'rename', 'file_exists', 'unlink', 'rmdir', 'mkdir',
+					'getcwd', 'chdir', 'chmod'
+				),
+				'phpversion' => false,
+				'gd' => false,
+				'mysql_support' => false,
+				'config_dir' => 'config',
+				'files' => false,
+				'mails_dir' => 'mails',
+			));
+
+		return $tests;
 	}
 
 	/**
@@ -77,6 +81,7 @@ class ConfigurationTestCore
 			'register_globals' => false,
 			'gz' => false,
 			'mcrypt' => false,
+			'mbstring' => false,
 			'magicquotes' => false,
 			'dom' => false,
 			'pdo_mysql' => false,
@@ -162,13 +167,13 @@ class ConfigurationTestCore
 	public static function test_dir($relative_dir, $recursive = false, &$full_report = null)
 	{
 		$dir = rtrim(_PS_ROOT_DIR_, '\\/').DIRECTORY_SEPARATOR.trim($relative_dir, '\\/');
-		if (!file_exists($dir) || !$dh = opendir($dir))
+		if (!file_exists($dir) || !$dh = @opendir($dir))
 		{
 			$full_report = sprintf('Directory %s does not exists or is not writable', $dir); // sprintf for future translation
 			return false;
 		}
 		$dummy = rtrim($dir, '\\/').DIRECTORY_SEPARATOR.uniqid();
-		if (false && @file_put_contents($dummy, 'test'))
+		if (@file_put_contents($dummy, 'test'))
 		{
 			@unlink($dummy);
 			if (!$recursive)
@@ -266,21 +271,24 @@ class ConfigurationTestCore
 
 	public static function test_theme_lang_dir($dir)
 	{
-		if (!file_exists($dir))
-			return true;
+		$absoluteDir = rtrim(_PS_ROOT_DIR_, '\\/').DIRECTORY_SEPARATOR.trim($dir, '\\/');
+		if (!file_exists($absoluteDir))
+			return true;		
 		return ConfigurationTest::test_dir($dir, true);
 	}
 
 	public static function test_theme_pdf_lang_dir($dir)
 	{
-		if (!file_exists($dir))
+		$absoluteDir = rtrim(_PS_ROOT_DIR_, '\\/').DIRECTORY_SEPARATOR.trim($dir, '\\/');
+		if (!file_exists($absoluteDir))
 			return true;
 		return ConfigurationTest::test_dir($dir, true);
 	}
 
 	public static function test_theme_cache_dir($dir)
 	{
-		if (!file_exists($dir))
+		$absoluteDir = rtrim(_PS_ROOT_DIR_, '\\/').DIRECTORY_SEPARATOR.trim($dir, '\\/');
+		if (!file_exists($absoluteDir))
 			return true;
 		return ConfigurationTest::test_dir($dir, true);
 	}
@@ -295,13 +303,42 @@ class ConfigurationTestCore
 		return ConfigurationTest::test_dir($dir);
 	}
 
+	public static function test_mbstring()
+	{
+		return function_exists('mb_strtolower');
+	}
+
 	public static function test_mcrypt()
 	{
 		return function_exists('mcrypt_encrypt');
 	}
 
+	public static function test_sessions()
+	{
+		if (!$path = @ini_get('session.save_path'))
+			return true;
+
+		return is_writable($path);
+	}
 	public static function test_dom()
 	{
 		return extension_loaded('Dom');
+	}
+	
+	public static function test_files()
+	{
+		$files = array(
+			'/cache/smarty/compile/index.php',
+			'/classes/log/index.php',
+			'/classes/cache/index.php',
+			'/config/index.php',
+			'/tools/tar/Archive_Tar.php',
+			'/tools/pear/PEAR.php',
+			'/index.php'
+		);
+		foreach ($files as $file)
+			if (!file_exists(rtrim(_PS_ROOT_DIR_, DIRECTORY_SEPARATOR).str_replace('/', DIRECTORY_SEPARATOR, $file)))
+				return false;
+		return true;		
 	}
 }

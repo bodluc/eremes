@@ -1,9 +1,13 @@
-Hi {firstname} {lastname},
 
-A new command has been generated to you.
+[{shop_url}] 
 
-Go on {order_link} to finalize the payment.
+Witaj {firstname} {lastname}, 
 
-{shop_name} - {shop_url}
+Nowe zamówienie zostało wygenerowane w Twoim imieniu. 
 
-{shop_url} powered by PrestaShop™
+Przejdź na {order_link} [{order_link}], aby
+sfinalizować płatność. 		 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7040 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -71,6 +70,13 @@ class GroupCore extends ObjectModel
 
 	protected $webserviceParameters = array();
 
+	public function __construct($id = null, $id_lang = null, $id_shop = null)
+	{
+		parent::__construct($id, $id_lang, $id_shop);
+		if ($this->id && !isset(Group::$group_price_display_method[$this->id]))
+			self::$group_price_display_method[$this->id] = $this->price_display_method;
+	}
+	
 	public static function getGroups($id_lang, $id_shop = false)
 	{
 		$shop_criteria = '';
@@ -85,7 +91,7 @@ class GroupCore extends ObjectModel
 		ORDER BY g.`id_group` ASC');
 	}
 
-	public function getCustomers($count = false, $start = 0, $limit = 0)
+	public function getCustomers($count = false, $start = 0, $limit = 0, $shop_filtering = false)
 	{
 		if ($count)
 			return Db::getInstance()->getValue('
@@ -93,6 +99,7 @@ class GroupCore extends ObjectModel
 			FROM `'._DB_PREFIX_.'customer_group` cg
 			LEFT JOIN `'._DB_PREFIX_.'customer` c ON (cg.`id_customer` = c.`id_customer`)
 			WHERE cg.`id_group` = '.(int)$this->id.'
+			'.($shop_filtering ? Shop::addSqlRestriction(Shop::SHARE_CUSTOMER) : '').'
 			AND c.`deleted` != 1');
 		return Db::getInstance()->executeS('
 		SELECT cg.`id_customer`, c.*
@@ -100,6 +107,7 @@ class GroupCore extends ObjectModel
 		LEFT JOIN `'._DB_PREFIX_.'customer` c ON (cg.`id_customer` = c.`id_customer`)
 		WHERE cg.`id_group` = '.(int)$this->id.'
 		AND c.`deleted` != 1
+		'.($shop_filtering ? Shop::addSqlRestriction(Shop::SHARE_CUSTOMER) : '').'
 		ORDER BY cg.`id_customer` ASC
 		'.($limit > 0 ? 'LIMIT '.(int)$start.', '.(int)$limit : ''));
 	}
@@ -107,10 +115,10 @@ class GroupCore extends ObjectModel
 	public static function getReduction($id_customer = null)
 	{
 		if (!isset(self::$cache_reduction['customer'][(int)$id_customer]))
-        {
-            $id_group = $id_customer ? Customer::getDefaultGroupId((int)$id_customer) : (int)Configuration::get('PS_CUSTOMER_GROUP');
-			self::$cache_reduction['customer'][(int)$id_customer] = Group::getReductionByIdGroup($id_group);
-        }
+		{
+				$id_group = $id_customer ? Customer::getDefaultGroupId((int)$id_customer) : (int)Group::getCurrent()->id;
+				self::$cache_reduction['customer'][(int)$id_customer] = Group::getReductionByIdGroup($id_group);
+		}
 		return self::$cache_reduction['customer'][(int)$id_customer];
 	}
 
@@ -143,22 +151,26 @@ class GroupCore extends ObjectModel
 
 	public function add($autodate = true, $null_values = false)
 	{
+		Configuration::updateGlobalValue('PS_GROUP_FEATURE_ACTIVE', '1');
 		if (parent::add($autodate, $null_values))
 		{
 			Category::setNewGroupForHome((int)$this->id);
-			
 			Carrier::assignGroupToAllCarriers((int)$this->id);
-
-			// Set cache of feature detachable to true
-			Configuration::updateGlobalValue('PS_GROUP_FEATURE_ACTIVE', '1');
 			return true;
 		}
 		return false;
 	}
 
+	public function update($autodate = true, $null_values = false)
+	{
+		if (!Configuration::getGlobalValue('PS_GROUP_FEATURE_ACTIVE') && $this->reduction > 0)
+			Configuration::updateGlobalValue('PS_GROUP_FEATURE_ACTIVE', 1);
+		return parent::update($autodate, $null_values);
+	}
+
 	public function delete()
 	{
-		if ($this->id == _PS_DEFAULT_CUSTOMER_GROUP_)
+		if ($this->id == (int)Configuration::get('PS_CUSTOMER_GROUP'))
 			return false;
 		if (parent::delete())
 		{
@@ -168,9 +180,6 @@ class GroupCore extends ObjectModel
 			Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'group_reduction` WHERE `id_group` = '.(int)$this->id);
 			Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'product_group_reduction_cache` WHERE `id_group` = '.(int)$this->id);
 			$this->truncateModulesRestrictions($this->id);
-
-			// Refresh cache of feature detachable
-			Configuration::updateGlobalValue('PS_GROUP_FEATURE_ACTIVE', Group::isCurrentlyUsed());
 
 			// Add default group (id 3) to customers without groups
 			Db::getInstance()->execute('INSERT INTO `'._DB_PREFIX_.'customer_group` (
@@ -205,7 +214,7 @@ class GroupCore extends ObjectModel
 	}
 
 	/**
-	 * This method is allow to know if a Discount entity is currently used
+	 * This method is allow to know if there are other groups than the default ones
 	 * @since 1.5.0.1
 	 * @param $table
 	 * @param $has_active_column
@@ -213,12 +222,7 @@ class GroupCore extends ObjectModel
 	 */
 	public static function isCurrentlyUsed($table = null, $has_active_column = false)
 	{
-		// We don't use the parent method, for specific clause reason (id_group != 3)
-		return (bool)Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
-			SELECT `id_group`
-			FROM `'._DB_PREFIX_.'group`
-			WHERE `id_group` != '.(int)Configuration::get('PS_CUSTOMER_GROUP').'
-		');
+		return (bool)(Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT COUNT(*) FROM `'._DB_PREFIX_.'group`') > 3);
 	}
 
 	/**
@@ -296,14 +300,43 @@ class GroupCore extends ObjectModel
 	 */
 	public static function getCurrent()
 	{
-		$customer = Context::getContext()->customer;
-		$id_group = (int)Configuration::get('PS_UNIDENTIFIED_GROUP');
+		static $groups = array();
 
+		$customer = Context::getContext()->customer;
 		if (Validate::isLoadedObject($customer))
 			$id_group = (int)$customer->id_default_group;
+		else
+			$id_group = (int)Configuration::get('PS_UNIDENTIFIED_GROUP');
 
-		return new self($id_group);
+		if (!isset($groups[$id_group]))
+			$groups[$id_group] = new Group($id_group);
+			
+		if (!$groups[$id_group]->isAssociatedToShop(Context::getContext()->shop->id))
+		{
+			$id_group = (int)Configuration::get('PS_CUSTOMER_GROUP');
+			if (!isset($groups[$id_group]))
+				$groups[$id_group] = new Group($id_group);
+		}
+
+		return $groups[$id_group];
+	}
+
+	/**
+	  * Light back office search for Group
+	  *
+	  * @param integer $id_lang Language ID
+	  * @param string $query Searched string
+	  * @param boolean $unrestricted allows search without lang and includes first group and exact match
+	  * @return array Corresponding groupes
+	  */
+	public static function searchByName($query)
+	{
+		return Db::getInstance()->getRow('
+			SELECT g.*, gl.*
+			FROM `'._DB_PREFIX_.'group` g
+			LEFT JOIN `'._DB_PREFIX_.'group_lang` gl
+				ON (g.`id_group` = gl.`id_group`)
+			WHERE `name` LIKE \''.pSQL($query).'\'
+		');
 	}
 }
-
-

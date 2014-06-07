@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,16 +18,16 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
 <!-- MODULE WishList -->
 <li class="lnk_wishlist">
-	<a href="{$wishlist_link}" title="{l s='My wishlists' mod='blockwishlist'}">
-		<img {if isset($mobile_hook)} src="{$module_template_dir}img/gift.png" class="ui-li-icon ui-li-thumb" {else} src="{$module_template_dir}img/gift.gif" class="icon"{/if}  alt="{l s='wishlist' mod='blockwishlist'}" /> {l s='My wishlists' mod='blockwishlist'}
+	<a href="{$link->getModuleLink('blockwishlist', 'mywishlist', array(), true)|escape:'html':'UTF-8'}" title="{l s='My wishlists' mod='blockwishlist'}">
+		<img src="{$module_template_dir}img/gift.gif" alt="{l s='My wishlists' mod='blockwishlist'}" class="icon" />
+		{l s='My wishlists' mod='blockwishlist'}
 	</a>
 </li>
 <!-- END : MODULE WishList -->

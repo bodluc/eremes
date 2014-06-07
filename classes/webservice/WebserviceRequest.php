@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2010 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -20,13 +20,16 @@
 *
 *  @author Prestashop SA <contact@prestashop.com>
 *  @copyright  2007-2010 Prestashop SA
-*  @version  Release: $Revision: 7499 $
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
 class WebserviceRequestCore
 {
+	const HTTP_GET = 1;
+	const HTTP_POST = 2;
+	const HTTP_PUT = 4;
+	
 	protected $_available_languages = null;
 	/**
 	 * Errors triggered at execution
@@ -56,7 +59,7 @@ class WebserviceRequestCore
 	 * PrestaShop Webservice Documentation URL
 	 * @var string
 	 */
-	protected $_docUrl = 'http://doc.prestashop.com/display/PS14/Using+the+REST+webservice';
+	protected $_docUrl = 'http://doc.prestashop.com/display/PS16/Using+the+PrestaShop+Web+Service';
 
 	/**
 	 * Set if the authentication key was checked
@@ -225,12 +228,16 @@ class WebserviceRequestCore
 			'addresses' => array('description' => 'The Customer, Manufacturer and Customer addresses','class' => 'Address'),
 			'carriers' => array('description' => 'The Carriers','class' => 'Carrier'),
 			'carts' => array('description' => 'Customer\'s carts', 'class' => 'Cart'),
+			'cart_rules' => array('description' => 'Cart rules management', 'class' => 'CartRule'),
 			'categories' => array('description' => 'The product categories','class' => 'Category'),
 			'combinations' => array('description' => 'The product combinations','class' => 'Combination'),
 			'configurations' => array('description' => 'Shop configuration', 'class' => 'Configuration'),
+			'contacts' => array('description' => 'Shop contacts','class' => 'Contact'),
 			'countries' => array('description' => 'The countries','class' => 'Country'),
 			'currencies' => array('description' => 'The currencies', 'class' => 'Currency'),
 			'customers' => array('description' => 'The e-shop\'s customers','class' => 'Customer'),
+			'customer_threads' => array('description' => 'Customer services threads','class' => 'CustomerThread'),
+			'customer_messages' => array('description' => 'Customer services messages','class' => 'CustomerMessage'),
 			'deliveries' => array('description' => 'Product delivery', 'class' => 'Delivery'),
 			'groups' => array('description' => 'The customer\'s groups','class' => 'Group'),
 			'guests' => array('description' => 'The guests', 'class' => 'Guest'),
@@ -245,7 +252,8 @@ class WebserviceRequestCore
 			'order_invoices' => array('description' => 'The Order invoices','class' => 'OrderInvoice'),
 			'orders' => array('description' => 'The Customers orders','class' => 'Order'),
 			'order_payments' => array('description' => 'The Order payments','class' => 'OrderPayment'),
-			'order_states' => array('description' => 'The Order states','class' => 'OrderState'),
+			'order_states' => array('description' => 'The Order statuses','class' => 'OrderState'),
+			'order_slip' => array('description' => 'The Order slips', 'class' => 'OrderSlip'),
 			'price_ranges' => array('description' => 'Price ranges', 'class' => 'RangePrice'),
 			'product_features' => array('description' => 'The product features','class' => 'Feature'),
 			'product_feature_values' => array('description' => 'The product feature values','class' => 'FeatureValue'),
@@ -269,11 +277,11 @@ class WebserviceRequestCore
 			'stock_movement_reasons' => array('description' => 'Stock movement reason', 'class' => 'StockMvtReason'),
 			'warehouses' => array('description' => 'Warehouses', 'class' => 'Warehouse', 'forbidden_method' => array('DELETE')),
 			'stocks' => array('description' => 'Stocks', 'class' => 'Stock', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
-			'stock_availables' => array('description' => 'Available quantities', 'class' => 'StockAvailable', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
+			'stock_availables' => array('description' => 'Available quantities', 'class' => 'StockAvailable', 'forbidden_method' => array('POST', 'DELETE')),
 			'warehouse_product_locations' => array('description' => 'Location of products in warehouses', 'class' => 'WarehouseProductLocation', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
 			'supply_orders' => array('description' => 'Supply Orders', 'class' => 'SupplyOrder', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
 			'supply_order_details' => array('description' => 'Supply Order Details', 'class' => 'SupplyOrderDetail', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
-			'supply_order_states' => array('description' => 'Supply Order States', 'class' => 'SupplyOrderState', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
+			'supply_order_states' => array('description' => 'Supply Order Statuses', 'class' => 'SupplyOrderState', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
 			'supply_order_histories' => array('description' => 'Supply Order Histories', 'class' => 'SupplyOrderHistory', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
 			'supply_order_receipt_histories' => array('description' => 'Supply Order Receipt Histories', 'class' => 'SupplyOrderReceiptHistory', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
 			'product_suppliers' => array('description' => 'Product Suppliers', 'class' => 'ProductSupplier', 'forbidden_method' => array('PUT', 'POST', 'DELETE')),
@@ -329,24 +337,23 @@ class WebserviceRequestCore
 		$arr_return = array();
 		foreach($parameters as $name => $value)
 		{
+			$id_shop = (int)Context::getContext()->shop->id;
 			$id_country = (int)(isset($value['country']) ? $value['country'] : (Configuration::get('PS_COUNTRY_DEFAULT')));
 			$id_state = (int)(isset($value['state']) ? $value['state'] : 0);
 			$id_currency = (int)(isset($value['currency']) ? $value['currency'] : Configuration::get('PS_CURRENCY_DEFAULT'));
-			$id_group = (int)(isset($value['group']) ? $value['group'] : Configuration::get('_PS_DEFAULT_CUSTOMER_GROUP_'));
+			$id_group = (int)(isset($value['group']) ? $value['group'] : (int)Configuration::get('PS_CUSTOMER_GROUP'));
 			$quantity = (int)(isset($value['quantity']) ? $value['quantity'] : 1);
 			$use_tax = (int)(isset($value['use_tax']) ? $value['use_tax'] : Configuration::get('PS_TAX'));
 			$decimals = (int)(isset($value['decimals']) ? $value['decimals'] : Configuration::get('PS_PRICE_ROUND_MODE'));
 			$id_product_attribute = (int)(isset($value['product_attribute']) ? $value['product_attribute'] : null);
-			$id_county = (int)(isset($value['county']) ? $value['county'] : null);
-
 			$only_reduc = (int)(isset($value['only_reduction']) ? $value['only_reduction'] : false);
 			$use_reduc = (int)(isset($value['use_reduction']) ? $value['use_reduction'] : true);
 			$use_ecotax = (int)(isset($value['use_ecotax']) ? $value['use_ecotax'] : Configuration::get('PS_USE_ECOTAX'));
 			$specific_price_output = null;
-			$id_county = (isset($value['county']) ? $value['county'] : 0);
-			$return_value = Product::priceCalculation(null, $value['object_id'], $id_product_attribute, $id_country, $id_state, $id_county, $id_currency, $id_group, $quantity,
+			$id_county = (int)(isset($value['county']) ? $value['county'] : 0);
+			$return_value = Product::priceCalculation($id_shop, $value['object_id'], $id_product_attribute, $id_country, $id_state, $id_county, $id_currency, $id_group, $quantity,
 									$use_tax, $decimals, $only_reduc, $use_reduc, $use_ecotax, $specific_price_output, null);
-			$arr_return[$name] = array('sqlId'=>strtolower($name), 'value'=>$return_value);
+			$arr_return[$name] = array('sqlId'=>strtolower($name), 'value'=>sprintf('%f', $return_value));
 		}
 		return $arr_return;
 	}
@@ -509,7 +516,6 @@ class WebserviceRequestCore
 						$this->setError(501, sprintf('The specific management class is not implemented for the "%s" entity.', $this->urlSegment[0]), 124);
 					else
 					{
-						$this->setFieldsToDisplay();
 						$this->objectSpecificManagement = new $specificObjectName();
 						$this->objectSpecificManagement->setObjectOutput($this->objOutput)
 													   ->setWsObject($this);
@@ -526,9 +532,10 @@ class WebserviceRequestCore
 				}
 			}
 		}
-		return $this->returnOutput();
+		$return = $this->returnOutput();
 		unset($webservice_call);
-		unset ($display_errors);
+		unset($display_errors);
+		return $return;
 	}
 
 	protected function webserviceChecks()
@@ -608,7 +615,6 @@ class WebserviceRequestCore
 	 */
 	public function webserviceErrorHandler($errno, $errstr, $errfile, $errline)
 	{
-		echo 'Error Handler WebserviceRequest';
 		$display_errors = strtolower(ini_get('display_errors')) != 'off';
 		if (!(error_reporting() & $errno) || $display_errors)
 			return;
@@ -1155,6 +1161,7 @@ class WebserviceRequestCore
 				$sorts = array($this->urlFragments['sort']);
 
 			$sql_sort .= ' ORDER BY ';
+
 			foreach ($sorts as $sort)
 			{
 				$delimiterPosition = strrpos($sort, '_');
@@ -1181,7 +1188,15 @@ class WebserviceRequestCore
 					$sql_sort .= 'main_i18n.`'.pSQL($this->resourceConfiguration['fields'][$fieldName]['sqlId']).'` '.$direction.', ';// ORDER BY main_i18n.`field` ASC|DESC
 				}
 				else
-					$sql_sort .= (isset($this->resourceConfiguration['retrieveData']['tableAlias']) ? $this->resourceConfiguration['retrieveData']['tableAlias'].'.' : '').'`'.pSQL($this->resourceConfiguration['fields'][$fieldName]['sqlId']).'` '.$direction.', ';// ORDER BY `field` ASC|DESC
+				{
+					$object = new $this->resourceConfiguration['retrieveData']['className']();
+					$assoc = Shop::getAssoTable($this->resourceConfiguration['retrieveData']['table']);
+					if ($assoc !== false && $assoc['type'] == 'shop' && ($object->isMultiShopField($this->resourceConfiguration['fields'][$fieldName]['sqlId']) || $fieldName == 'id'))
+						$table_alias = 'multi_shop_'.$this->resourceConfiguration['retrieveData']['table'];
+					else
+						$table_alias = '';
+					$sql_sort .= (isset($this->resourceConfiguration['retrieveData']['tableAlias']) ? '`'.bqSQL($this->resourceConfiguration['retrieveData']['tableAlias']).'`.' : '`'.bqSQL($table_alias).'`.').'`'.pSQL($this->resourceConfiguration['fields'][$fieldName]['sqlId']).'` '.$direction.', ';// ORDER BY `field` ASC|DESC
+				}
 			}
 			$sql_sort = rtrim($sql_sort, ', ')."\n";
 		}
@@ -1209,12 +1224,15 @@ class WebserviceRequestCore
 		return $filters;
 	}
 
-
-
 	public function getFilteredObjectList()
 	{
 		$objects = array();
 		$filters = $this->manageFilters();
+
+		/* If we only need to display the synopsis, analyzing the first row is sufficient */
+		if (isset($this->urlFragments['schema']) && in_array($this->urlFragments['schema'], array('blank', 'synopsis')))
+			$filters = array('sql_join' => '', 'sql_filter' => '', 'sql_sort' => '', 'sql_limit' => ' LIMIT 1');
+			
 		$this->resourceConfiguration['retrieveData']['params'][] = $filters['sql_join'];
 		$this->resourceConfiguration['retrieveData']['params'][] = $filters['sql_filter'];
 		$this->resourceConfiguration['retrieveData']['params'][] = $filters['sql_sort'];
@@ -1226,7 +1244,16 @@ class WebserviceRequestCore
 		if ($sqlObjects)
 		{
 			foreach ($sqlObjects as $sqlObject)
-				$objects[] = new $this->resourceConfiguration['retrieveData']['className']((int)$sqlObject[$this->resourceConfiguration['fields']['id']['sqlId']]);
+			{
+				if ($this->fieldsToDisplay == 'minimum')
+				{
+					$obj = new $this->resourceConfiguration['retrieveData']['className']();
+					$obj->id = (int)$sqlObject[$this->resourceConfiguration['fields']['id']['sqlId']];
+					$objects[] = $obj;
+				}
+				else
+					$objects[] = new $this->resourceConfiguration['retrieveData']['className']((int)$sqlObject[$this->resourceConfiguration['fields']['id']['sqlId']]);
+			}
 			return $objects;
 		}
 	}
@@ -1237,32 +1264,39 @@ class WebserviceRequestCore
 		if (!isset($this->urlFragments['display']))
 			$this->fieldsToDisplay = 'full';
 
-		// Check if Object is accessible for this/those id_shop
-		$assoc = Shop::getAssoTable($this->resourceConfiguration['retrieveData']['table']);
-		if ($assoc !== false)
-		{
-			$sql = 'SELECT 1
- 						FROM `'.bqSQL(_DB_PREFIX_.$this->resourceConfiguration['retrieveData']['table']);
-			if ($assoc['type'] != 'fk_shop')
-				$sql .= '_'.$assoc['type'];
-			$sql .= '`';
-
-			foreach (self::$shopIDs as $id_shop)
-				$OR[] = ' id_shop = '.(int)$id_shop.' ';
-
-			$check = ' WHERE ('.implode('OR', $OR).') AND `'.bqSQL($this->resourceConfiguration['fields']['id']['sqlId']).'` = '.(int)$this->urlSegment[1];
-			if (!Db::getInstance()->getValue($sql.$check))
-				$this->setError(403, 'Bad id_shop : You are not allowed to access this '.$this->resourceConfiguration['retrieveData']['className'].' ('.(int)$this->urlSegment[1].')', 131);
-		}
-
 		//get entity details
 		$object = new $this->resourceConfiguration['retrieveData']['className']((int)$this->urlSegment[1]);
 		if ($object->id)
 		{
 			$objects[] = $object;
+			// Check if Object is accessible for this/those id_shop
+			$assoc = Shop::getAssoTable($this->resourceConfiguration['retrieveData']['table']);
+			if ($assoc !== false)
+			{
+				$check_shop_group = false;
+
+				$sql = 'SELECT 1
+	 						FROM `'.bqSQL(_DB_PREFIX_.$this->resourceConfiguration['retrieveData']['table']);
+				if ($assoc['type'] != 'fk_shop')
+					$sql .= '_'.$assoc['type'];
+				else
+				{
+					$def = ObjectModel::getDefinition($this->resourceConfiguration['retrieveData']['className']);
+					if (isset($def['fields']) && isset($def['fields']['id_shop_group']))
+						$check_shop_group = true;
+				}
+				$sql .= '`';
+
+				foreach (self::$shopIDs as $id_shop)
+					$OR[] = ' (id_shop = '.(int)$id_shop.($check_shop_group ? ' OR (id_shop = 0 AND id_shop_group='.(int)Shop::getGroupFromShop((int)$id_shop).')' : '').') ';
+
+				$check = ' WHERE ('.implode('OR', $OR).') AND `'.bqSQL($this->resourceConfiguration['fields']['id']['sqlId']).'` = '.(int)$this->urlSegment[1];
+				if (!Db::getInstance()->getValue($sql.$check))
+					$this->setError(404, 'This '.$this->resourceConfiguration['retrieveData']['className'].' ('.(int)$this->urlSegment[1].') does not exists on this shop', 131);
+			}
 			return $objects;
 		}
-		elseif (!count($this->errors))
+		if (!count($this->errors))
 		{
 			$this->objOutput->setStatus(404);
 			$this->_outputEnabled = false;
@@ -1477,14 +1511,22 @@ class WebserviceRequestCore
 				}
 				elseif ((!isset($fieldProperties['required']) || !$fieldProperties['required']) && property_exists($object, $sqlId))
 					$object->$sqlId = null;
-
 				if (isset($fieldProperties['i18n']) && $fieldProperties['i18n'])
 				{
 					$i18n = true;
 					if (isset($attributes->$fieldName, $attributes->$fieldName->language))
 						foreach ($attributes->$fieldName->language as $lang)
 							$object->{$fieldName}[(int)$lang->attributes()->id] = (string)$lang;
+					else
+						$object->{$fieldName} = (string)$attributes->$fieldName;
 				}
+			}
+
+			// Apply the modifiers if they exist
+			foreach ($this->resourceConfiguration['fields'] as $fieldName => $fieldProperties)
+			{				
+				if (isset($fieldProperties['modifier']) && isset($fieldProperties['modifier']['modifier']) && $fieldProperties['modifier']['http_method'] & constant('WebserviceRequest::HTTP_'.$this->method))
+					$object->{$fieldProperties['modifier']['modifier']}();
 			}
 
 			if (!$this->hasErrors())
@@ -1538,7 +1580,7 @@ class WebserviceRequestCore
 								}
 							}
 						$assoc = Shop::getAssoTable($this->resourceConfiguration['retrieveData']['table']);
-						if ($assoc !== false)
+						if ($assoc !== false && $assoc['type'] != 'fk_shop')
 						{
 							// PUT nor POST is destructive, no deletion
 							$sql = 'INSERT IGNORE INTO `'.bqSQL(_DB_PREFIX_.$this->resourceConfiguration['retrieveData']['table'].'_'.$assoc['type']).'` (id_shop, '.pSQL($this->resourceConfiguration['fields']['id']['sqlId']).') VALUES ';

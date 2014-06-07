@@ -1,5 +1,19 @@
-{reply}
 
-Please do not reply to this message, we will not receive it.
+[{shop_url}] 
 
-In order to reply, please use the following link: {link}
+Witaj {firstname} {lastname}, 
+
+{reply} 
+
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
+"Historia zamówień" [{history_url}] na koncie
+klienta klikając w "Moje konto"
+[{my_account_url}] w naszym sklepie. 
+
+Jeśli masz konto Gościa, możesz śledzić swoje zamówienie za
+pośrednictwem sekcji "Śledzenie Gościa"
+[{guest_tracking_url}] w naszym sklepie. 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

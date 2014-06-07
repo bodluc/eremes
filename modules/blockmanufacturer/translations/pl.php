@@ -2,22 +2,26 @@
 
 global $_MODULE;
 $_MODULE = array();
+
 $_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_bc3e73cfa718a3237fb1d7e1da491395'] = 'Blok producentów';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_9859921e6d3733788e09599adb681dcd'] = 'Wyświetla blok producentów/marek';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_cf64d2d0bc5de5ce3d309d0e899d36fb'] = 'Nieprawidłowa liczba elementów';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_bb30aac3161f999a357af767ce2fd7ec'] = 'Aktywuj przynajmniej jeden system list';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_c888438d14855d7d96a2724ee9c306bd'] = 'Zaktualizowano';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_71087c7035e626bd33c72ae9a7f042af'] = 'Wyświetla blok producentów/marek';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_b15e7271053fe9dd22d80db100179085'] = 'Ten moduł powinien być umieszczony w kolumnie, a Twój szablon ich nie posiada';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_f8c922e47935b3b76a749334045d61cf'] = 'Nieprawidłowa liczba elementów.';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_5b2e13ff6fa0da895d14bd56f2cb2d2d'] = 'Aktywuj przynajmniej jedną listę systemową.';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_f38f5974cdc23279ffe6d203641a8bdf'] = 'Ustawienia zaktualizowane.';
 $_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_f4f70727dc34561dfde1a3c529b6205c'] = 'Ustawienia';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_bfdff752293014f11f17122c92909ad5'] = 'Użyj listy txt';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_00d23a76e43b46dae9ec7aa9dcbebb32'] = 'Włączone';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_b9f5c797ebbf55adccdd8539a65a0241'] = 'Wyłączone';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_b9987a246a537f4fe86f1f2e3d10dbdb'] = 'Wyświetl';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_6a7f245843454cf4f28ad7c5e2572aa2'] = 'elementy';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_2e5acd674f7f821a81e99ed01d5305d1'] = 'Wyświetl producentów jako listę txt';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_b0fa976774d2acf72f9c62e9ab73de38'] = 'Zastosuj listę rozwijaną';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_f68d82d608d94a571e0984a0288595e0'] = 'Wyświetl producentów jako listę rozwijaną';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_bfdff752293014f11f17122c92909ad5'] = 'Użyj listy tekstowej';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_a7c6946ecc7f4ed19c2691a1e7a28f97'] = 'Wyświetl producentów jako listę tekstową.';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_00d23a76e43b46dae9ec7aa9dcbebb32'] = 'Włączony';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_b9f5c797ebbf55adccdd8539a65a0241'] = 'Wyłączony';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_2eef734f174a02ae3d7aaafefeeedb42'] = 'Ilość elementów do wyświetlenia';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_b0fa976774d2acf72f9c62e9ab73de38'] = 'Użyj listy rozwijanej';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_56353167778d1520bfecc70c470e6d8a'] = 'Wyświetl producentów jako listę rozwijalną.';
 $_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_c9cc8cce247e49bae79f15173ce97354'] = 'Zapisz';
 $_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_2377be3c2ad9b435ba277a73f0f1ca76'] = 'Producenci';
-$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_49fa2426b7903b3d4c89e2c1874d9346'] = 'Więcej o';
+$_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_c70ad5f80e4c6f299013e08cabc980df'] = 'Około %s';
 $_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_bf24faeb13210b5a703f3ccef792b000'] = 'Wszyscy producenci';
 $_MODULE['<{blockmanufacturer}prestashop>blockmanufacturer_1c407c118b89fa6feaae6b0af5fc0970'] = 'Brak producentów';
+
+
+return $_MODULE;

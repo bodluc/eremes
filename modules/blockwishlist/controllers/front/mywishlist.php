@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 15658 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -30,14 +29,13 @@
  */
 class BlockWishListMyWishListModuleFrontController extends ModuleFrontController
 {
+	public $ssl = true;
 	public $display_column_left = false;
 
 	public function __construct()
 	{
 		parent::__construct();
-
 		$this->context = Context::getContext();
-
 		include_once($this->module->getLocalPath().'WishList.php');
 	}
 
@@ -47,7 +45,6 @@ class BlockWishListMyWishListModuleFrontController extends ModuleFrontController
 	public function initContent()
 	{
 		parent::initContent();
-
 		$this->assign();
 	}
 
@@ -67,10 +64,9 @@ class BlockWishListMyWishListModuleFrontController extends ModuleFrontController
 			$id_wishlist = Tools::getValue('id_wishlist');
 			if (Tools::isSubmit('submitWishlist'))
 			{
-				if (Configuration::get('PS_TOKEN_ACTIVATED') == 1 AND
-					strcmp(Tools::getToken(), Tools::getValue('token')))
+				if (Configuration::get('PS_TOKEN_ACTIVATED') == 1 && strcmp(Tools::getToken(), Tools::getValue('token')))
 					$errors[] = $this->module->l('Invalid token', 'mywishlist');
-				if (!sizeof($errors))
+				if (!count($errors))
 				{
 					$name = Tools::getValue('name');
 					if (empty($name))
@@ -78,7 +74,7 @@ class BlockWishListMyWishListModuleFrontController extends ModuleFrontController
 					if (WishList::isExistsByNameForUser($name))
 						$errors[] = $this->module->l('This name is already used by another list.', 'mywishlist');
 
-					if(!sizeof($errors))
+					if (!count($errors))
 					{
 						$wishlist = new WishList();
 						$wishlist->id_shop = $this->context->shop->id;
@@ -95,20 +91,23 @@ class BlockWishListMyWishListModuleFrontController extends ModuleFrontController
 							Mail::l('Your wishlist\'s link', $this->context->language->id),
 							array(
 							'{wishlist}' => $wishlist->name,
-							'{message}' => Tools::getProtocol().htmlentities($_SERVER['HTTP_HOST'], ENT_COMPAT, 'UTF-8').__PS_BASE_URI__.'modules/blockwishlist/view.php?token='.$wishlist->token),
+							'{message}' => $this->context->link->getModuleLink('blockwishlist', 'view', array('token' => $wishlist->token))
+							),
 							$this->context->customer->email,
 							$this->context->customer->firstname.' '.$this->context->customer->lastname,
-							NULL,
+							null,
 							strval(Configuration::get('PS_SHOP_NAME')),
-							NULL,
-							NULL,
+							null,
+							null,
 							$this->module->getLocalPath().'mails/');
+
+						Tools::redirect($this->context->link->getModuleLink('blockwishlist', 'mywishlist'));
 					}
 				}
 			}
 			else if ($add)
 				WishList::addCardToWishlist($this->context->customer->id, Tools::getValue('id_wishlist'), $this->context->language->id);
-			else if ($delete AND empty($id_wishlist) === false)
+			elseif ($delete && empty($id_wishlist) === false)
 			{
 				$wishlist = new WishList((int)($id_wishlist));
 				if (Validate::isLoadedObject($wishlist))

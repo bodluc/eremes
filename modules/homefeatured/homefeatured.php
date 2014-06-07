@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7048 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -30,173 +29,202 @@ if (!defined('_PS_VERSION_'))
 
 class HomeFeatured extends Module
 {
-	private $_html = '';
-	private $_postErrors = array();
+	protected static $cache_products;
 
-	function __construct()
+	public function __construct()
 	{
 		$this->name = 'homefeatured';
 		$this->tab = 'front_office_features';
-		$this->version = '0.9';
+		$this->version = '1.5';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
+		$this->bootstrap = true;
 		parent::__construct();
 
-		$this->displayName = $this->l('Featured Products on the homepage');
-		$this->description = $this->l('Displays Featured Products in the middle of your homepage.');
+		$this->displayName = $this->l('Featured products on the homepage');
+		$this->description = $this->l('Displays featured products in the central column of your homepage.');
 	}
 
-	function install()
+	public function install()
 	{
-		if (!Configuration::updateValue('HOME_FEATURED_NBR', 8) || !parent::install() || !$this->registerHook('displayHome') || !$this->registerHook('displayHeader'))
+		$this->_clearCache('*');
+		Configuration::updateValue('HOME_FEATURED_NBR', 8);
+
+		if (!parent::install()
+			|| !$this->registerHook('header')
+			|| !$this->registerHook('addproduct')
+			|| !$this->registerHook('updateproduct')
+			|| !$this->registerHook('deleteproduct')
+			|| !$this->registerHook('categoryUpdate')
+			|| !$this->registerHook('displayHomeTab')
+			|| !$this->registerHook('displayHomeTabContent')
+		)
 			return false;
+
 		return true;
+	}
+
+	public function uninstall()
+	{
+		$this->_clearCache('*');
+
+		return parent::uninstall();
 	}
 
 	public function getContent()
 	{
-		$output = '<h2>'.$this->displayName.'</h2>';
+		$output = '';
+		$errors = array();
 		if (Tools::isSubmit('submitHomeFeatured'))
 		{
-			$nbr = (int)(Tools::getValue('nbr'));
-			if (!$nbr OR $nbr <= 0 OR !Validate::isInt($nbr))
-				$errors[] = $this->l('Invalid number of products');
+			$nbr = (int)Tools::getValue('HOME_FEATURED_NBR');
+			if (!$nbr || $nbr <= 0 || !Validate::isInt($nbr))
+				$errors[] = $this->l('An invalid number of products has been specified.');
 			else
-				Configuration::updateValue('HOME_FEATURED_NBR', (int)($nbr));
-			if (isset($errors) AND sizeof($errors))
+			{
+				Tools::clearCache(Context::getContext()->smarty, $this->getTemplatePath('homefeatured.tpl'));
+				Configuration::updateValue('HOME_FEATURED_NBR', (int)$nbr);
+			}
+			if (isset($errors) && count($errors))
 				$output .= $this->displayError(implode('<br />', $errors));
 			else
-				$output .= $this->displayConfirmation($this->l('Settings updated'));
+				$output .= $this->displayConfirmation($this->l('Your settings have been updated.'));
 		}
-		return $output.$this->displayForm();
-	}
 
-	public function displayForm()
-	{
-		$output = '
-		<form action="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'" method="post">
-			<fieldset><legend><img src="'.$this->_path.'logo.gif" alt="" title="" />'.$this->l('Settings').'</legend>
-				<p>'.$this->l('In order to add products to your homepage, just add them to the "home" category.').'</p><br />
-				<label>'.$this->l('Number of products displayed').'</label>
-				<div class="margin-form">
-					<input type="text" size="5" name="nbr" value="'.Tools::safeOutput(Tools::getValue('nbr', (int)(Configuration::get('HOME_FEATURED_NBR')))).'" />
-					<p class="clear">'.$this->l('The number of products displayed on homepage (default: 10).').'</p>
-
-				</div>
-				<center><input type="submit" name="submitHomeFeatured" value="'.$this->l('Save').'" class="button" /></center>
-			</fieldset>
-		</form>';
-		return $output;
+		return $output.$this->renderForm();
 	}
 
 	public function hookDisplayHeader($params)
 	{
-		$this->context->controller->addCss($this->_path.'homefeatured.css');
+		$this->hookHeader($params);
 	}
 
+	public function hookHeader($params)
+	{
+		if (isset($this->context->controller->php_self) && $this->context->controller->php_self == 'index')
+			$this->context->controller->addCSS(_THEME_CSS_DIR_.'product_list.css');
+		$this->context->controller->addCSS(($this->_path).'homefeatured.css', 'all');
+	}
 
-     //random products
-     public function hookDisplayHome($params)
-    {
-        /* random product
+	public function _cacheProducts()
+	{
+		if (!isset(HomeFeatured::$cache_products))
+		{
+			$category = new Category(Context::getContext()->shop->getCategory(), (int)Context::getContext()->language->id);
+			$nb = (int)Configuration::get('HOME_FEATURED_NBR');
+			HomeFeatured::$cache_products = $category->getProducts((int)Context::getContext()->language->id, 1, ($nb ? $nb : 8), 'position');
+		}
 
-        //$category = new Category(8, (int)Context::getContext()->language->id);
-        $products = array();
-        $nb = (int)(Configuration::get('HOME_FEATURED_NBR'));
-                $category[0] = new Category(11, Configuration::get('PS_LANG_DEFAULT'));
-                $category[1] = new Category(20, Configuration::get('PS_LANG_DEFAULT'));
-                $category[2] = new Category(29, Configuration::get('PS_LANG_DEFAULT'));
-                $category[3] = new Category(41, Configuration::get('PS_LANG_DEFAULT'));
-                $category[4] = new Category(8, Configuration::get('PS_LANG_DEFAULT'));
-                $category[5] = new Category(37, Configuration::get('PS_LANG_DEFAULT'));
-                $category[6] = new Category(38, Configuration::get('PS_LANG_DEFAULT'));
-                $category[7] = new Category(12, Configuration::get('PS_LANG_DEFAULT'));
+		if (HomeFeatured::$cache_products === false || empty(HomeFeatured::$cache_products))
+			return false;
+	}
 
-                for ($i=0;$i<8;$i++) {
-                    $list = $category[$i]->getProducts((int)($params['cookie']->id_lang), 1, 6,null,null,false,true,true,1);
-                   array_push($products,$list[0]);
-                }
-         */
+	public function hookDisplayHomeTab($params)
+	{
+		if (!$this->isCached('tab.tpl', $this->getCacheId('homefeatured-tab')))
+			$this->_cacheProducts();
 
-        $product[] = $this->getProduct(6,356,1,'id_product','asc');
-        $product[] = $this->getProduct(6,591,1,'id_product','asc');
-        $product[] = $this->getProduct(6,1205,1,'id_product','asc');
-        $product[] = $this->getProduct(6,589,1,'id_product','asc');
-        $product[] = $this->getProduct(6,731,1,'id_product','asc');
-        $product[] = $this->getProduct(6,107,1,'id_product','asc');
-        $product[] = $this->getProduct(6,197,1,'id_product','asc');
-        $product[] = $this->getProduct(6,534,1,'id_product','asc');
+		return $this->display(__FILE__, 'tab.tpl', $this->getCacheId('homefeatured-tab'));
+	}
 
-        $this->setImg($product);
+	public function hookDisplayHome($params)
+	{
+		if (!$this->isCached('homefeatured.tpl', $this->getCacheId()))
+		{
+			$this->_cacheProducts();
+			$this->smarty->assign(
+				array(
+					'products' => HomeFeatured::$cache_products,
+					'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
+					'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
+				)
+			);
+		}
 
+		return $this->display(__FILE__, 'homefeatured.tpl', $this->getCacheId());
+	}
 
+	public function hookDisplayHomeTabContent($params)
+	{
+		return $this->hookDisplayHome($params);
+	}
 
-        $this->smarty->assign(array(
-            'products' => $product,
-            'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
-            'homeSize' => Image::getSize('homefeature'),
-        ));
+	public function hookAddProduct($params)
+	{
+		$this->_clearCache('*');
+	}
 
-        return $this->display(__FILE__, 'homefeatured.tpl');
-    }
+	public function hookUpdateProduct($params)
+	{
+		$this->_clearCache('*');
+	}
 
-    public function setImg(&$products) {
+	public function hookDeleteProduct($params)
+	{
+		$this->_clearCache('*');
+	}
 
-        foreach ($products as &$p) {
-            $tp = new Product($p['id_product']);
-            $img  = $tp->getImages(6);
-            $p['id_image'] = $img[0]['id_image'];
-            $p =  Product::getProductProperties(6,$p);
+	public function hookCategoryUpdate($params)
+	{
+		$this->_clearCache('*');
+	}
 
-        }
-    }
+	public function _clearCache($template, $cache_id = NULL, $compile_id = NULL)
+	{
+		parent::_clearCache('homefeatured.tpl');
+		parent::_clearCache('tab.tpl', 'homefeatured-tab');
+	}
 
-    public static function getProduct($id_lang, $id_product, $limit, $order_by, $order_way, $id_category = false,
-        $only_active = false, Context $context = null)
-    {
-        if (!$context)
-            $context = Context::getContext();
+	public function renderForm()
+	{
+		$fields_form = array(
+			'form' => array(
+				'legend' => array(
+					'title' => $this->l('Settings'),
+					'icon' => 'icon-cogs'
+				),
+				'description' => $this->l('To add products to your homepage, simply add them to the root product category (default: "Home").'),
+				'input' => array(
+					array(
+						'type' => 'text',
+						'label' => $this->l('Number of products to be displayed'),
+						'name' => 'HOME_FEATURED_NBR',
+						'class' => 'fixed-width-xs',
+						'desc' => $this->l('Set the number of products that you would like to display on homepage (default: 8).'),
+					),
+				),
+				'submit' => array(
+					'title' => $this->l('Save'),
+				)
+			),
+		);
 
-        $front = true;
-        if (!in_array($context->controller->controller_type, array('front', 'modulefront')))
-            $front = false;
+		$helper = new HelperForm();
+		$helper->show_toolbar = false;
+		$helper->table = $this->table;
+		$lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+		$helper->default_form_language = $lang->id;
+		$helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
+		$this->fields_form = array();
+		$helper->id = (int)Tools::getValue('id_carrier');
+		$helper->identifier = $this->identifier;
+		$helper->submit_action = 'submitHomeFeatured';
+		$helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
+		$helper->token = Tools::getAdminTokenLite('AdminModules');
+		$helper->tpl_vars = array(
+			'fields_value' => $this->getConfigFieldsValues(),
+			'languages' => $this->context->controller->getLanguages(),
+			'id_language' => $this->context->language->id
+		);
 
-        if (!Validate::isOrderBy($order_by) || !Validate::isOrderWay($order_way))
-            die (Tools::displayError());
-        if ($order_by == 'id_product' || $order_by == 'price' || $order_by == 'date_add')
-            $order_by_prefix = 'p';
-        else if ($order_by == 'name')
-            $order_by_prefix = 'pl';
-        else if ($order_by == 'position')
-            $order_by_prefix = 'c';
+		return $helper->generateForm(array($fields_form));
+	}
 
-        if (strpos($order_by, '.') > 0)
-        {
-            $order_by = explode('.', $order_by);
-            $order_by_prefix = $order_by[0];
-            $order_by = $order_by[1];
-        }
-        $sql = 'SELECT p.*, product_shop.*, pl.* , t.`rate` AS tax_rate, m.`name` AS manufacturer_name, s.`name` AS supplier_name
-                FROM `'._DB_PREFIX_.'product` p
-                '.Shop::addSqlAssociation('product', 'p').'
-                LEFT JOIN `'._DB_PREFIX_.'product_lang` pl ON (p.`id_product` = pl.`id_product` '.Shop::addSqlRestrictionOnLang('pl').')
-                LEFT JOIN `'._DB_PREFIX_.'tax_rule` tr ON (product_shop.`id_tax_rules_group` = tr.`id_tax_rules_group`
-                   AND tr.`id_country` = '.(int)Context::getContext()->country->id.'
-                   AND tr.`id_state` = 0)
-                   LEFT JOIN `'._DB_PREFIX_.'tax` t ON (t.`id_tax` = tr.`id_tax`)
-                LEFT JOIN `'._DB_PREFIX_.'manufacturer` m ON (m.`id_manufacturer` = p.`id_manufacturer`)
-                LEFT JOIN `'._DB_PREFIX_.'supplier` s ON (s.`id_supplier` = p.`id_supplier`)'.
-                ($id_category ? 'LEFT JOIN `'._DB_PREFIX_.'category_product` c ON (c.`id_product` = p.`id_product`)' : '').'
-                WHERE p.id_product='.$id_product.' AND pl.`id_lang` = '.(int)$id_lang.
-                    ($id_category ? ' AND c.`id_category` = '.(int)$id_category : '').
-                    ($front ? ' AND product_shop.`visibility` IN ("both", "catalog")' : '').
-                    ($only_active ? ' AND product_shop.`active` = 1' : '').'
-                ORDER BY '.(isset($order_by_prefix) ? pSQL($order_by_prefix).'.' : '').'`'.pSQL($order_by).'` '.pSQL($order_way).
-                ($limit > 0 ? ' LIMIT '.(int)$start.','.(int)$limit : '');
-        $rq = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
-        if ($order_by == 'price')
-            Tools::orderbyPrice($rq, $order_way);
-        return ($rq[0]);
-    }
+	public function getConfigFieldsValues()
+	{
+		return array(
+			'HOME_FEATURED_NBR' => Tools::getValue('HOME_FEATURED_NBR', Configuration::get('HOME_FEATURED_NBR')),
+		);
+	}
 }

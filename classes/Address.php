@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -116,7 +115,7 @@ class AddressCore extends ObjectModel
 			'id_country' => 		array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId', 'required' => true),
 			'id_state' => 			array('type' => self::TYPE_INT, 'validate' => 'isNullOrUnsignedId'),
 			'alias' => 				array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'required' => true, 'size' => 32),
-			'company' => 			array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 32),
+			'company' => 			array('type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 64),
 			'lastname' => 			array('type' => self::TYPE_STRING, 'validate' => 'isName', 'required' => true, 'size' => 32),
 			'firstname' => 			array('type' => self::TYPE_STRING, 'validate' => 'isName', 'required' => true, 'size' => 32),
 			'vat_number' =>	 		array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
@@ -125,8 +124,8 @@ class AddressCore extends ObjectModel
 			'postcode' => 			array('type' => self::TYPE_STRING, 'validate' => 'isPostCode', 'size' => 12),
 			'city' => 				array('type' => self::TYPE_STRING, 'validate' => 'isCityName', 'required' => true, 'size' => 64),
 			'other' => 				array('type' => self::TYPE_STRING, 'validate' => 'isMessage', 'size' => 300),
-			'phone' => 				array('type' => self::TYPE_STRING, 'validate' => 'isPhoneNumber', 'size' => 16),
-			'phone_mobile' => 		array('type' => self::TYPE_STRING, 'validate' => 'isPhoneNumber', 'size' => 16),
+			'phone' => 				array('type' => self::TYPE_STRING, 'validate' => 'isPhoneNumber', 'size' => 32),
+			'phone_mobile' => 		array('type' => self::TYPE_STRING, 'validate' => 'isPhoneNumber', 'size' => 32),
 			'dni' => 				array('type' => self::TYPE_STRING, 'validate' => 'isDniLite', 'size' => 16),
 			'deleted' => 			array('type' => self::TYPE_BOOL, 'validate' => 'isBool', 'copy_post' => false),
 			'date_add' => 			array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat', 'copy_post' => false),
@@ -175,6 +174,17 @@ class AddressCore extends ObjectModel
 			Customer::resetAddressCache($this->id_customer);
 		return true;
 	}
+	
+	public function update($null_values = false)
+	{
+		// Empty related caches
+		if (isset(self::$_idCountries[$this->id]))
+			unset(self::$_idCountries[$this->id]);
+		if (isset(self::$_idZones[$this->id]))
+			unset(self::$_idZones[$this->id]);
+
+		return parent::update($null_values);
+	}
 
 	/**
 	 * @see ObjectModel::delete()
@@ -212,7 +222,7 @@ class AddressCore extends ObjectModel
 	public function validateController($htmlentities = true)
 	{
 		$errors = parent::validateController($htmlentities);
-		if (!Configuration::get('VATNUMBER_CHECKING'))
+		if (!Configuration::get('VATNUMBER_MANAGEMENT') || !Configuration::get('VATNUMBER_CHECKING'))
 			return $errors;
 		include_once(_PS_MODULE_DIR_.'vatnumber/vatnumber.php');
 		if (class_exists('VatNumber', false))
@@ -227,6 +237,8 @@ class AddressCore extends ObjectModel
 	 */
 	public static function getZoneById($id_address)
 	{
+		if(!isset($id_address) || empty($id_address))
+			return false;
 		if (isset(self::$_idZones[$id_address]))
 			return self::$_idZones[$id_address];
 
@@ -249,13 +261,20 @@ class AddressCore extends ObjectModel
 	 */
 	public static function isCountryActiveById($id_address)
 	{
-		if (!$result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow('
-		SELECT c.`active`
-		FROM `'._DB_PREFIX_.'address` a
-		LEFT JOIN `'._DB_PREFIX_.'country` c ON c.`id_country` = a.`id_country`
-		WHERE a.`id_address` = '.(int)$id_address))
+		if(!isset($id_address) || empty($id_address))
 			return false;
-		return ($result['active']);
+
+		$cache_id = 'Address::isCountryActiveById_'.(int)$id_address;
+		if (!Cache::isStored($cache_id))
+		{
+			$result = (bool)Db::getInstance(_PS_USE_SQL_SLAVE_)->getvalue('
+			SELECT c.`active`
+			FROM `'._DB_PREFIX_.'address` a
+			LEFT JOIN `'._DB_PREFIX_.'country` c ON c.`id_country` = a.`id_country`
+			WHERE a.`id_address` = '.(int)$id_address);
+			Cache::store($cache_id, $result);
+		}
+		return Cache::retrieve($cache_id);
 	}
 
 	/**
@@ -291,18 +310,17 @@ class AddressCore extends ObjectModel
 	/**
 	* Specify if an address is already in base
 	*
-	* @param $id_address Address id
+	* @param int $id_address Address id
 	* @return boolean
 	*/
 	public static function addressExists($id_address)
 	{
 		$key = 'address_exists_'.(int)$id_address;
 		if (!Cache::isStored($key))
-				Cache::store(
-					$key, Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow('
-							SELECT `id_address`
-							FROM '._DB_PREFIX_.'address a
-							WHERE a.`id_address` = '.(int)$id_address));
+		{
+			$id_address = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `id_address` FROM '._DB_PREFIX_.'address a WHERE a.`id_address` = '.(int)$id_address);
+			Cache::store($key, (bool)$id_address);
+		}
 		return Cache::retrieve($key);
 	}
 
@@ -310,12 +328,17 @@ class AddressCore extends ObjectModel
 	{
 		if (!$id_customer)
 			return false;
-
-		return Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
-			SELECT `id_address`
-			FROM `'._DB_PREFIX_.'address`
-			WHERE `id_customer` = '.(int)$id_customer.' AND `deleted` = 0'.($active ? ' AND `active` = 1' : '')
-		);
+		$cache_id = 'Address::getFirstCustomerAddressId_'.(int)$id_customer.'-'.(bool)$active;
+		if (!Cache::isStored($cache_id))
+		{
+			$result = (int)Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
+				SELECT `id_address`
+				FROM `'._DB_PREFIX_.'address`
+				WHERE `id_customer` = '.(int)$id_customer.' AND `deleted` = 0'.($active ? ' AND `active` = 1' : '')
+			);
+			Cache::store($cache_id, $result);
+		}
+		return Cache::retrieve($cache_id);
 	}
 
 	/**
@@ -327,12 +350,6 @@ class AddressCore extends ObjectModel
 	*/
 	public static function initialize($id_address = null)
 	{
-		// set the default address
-		$address = new Address();
-		$address->id_country = (int)Context::getContext()->country->id;
-		$address->id_state = 0;
-		$address->postcode = 0;
-
 		// if an id_address has been specified retrieve the address
 		if ($id_address)
 		{
@@ -340,6 +357,14 @@ class AddressCore extends ObjectModel
 
 			if (!Validate::isLoadedObject($address))
 				throw new PrestaShopException('Invalid address');
+		}
+		else
+		{
+			// set the default address
+			$address = new Address();
+			$address->id_country = (int)Context::getContext()->country->id;
+			$address->id_state = 0;
+			$address->postcode = 0;
 		}
 
 		return $address;
@@ -364,4 +389,3 @@ class AddressCore extends ObjectModel
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($query);
 	}
 }
-

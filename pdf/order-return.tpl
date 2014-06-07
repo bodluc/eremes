@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6753 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
@@ -90,7 +89,7 @@
 			{'%06d'|sprintf:$order_return->id}<br />
 			<br />
 			<b>{l s='Date:' pdf='true'}</b><br />
-			{$order_return->date_add|date_format:"%d-%m-%Y %H:%M"}<br />
+			{dateFormat date=$order_return->date_add full=0}<br />
 			<br />
 			<!-- / CUSTOMER INFORMATIONS -->
 		</td>
@@ -143,8 +142,7 @@
             </table>
 
             <br />
-            {l s='Upon receiving your package, we will notify you by e-mail. We will then begin processing the reimbursement of your order total.
-Let us know if you have any questions' pdf='true'}
+            {l s='Upon receiving your package, we will notify you by e-mail. We will then begin processing the reimbursement of your order total. Let us know if you have any questions' pdf='true'}
 		</td>
 	</tr>
 </table>

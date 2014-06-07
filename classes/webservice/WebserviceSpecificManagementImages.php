@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7310 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -34,7 +33,7 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 	/**
 	 * @var string The extension of the image to display
 	 */
-	protected $imgExtension = 'jpg';
+	protected $imgExtension;
 
 	/**
 	 * @var array The type of images (general, categories, manufacturers, suppliers, stores...)
@@ -118,17 +117,38 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 		if ($this->output != '')
 			return $this->objOutput->getObjectRender()->overrideContent($this->output);
 		// display image content if needed
-		else if ($this->imgToDisplay)
+		elseif ($this->imgToDisplay)
 		{
+			if (empty($this->imgExtension))
+			{
+				$imginfo = getimagesize($this->imgToDisplay);
+				$this->imgExtension = image_type_to_extension($imginfo[2], false);
+			}
+
 			$imageResource = false;
-			$types = array('jpg' => array('function' => 'imagecreatefromjpeg', 'Content-Type' => 'image/jpeg'),
-							'gif' => array('function' => 'imagecreatefromgif', 'Content-Type' => 'image/gif')
-							);
+			$types = array(
+				'jpg' => array(
+					'function' => 'imagecreatefromjpeg', 
+					'Content-Type' => 'image/jpeg'
+				),
+				'jpeg' => array(
+					'function' => 'imagecreatefromjpeg', 
+					'Content-Type' => 'image/jpeg'
+				),
+				'png' => array('function' => 
+					'imagecreatefrompng', 
+					'Content-Type' => 'image/png'
+				),
+				'gif' => array(
+					'function' => 'imagecreatefromgif', 
+					'Content-Type' => 'image/gif'
+				)
+			);
 
 			if (array_key_exists($this->imgExtension, $types))
 				$imageResource = @$types[$this->imgExtension]['function']($this->imgToDisplay);
 
-			if(!$imageResource)
+			if (!$imageResource)
 				throw new WebserviceException(sprintf('Unable to load the image "%s"', str_replace(_PS_ROOT_DIR_, '[SHOP_ROOT_DIR]', $this->imgToDisplay)), array(47, 500));
 			else
 			{
@@ -324,7 +344,7 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 			// Set the image path on display in relation to the header image
 			case 'header':
 				if (in_array($this->wsObject->method, array('GET','HEAD','PUT')))
-					$path = _PS_IMG_DIR_.'logo.jpg';
+					$path = _PS_IMG_DIR_.Configuration::get('PS_LOGO');
 				else
 					throw new WebserviceException('This method is not allowed with general image resources.', array(49, 405));
 				break;
@@ -388,7 +408,7 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 		{
 			case 'GET':
 			case 'HEAD':
-				$this->imgToDisplay = ($path != '' && file_exists($path)) ? $path : $alternative_path;
+				$this->imgToDisplay = ($path != '' && file_exists($path) && is_file($path)) ? $path : $alternative_path;
 				return true;
 				break;
 			case 'PUT':
@@ -397,7 +417,8 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 				{
 					if ($this->wsObject->urlSegment[2] == 'header')
 					{
-						list($width, $height, $type, $attr) = getimagesize(_PS_IMG_DIR_.'logo.jpg');
+						$logo_name = Configuration::get('PS_LOGO') ? Configuration::get('PS_LOGO') : 'logo.jpg';
+						list($width, $height, $type, $attr) = getimagesize(_PS_IMG_DIR_.$logo_name);
 						Configuration::updateValue('SHOP_LOGO_WIDTH', (int)round($width));
 						Configuration::updateValue('SHOP_LOGO_HEIGHT', (int)round($height));
 					}
@@ -685,16 +706,21 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 				break;
 			// Delete the image
 			case 'DELETE':
-				if ($filename_exists)
+				// Delete products image in DB
+				if ($this->imageType == 'products')
 				{
-					// Delete products image in DB
-					if ($this->imageType == 'products')
-					{
 						$image = new Image((int)$this->wsObject->urlSegment[3]);
 						return $image->delete();
+				}
+				elseif ($filename_exists)
+				{
+					if (in_array($this->imageType, array('categories', 'manufacturers', 'suppliers', 'stores')))
+					{
+						$object = new $this->wsObject->resourceList[$this->imageType]['class']((int)$this->wsObject->urlSegment[2]);
+						return $object->deleteImage(true);
 					}
 					else
-					return $this->deleteImageOnDisk($filename, $imageSizes, $directory);
+						return $this->deleteImageOnDisk($filename, $imageSizes, $directory);
 				}
 				else
 					throw new WebserviceException('This image does not exist on disk', array(64, 500));
@@ -833,11 +859,13 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 				$imaged = imagegif($destImage, $newPath);
 				break;
 			case 'png':
-				$imaged = imagepng($destImage, $newPath, 7);
+				$quality = (Configuration::get('PS_PNG_QUALITY') === false ? 7 : Configuration::get('PS_PNG_QUALITY'));
+				$imaged = imagepng($destImage, $newPath, (int)$quality);
 				break;
 			case 'jpeg':
 			default:
-				$imaged = imagejpeg($destImage, $newPath, 90);
+				$quality = (Configuration::get('PS_JPEG_QUALITY') === false ? 90 : Configuration::get('PS_JPEG_QUALITY'));
+				$imaged = imagejpeg($destImage, $newPath, (int)$quality);
 				break;
 		}
 		imagedestroy($destImage);
@@ -945,6 +973,12 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 						$image = new Image();
 						$image->id_product = (int)($product->id);
 						$image->position = Image::getHighestPosition($product->id) + 1;
+
+						if (!Image::getCover((int)$product->id))
+							$image->cover = 1;
+						else
+							$image->cover = 0;
+							
 						if (!$image->add())
 							throw new WebserviceException('Error while creating image', array(76, 400));
 						if (!Validate::isLoadedObject($product))
@@ -976,13 +1010,21 @@ class WebserviceSpecificManagementImagesCore implements WebserviceSpecificManage
 						}
 						@unlink($tmpName);
 						$this->imgToDisplay = _PS_PROD_IMG_DIR_.$image->getExistingImgPath().'.'.$image->image_format;
+						$this->objOutput->setFieldsToDisplay('full');
+						$this->output = $this->objOutput->renderEntity($image, 1);
+						$image_content = array('sqlId' => 'content', 'value' => base64_encode(file_get_contents($this->imgToDisplay)), 'encode' => 'base64');
+						$this->output .= $this->objOutput->objectRender->renderField($image_content);
 					}
-					elseif ($this->imageType == 'categories')
+					elseif (in_array($this->imageType, array('categories', 'manufacturers', 'suppliers', 'stores')))
 					{
 						if (!($tmpName = tempnam(_PS_TMP_IMG_DIR_, 'PS')) || !move_uploaded_file($file['tmp_name'], $tmpName))
 							throw new WebserviceException('An error occurred during the image upload', array(76, 400));
 						elseif (!ImageManager::resize($tmpName, $receptionPath))
 							throw new WebserviceException('An error occurred while copying image', array(76, 400));
+						$imagesTypes = ImageType::getImagesTypes($this->imageType);
+						foreach ($imagesTypes as $imageType)
+							if (!ImageManager::resize($tmpName, $parentPath.$this->wsObject->urlSegment[2].'-'.stripslashes($imageType['name']).'.jpg', $imageType['width'], $imageType['height']))
+								$this->_errors[] = Tools::displayError('An error occurred while copying image:').' '.stripslashes($imageType['name']);
 						@unlink(_PS_TMP_IMG_DIR_.$tmpName);
 						$this->imgToDisplay = $receptionPath;
 					}

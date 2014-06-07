@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7331 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -29,6 +28,7 @@ class CategoryControllerCore extends FrontController
 {
 	public $php_self = 'category';
 	protected $category;
+	public $customer_access = true;
 
 	/**
 	 * Set default medias for this controller
@@ -36,20 +36,30 @@ class CategoryControllerCore extends FrontController
 	public function setMedia()
 	{
 		parent::setMedia();
-		//TODO : check why cluetip css is include without js file
-		$this->addCSS(array(
-			_THEME_CSS_DIR_.'scenes.css' => 'all',
-			_THEME_CSS_DIR_.'category.css' => 'all',
-			_THEME_CSS_DIR_.'product_list.css' => 'all',
-		));
 
-		if (Configuration::get('PS_COMPARATOR_MAX_ITEM') > 0)
-			$this->addJS(_THEME_JS_DIR_.'products-comparison.js');
+		if (!$this->useMobileTheme())
+		{
+			//TODO : check why cluetip css is include without js file
+			$this->addCSS(array(
+				_THEME_CSS_DIR_.'scenes.css' => 'all',
+				_THEME_CSS_DIR_.'category.css' => 'all',
+				_THEME_CSS_DIR_.'product_list.css' => 'all',
+			));
+		}
+		$scenes = Scene::getScenes($this->category->id, $this->context->language->id, true, false);
+		if ($scenes && count($scenes))
+		{
+			$this->addJS(_THEME_JS_DIR_.'scenes.js');
+			$this->addJqueryPlugin(array('scrollTo', 'serialScroll'));
+		}
+		$this->addJS(_THEME_JS_DIR_.'category.js');
 	}
 
 	public function canonicalRedirection($canonicalURL = '')
 	{
-		if (!Validate::isLoadedObject($this->category) || !$this->category->inShop() || !$this->category->isAssociatedToShop())
+		if (Tools::getValue('live_edit'))
+			return ;
+		if (!Validate::isLoadedObject($this->category) || !$this->category->inShop() || !$this->category->isAssociatedToShop() || in_array($this->category->id, array(Configuration::get('PS_HOME_CATEGORY'), Configuration::get('PS_ROOT_CATEGORY'))))
 		{
 			$this->redirect_after = '404';
 			$this->redirect();
@@ -73,14 +83,30 @@ class CategoryControllerCore extends FrontController
 		$this->category = new Category($id_category, $this->context->language->id);
 
 		parent::init();
-
+		//check if the category is active and return 404 error if is disable.
+		if (!$this->category->active)
+		{
+			header('HTTP/1.1 404 Not Found');
+			header('Status: 404 Not Found');
+		}
+		//check if category can be accessible by current customer and return 403 if not
 		if (!$this->category->checkAccess($this->context->customer->id))
+		{
+			header('HTTP/1.1 403 Forbidden');
+			header('Status: 403 Forbidden');
 			$this->errors[] = Tools::displayError('You do not have access to this category.');
+			$this->customer_access = false;
+		}
 	}
-
+	
 	public function initContent()
 	{
 		parent::initContent();
+		
+		$this->setTemplate(_PS_THEME_DIR_.'category.tpl');
+		
+		if (!$this->customer_access)
+			return;
 
 		if (isset($this->context->cookie->id_compare))
 			$this->context->smarty->assign('compareProducts', CompareProduct::getCompareProducts((int)$this->context->cookie->id_compare));
@@ -89,28 +115,26 @@ class CategoryControllerCore extends FrontController
 		
 		$this->assignScenes();
 		$this->assignSubcategories();
-		if ($this->category->id != 1)
-			$this->assignProductList();
+		$this->assignProductList();
 
 		$this->context->smarty->assign(array(
 			'category' => $this->category,
+			'description_short' => Tools::truncateString($this->category->description, 350),
 			'products' => (isset($this->cat_products) && $this->cat_products) ? $this->cat_products : null,
 			'id_category' => (int)$this->category->id,
 			'id_category_parent' => (int)$this->category->id_parent,
 			'return_category_name' => Tools::safeOutput($this->category->name),
 			'path' => Tools::getPath($this->category->id),
 			'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
-			'categorySize' => Image::getSize('category'),
-			'mediumSize' => Image::getSize('medium'),
-			'thumbSceneSize' => Image::getSize('thumb_scene'),
-			'homeSize' => Image::getSize('home'),
+			'categorySize' => Image::getSize(ImageType::getFormatedName('category')),
+			'mediumSize' => Image::getSize(ImageType::getFormatedName('medium')),
+			'thumbSceneSize' => Image::getSize(ImageType::getFormatedName('m_scene')),
+			'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
 			'allow_oosp' => (int)Configuration::get('PS_ORDER_OUT_OF_STOCK'),
 			'comparator_max_item' => (int)Configuration::get('PS_COMPARATOR_MAX_ITEM'),
-			'suppliers' => Supplier::getSuppliers()
+			'suppliers' => Supplier::getSuppliers(),
+			'body_classes' => array($this->php_self.'-'.$this->category->id, $this->php_self.'-'.$this->category->link_rewrite)
 		));
-
-
-		$this->setTemplate(_PS_THEME_DIR_.'category.tpl');
 	}
 
 	/**
@@ -127,9 +151,9 @@ class CategoryControllerCore extends FrontController
 		{
 			foreach ($sceneImageTypes as $sceneImageType)
 			{
-				if ($sceneImageType['name'] == 'thumb_scene')
+				if ($sceneImageType['name'] == ImageType::getFormatedName('m_scene'))
 					$thumbSceneImageType = $sceneImageType;
-				elseif ($sceneImageType['name'] == 'large_scene')
+				elseif ($sceneImageType['name'] == ImageType::getFormatedName('scene'))
 					$largeSceneImageType = $sceneImageType;
 			}
 
@@ -179,7 +203,27 @@ class CategoryControllerCore extends FrontController
 		else
 			// Pagination must be call after "getProducts"
 			$this->pagination($this->nbProducts);
+
+		Hook::exec('actionProductListModifier', array(
+			'nb_products' => &$this->nbProducts,
+			'cat_products' => &$this->cat_products,
+		));
+
+		foreach ($this->cat_products as &$product)
+			if ($product['id_product_attribute'] && isset($product['product_attribute_minimal_quantity']))
+				$product['minimal_quantity'] = $product['product_attribute_minimal_quantity'];
+
+		$this->addColorsToProductList($this->cat_products);
+
 		$this->context->smarty->assign('nb_products', $this->nbProducts);
+	}
+	
+	/**
+	 * Get instance of current category
+	 */
+	public function getCategory()
+	{
+		return $this->category;
 	}
 }
 

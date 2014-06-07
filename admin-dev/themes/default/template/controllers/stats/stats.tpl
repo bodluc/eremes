@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,24 +18,21 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 8897 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-<div>
-	{if $module_name}
-		{if $module_instance && $module_instance->active}
-			{$hook}
-		{else}
-			{l s='Module not found'}
-		{/if}
-	{else}
-		<h3 class="space">{l s='Please select a module in the left column.'}</h3>
-	{/if}
+		<div class="panel">
+			{if $module_name}
+				{if $module_instance && $module_instance->active}
+					{$hook}
+				{else}
+					{l s='Module not found'}
+				{/if}
+			{else}
+				<h3 class="space">{l s='Please select a module from the left column.'}</h3>
+			{/if}
+		</div>
+	</div>
 </div>
-</div>
-</div>
-
-

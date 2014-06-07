@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Blog PL</title>
+	<atom:link href="http://www.prestashop.com/blog/pl/feed/" rel="self" type="application/rss+xml" />
+	<link>http://www.prestashop.com/blog/pl</link>
+	<description>Blog o e-handlu poświęcony sklepom internetowym. Blog prowadzony przez ekspertów zakupów z PrestaShop.</description>
+	<lastBuildDate>Mon, 08 Sep 2014 15:38:48 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.4</generator>
+		<item>
+		<title>29 N Under, sklep w odzieżą, migruje z Facebooka do PrestaShop i odnotowuje wzrost w wysokości 1000%</title>
+		<link>http://www.prestashop.com/blog/pl/2014/09/08/29-n-under-sklep-w-odzieza-migruje-z-facebooka-do-prestashop-i-odnotowuje-wzrost-w-wysokosci-1000/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/09/08/29-n-under-sklep-w-odzieza-migruje-z-facebooka-do-prestashop-i-odnotowuje-wzrost-w-wysokosci-1000/#comments</comments>
+		<pubDate>Mon, 08 Sep 2014 09:20:41 +0000</pubDate>
+		<dc:creator>Camille Sila</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1213</guid>
+		<description><![CDATA[W dzisiejszej historii sukcesu przedstawimy sklep PrestaShop o unikatowym koncepcie – „Sukienki poniżej 29 $”. Niezależnie od wybranego artykułu, w sklepie 29 N Under, nie zapłacisz więcej niż 29 $. Tak innowacyjny model cenowy został opracowany przez specjalistę od marketingu &#8230; <a href="http://www.prestashop.com/blog/pl/2014/09/08/29-n-under-sklep-w-odzieza-migruje-z-facebooka-do-prestashop-i-odnotowuje-wzrost-w-wysokosci-1000/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<p>W dzisiejszej historii sukcesu przedstawimy sklep PrestaShop o unikatowym koncepcie – „Sukienki poniżej 29 $”. Niezależnie od wybranego artykułu, w sklepie <a href="http://www.29nunder.com/" target="_blank">29 N Under</a>, nie zapłacisz więcej niż 29 $. Tak innowacyjny model cenowy został opracowany przez specjalistę od marketingu i współwłaściciela sklepu – Jasona Burlina. Jednakże wyborem sukienek i oryginalnych kreacji zajmuje się jego żona &#8211; kalifornijska miłośniczka mody – Oryan Burlin.</p>
+<p><img class="aligncenter size-full wp-image-1214" title="1 29 N UNDER SS Main" src="http://www.prestashop.com/blog/pl/files/2014/09/1-29-N-UNDER-SS-Main.png" alt="" width="600" height="315" /></p>
+<p>Para, dzięki znajomości mody i doskonałemu mottu biznesowemu, rozpoczęła sprzedaż sukienek za pośrednictwem sklepu na Facebooku. W późniejszym czasie, zdecydowali się na migrację do PrestaShop, gdzie ich biznes rozkwitł i stał się rentownym sklepem internetowym! Przeprowadziliśmy wywiad z Jasonem, aby dowiedzieć się, jak udało im się przekształcić swoją działalność w prawdziwą historię sukcesu rodem z PrestaShop.<br />
+<span id="more-1213"></span></p>
+<h4><span style="color: #b71683;">Dlaczego zdecydowaliście się na migrację sklepu z Facebooka do PrestaShop?</span></h4>
+<p>Zaczęliśmy na Facebooku, aby przetestować rynek i zobaczyć, czy ten postrzelony pomysł chwyci. Zauważyliśmy, że wiele osób interesuje się naszym konceptem i sprzedawanymi przez nas sukienkami. Już po sześciu miesiącach przetwarzaliśmy 80 zamówień miesięcznie. Był to dla nas wyraźny znak, że sklep rozwija się. Aby wesprzeć nasz wzrost potrzebowaliśmy solidnego oprogramowania i strony internetowej zaprojektowanej pod kątem naszych klientów. <strong>TDlatego zdecydowaliśmy się na migrację do PrestaShop – aby rozwijać nasz internetowy biznes.</strong></p>
+<h4><span style="color: #b71683;">Jaki wzrost odnotowaliście od momentu otwarcia sklepu PrestaShop? </span></h4>
+<p>Przeszliśmy z poziomu 80 zamówień miesięcznie do około 1000 zamówień miesięcznie. Odpowiada to wzrostowi w wysokości ponad 1000% od momentu naszej migracji do PrestaShop. To niesamowite, że ten zwariowany pomysł stał się głównym źródłem naszych dochodów. Rozwinęliśmy się tak bardzo, że musieliśmy przyjąć więcej osób do naszego zespołu. Duet mąż – żona rozrósł się do zespołu <strong>10</strong> osób zatrudnionych w pełnym i niepełnym wymiarze godzin.</p>
+<h4><span style="color: #b71683;">Jak wyglądały początki Waszego sklepu PrestaShop?</span></h4>
+<p>Szukaliśmy programisty na portalach Odesk i Elance. Po przejrzeniu kilku profili programistów i sprawdzeniu ich referencji, zdecydowaliśmy się na jednego z nich. Zasugerował on PrestaShop ze względu na solidność i łatwość w obsłudze. Ponieważ szukaliśmy oszczędnego rozwiązania, nalegał na wdrożenie oprogramowania, które nie będzie wymagało wielu cennych godzin programowania.<br />
+Jednakże najważniejszym decydującym czynnikiem była skalowalność PrestaShop. Przerzuciliśmy się z Facebooka na PrestaShop, ponieważ przekroczyliśmy możliwości naszego pierwszego sklepu. Potrzebujemy rozwiązania, które odpowiada naszym obecnym potrzebom, ale nie hamuje przyszłego wzrostu. Mimo iż sklep rozrósł się przez ostatnie dwa lata, PrestaShop nadal bez problemu obsługuje wszystkie zamówienia.</p>
+<h4><span style="color: #b71683;">Ile czasu zajęło Wam założenie sklepu PrestaShop? </span></h4>
+<p>Naszemu programiście udało się założyć i uruchomić sklep w przeciągu jednego tygodnia. Mogliśmy wystartować tak szybko, ponieważ mieliśmy już gotowe kategorie produktów, opisy i zdjęcia z naszego sklepu na Facebooku. Dzień po otwarciu sklepu, po przyjściu do pracy czekało już na nas jedno zamówienie. Obserwowanie jak szybko nasza ciężka praca zaczyna przynosić efekty było niesamowite!</p>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-1215" title="2 29 N UNDER SS Product Images" src="http://www.prestashop.com/blog/pl/files/2014/09/2-29-N-UNDER-SS-Product-Images.png" alt="" width="475" height="221" /></p>
+<h4><span style="color: #b71683;">Czym różnił się Wasz sklep PrestaShop od wcześniejszego sklepu na Facebooku?</span></h4>
+<p>W sklepie na Facebooku wiele rzeczy musieliśmy wykonywać ręcznie. Najbardziej uciążliwe było przetwarzanie płatności, gdyż cały czas musieliśmy żonglować między sklepem i innymi stronami. W PrestaShop, mogliśmy skonfigurować zintegrowany <a href="http://addons.prestashop.com/pl/platnosci-prestashop-moduly/1748-paypal.html" target="_blank">moduł PayPal</a> kilkoma kliknięciami i przetwarzać zamówienia bezpośrednio z back office. Korzystanie z PrestaShop zmniejsza ilość czynności manualnych i zapewnia dużą oszczędność czasu –<strong> wszystko jest usprawnione</strong>.</p>
+<p><img class="alignright size-full wp-image-1216" title="3 29 N UNDER SS Newsletter Sample" src="http://www.prestashop.com/blog/pl/files/2014/09/3-29-N-UNDER-SS-Newsletter-Sample.png" alt="" width="300" height="617" align="right" /></p>
+<h4><span style="color: #b71683;">Czy wprowadziliście na stronę sklepu dodatkowe moduły z PrestaShop Addons?</span></h4>
+<p>Używamy PrestaShop od wersji 1.4 i korzystamy z kilku modułów umożliwiających klientom otrzymywanie e-maili z powiadomieniem, gdy produkty są dostępne i dodawanie przycisków mediów społecznościowych do stron produktów. Jednakże, moduł, z którego korzystamy najczęściej to<a href="http://addons.prestashop.com/pl/reklama-marketing-newsletter-prestashop-moduly/4932-my-newsletter-statistics.html" target="_blank"> moduł newslettera</a>. Wysyłamy co dwa tygodnie newslettery prezentujące nowe produkty i informujące o wyprzedażach. Wysyłamy również tematyczne newslettery przy okazji ważnych świąt i wydarzeń.</p>
+<p>Na przykład, wysłaliśmy klientom e-mail z okazji amerykańskiego Dnia Niepodległości, aby promować odzież z akcentami patriotycznymi. W tym newsletterze zaprezentowaliśmy odzież w barwach czerwonych, białych lub niebieskich. Podobnie, jak inne nasze newslettery, spowodował on 10-procentowy wzrost zamówień.</p>
+<h4><span style="color: #b71683;">Jako specjalista od marketingu, jakie inne strategie marketingowe wykorzystujesz do stymulowania wizyt w Waszym sklepie?</span></h4>
+<p>Cały nasz marketing odbywa się w mediach społecznościowych. Właśnie przeprowadzamy pomiar skuteczności <a href="https://www.facebook.com/29NUnder" target="_blank">Facebook </a>(w porównaniu z innymi platformami mediów społecznościowych), używając promocji skierowanej do pewnej grupy docelowej. Promocja nadal trwa, więc nie mamy jeszcze wyników. Używamy również sieci <a href="https://twitter.com/29nunder" target="_blank">Twitter </a>i <a href="http://instagram.com/29nunder/" target="_blank">Instagram </a>do promocji naszych sukienek i kreacji.</p>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-1217" title="4 29 N UNDER SS FB Sale" src="http://www.prestashop.com/blog/pl/files/2014/09/4-29-N-UNDER-SS-FB-Sale.png" alt="" width="475" height="272" /></p>
+<p><strong>[29 N Under otrzymał prawie 100 000 „Lubię to!” na Facebooku i ponad 25 000 śledzących na Instagramie! </strong>Ponadto, korzysta on z aktywnej promocji fanów w mediach społecznościowych. Ponad 3 000 użytkowników Facebooka <a href="https://www.facebook.com/29NUnder/likes" target="_blank">dyskutuje o nich</a> i średnio 750 użytkowników Instagramu lubi każde opublikowane przez nich zdjęcie].</p>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-1218" title="5 facebook stats" src="http://www.prestashop.com/blog/pl/files/2014/09/5-facebook-stats.png" alt="" width="475" height="322" /></p>
+<h4><span style="color: #b71683;">Co uczyniliście, aby rozwinąć swój internetowy biznes? Co wyróżnia Wasz sklep na tle innych sklepów internetowych?</span></h4>
+<p>Mimo iż sprzedajemy sukienki po niskich cenach, dostarczamy klientom produkty i usługi wysokiej jakości. Gdy klienci zadają nam pytania, odpowiadamy na nie natychmiast, głównie za pośrednictwem mediów społecznościowych. Staramy się zawsze ułatwiać i umilać klientowi proces zakupów. Dzięki temu udało nam się utrzymać 20% regularnych klientów. Nawet osoby, które nie dokonały drugiego zakupu polecają naszą stronę innym potencjalnym klientom.</p>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-1219" title="6 29 N UNDER SS Customer Service" src="http://www.prestashop.com/blog/pl/files/2014/09/6-29-N-UNDER-SS-Customer-Service.png" alt="" width="475" height="298" /></p>
+<h4><span style="color: #b71683;">A co szykujecie w przyszłości dla 29 N Under? </span></h4>
+<p>Chcielibyśmy otworzyć kilka niewirtualnych sklepów. Idealnie 3, w amerykańskich metropoliach. Z niecierpliwością czekamy również na <a href="http://www.prestashop.com/pl/pobranie" target="_blank">najnowszą wersję PrestaShop</a>. Funkcja statystyk i analiz pozwoli nam uzyskać interesujące i przydatne informacje odnośnie miast, z których pochodzi najwięcej naszych klientów i w których możemy planować otwarcie sklepów.</p>
+<div>
+<hr align="left" size="2" width="20%" />
+</div>
+<p>Czy masz już sklep internetowy? Rozwiązania e-commerce PrestaShop wspierają rozwój Twojego internetowego biznesu.<a href="http://www.prestashop.com/pl/pobranie" target="_blank"> Pobierz oprogramowanie </a>już dzisiaj i zacznij tworzyć swój internetowy sklep. Nie jesteś jeszcze gotów do rozpoczęcia własnej działalności online? Poznaj więcej <a href="http://www.prestashop.com/pl/showcase" target="_blank">historii sukcesu rodem z PrestaShop.</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/09/08/29-n-under-sklep-w-odzieza-migruje-z-facebooka-do-prestashop-i-odnotowuje-wzrost-w-wysokosci-1000/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Targi e-commerce 2014: zapraszamy do PrestaShop podczas wydarzenia roku w sektorze e-commerce</title>
+		<link>http://www.prestashop.com/blog/pl/2014/09/03/targi-e-commerce-2014-zapraszamy-do-prestashop-podczas-wydarzenia-roku-w-sektorze-e-commerce/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/09/03/targi-e-commerce-2014-zapraszamy-do-prestashop-podczas-wydarzenia-roku-w-sektorze-e-commerce/#comments</comments>
+		<pubDate>Wed, 03 Sep 2014 13:25:15 +0000</pubDate>
+		<dc:creator>Camille Sila</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1207</guid>
+		<description><![CDATA[W tym roku po raz kolejny paryskie targi e-commerce staną się the place to be dla wszystkich uczestników sektora sprzedażny internetowej. Planujesz udział w targach? My tak! Od 23 do 25 września 2014 PrestaShop będzie obecny na stoisku nr B041 &#8230; <a href="http://www.prestashop.com/blog/pl/2014/09/03/targi-e-commerce-2014-zapraszamy-do-prestashop-podczas-wydarzenia-roku-w-sektorze-e-commerce/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<p>W tym roku po raz kolejny <a href="http://www.ecommerceparis.com/">paryskie targi e-commerce</a> staną się <em>the place to be</em> dla wszystkich uczestników sektora sprzedażny internetowej. Planujesz udział w targach? My tak! Od <strong>23 do 25 września 2014</strong> PrestaShop będzie obecny na <strong>stoisku nr B041 i C041 </strong>w sektorze poświęconym wyłącznie tworzeniu i rozwojowi sklepów internetowych. Nasz zespół wraz z 19 partnerami będzie do dyspozycji sprzedawców, programistów, agencji i partnerów.</p>
+<p>Zapraszamy do PrestaShop Village i odkrycia naszych najnowszych produktów, uzyskania odpowiedzi na nurtujące pytania a nawet skorzystania z bezpłatnego audytu przeprowadzonego przez zespól PrestaShop: dwa stoiska zostaną poświęcone wyłącznie audytom.</p>
+<p><img class="aligncenter size-full wp-image-17157" title="e-commerce-fr-BO" src="http://www.prestashop.com/blog/fr/files/2014/09/e-commerce-fr-BO.jpg" alt="" width="556" height="216" /><br />
+<span id="more-1207"></span></p>
+<h4><span style="color: #ed2279; font-weight: bold;">PrestaShop Village w liczbach:</span></h4>
+<p style="padding-left: 30px;"><span style="color: #99cc00;"><strong>253</strong> </span><strong>m<sup>3</sup> powierzchni<br />
+<span style="color: #99cc00;">11</span> agencji</strong> – <em>Kiwik, 123 monsite, Dream me up, My Web Shop, Web Alliance, My BB Services, Edatis, Antadis, Full Performance, Affinity Engine, Bm service.</em><br />
+<span style="color: #99cc00;"><strong>8</strong></span> <strong>partnerów</strong> – <em>Mondial Relay, Shopping Flux, PayPlug, So Colissimo-Quadra, EcoPresto, PayMill, Profileo, Envoi Moins Cher.</em><br />
+<span style="color: #99cc00;"><strong>3</strong> </span><strong>stoiska ogólne</strong><br />
+<span style="color: #99cc00;"><strong>2</strong></span> <strong>stoiska audytowe<br />
+</strong><strong><span style="color: #99cc00;">500</span> ekskluzywnych podarunków </strong>do odebrania na stoiskach PrestaShop</p>
+<h4><span style="color: #ed2279; font-weight: bold;">Konferencje i warsztaty dla pogłębienia wiedzy i umiejętności</span></h4>
+<p>Każdego dnia, PrestaShop i jego partnerzy, poprowadzą warsztaty i konferencje wspierające Twoja drogę do sukcesu! Spotkanie w Sali 2 podczas prezentacji najnowszych produktów:</p>
+<p><strong><span style="color: #000000;">Wtorek 23 września &#8211; 16:15/17:00</span>,</strong></p>
+<p style="padding-left: 30px;"><strong>PrestaShop, e-commerce 3.0<br />
+</strong><em>Prowadzone przez Bruno Lévêque&#8217;a, założyciela PrestaShop i Benjamina Tesznera, prezesa PrestaShop.</em></p>
+<p><span style="color: #000000;"><strong>Środa 24 września &#8211; 12:15/13:00 </strong></span></p>
+<p style="padding-left: 30px;"><strong>Mobilne zakupy jednym kliknięciem z Powatag i PrestaShop: Określenie nowych limitów m-commerce w Twoim sklepie internetowym<br />
+</strong><em>Prowadzone przez Erica Messin, Channel Director France w Powatag i Grégoire&#8217;a Vérona, Head of Partnerships w PrestaShop</em></p>
+<p><span style="color: #000000;"><strong>Czwartek 25 września &#8211; 14:45/15:30 </strong></span></p>
+<p style="padding-left: 30px;"><strong>Doświadczenie płynnych płatności z PayPal i PrestaShop<br />
+</strong><em>Prowadzone przez PayPal i Arnaud Bourboulona, Chief Revenue Officer, PrestaShop</em></p>
+<p><span style="color: #000000;"><strong>Czwartek 25 września &#8211; 15:30/16:15</strong><strong>, </strong></span></p>
+<p style="padding-left: 30px;"><strong>Personalizowane porady w PrestaShop: handlowe podejście w służbie Twojej rentowności.<br />
+</strong><em>Prowadzone przez Teddy&#8217;ego Malfaita, Dyrektora Generalnego Affinity Engine i Arnaud Bourboulona, Chief Revenue Officer w PrestaShop</em></p>
+<p>Czekamy na Ciebie w PrestaShop Village!</p>
+<p><a href="http://logi9.xiti.com/go.url?xts=496748&amp;xtor=AD-183&amp;url=http://badge.ecommerceparis.com/" target="_blank">Zgłoś się po identyfikator!</a></p>
+<h4><span style="color: #ed2279; font-weight: bold;">Praktyczne informacje:</span></h4>
+<p><strong>Targi e-commerce w Paryżu</strong><br />
+<strong>Kiedy</strong>: od 23 do 25 września 2014<br />
+<strong>Gdzie</strong>: w Paryżu Porte de Versailles/ PAVILLON 7-3<br />
+1 Place de la Porte de Versailles &#8211; 75015 PARIS</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/09/03/targi-e-commerce-2014-zapraszamy-do-prestashop-podczas-wydarzenia-roku-w-sektorze-e-commerce/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Głosuj na PrestaShop w ramach CMS Critics’ Choice CMS Awards!</title>
+		<link>http://www.prestashop.com/blog/pl/2014/09/02/glosuj-na-prestashop-w-ramach-cms-critics-choice-cms-awards/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/09/02/glosuj-na-prestashop-w-ramach-cms-critics-choice-cms-awards/#comments</comments>
+		<pubDate>Tue, 02 Sep 2014 15:12:29 +0000</pubDate>
+		<dc:creator>Xavier du Tertre</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1202</guid>
+		<description><![CDATA[Dziękujemy za wszystkie nominacje od społeczności. PrestaShop został wyłoniony jako finalista w dwóch kategoriach tegorocznej edycji CMS Critics’ Choice CMS Awards 2014! Pomóż nam wygrać, oddając dzisiaj swój głos. Zajmie to tylko minutę! Twój głos się liczy! Głosuj na PrestaShop &#8230; <a href="http://www.prestashop.com/blog/pl/2014/09/02/glosuj-na-prestashop-w-ramach-cms-critics-choice-cms-awards/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<p>Dziękujemy za wszystkie nominacje od społeczności. PrestaShop został wyłoniony jako finalista w dwóch kategoriach tegorocznej edycji CMS Critics’ Choice CMS Awards 2014! </p>
+<p>Pomóż nam wygrać, <a href="http://awards.cmscritic.com/vote" target="_blank">oddając dzisiaj swój głos</a>. Zajmie to tylko minutę!<br />
+<a href="http://www.prestashop.com/blog/fr/files/2014/09/cms-critic-awards.jpg"><img src="http://www.prestashop.com/blog/fr/files/2014/09/cms-critic-awards-1024x537.jpg" alt="" title="cms-critic-awards" width="584" height="306" class="aligncenter size-large wp-image-17145" /></a></p>
+<h4><span style="color: #3366ff;">Twój głos się liczy!</span></h4>
+<p style="padding-left: 30px;"><span style="color: #333333;"><strong>Głosuj na PrestaShop w kategoriach:</strong></span><br />
+- Best eCommerce Solution for SMB<br />
+- Best eCommerce Solution for Enterprise</p>
+<p>Możesz szybko oddać głos tutaj: <a href="http://awards.cmscritic.com/vote" target="_blank">http://awards.cmscritic.com/vote</a></p>
+<p>Dziękujemy za oddane głosy! Pomóż nam przekazać dalej tę informację za pomocą ikon udostępniania w sieciach społecznościowych w dolnej części tego postu. Poinformujemy Cię o wynikach!</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/09/02/glosuj-na-prestashop-w-ramach-cms-critics-choice-cms-awards/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Jak wykorzystać Pinterest dla Twojego sklepu internetowego</title>
+		<link>http://www.prestashop.com/blog/pl/2014/08/27/jak-wykorzystac-pinterest-dla-twojego-sklepu-internetowego/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/08/27/jak-wykorzystac-pinterest-dla-twojego-sklepu-internetowego/#comments</comments>
+		<pubDate>Wed, 27 Aug 2014 09:19:07 +0000</pubDate>
+		<dc:creator>Camille Sila</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1193</guid>
+		<description><![CDATA[Pinterest to platforma społecznościowa ciesząca się coraz większą popularnością wśród firm internetowych. Może poszczycić się 135 mln wizyt dziennie, przyciąga więcej osób niż LinkedIn, Google+ i YouTube razem wzięte i tylko Facebook prześciga ją pod względem przyciągania użytkowników do firmowych &#8230; <a href="http://www.prestashop.com/blog/pl/2014/08/27/jak-wykorzystac-pinterest-dla-twojego-sklepu-internetowego/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<p>Pinterest to platforma społecznościowa ciesząca się coraz większą popularnością wśród firm internetowych. Może poszczycić się 135 mln wizyt dziennie, przyciąga więcej osób niż LinkedIn, Google+ i YouTube razem wzięte i tylko Facebook prześciga ją pod względem przyciągania użytkowników do firmowych witryn internetowych.</p>
+<p>Aby zachęcić więcej firm do używania swojej platformy, Pinterest wprowadził nowe konta biznesowe dysponujące dokładną analizą, która śledzi wrażenia, „przypinania” i kliknięcia. Niezależnie od tego, czy jesteś ekspertem czy nowicjuszem w dziedzinie „przypięć”, pokażemy Ci, jak wykorzystać Pinterest dla Twojego sklepu internetowego.<br />
+<img class="aligncenter size-full wp-image-18315" src="http://www.prestashop.com/blog/en/files/2014/08/pinterest.jpg" alt="" width="600" height="315" /></p>
+<p><span id="more-1193"></span></p>
+<h2><span style="color: #d0333a;">Czym jest Pinterest? </span></h2>
+<p>Zgodnie z własną definicją <a href="http://business.pinterest.com/pl" target="_blank">Pinterest</a> to „narzędzie do wizualnego odkrywania pomysłów, które mogą być przydatne dla Twoich projektów i zainteresowań”. Innymi słowy, to cyfrowa i społecznościowa tablica korkowa. Użytkownicy (czyli w żargonie Pinterest pinnerzy) mogą zbierać (lub przypinać) obrazy na swoje strony internetowe zwane tablicami (boards). Aspekt społecznościowy powstaje, gdy inni pinnerzy ponownie użyją tych samych obrazów, przypinając je na własnych tablicach. Teraz, gdy poznałeś już język Pinterest, przejdziemy do omawiania strategii Pinterest.</p>
+<h2><span style="color: #d0333a;">Określ publiczność i komunikat</span></h2>
+<p>Kluczem udanej strategii jest określenie, do kogo się zwracasz i co próbujesz mu powiedzieć. Użytkownicy Pinterest należą zazwyczaj do jednej z poniższych <a href="http://sociable360.blogspot.com/2012/02/pinterest-demographic-data-marketers.html" target="_blank">grup demograficznych</a>: <a href="http://mashable.com/2012/02/25/pinterest-user-demographics/?utm_medium=email&amp;utm_source=newsletter" target="_blank">kobieta, 25+ lat, zamieszkująca przedmieścia dużych miast</a>. Jeżeli Twoi klienci należą do jeden z poniższych kategorii, powinieneś już być na Pinterest. Jeżeli chcesz dotrzeć do tej grupy demograficznej, powinieneś również zacząć „przypinać”.</p>
+<p>Wiesz już, do kogo się zwracasz. Czas opracować treść przekazu i sposób jego dostarczenia. Silną stroną Pinterest jest możliwość połączenia różnych obrazów i pomysłów do przekazania idei marki. Pamiętaj, że Twój język, komunikat i cała treść musi odzwierciedlać promowany przez Ciebie styl życia.</p>
+<h2><span style="color: #d0333a;">6 zasad e-commerce odnośnie Pinterest</span></h2>
+<p>Nawet jeżeli <a href="http://www.pinterest.com/pinterest/pinterest-for-business/" target="_blank">założyłeś już konto biznesowe w Pinterest</a>, nie jesteś jeszcze gotowy do przypinania. Na początku musimy określić kilka podstawowych zasad, aby zwiększyć skuteczność Twoich pinezek.</p>
+<ol>
+<li>Używaj odpowiednich # do promowania Twoich pinezek.</li>
+<li>Stwórz własne tablice z połączeniem oryginalnych pinezek i przepięć.</li>
+<li>Przypinaj pinezki w nocy, ponieważ szczyt przypinania przypada na 21.00.</li>
+<li>Wybieraj długie obrazy, gdyż funkcjonują one najlepiej w układzie Pinterest.</li>
+<li>Pozwól klientom na łatwe udostępnianie Twoich produktów, dzięki przyciskowi Pinterest Share (pierwotna funkcja w PrestaShop.)</li>
+<li>Pozostań aktywny. Przypinaj, komentuj lub po prostu „lajkuj” treści innych pinnerów, aby zaangażować inne osoby.</li>
+</ol>
+<h2><span style="color: #d0333a;">Oryginalna treść na Pinterest </span></h2>
+<p>Rozpocznij od stworzenia profilu biznesowego Pinterest, używając specjalnego arkusza do wymiarowania obrazu <a href="http://www.authormedia.com/the-pinterest-cheat-sheet-to-image-sizes/" target="_blank">z AuthorMedia</a>.</p>
+<ol>
+<ul>
+<li>obrazy profilowe: 165 x 165 pikseli (w oparciu o 600 X 600 pikseli),</li>
+<li>wprowadzane pinezki: 238 pikseli x dostosowane do wysokości,</li>
+<li>powiększone wymiary pinezki: 735 pikseli x dostosowane do wysokości,</li>
+<li>obraz główny: 217 x 146 pikseli,</li>
+<li>miniaturki: 51 x 51 pikseli.</li>
+</ul>
+</ol>
+<p>Następnie, musisz oznakować oryginalne markowe obrazy znakiem wodnym zawierającym adres internetowy Twojego sklepu. Nie wstawiaj go wszędzie, tyko na pięknych obraz przedstawiających wiele produktów. Podczas przypinania obrazów produktów z Twojej strony, zawsze wiąż je bezpośrednio z produktem, aby ułatwić zakupy. Na zakończenie stwórz dobry opis &#8211; nie używaj identyfikatora SKU ani nazw plików takich jak IMG_21231.</p>
+<h2><span style="color: #d0333a;">Pomysły na zadziwiające tablice Pinterest </span></h2>
+<p>Zainspiruj się tymi 5 pomysłami i przykładami tablic Pinterest.</p>
+<h4><span style="color: #000000;">1. Produkty</span></h4>
+<p>Korzystaj z tablicy „Prezentowane produkty” lub „Nowości”, aby prezentować na bieżąco nowe produkty. <a href="http://www.gretelhome.com/" target="_blank">Gretel Home</a>, sklep z artykułami gospodarstwa domowego PrestaShop, promuje swoje produkty za pomocą<a href="http://www.pinterest.com/gretelhome/new-at-gretel/" target="_blank">New at Gretel board</a>.</p>
+<p style="text-align: center;"><img class="aligncenter  wp-image-18318" src="http://www.prestashop.com/blog/en/files/2014/08/pinterest-1-gretel-home.png" alt="" width="540" height="255" /></p>
+<h4><span style="color: #000000;">2. Inspiracja</span></h4>
+<p>Co Cię inspiruje? Czy pracujesz, używając modnych schematów lub muz? <a href="http://www.whatgoesaroundnyc.com/" target="_blank">What Goes Around Comes Around NYC</a> to obsługiwany przez PrestaShop sklep sprzedający towary luksusowe, który stworzył kilka <a href="http://www.pinterest.com/wgacany/vintage-luxury-ads/" target="_blank">reklam w starym stylu</a> aby zainspirować własne obrazy.</p>
+<p style="text-align: center;"><img class="aligncenter  wp-image-18319" src="http://www.prestashop.com/blog/en/files/2014/08/pinterest-2-wgaca.png" alt="" width="540" height="244" /></p>
+<h4><span style="color: #000000;">3. Kolor(y)</span></h4>
+<p>Pinterest jest narzędziem wizualnym, więc wykorzystaj to, poświęcając całą tablicę Pinterest kolorom. Wybierz jeden kolor, dwa dodatkowe kolory lub nawet tęczę. Obejrzyj obsługiwaną przez PrestaShop <a href="http://www.pinterest.com/condura/black-white/" target="_blank">czarno-białą tablicę</a> <a href="http://www.condura.com.au" target="_blank">Condura </a>jako źródło inspiracji.</p>
+<p style="text-align: center;"><img class="aligncenter  wp-image-18320" src="http://www.prestashop.com/blog/en/files/2014/08/pinterest-3-condura.png" alt="" width="540" height="225" /></p>
+<h4><span style="color: #000000;">4. Współpraca </span></h4>
+<p>Poproś klientów o udział w Twoich tablicach Pinterest. Niedawno poprosiliśmy nasze sklepy o przysłanie ich pięknych witryn sklepowych PrestaShop przez #ShopShot. Sklepy te znajdują się obecnie na naszej tablicy <a href="http://www.pinterest.com/prestashop/of-pride-and-stores/" target="_blank">OPride and Stores</a>.</p>
+<p style="text-align: center;"><img class="aligncenter  wp-image-18321" src="http://www.prestashop.com/blog/en/files/2014/08/pinterest-4-prestashop.png" alt="" width="540" height="206" /></p>
+<h4><span style="color: #000000;">5. Pory roku i święta</span></h4>
+<p>Aktualizuj swoje pinezki przed nadchodzącymi porami roku i świętami. Pod koniec lata przypnij kilka pomysłów jak wykorzystać ostatnie dni lata lub przygotuj jesienne akcesoria. W ubiegłym roku <a href="https://www.donnawilson.com/" target="_blank">Donna Wilson</a>, sklep PrestaShop sprzedający artykuły robione na drutach, stworzył <a href="http://www.pinterest.com/donnawilsonltd/donna-wilson-christmas-gift-guide-2013/" target="_blank">Przewodnik po świątecznych prezentach</a> prezentujący pomysły na idealne prezenty dla mamy, taty a nawet najlepszego przyjaciela.</p>
+<p style="text-align: center;"><img class="aligncenter  wp-image-18322" src="http://www.prestashop.com/blog/en/files/2014/08/pinterest-5-donna-wilson.png" alt="" width="600" height="270" /></p>
+<h2><span style="color: #d0333a;">Wniosek</span></h2>
+<p>Podobnie jak w każdej innej strategii, analizuj swoje wyniki, aby zmierzyć ich skuteczność. Dzięki temu optymalnie wykorzystasz swoje konto biznesowe Pinterest. Na jakiej tablicy Pinterest masz największą ochotę przypinać pinezki? Jeżeli jesteś już doświadczonym pinnerem, powiedz nam w poniższym polu, która z Twoich tablic funkcjonuje najlepiej! Nie masz jeszcze sklepu internetowego? Zacznij już dzisiaj od przetestowania naszego <a href="http://demo.prestashop.com/" target="_blank">demo </a>lub wskocz na głęboką wodę i <a href="http://www.prestashop.com/pl/pobranie" target="_blank">download PrestaShop’s</a> oprogramowanie e-commerce PrestaShop.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/08/27/jak-wykorzystac-pinterest-dla-twojego-sklepu-internetowego/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Wprowadzenie do tematu blogowania w e-commerce</title>
+		<link>http://www.prestashop.com/blog/pl/2014/08/26/wprowadzenie-do-tematu-blogowania-w-e-commerce/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/08/26/wprowadzenie-do-tematu-blogowania-w-e-commerce/#comments</comments>
+		<pubDate>Tue, 26 Aug 2014 13:45:33 +0000</pubDate>
+		<dc:creator>Camille Sila</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1180</guid>
+		<description><![CDATA[Ostatnie lata udowodniły, że blogowanie jest najskuteczniejszą metodą marketingową dla firm internetowych. Strony e-commerce, które posiadają popularne blogi przyciągają odpowiednią grupę gości, podnosząc świadomość marki i tworząc rozpowszechniane treści. Przedstawione poniżej wprowadzenie do tematu blogowania w e-commerce obejmuje podstawy tworzenia &#8230; <a href="http://www.prestashop.com/blog/pl/2014/08/26/wprowadzenie-do-tematu-blogowania-w-e-commerce/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<p>Ostatnie lata udowodniły, że blogowanie jest najskuteczniejszą metodą marketingową dla firm internetowych. Strony e-commerce, które posiadają popularne blogi przyciągają odpowiednią grupę gości, podnosząc świadomość marki i tworząc rozpowszechniane treści.</p>
+<p>Przedstawione poniżej wprowadzenie do tematu blogowania w e-commerce obejmuje podstawy tworzenia doskonałego bloga oraz przykłady firm internetowych, które dysponują popularnymi blogami.</p>
+<p><img class="aligncenter size-large wp-image-1181" title="header-ecommerce-blogging" src="http://www.prestashop.com/blog/pl/files/2014/08/header-ecommerce-blogging-1024x537.jpg" alt="" width="584" height="306" /></p>
+<p><span id="more-1180"></span></p>
+<h2><span style="color: #1abc9c;">Korzyści z blogowania w e-commerce</span></h2>
+<p>Zbyt wiele sklepów internetowych skupia się wyłącznie na taktykach marketingowych, mających na celu przekształcenie wizyt w bezpośrednią sprzedaż, takich jak zniżki czy promocje. Natomiast, blog nie ma na celu natychmiastowego przekształcenia gości w klientów. Ma on za zadanie przyciągnięcie potencjalnych klientów dzięki wartościowej i dostosowanej do nich treści.</p>
+<h4><span style="color: #3498db;">Realne korzyści z blogowania dla Twojego biznesu:</span></h4>
+<p style="padding-left: 60px;"><strong><span style="color: #e74c3c;">-</span></strong> przyciągniecie Twojej docelowej publiczności,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> stymulowanie wizyt zainteresowanych osób,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> promowanie produktów bez zachęcania do kupna,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> budowanie swojej wiarygodności jako eksperta,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> tworzenie więzi poprzez budowanie zaufania,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> umożliwienie czytelnikom dzielenia się treścią.</p>
+<p>A więc, jak zabrać się do tworzenia udanego bloga, który pozwoli Ci korzystać ze wspomnianych plusów?</p>
+<h2><span style="color: #1abc9c;">Określenie profilu nabywcy</span></h2>
+<p>Blog w e-commerce jest doskonałym sposobem na przyciągnięcie wizyt, lecz doświadczeni przedsiębiorcy wiedzą, że ogromny ruch nie zawsze oznacza ogromną sprzedaż. Musisz stworzyć treść, która przyciągnie nabywców o konkretnym profilu.</p>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-1182" title="Buyer Personas (3)" src="http://www.prestashop.com/blog/pl/files/2014/08/Buyer-Personas-3.png" alt="" width="496" height="228" /></p>
+<p>Określenie profilu nabywcy to kluczowy etap tworzenia zniewalającej treści dla Twojego bloga. Dlatego musisz zadać sobie <a href="http://blog.hubspot.com/blog/tabid/6307/bid/30907/9-Questions-You-Need-to-Ask-When-Developing-Buyer-Personas.aspx" target="_blank">9 pytań podczas określania profilu nabywcy</a>.</p>
+<p>Po określeniu profilu Twoich klientów, będzie Ci łatwiej ukierunkować wysiłki i opracować odpowiednią strategię dotyczącą treści.</p>
+<h2><span style="color: #1abc9c;">Opracowanie strategii dotyczącej treści</span></h2>
+<p>Strategia dotycząca treści określi typ treści, ton, tematy i informacje, które będziesz publikować, aby przyciągnąć potencjalnych nabywców.</p>
+<p>Ponieważ profil nabywcy odgrywa bardzo ważną rolę podczas opracowywania strategii dotyczącej treści, dostępnych jest kilka różnych podejść w zależności od bloga. Jednakże, istnieje kilka najlepszych praktyk, które będą obowiązywać niezależnie od sprzedawanego w sieci towaru.</p>
+<h4><span style="color: #3498db;">Pomysły na zachęcający blog:</span></h4>
+<p style="padding-left: 60px;"><strong><span style="color: #e74c3c;">-</span></strong> filmy instruktażowe,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> treści wzbogacone zdjęciami,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> artykuły typu „zrób to sam”,Do it yourself articles<br />
+<strong><span style="color: #e74c3c;">-</span></strong> przykładowe stroje,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> pomysły na prezent,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> wywiady z liderami danej dziedziny,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> prezentacja nadchodzących trendów,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> prezentacja własnego zespołu, biura itp.,<br />
+<strong><span style="color: #e74c3c;">-</span></strong> przegląd powiązanych usług, produktów, wydarzeń.</p>
+<p>Pamiętaj, że Twój blog powinien wzbudzać zaufanie, dostarczać informacji i podnosić świadomość marki, używając treści, która przekształca czytelników i/lub zachęca ich do powrotu.</p>
+<h2><span style="color: #1abc9c;">Tworzenie harmonogramu publikacji</span></h2>
+<p>Każdy aktywny blog posiada zintegrowany, niewidoczny harmonogram publikacji. Miesięczny harmonogram publikacji to dokument organizujący planowanie, tworzenie i publikowanie wpisów na blogu.</p>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-1183" title="EDITORIAL CALENDAR (6)" src="http://www.prestashop.com/blog/pl/files/2014/08/EDITORIAL-CALENDAR-6.png" alt="" width="600" height="300" /></p>
+<h4><span style="color: #3498db;">Kompleksowy harmonogram publikacji zawiera:</span></h4>
+<p style="padding-left: 30px; text-align: justify;"><span style="color: #4c4c4c;"><strong>Datę publikacji:</strong></span> to raczej oczywisty element, ale pamiętaj o uwzględnieniu świąt, dni tygodnia i czasu. Oto artykuł prezentujący <a href="http://contently.com/strategist/2011/06/10/whats-the-best-day-and-time-to-publish-content/" target="_blank">najlepsze dni i godziny do publikacji treści</a>.</p>
+<p style="padding-left: 30px; text-align: justify;"><span style="color: #4c4c4c;"><strong>Tytuł:</strong></span> tytuły wpisów na blogu powinny być łatwo odnajdywane przez wyszukiwarki, lecz co ważniejsze, powinny zachęcać profile nabywców do przeczytania treści.</p>
+<p style="padding-left: 30px; text-align: justify;"><span style="color: #4c4c4c;"><strong>Słowa kluczowe:</strong></span> to słowa, których użyjesz w całym wpisie, aby zwiększyć swoją popularność w wyszukiwarkach. Oto <a href="http://writtent.com/blog/14-blog-writing-tips-for-creating-seo-friendly-blog-posts/ " target="_blank">14 wskazówek jak pisać blog pod kątem wyszukiwarek</a>.</p>
+<p style="padding-left: 30px; text-align: justify;"><span style="color: #4c4c4c;"><strong>Zachęcanie do działania:</strong></span> każdy wpis na blogu powinien zawierać wyraźne zachęcenie do działania. Czego oczekujesz od swoich czytelników po przeczytaniu danego wpisu? Polubienia Twojej strony na Facebooku, obejrzenia produktu czy filmu?</p>
+<p style="padding-left: 30px; text-align: justify;"><span style="color: #4c4c4c;"><strong>Kanały promocyjne:</strong></span> w jaki sposób będziesz promować dany wpis na blogu? Na przykład, możesz udostępnić wpis w sieciach społecznościowych lub w swoim comiesięcznym biuletyni.</p>
+<p>Już wkrótce przekonasz się, że harmonogram publikacji to niezastąpione narzędzie do planowania i realizacji doskonałej strategii dotyczącej treści.</p>
+<h2><span style="color: #1abc9c;">Kto może posłużyć za przykład? </span></h2>
+<p>Jesteś już prawie gotowy do blogowania! Pozostał Ci jeszcze ostatni krok. Obejrzyj blogi Twoich konkurentów, aby ocenić, co robią jak należy, a co możesz zrobić lepiej.</p>
+<p>Oto 3 firmy internetowe, których blogi mogą posłużyć Ci za inspirację:</p>
+<h4><span style="color: #3498db;">#1 Target.com</span></h4>
+<p><img class="aligncenter size-full wp-image-1184" title="#1 A Bullseye View" src="http://www.prestashop.com/blog/pl/files/2014/08/1-A-Bullseye-View.png" alt="" width="570" height="392" /></p>
+<p>Target przeniósł blogowanie w e-commerce na inny poziom! Ich blog, <a href="http://www.abullseyeview.com/" target="_blank">A Bullseye View</a>, to niezgłębione źródło pomysłów na treści internetowe.</p>
+<h4><span style="color: #3498db;">#2 Ikea.com</span></h4>
+<p><img class="aligncenter size-full wp-image-1185" title="#2 IKEA Share Space blog" src="http://www.prestashop.com/blog/pl/files/2014/08/2-IKEA-Share-Space-blog.png" alt="" width="570" height="306" /></p>
+<p>Blog sklepów Ikea, <a href="http://www.theshare-space.com/blog/ " target="_blank">Share Space</a>, promuje ich produkty bez nadmiernego zachęcania do zakupów. Oferując porady stylistyczne i zachęcając klientów do dzielenia się treścią, ich blog służy za inspirację i przyciąga klientów!</p>
+<h4><span style="color: #3498db;">#3 Gap.com</span></h4>
+<p><img class="aligncenter size-full wp-image-1186" title="#3 aDressed" src="http://www.prestashop.com/blog/pl/files/2014/08/3-aDressed.png" alt="" width="570" height="437" /></p>
+<p><a href="http://blogs.gapinc.com/" target="_blank">aDressed</a> to oficjalny blog Gap Inc. Ten blog to źródło informacji o firmie, pozycjonujące Gap jako lidera w swoim sektorze.</p>
+<h2><span style="color: #1abc9c;">Dodaj blog do swojego sklepu PrestaShop</span></h2>
+<p>Sklepy internetowe stworzone w oparciu o PrestaShop mogą w prosty sposób rozpocząć blogowanie. Dodaj stronę do istniejącego bloga lub wybierz moduł z <a href="http://addons.prestashop.com/pl/search.php?search_query=blog" target="_blank">Addons store</a>, aby stworzyć blog na swojej stronie.</p>
+<p>Nie korzystasz jeszcze z PrestaShop? <a href="http://www.prestashop.com/pl/pobranie" target="_blank">Pobierz PrestaShop</a> i otwórz już dzisiaj swój bezpłatny sklep internetowy.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/08/26/wprowadzenie-do-tematu-blogowania-w-e-commerce/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Dlaczego Bootstrap jest wart rozgłosu</title>
+		<link>http://www.prestashop.com/blog/pl/2014/08/20/dlaczego-bootstrap-jest-wart-rozglosu/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/08/20/dlaczego-bootstrap-jest-wart-rozglosu/#comments</comments>
+		<pubDate>Wed, 20 Aug 2014 14:55:59 +0000</pubDate>
+		<dc:creator>Benjamin Utterback</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1173</guid>
+		<description><![CDATA[Bootstrap nie jest już tylko modnym słówkiem w żargonie programistów internetowych. Słowo to weszło do słownictwa i jest obecnie używane jako pełnoprawny czasownik. „Masz problemy z rozpoczęciem projektowania strony? Bootstrapuj”. Gdy markowa nazwa, taka jak Twitter Bootstrap staje się nieformalnym, &#8230; <a href="http://www.prestashop.com/blog/pl/2014/08/20/dlaczego-bootstrap-jest-wart-rozglosu/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<p style="text-align: left;" align="center">Bootstrap nie jest już tylko modnym słówkiem w żargonie programistów internetowych. Słowo to weszło do słownictwa i jest obecnie używane jako pełnoprawny czasownik. „Masz problemy z rozpoczęciem projektowania strony? Bootstrapuj”. Gdy markowa nazwa, taka jak Twitter Bootstrap staje się nieformalnym, lecz popularnym słowem, wiesz, że bardzo wiele osób jej używa.</p>
+<p style="text-align: left;" align="center">Podobnie jak słowo „kserowanie” określające powielanie czy „googlowanie” – wyszukiwanie internetowe, słowo „Bootstrap” stało się synonimem ramy służącej do tworzenia stron internetowych. Być może to bardzo śmiałe stwierdzenie, biorąc pod uwagę dużą konkurencyjność tego rynku, ale wiem, co mówię. W moim poprzednim poście, przedstawiłem <a href="http://www.prestashop.com/blog/pl/2014/03/06/co-to-bootstrap-historia-oraz-o-co-caly-ten-szum-czesc-1-z-2/">krótką historię nieoczekiwanych narodzin i wielkiego szumu</a> wokół ramy Twitter Bootstrap.</p>
+<p>A oto 5 powodów, dla których Bootstrap zasłużyła na ten rozgłos.</p>
+<p><img class="alignleft size-full wp-image-18251" title="img-02" src="http://www.prestashop.com/blog/en/files/2014/08/img-02.png" alt="" width="500" height="150" /><span id="more-1173"></span></p>
+<h4>1. Oszczędność czasu:</h4>
+<p>Bootstrap oferuje przygotowane wstępnie siatki, szablony oraz gotowe elementy CSS i HTML, takie jak tabele, formy, przyciski, ikony itd. Co to oznacza dla cierpiącego na chroniczny brak czasu programisty? Oznacza to, że masz pod ręką dosłownie wszystko, co niezbędne do stworzenia profesjonalnej strony internetowej od podstaw – w jednym pakiecie Bootstrap. Koniec ze stylizowaniem i kodowaniem każdego elementu strony, teraz wystarczy ją bootstrapować</p>
+<h4>2. Pełna reaktywność:</h4>
+<p>prawie wszystkie strony internetowe muszą być kompatybilne z systemami mobilnymi i reaktywne, w szczególności strony e-commerce. Chcesz, aby Twoi klienci mogli wyszukać produkty, siedząc przed domowym komputerem, dodać nowe produkty na tablecie, czekając na odprawę lotniczą i zakończyć transakcję na smartfonie po wylądowaniu. Zdarza się to coraz częściej, ponieważ systemy i płatności mobilne przeżywają rozkwit. Bootstrap oferuje gotowe siatki o dużej reaktywności, wspierające web design dla systemów mobilnych na każdym poziomie.</p>
+<h4>3. Aktywna społeczność:</h4>
+<p>dotychczas, <a href="https://github.com/twbs/bootstrap">repozytorium Bootstrap na GitHub</a> otrzymało 70 000 gwiazdek (odpowiednika „Lubię to!” na Facebooku czy Google +1). Prawie 600 współautorów wzbogaca ten serwis należący do najpopularniejszych repozytoriów na GitHub. W razie problemu, wątpliwości czy pytań, wystarczy zamieścić post w temacie GitHub Bootstrap i skontaktować się z ekspertami. Najczęściej Twój problem zostanie rozwiązany od ręki. Miło jest mieć świadomość, że można liczyć na społeczność.</p>
+<h4>4. Pakiety wtyczek JavaScript:</h4>
+<p>jedną z najlepszych cech Bootstrap jest oferowanie całej gamy przydatnych wtyczek JavaScript. Każdy programista wie, ile nerwów może kosztować osiągnięcie kompatybilności między funkcjami JavaScript a projektem. Na szczęście, wszystkie oferowane przez Bootstraps wtyczki JS pracują bez zarzutu. Potrzebujesz zakładek z animacją, ruchomych suwaków czy składanych menu? Bootstrapuj!</p>
+<h4>5. Dokumentacja. Dokumentacja. Dokumentacja:</h4>
+<p>często dostęp do specjalistycznej dokumentacji jest na wagę złota. Bootstrap słynie wśród programistów stron internetowych z obszernej, pomocnej i przystępnie napisanej dokumentacji. Można w niej znaleźć przykłady prawie każdego elementu. Początkujący użytkownicy mają również dostęp do demo, ułatwiającego pierwsze kroki w świecie projektowania stron. Dokumentacja Bootstrap pokrywa wszystkie podstawy, od najłatwiejszych funkcji po najbardziej złożone elementy. </p>
+<p>&#8212;&#8211;</p>
+<p>Bootstrap jest absolutnym hitem na scenie projektowania stron internetowych i w pełni na to zasługuje. Połączenie gotowych elementów, pakietów animacyjnych, obszernej dokumentacji i społeczności pasjonatów uczyniło z ramy Twitter Bootstrap atrakcyjne rozwiązanie dla web designu na wszystkich poziomach. Nie oznacza to, że Twoja wymarzona strona zaprojektuje się sama. Musisz posiadać dobrą znajomość HTML i CSS, aby zacząć projekt. Mieliśmy ogromną przyjemność móc przeprowadzić wywiad z twórcą Bootstrapa, Markiem Otto. Możesz <a href="http://www.prestashop.com/blog/en/creator-of-bootstrap-mark-otto-speaks-to-attendees-at-prestashop-barcamp-2013/">obejrzeć go tutaj</a>.</p>
+<p>Miło, że poświęciłeś czas na zaznajomienie się z tym wyjątkowym narzędziem. Poniżej możesz umieścić swoje uwagi lub pytania. Ja mam do Ciebie tylko jedno. Czy bootstrapujesz?</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/08/20/dlaczego-bootstrap-jest-wart-rozglosu/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Polityki zwrotów w e-commerce</title>
+		<link>http://www.prestashop.com/blog/pl/2014/08/19/polityki-zwrotow-w-e-commerce/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/08/19/polityki-zwrotow-w-e-commerce/#comments</comments>
+		<pubDate>Tue, 19 Aug 2014 16:02:25 +0000</pubDate>
+		<dc:creator>Samyha Aggoune</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1163</guid>
+		<description><![CDATA[Jasna i zrozumiała polityka zwrotów zwiększa wiarygodność i jest niezbędnym warunkiem zdobycia zaufania klientów. Odpowiednia polityka zwrotów umożliwia skrócenie czasu poświęconego na zwrot pieniędzy, obsługę reklamacji klienta i wzrost rentowności. Co należy do niej włączyć i od czego zacząć? Pomożemy &#8230; <a href="http://www.prestashop.com/blog/pl/2014/08/19/polityki-zwrotow-w-e-commerce/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<p>Jasna i zrozumiała polityka zwrotów zwiększa wiarygodność i jest niezbędnym warunkiem zdobycia zaufania klientów. Odpowiednia polityka zwrotów umożliwia skrócenie czasu poświęconego na zwrot pieniędzy, obsługę reklamacji klienta i wzrost rentowności. Co należy do niej włączyć i od czego zacząć? Pomożemy Ci, przedstawiając ogólne zasady polityki zwrotów w e-commerce.</p>
+<p><img class="aligncenter size-full wp-image-1164" src="http://www.prestashop.com/blog/pl/files/2014/08/Return-Policies.jpg" alt="" width="600" height="315" /></p>
+<p><span id="more-1163"></span></p>
+<h2><span style="color: #ff6600">Jaki produkt może zostać zwrócony? </span></h2>
+<p>Musisz podjąć pierwszą decyzję – czy zgadzasz się na zwroty i wymiany produktów, czy też nie. Nie jesteś pewien? Oto 5 kategorii produktów, które ogólnie nie podlegają zwrotom zgodnie z <a href="http://www.dca.ca.gov/publications/legal_guides/s-6.shtml" target="_blank">prawem stanu Kalifornia</a>. Twoje lokalne władze na pewno opracowały podobną dokumentację.</p>
+<ol>
+<ul>
+<li>Produkty spożywcze, rośliny, kwiaty i inne towary łatwo psujące się.</li>
+<li>Wyroby produkowane specjalnie na zamówienie .</li>
+<li>Towary, które nie mogą zostać ponownie sprzedane ze względów higienicznych.</li>
+<li>Produkty zwrócone w stanie uniemożliwiającym ich ponowną sprzedaż.</li>
+<li>Zwroty bez oryginalnych etykiet, opakowań i paragonów lub faktur.</li>
+</ul>
+</ol>
+<p>Jeżeli sprzedajesz artykuły różnego rodzaju, musisz określić, które z nich podlegają zwrotom, a które nie.</p>
+<h2><span style="color: #ff6600">Kwota zwrotu</span></h2>
+<p>Określ jakiej kwoty mogą oczekiwać klienci. Na przykład, zazwyczaj koszty wysyłki nie podlegają zwrotom, w przeciwieństwie do podatków. Jeżeli pobierasz opłatę manipulacyjną, musisz poinformować o tym w polityce zwrotów. Klienci powinni być w stanie obliczyć dokładną kwotę zwróconych im pieniędzy.</p>
+<h2><span style="color: #ff6600">Termin zwrotu</span></h2>
+<p>Określ, do jakiego czasu (w dniach lub miesiącach) klienci mogą zwrócić zamówienie. Nie wiesz jaki termin podać? Weź pod uwagę podstawowy czynnik &#8211; instytucje przetwarzające płatności przechowują informacje o kartach kredytowych klientów przez ograniczony okres czasu. Po jego upływie, nie będziesz mógł zwrócić pieniędzy klientom. Inne czynniki, które należy uwzględnić to czas dostawy i zwrotu zamówienia.</p>
+<p>Aby polityka zwrotów była jasna i zrozumiała, zalecamy podanie od kiedy rozpoczyna się okres umożliwiający zwrot towaru. Czy jest to dzień otrzymania płatności, wysłania przesyłki czy może otrzymania przesyłki przez klienta? Określ również, co powinien uczynić klient przed końcem tego okresu. Na przykład, czy przed tym terminem klient musi wysłać przesyłkę czy też przesyłka musi już do Ciebie dotrzeć. Na zakończenie, określ ile dni zajmie przetworzenie zwrotu i informuj klienta na bieżąco o sytuacji.</p>
+<h2><span style="color: #ff6600">Adres wysyłki</span></h2>
+<p>Podaj adres, na który należy wysyłać zwrotne przesyłki, nie zapominając o szczegółach. Aby upewnić się, że klienci wyślą przesyłkę na właściwy adres, załącz dokument zwrotu, który klienci będą mogli wypełnić.</p>
+<p>Musisz również podać, kto zapłaci za przesyłkę. Obciążenie klientów kosztami przesyłki jest opłacalne, ale należy pamiętać, że mogą oni wybrać tani i niepewny serwis transportowy. Niezależnie od tego kto opłaca przesyłkę, upewnij się, że dostępna jest usługa śledzenia przesyłki.</p>
+<h2><span style="color: #ff6600"> Wymiana towaru</span></h2>
+<p>Czy klient może zwrócić artykuł w zamian za inny lub otrzymać bon do wykorzystania w późniejszym czasie? Jeżeli tak, jak to będzie wyglądać od strony klienta? Ile czasu zajmie? Podaj również dodatkowe opłaty nałożone na klienta, takie jak opłata manipulacyjna czy koszty dodatkowej przesyłki. Jeżeli nie akceptujesz wymian lub bonów, wyraźnie to zaznacz.</p>
+<h2><span style="color: #ff6600"> Wyjątkowe sytuacje: </span></h2>
+<p><strong>Wyprzedaże</strong><br />
+Podczas wyprzedaży, zazwyczaj zakłada się, że nabyte towary nie podlegają zwrotom. Jednakże, każdy klient może inaczej to interpretować, więc wyraźnie określ obowiązującą politykę zwrotów podczas wyprzedaży. Na przykład, jeżeli używasz wyrażeń promocyjnych w stylu „ostateczna wyprzedaż”, czy „2 w cenie 1”, wyraźnie zaznacz, że te artykuły nie podlegają zwrotom.</p>
+<p><strong>Po upływie terminu</strong><br />
+Poinformuj klientów, co stanie się w przypadku, gdy zwracany towar zostanie przysłany po upływie terminu zwrotu. Czy klient otrzyma wówczas bon, obniżony zwrot pieniędzy a może otrzyma z powrotem zwrócony produkt? Surowa polityka zwrotów będzie chronić Cię przed stratami, ale może również odstraszyć klientów.</p>
+<h2><span style="color: #ff6600">Uwagi końcowe</span></h2>
+<p>Dołącz paragraf umożliwiający Ci wprowadzanie rozsądnych zmian lub aktualizacji w polityce zwrotów, według własnego uznania. W miarę jak poznasz nawyki Twoich klientów, będziesz mógł dostosować politykę zwrotów, aby lepiej odzwierciedlała ich oczekiwania. Jeżeli uważasz, że otrzymujesz zbyt wiele zwrotów, zapoznaj się z <a href="http://www.prestashop.com/blog/en/10-ways-to-reduce-returns-for-your-e-commerce-site/" target="”_blank”">10 sposobami jak ograniczyć zwroty. </a></p>
+<p>Czy nasze rady okazały się przydatne, czy może coś pominęliśmy? Czekamy na Twoje uwagi, które możesz wpisać w polu poniżej. Szukasz oprogramowania e-commerce, które zapewniłoby Ci skuteczniejsze zarządzanie zamówieniami i zwrotami? Na początek <a href="http://www.prestashop.com/pl/pobranie" target="”_blank”"> pobierz PrestaShop </a>– oprogramowanie do zarządzania zamówieniami!<br />
+<em></em></p>
+<p><em>(Uwaga od autora: ninejszy post na blogu ma na celu ułatwienie Ci opracowania własnej polityki zwrotów. Aby upewnić się, że Twoja polityka zwrotów jest zgodna z lokalnymi/ krajowymi przepisami, skontaktuj się z prawnikiem).</em></p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/08/19/polityki-zwrotow-w-e-commerce/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>4 najważniejsze wskazówki, jak udoskonalić wewnętrzną wyszukiwarkę</title>
+		<link>http://www.prestashop.com/blog/pl/2014/08/14/4-najwazniejsze-wskazowki-jak-udoskonalic-wewnetrzna-wyszukiwarke/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/08/14/4-najwazniejsze-wskazowki-jak-udoskonalic-wewnetrzna-wyszukiwarke/#comments</comments>
+		<pubDate>Thu, 14 Aug 2014 15:09:16 +0000</pubDate>
+		<dc:creator>Camille Sila</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1154</guid>
+		<description><![CDATA[W tym tygodniu gościmy Steve&#8217;a Chou, współwłaściciela Bumblebee Linens i MyWifeQuitHerJob.com. W pierwszym roku działalności internetowy sklep Steve’a &#8211; Bumblebee Linens zarobił ponad 100 000 $. Tak, to nie pomyłka – 6-cyfrowy wynik w przeciągu roku. Następnie założył on stronę &#8230; <a href="http://www.prestashop.com/blog/pl/2014/08/14/4-najwazniejsze-wskazowki-jak-udoskonalic-wewnetrzna-wyszukiwarke/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<p>W tym tygodniu gościmy Steve&#8217;a Chou, współwłaściciela Bumblebee Linens i MyWifeQuitHerJob.com. W pierwszym roku działalności internetowy sklep Steve’a &#8211; Bumblebee Linens zarobił ponad 100 000 $. Tak, to nie pomyłka – 6-cyfrowy wynik w przeciągu roku. </p>
+<p>Następnie założył on stronę MyWifeQuitHerJob.com, aby dzielić się swoimi wskazówkami i poradami na temat prowadzenia działalności w Internecie. Obecnie, jego blog przyciąga ponad 90 000 czytelników miesięcznie i znalazł się w gronie wybrańców <em>The New York Times </em>i <em>The Huffington Post</em>. Zaprosiliśmy go, aby podzielił się z nami 4 najważniejszymi wskazówkami, jak udoskonalić wewnętrzne wyszukiwarki.</p>
+<p style="text-align: center"><img class="aligncenter  wp-image-18199" src="http://www.prestashop.com/blog/en/files/2014/08/search-improve5.png" alt="" width="540" height="284" /> <span id="more-1154"></span></p>
+<p>Jeżeli masz własny sklep internetowy, z pewnością wiesz, że optymalizacja Twojej strony dla wyszukiwarek internetowych (w szczególności Google) jest niezbędna, jeżeli chcesz zwiększyć liczbę wizyt, a tym samym sprzedaż. Jednak prawdziwą sztuką jest nie tylko zachęcenie klientów do odwiedzenia Twojej strony, <strong>lecz również zatrzymanie ich na niej  </strong> — i zachęcenie do zakupów.<br />
+<img class="aligncenter size-medium wp-image-18202" src="http://www.prestashop.com/blog/en/files/2014/08/mywifequitherjob-headshot-200x300.jpg" alt="" width="200" height="300" align="right" /><br />
+Niestety, zbyt wiele firm internetowych skupia się na optymalizacji pod kątem najpopularniejszych wyszukiwarek, całkowicie <strong>zaniedbując własną stronę internetową</strong>. Zrozumiałem, jak ogromne znaczenie ma <a href="http://mywifequitherjob.com/how-to-open-an-online-store/" target="_blank">dobra wyszukiwarka wewnętrzna</a> gdy zacząłem dawno temu <strong>uczyć technik e-commerce&#8217;u </strong>i prowadzić własny sklep internetowy z chusteczkami do nosa.</p>
+<p>Oto ciekawa informacja. Większość klientów po wejściu na stronę główną mojego sklepu nie szuka produktu, który chce kupić. <strong>Zamiast tego udaje się natychmiast do paska wyszukiwarki, aby zlokalizować poszukiwany artykuł.</strong></p>
+<p>Jeżeli Twoja strona nie jest gotowa do obsługi tych potencjalnych klientów, możesz przejść obok kilkunastotysięcznego zysku. Jak podają dane statystyczne, ponad <strong>95 procent klientów opuści natychmiast stronę, jeżeli nie znajdą tego, czego szukają.</strong> Jeden zły wynik i klient odchodzi w dal, a wraz nim — Twoja sprzedaż.</p>
+<h4><span style="color: #fc883e">Gotowe rozwiązania są niewystarczająco dobre</span></h4>
+<p>Jeżeli dodasz na ślepo artykuły do bazy danych koszyka, nie biorąc pod uwagę wewnętrznej wyszukiwarki, wiesz co się stanie? Twoja wewnętrzna wyszukiwarka nie poradzi sobie.<br />
+Jakiś czas temu przeanalizowałem pewne hasła wpisywane przez klientów do wyszukiwarki mojej strony, które nie zwracały żadnych wyników. Oto niektóre z nich:</p>
+<p style="padding-left: 30px">handkie<br />
+hankercheif<br />
+women’s hankies<br />
+mankerchief</p>
+<p><strong>Nic dziwnego, że wyszukiwarka nie znalazła żadnych wyników dla tych słów. </strong>Pierwsze dwa są niepoprawnie napisane (ang. handkerchief — chusteczka). Trzeci przykład zawiera apostrof, który powinien zostać zignorowany w ciągu znaków, ale tak się nie stało. Czwarty jest najwyraźniej próbą wyszukania chusteczek dla mężczyzn. Każdy z tych artykułów jest dostępny w moim sklepie. Ale klient nie będzie o tym wiedzieć, biorąc pod uwagę wyniki.</p>
+<p>Większość platform e-commerce&#8217;u nie dostarczy wyszukiwanych wyników w sposób domyślny. <strong>Nieprawidłowo wpisane hasła i synonimy mogą kosztować Cię tysiące dolarów,</strong> a Ty możesz nawet nie zdawać sobie z tego sprawy. Jeżeli chcesz zatrzymać tych potencjalnych klientów i zamienić ich w prawdziwych klientów, musisz zacząć od 4 rzeczy:</p>
+<h4><span style="color: #fc883e">1. Udoskonalenie Twojej wewnętrznej wyszukiwarki zależy do Ciebie</span></h4>
+<p>To prawda, że większość Twoich klientów znajdzie Twoje produkty w Google, trafiając bezpośrednio na stronę produktu lub na stronę kategorii. Mimo to wielu potencjalnych klientów skorzysta z Twojej wewnętrznej wyszukiwarki. </p>
+<p>Nie musisz być kolejnym konkurentem Google, wystarczy, że stworzysz na własnej stronie <strong>wewnętrzną wyszukiwarkę </strong>produktów. Innymi słowy — trzeba  <strong>określić możliwe nazwy służące do wyszukiwania</strong> aby ułatwić potencjalnym klientom odnalezienie odpowiednich wyników, które ich zatrzymają na Twojej stronie. Nawet jeżeli nie obejdzie się bez pomocy programisty, inwestycja na pewno się zwróci.</p>
+<p>Wewnętrzna wyszukiwarka PrestaShop jest całkiem dobra — oferuje automatyczne uzupełnianie tekstu oraz sugestie wyszukiwania — lecz większość pracy związanej z optymalizacją własnej wyszukiwarki będzie należała do Ciebie.</p>
+<h4><span style="color: #fc883e">2. Zapisuj wszystkie wpisywane hasła</span></h4>
+<p>Nigdy nie uda Ci się wymyślić wszystkich wersji nazw Twoich produktów. Nawet jeśli spędzisz mnóstwo czasu próbując wymyślić wszelkie możliwe błędy ortograficzne, gramatyczne, interpunkcyjne czy wszelkie wersje nazw Twoich produktów, nigdy nie znajdziesz ich wszystkich. Klienci będą Cię zawsze zaskakiwać.</p>
+<p>Jeżeli chcesz uzyskać dokładny obraz haseł wpisywanych do wyszukiwarki na Twojej stronie, <strong>zapisuj każde z nich</strong>. Możesz zauważyć powtarzające się schematy i dostosować się do nich, aby nawet klienci popełniający błędy mogli uzyskać odpowiednie wyniki na Twojej stronie. Analizując wpisywane hasła, należy wziąć pod uwagę:</p>
+<p style="padding-left: 30px"><strong>Synonimy:</strong> Nawet jeżeli dysponujesz dobrymi opisami produktów, które używają alternatywnych nazw Twoich produktów, z pewnością istnieją nazwy, o których nie masz pojęcia. Notuj te słowa i zaprogramuj swoją wewnętrzną wyszukiwarkę tak, aby powiązała je z odpowiednimi produktami.</p>
+<p style="padding-left: 30px"><strong>Liczba mnoga, apostrofy i inne znaki interpunkcyjne: </strong>Upewnij się, że Twoja wyszukiwarka ignoruje znaki interpunkcyjne i liczbę mnogą. Możesz modyfikować kod, aby błędy gramatyczne nie zaważyły na wynikach uzyskanych przez klientów.<br />
+<strong></strong></p>
+<p style="padding-left: 30px"><strong>Skróty:</strong> Wiele osób używa slangu i skróconych nazw podczas wyszukiwania produktów. Weź to również pod uwagę.<br />
+<strong></strong></p>
+<p style="padding-left: 30px"><strong>Błędy ortograficzne: </strong>Wiele osób ma problemy z ortografią. Musisz się upewnić, że Twoja wyszukiwarka uwzględnia także to. Zwróć uwagę na „alternatywną” pisownię oraz częste omyłki, aby umożliwić pojawienie się prawidłowych wyników nawet po wpisaniu haseł z błędami.</p>
+<h4><span style="color: #fc883e">3. Pozwól klientom na łatwe precyzowanie wyszukiwania</span></h4>
+<p>Mój sklep sprzedaje chusteczki do nosa. Ponad połowa sprzedawanych produktów jest oznakowana po angielsku „handkerchiefs”, czyli właśnie chusteczki. Oznacza to, że osoba wpisująca slangowe słowo „hankies” ma niewielkie szanse, że znajdzie odpowiedni produkt. Większość klientów nie próbuje szukać dalej po pojawieniu się dziwnych wyników. Z drugiej strony nie bardzo mam ochotę dodawać do każdego opisu produktu słowa „hankies”.</p>
+<p>Na szczęście istnieje na to sposób. Zamiast wyświetlać brak wyników lub bardzo ograniczone wyniki możesz <strong>zastosować nowy link wyszukiwania</strong> tktóry zadałby klientowi pytanie, czy miał on na myśli inne słowo. W moim przypadku, osoba, która wpisała „hankies” zobaczy komunikat:</p>
+<p><strong>Czy masz na myśli „handkerchiefs”?</strong></p>
+<p>Ta metoda może być wykorzystana w przypadku różnorodnych błędów — w tym również ortograficznych — które pojawiają się w słowach wpisywanych przez klientów. Można w prosty sposób sprawić, aby ten link był <strong>widoczny i aktywny</strong>, dzięki czemu klienci mogli zmienić zapytanie przy minimalnym wysiłku. Wówczas uzyskają lepsze wyniki i pozostaną na Twojej stronie, zamiast szukać gdzie indziej.</p>
+<h4><span style="color: #fc883e">4. Dodaj do Twoich produktów słowa kluczowe używane podczas wyszukiwania</span></h4>
+<p>Wiesz już, czego poszukują Twoi klienci. Czas, aby <strong>odać do Twoich produktów słowa kluczowe używane podczas wyszukiwania.</strong> Są to słowa, które mogą się nie pojawiać w nazwie lub tytule Twojego produktu ani w jego opisie. Jednak zależy Ci na tym, aby te produkty pojawiały się jako wynik niektórych popularnych nazw używanych podczas wyszukiwania.</p>
+<p>Na przykład na mojej stronie popularnym wyrażeniem jest „Mother of the bride”. Ale nie chcę używać tej nazwy w tytułach czy opisach setek produktów. Dlatego to wyrażenie zostało <strong>włączone do wyszukiwanych słów</strong> powiązanych z konkretnymi produktami. To powiązanie oznacza, że klienci mogą znaleźć setki odpowiednich artykułów, wpisując hasło „mother of the bride”.</p>
+<p>Najlepszym sposobem jest <strong> dawanie wyszukiwanych słów po każdorazowym dodaniu nowego produktu. </strong>Niech wejdzie Ci to w nawyk. W ten sposób unikniesz czasochłonnych masowych aktualizacji. Jeżeli jednak Twoja strona wymaga masowych aktualizacji, zarezerwuj sobie na nie czas, stopniowo aktualizując nazwy i zaczynając od najpopularniejszych produktów.</p>
+<p><em>Jaki z tego morał?<br />
+</em>Twoja wewnętrzna wyszukiwarka ma znaczenie. Jeżeli nie chcesz stracić klientów przez frustrujące wyniki wyszukiwań, nie masz innego wyjścia — musisz udoskonalić wewnętrzną wyszukiwarkę.</p>
+<div>
+<hr align="left" size="2" width="20%" />
+</div>
+<p>Od czego mamy zacząć? Jeżeli należysz do użytkowników PrestaShop, najlepiej zacząć od: </p>
+<h4><span style="color: #fc883e">4 pierwszych kroków</span></h4>
+<p style="text-align: left"><strong>1.</strong> Masz dostęp do kluczowych słów, jakie Twoi klienci wpisali w wyszukiwarce<br />
+<em>         Back Office &gt; Statystyki &gt; Wyszukiwarki </em></p>
+<p style="text-align: left"><strong>2. </strong>Połącz każde wpisane słowo lub wyrażenie w grupy<br />
+<span style="color: #800080">          a. Błędy ortograficzne lub synonimy</span><br />
+<span style="color: #008000">          b. Określenia lub opisy</span></p>
+<p><strong>3.</strong> 3.	Przy każdym słowie lub wyrażeniu w kategorii <span style="color: #800080">Błędy ortograficzne lub synonimy</span>, zastanów się, do jakich słów kluczowych chciałbyś przekierować klienta. Następnie przekieruj każde słowo.<br />
+<em>          Back Office &gt; Preferencje &gt; Szukaj</em></p>
+<p><strong>4.</strong> Dla każdego <span style="color: #008000"> Określenia lub opisu ,</span> odszukaj produkty odpowiadające tym opisom i dodaj do nich słowa kluczowe jako tagi.<br />
+<em>         Back Office &gt; Katalog &gt; Produkty &gt; Informacje</em><br />
+(Więcej na temat <a href="http://doc.prestashop.com/display/PS16/Managing+Tags" target="_blank">zarządzania tagami</a> w naszej Instrukcji dla użytkowników.)</p>
+<p>Chcesz korzystać z funkcji, która pozwoli Twoim klientom zawsze odnajdywać to, czego szukają? Jedna z naszych agencji opracowała idealne rozwiązanie. Sugerowanie propozycji w odpowiedzi na „brak wyników”, dzięki <a href="http://addons.prestashop.com/pl/wyszukiwanie-filtrowanie-moduly-/5071-search-autocorrection.html" target="_blank">modułowi autokorekty wyszukiwania</a>.</p>
+<p>Nie jesteś użytkownikiem PrestaShop? Zadaj sobie pytanie, „Czy moje oprogramowanie sklepu oferuje wszystkie te <a href="http://www.prestashop.com/pl/funkcjonalnosc" target="_blank">funkcje bezpłatnie</a>?” Jeżeli nie, czas<a href="http://www.prestashop.com/pl/migrowac-do-prestashop" target="_blank"> przejść do PrestaShop</a>! (Przekonaj się sam, oglądając nasze <a href="http://demo.prestashop.com/pl/?view=front" target="_blank">demo</a>.)</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/08/14/4-najwazniejsze-wskazowki-jak-udoskonalic-wewnetrzna-wyszukiwarke/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>W sierpniu nasz personel wybrał: Top 3 wśród funkcji wspierających Twoją sprzedaż</title>
+		<link>http://www.prestashop.com/blog/pl/2014/08/12/w-sierpniu-nasz-personel-wybral-top-3-wsrod-funkcji-wspierajacych-twoja-sprzedaz/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/08/12/w-sierpniu-nasz-personel-wybral-top-3-wsrod-funkcji-wspierajacych-twoja-sprzedaz/#comments</comments>
+		<pubDate>Tue, 12 Aug 2014 08:35:36 +0000</pubDate>
+		<dc:creator>Camille Sila</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1145</guid>
+		<description><![CDATA[Na rynku internetowym, przeżywającym ciągłą ekspansję i rozwój konkurencji, nieustannie poszukujesz odpowiednich narzędzi i funkcji do napędzania sprzedaży. W tym miesiącu nasz zespół wybrał Top 3 wśród funkcji PrestaShop wspierających Twoją sprzedaż. Dobra wiadomość — każda z tych funkcji jest &#8230; <a href="http://www.prestashop.com/blog/pl/2014/08/12/w-sierpniu-nasz-personel-wybral-top-3-wsrod-funkcji-wspierajacych-twoja-sprzedaz/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<p><img class="alignnone size-full wp-image-18192" src="http://www.prestashop.com/blog/en/files/2014/08/staff-picks-1.png" alt="" width="200" height="155" align="right" /></p>
+<p>Na rynku internetowym, przeżywającym ciągłą ekspansję i rozwój konkurencji, nieustannie poszukujesz odpowiednich narzędzi i funkcji do napędzania sprzedaży.</p>
+<p>W tym miesiącu nasz zespół wybrał Top 3 wśród funkcji PrestaShop wspierających Twoją sprzedaż. Dobra wiadomość — każda z tych funkcji jest dostępna w Twoim back office PrestaShop, co umożliwia szybką i łatwą instalację!</p>
+<p><span id="more-1145"></span></p>
+<p><strong>Oto wybrane funkcje!</strong></p>
+<ol>
+<ul>
+<li><span style="color: #ed2279">Brow.si</span> – całkowicie bezpłatna funkcja optymizująca doświadczenie zakupów w Twoim sklepie przez telefon omórkowy</li>
+<li><span style="color: #ed2279">PrestaStats</span> – wyświetla, porównuje i eksportuje najważniejsze dane Twojego sklepu przy użyciu zaawansowanego pulpitu </li>
+<li><span style="color: #ed2279">Riskified</span> – zapobiega oszustwom i chroni przed wszelkimi transakcjami o wysokim stopniu ryzyka</li>
+</ul>
+</ol>
+<p>&nbsp;</p>
+<h2><a href="http://addons.prestashop.com/pl/mobile/8609-browsi.html " target="_blank"><span style="color: #008000">1. Brow.si</span></a></h2>
+<p><strong>TWÓJ SKLEP Z PRZYJAZNEGO DLA UŻYTKOWNIKÓW MOBILNYCH STAJE SIĘ IDEALNYM DOŚWIADCZENIEM</strong></p>
+<p style="text-align: center"><img class="aligncenter  wp-image-18136" src="http://www.prestashop.com/blog/en/files/2014/08/browsi.png" alt="" width="527" height="278" /></p>
+<p style="text-align: left"><span style="color: #ed2279"><strong>Do czego służy: </strong></span>Brow.si tworzy intuicyjne doświadczenie mobilnych zakupów dzięki łatwej w użytku, półprzeźroczystej warstwie. Zapewnia dodatkowe funkcje dla klientów, ułatwiające wyszukiwanie, oglądanie, udostępnianie i zakupy na Twojej stronie z dowolnego miejsca na świecie.</p>
+<p style="text-align: left"><span style="color: #ed2279"><strong>Co nas przekonało:</strong></span> Wystarczy jedno kliknięcie, aby Twoja strona zyskała funkcjonalność aplikacji dzięki Brow.si. Po wejściu na Twoją stronę w smartfonie — dzięki najważniejszym elementom wyszukiwania mobilnego — zakupy są jasnym, spójnymi i łatwym doświadczeniem. Możesz dostosować tę funkcję do swojej strony, ustawić opcje lokalizacji i wyświetlić funkcje analityczne.</p>
+<p style="text-align: left"><span style="color: #ed2279"><strong>W jaki sposób wspiera to sprzedaż: </strong></span>Brow.si zapewnia dodatkowe funkcje, wzbogacające mobilne wyszukiwanie poprzez specjalne powiadomienia, mobilną wyszukiwarkę, mobilny lejek kontrolny, natychmiastowe udostępnianie sieciom społecznościowym, itd. Zdobądź więcej mobilnych klientów dzięki intuicyjnemu doświadczeniu zakupów.</p>
+<p style="text-align: center"><a href="http://addons.prestashop.com/pl/mobile/8609-browsi.html" target="_blank">Zainstaluj Brow.si w swoim sklepie — gratis!</a><br />
+<em>Lub odszukaj go w swoim back office PrestaShop &gt; Moduły &gt; Mobilne</em></p>
+<h2><a href="http://addons.prestashop.com/pl/statystyki-analizy-prestashop-moduly/17294-prestastats.html" target="_blank"><span style="color: #008000">2. PrestaStats</span></a></h2>
+<p style="text-align: center"><strong>ZAAWANSOWANE FUNKCJE DO PRECYZYJNEGO ZARZĄDZANIA DANYMI BIZNESOWYMI</strong><br />
+<img class="aligncenter  wp-image-18137" src="http://www.prestashop.com/blog/en/files/2014/08/prestastats.png" alt="" width="605" height="294" /></p>
+<p style="text-align: left"><span style="color: #ed2279"><strong>Do czego służy:</strong></span> PPrestaStats eksportuje dane pierwotne z Twojego sklepu PrestaShop i łączy je w jasną do zrozumienia statystykę, przydatną podczas podejmowania decyzji biznesowych. Porzucone koszyki, najpopularniejsze produkty i zyski są łatwo dostępne w pulpie działającym w czasie rzeczywistym.</p>
+<p style="text-align: left"><span style="color: #ed2279"><strong>Co nas przekonało:</strong></span> Twoje dane są łączone w najważniejsze dane statystyczne, ułatwiające szybkie i dogłębne zrozumienie procesów biznesowych. Masz do nich dostęp z dowolnego urządzenia, przez cały czas — w szczególności gdy musisz podjąć ważne decyzje biznesowe. Dobra wiadomość: możesz przeglądnąć historię danych nawet od dnia uruchomienia sklepu.</p>
+<p style="text-align: left"><strong><span style="color: #ed2279">W jaki sposób wspiera to sprzedaż:</span> </strong>: Dane statystyczne umożliwiają wgląd i zrozumienie co się dzieje po drugiej stronie sklepu, ułatwiając Ci sprzedaż, zarządzanie i podejmowanie decyzji marketingowych. Bądź na bieżąco z trendami, podejmując czasowe decyzje, w oparciu o dzisiejsze dane… dostępnie już dzisiaj. PrestaStats udostępnia istotne fakty, które ułatwią Ci prowadzenie internetowego biznesu</p>
+<p style="text-align: center"><a href="http://addons.prestashop.com/pl/statystyki-analizy-prestashop-moduly/17294-prestastats.html " target="_blank">Zainstaluj bezpłatną wersję próbną</a><br />
+<em>Lub odszukaj tę funkcję w swoim back office PrestaShop &gt; Moduły &gt; Analityka i statystyki</em></p>
+<h2><a href="http://addons.prestashop.com/pl/bezpieczestwo-platnosci-prestashop-moduly/17295-riskified.html " target="_blank"><span style="color: #008000">3. Riskified</span></a></h2>
+<p style="text-align: center"><strong>AKCEPTUJ TRANSAKCJE, KTÓRE ZOSTAŁYBY ODRZUCONE PRZEZ SYSTEM GWARANTOWANEJ OCHRONY</strong><br />
+<img class="aligncenter  wp-image-18138" src="http://www.prestashop.com/blog/en/files/2014/08/riskified.png" alt="" width="488" height="191" /></p>
+<p><span style="color: #ed2279"><strong>Do czego służy:</strong> </span>System przeciwdziałania oszustwom Riskified pozwala Ci wyświetlić, sprawdzić i zatwierdzić wszystkie lub wybrane podejrzane transakcje. Zapewnia również cenny wgląd w Twoje transakcje, umożliwiając lepsze zrozumienie klientów. </p>
+<p><span style="color: #ed2279"><strong>Co nas przekonało:</strong></span> Riskified jest pewien swojej technologii wykrywania oszustw, oferując gwarancję 100% zwrotu pieniędzy w przypadku oszustwa. Płacisz wyłącznie po zatwierdzeniu transakcji i zarabiasz pieniądze. </p>
+<p><span style="color: #ed2279"><strong>W jaki sposób wspiera to sprzedaż:</strong></span> Zapewnia dodatkowe zamówienia, które zostałyby odrzucone ze względu na podejrzenie oszustwa. Jednocześnie zwiększasz zysk, zmniejszając obciążenia zwrotne i unikając opłat bankowych. </p>
+<p style="text-align: center"><a href="http://addons.prestashop.com/pl/bezpieczestwo-platnosci-prestashop-moduly/17295-riskified.html" target="_blank">Obsługuje więcej płatności — poproś o wersję demo</a><br />
+<em>Lub odszukaj tę funkcję w swoim back office PrestaShop &gt; Moduły &gt; Certyfikaty strony i zapobieganie kradzieży<br />
+</em></p>
+<div>
+<hr align="left" size="2" width="20%" />
+</div>
+<p>Które z tych funkcji pragniesz dodać do swojego sklepu PrestaShop? Daj nam znać w poniższym polu. Do zobaczenia za miesiąc podczas prezentacji kolejnych nowych funkcji. </p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/08/12/w-sierpniu-nasz-personel-wybral-top-3-wsrod-funkcji-wspierajacych-twoja-sprzedaz/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>4 rodzaje recenzji, które mogą zaważyć o sukcesie lub porażce Twojej firmy</title>
+		<link>http://www.prestashop.com/blog/pl/2014/08/07/4-rodzaje-recenzji-ktore-moga-zawazyc-o-sukcesie-lub-porazce-twojej-firmy/</link>
+		<comments>http://www.prestashop.com/blog/pl/2014/08/07/4-rodzaje-recenzji-ktore-moga-zawazyc-o-sukcesie-lub-porazce-twojej-firmy/#comments</comments>
+		<pubDate>Thu, 07 Aug 2014 15:50:59 +0000</pubDate>
+		<dc:creator>Benjamin Utterback</dc:creator>
+				<category><![CDATA[Aktualności]]></category>
+
+		<guid isPermaLink="false">http://www.prestashop.com/blog/pl/?p=1138</guid>
+		<description><![CDATA[Artykuł gościnny Talia Shani,autorki piszącej dla Yotpo „Usuń, usuń, usuń!” Tak reaguje większość z nas na negatywne recenzje naszych sklepów. Ale czy istnieje inny sposób? Wszyscy byliśmy w tej sytuacji: Jednego dnia otwierasz skrzynkę odbiorczą i znajdujesz nowy e-mail oznajmiający: &#8230; <a href="http://www.prestashop.com/blog/pl/2014/08/07/4-rodzaje-recenzji-ktore-moga-zawazyc-o-sukcesie-lub-porazce-twojej-firmy/" rel="nofollow" class="more-link">Read more<span class="meta-nav"></span></a>]]></description>
+			<content:encoded><![CDATA[<address dir="ltr">Artykuł gościnny <a href="http://blog.yotpo.com/author/talia-shani/" target="_blank">Talia Shani</a>,autorki piszącej dla <a href="http://www.prestashop.com/en/industry-partners/marketing-visibility/yotpo-social-reviews" target="_blank">Yotpo</a></address>
+<h5 dir="ltr">„Usuń, usuń, usuń!” Tak reaguje większość z nas na negatywne recenzje naszych sklepów. Ale czy istnieje inny sposób?</h5>
+<p><img class="alignleft  wp-image-17751" style="border-color: #bbbbbb; margin-top: 0.4em; background: #eeeeee;" title="Top Image" src="http://www.prestashop.com/blog/en/files/2014/07/Top-Image.png" alt="" width="640" height="240" /></p>
+<p dir="ltr">Wszyscy byliśmy w tej sytuacji: Jednego dnia otwierasz skrzynkę odbiorczą i znajdujesz nowy e-mail oznajmiający: „Twoja strona otrzymała nową recenzję!” Z niecierpliwością otwierasz wiadomość, aby zobaczyć, co dobrego napisał kolejny z Twoich zadowolonych klientów, tylko aby przekonać się, że ten konkretny klient był… niezbyt zadowolony. Panikujesz, myśląc „O nie! Co ja teraz zrobię?!” i szybko logujesz się do panelu administracyjnego strony z recenzjami, kursor myszki już w zawieszeniu nad przyciskiem „Usuń” – ale czy jest to najlepsze rozwiązanie? Czytaj dalej, aby poznać najlepsze praktyki Yotpo dotyczące obchodzenia się z różnego rodzaju recenzjami.<span id="more-1138"></span></p>
+<h2 dir="ltr">Entuzjastyczne</h2>
+<p><img class="alignleft size-full wp-image-17766" style="margin: auto; display: block; margin-left: 15px;" title="Yotpo Review" src="http://www.prestashop.com/blog/en/files/2014/07/Image-2.png" alt="" width="300" height="300" align="right" /></p>
+<p dir="ltr">Ludzie zostawiający entuzjastyczne recenzje pomagają Ci, dając wszystkim znać, jak bardzo uwielbiają Twój sklep i produkty, ale nie spoczywaj na laurach. Gdy tylko zauważysz potencjalnego kaznodzieję, wykorzystaj okazję, aby nawiązać z nim relację. Entuzjastyczny klient, który głośno wyraża swoje zadowolenie może stać się najsilniejszym narzędziem marketingowym w Twoim arsenale. Nawet jeśli posiadasz najlepsze treści marketingowe na świecie, <a href="https://econsultancy.com/blog/9366-ecommerce-consumer-reviews-why-you-need-them-and-how-to-use-them" target="_blank">kupujący są 12 razy bardziej skłonni zaufać recenzji niż Twojemu opisowi produktu</a>.</p>
+<p dir="ltr">Porada eksperta: Gdy otrzymasz entuzjastyczną recenzję, skontaktuj się z recenzentem prywatnie i zapytaj, czy mógłbyś użyć ich recenzji gdzieindziej na stronie oraz jako materiał marketingowy. Możesz na przykład załączyć fragmenty entuzjastycznych recenzji na stronie podsumowania płatności lub jako element kampanii e-mailowej.</p>
+<h3 dir="ltr">Dobre</h3>
+<p><img class="alignleft size-full wp-image-17757" style="margin: auto; display: block; margin-left: 15px;" title="Image 1" src="http://www.prestashop.com/blog/en/files/2014/07/Image-1.png" alt="" width="300" height="300" align="right" /></p>
+<p dir="ltr">Gdy otrzymasz pozytywną recenzję, najlepiej jest odpowiedzieć na nią publicznie. Postaraj się odpowiedzieć na jak najwięcej pozytywnych recenzji, pokazując swoim poprzednim i obecnym klientom, jak bardzo cenisz ich opinię, dzięki czemu chętniej będą ją zostawiać. Krótkie podziękowanie wystarczy, ale osobista odpowiedź jest zawsze lepsza.</p>
+<p dir="ltr">Porada eksperta: Jeśli odpowiadasz na wiele recenzji, kuszące będzie użycie uniwersalnego szablonu – nie daj się jednak skusić! Postaraj się urozmaicić swoje odpowiedzi i je spersonalizować; dołącz imię recenzenta i postaraj się nawiązać do konkretnego aspektu recenzji. Na przykład, zamiast napisać: „Dzięki za super recenzję!”, napisz: „Dzięki za super recenzję Karol! Miło słyszeć, że Twoja nowa koszulka tak dobrze na Tobie leży!”</p>
+<h3 dir="ltr">Nietrafne</h3>
+<p><img class="alignleft size-full wp-image-17771" style="margin: auto; display: block; margin-left: 15px;" title="Image 4" src="http://www.prestashop.com/blog/en/files/2014/07/Image-4.png" alt="" width="300" height="300" align="right" /></p>
+<p dir="ltr">Pomimo iż „klient zawsze ma rację”, czasami i on się myli. Często spotykamy się z tego rodzaju recenzjami &#8211; bez względu czy są pozytywne, czy negatywne – po prostu zawierają nieprawdziwe informacje. Jeżeli recenzja jest ewidentnie błędna, może być myląca dla nowych kupujących.</p>
+<p dir="ltr">Porada eksperta: Skontaktuj się z takimi recenzentami prywatnie i postaraj dowiedzieć się, dlaczego w recenzji zawarli nieprawdziwe informacje. W najlepszym przypadku przyznają się do błędu i napiszą nową recenzję. W najgorszym przypadku będziesz zmuszony wysłuchać niezadowolonego klienta.</p>
+<h3 dir="ltr">Negatywne</h3>
+<p><img class="alignleft size-full wp-image-17769" style="margin: auto; display: block; margin-left: 15px;" title="Image 3" src="http://www.prestashop.com/blog/en/files/2014/07/Image-3.png" alt="" width="300" height="300" align="right" /></p>
+<p dir="ltr">Negatywne recenzję przerażają właścicieli wielu sklepów, ale tak naprawdę są one szczęściem w nieszczęściu. Zakładając, że coś poszło nie tak – błąd po Twojej stronie powinien zostać wykorzystany jako okazja do zaskoczenia kupujących świetną obsługą klienta. <a href="https://www.helpscout.net/blog/customer-complaints/" target="_blank">Badania wykazują, że 90% klientów da Ci drugą szansę, jeśli rozwiążesz ich problem w krótkim czasie.</a> Tutaj w Yotpo zawsze polecamy publikowanie negatywnych recenzji, gdyż nadają one wiarygodności wszystkim pozostałym recenzjom na stronie oraz dają Twoim klientom możliwość poczucia prawdziwego oblicza Twojego produktu.</p>
+<p dir="ltr">Porada eksperta: Nie wystarczy, że po prostu rozwiążesz problem klienta – jeśli zrobisz o krok więcej, to zyskasz wiernego klienta na całe życie. Jest wiele sposobów, aby zaimponować im świetną obsługą klienta – samo telefoniczne przeproszenie za pomyłkę może przynieść wiele korzyści. Jeśli jest taka możliwość, warto rozważyć wysłanie drobnego prezentu w ramach przeprosin.</p>
+<p dir="ltr">Teraz, gdy znasz już najlepsze sposoby radzenia sobie z różnego rodzaju recenzjami, możesz przyznać, że dobrze się z nimi do tej pory obchodziłeś?</p>
+<p dir="ltr">Czy masz własne praktyki dotyczące traktowania zadowolonych lub niezadowolonych klientami? Daj nam znać poniżej!</p>
+<h4 dir="ltr">Generuj recenzje klientów dla Twojego e-sklepu dzięki modułowi Yotpo Social Reviews</h4>
+<p>Yotpo, jedno z wiodących rozwiązań do tworzenia recenzji klientów dla stron e-commerce, pomaga właścicielom sklepów generować recenzje oraz wykorzystywać je jako skuteczne narzędzia marketingowe do przyciągania ruchu i zwiększania przychodów.</p>
+<p style="text-align: center;"><img class="wp-image-16957 aligncenter" title="yotpo" src="http://www.prestashop.com/blog/fr/files/2014/08/yotpo.png" alt="" width="311" height="311" /></p>
+<p>Handlowcy PrestaShop używający Yotpo mogą cieszyć się z następujących korzyści:</p>
+<ul>
+<li>Wysyłanie e-maila po dokonaniu zakupu zachęcającego do przesłania recenzji</li>
+<li>Wyświetlanie recenzji na stronach produktów</li>
+<li>Wyświetlanie oceny w postaci gwiazdek wśród płatnych i organicznych wyników wyszukiwania Google</li>
+<li>Odpowiadanie na recenzje publicznie lub prywatnie</li>
+<li>Udostępnianie recenzji na Facebooku i Twitterze</li>
+<li>Oferowanie kuponów kupującym w zamian za napisanie i udostępnienie recenzji</li>
+</ul>
+<p>Najnowsze badania wykazują, że <a href="http://searchengineland.com/2013-study-79-of-consumers-trust-online-reviews-as-much-as-personal-recommendations-164565" target="_blank">79% klientów ufa recenzjom on-line</a>, dlatego też posiadanie dużego arsenału dobrych recenzji i referencji jest decydującym czynnikiem sukcesu Twojego biznesu.</p>
+<p>Jeżeli nie zainstalowałeś jeszcze <a href="http://addons.prestashop.com/pl/sieci-spolecznosciowe-facebook-prestashop-moduly/7366-yotpo-social-reviews.html" target="_blank">modułu Yotpo dla PrestaShop</a>, możesz z łatwością zainstalować go bezpośrednio z back-office’u lub poprzez darmowe pobranie ze strony Oficjalnego rynku PrestaShop.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://www.prestashop.com/blog/pl/2014/08/07/4-rodzaje-recenzji-ktore-moga-zawazyc-o-sukcesie-lub-porazce-twojej-firmy/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

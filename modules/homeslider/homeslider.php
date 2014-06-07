@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,15 +19,14 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 15681 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
 /**
- * @since 1.5.0
- * @version 1.2 (2012-03-14)
+ * @since   1.5.0
+ * @version 1.3 (2012-03-14)
  */
 
 if (!defined('_PS_VERSION_'))
@@ -43,15 +42,17 @@ class HomeSlider extends Module
 	{
 		$this->name = 'homeslider';
 		$this->tab = 'front_office_features';
-		$this->version = '1.2';
+		$this->version = '1.3.6';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 		$this->secure_key = Tools::encrypt($this->name);
+		$this->bootstrap = true;
 
 		parent::__construct();
 
-		$this->displayName = $this->l('Homeslider');
+		$this->displayName = $this->l('Image slider for your homepage');
 		$this->description = $this->l('Adds an image slider to your homepage.');
+		$this->ps_versions_compliancy = array('min' => '1.6.0.4', 'max' => _PS_VERSION_);
 	}
 
 	/**
@@ -60,11 +61,14 @@ class HomeSlider extends Module
 	public function install()
 	{
 		/* Adds Module */
-		if (parent::install() && $this->registerHook('displaySlider')  && $this->registerHook('displayHome') && $this->registerHook('actionShopDataDuplication'))
+		if (parent::install() &&
+			$this->registerHook('displayHeader') &&
+			$this->registerHook('displayTopColumn') &&
+			$this->registerHook('actionShopDataDuplication')
+		)
 		{
 			/* Sets up configuration */
-			$res = Configuration::updateValue('HOMESLIDER_WIDTH', '535');
-			$res &= Configuration::updateValue('HOMESLIDER_HEIGHT', '300');
+			$res = Configuration::updateValue('HOMESLIDER_WIDTH', '779');
 			$res &= Configuration::updateValue('HOMESLIDER_SPEED', '500');
 			$res &= Configuration::updateValue('HOMESLIDER_PAUSE', '3000');
 			$res &= Configuration::updateValue('HOMESLIDER_LOOP', '1');
@@ -75,8 +79,12 @@ class HomeSlider extends Module
 			if ($res)
 				$this->installSamples();
 
-			return $res;
+			// Disable on mobiles and tablets
+			$this->disableDevice(Context::DEVICE_MOBILE);
+
+			return (bool)$res;
 		}
+
 		return false;
 	}
 
@@ -86,7 +94,7 @@ class HomeSlider extends Module
 	private function installSamples()
 	{
 		$languages = Language::getLanguages(false);
-		for ($i = 1; $i <= 5; ++$i)
+		for ($i = 1; $i <= 3; ++$i)
 		{
 			$slide = new HomeSlide();
 			$slide->position = $i;
@@ -94,9 +102,11 @@ class HomeSlider extends Module
 			foreach ($languages as $language)
 			{
 				$slide->title[$language['id_lang']] = 'Sample '.$i;
-				$slide->description[$language['id_lang']] = 'This is a sample picture';
+				$slide->description[$language['id_lang']] = '<h2>EXCEPTEUR<br />OCCAECAT</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique in tortor et dignissim. Quisque non tempor leo. Maecenas egestas sem elit</p>
+				<p><button class="btn btn-default" type="button">Shop now !</button></p>';
 				$slide->legend[$language['id_lang']] = 'sample-'.$i;
-				$slide->url[$language['id_lang']] = 'http://www.prestashop.com';
+				$slide->url[$language['id_lang']] = 'http://www.prestashop.com/?utm_source=v16_homeslider';
 				$slide->image[$language['id_lang']] = 'sample-'.$i.'.jpg';
 			}
 			$slide->add();
@@ -115,12 +125,13 @@ class HomeSlider extends Module
 			$res = $this->deleteTables();
 			/* Unsets configuration */
 			$res &= Configuration::deleteByName('HOMESLIDER_WIDTH');
-			$res &= Configuration::deleteByName('HOMESLIDER_HEIGHT');
 			$res &= Configuration::deleteByName('HOMESLIDER_SPEED');
 			$res &= Configuration::deleteByName('HOMESLIDER_PAUSE');
 			$res &= Configuration::deleteByName('HOMESLIDER_LOOP');
-			return $res;
+
+			return (bool)$res;
 		}
+
 		return false;
 	}
 
@@ -176,6 +187,7 @@ class HomeSlider extends Module
 			$to_del = new HomeSlide($slide['id_slide']);
 			$to_del->delete();
 		}
+
 		return Db::getInstance()->execute('
 			DROP TABLE IF EXISTS `'._DB_PREFIX_.'homeslider`, `'._DB_PREFIX_.'homeslider_slides`, `'._DB_PREFIX_.'homeslider_slides_lang`;
 		');
@@ -184,248 +196,33 @@ class HomeSlider extends Module
 	public function getContent()
 	{
 		$this->_html .= $this->headerHTML();
-		$this->_html .= '<h2>'.$this->displayName.'.</h2>';
 
 		/* Validate & process */
 		if (Tools::isSubmit('submitSlide') || Tools::isSubmit('delete_id_slide') ||
 			Tools::isSubmit('submitSlider') ||
-			Tools::isSubmit('changeStatus'))
+			Tools::isSubmit('changeStatus')
+		)
 		{
 			if ($this->_postValidation())
+			{
 				$this->_postProcess();
-			$this->_displayForm();
+				$this->_html .= $this->renderForm();
+				$this->_html .= $this->renderList();
+			}
+			else
+				$this->_html .= $this->renderAddForm();
+
+			$this->clearCache();
 		}
 		elseif (Tools::isSubmit('addSlide') || (Tools::isSubmit('id_slide') && $this->slideExists((int)Tools::getValue('id_slide'))))
-			$this->_displayAddForm();
+			$this->_html .= $this->renderAddForm();
 		else
-			$this->_displayForm();
+		{
+			$this->_html .= $this->renderForm();
+			$this->_html .= $this->renderList();
+		}
 
 		return $this->_html;
-	}
-
-	private function _displayForm()
-	{
-		/* Gets Slides */
-		$slides = $this->getSlides();
-
-		/* Begin fieldset slider */
-		$this->_html .= '
-		<fieldset>
-			<legend><img src="'._PS_BASE_URL_.__PS_BASE_URI__.'modules/'.$this->name.'/logo.gif" alt="" /> '.$this->l('Slider configuration').'</legend>';
-		/* Begin form */
-		$this->_html .= '<form action="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'" method="post">';
-		/* Height field */
-		$this->_html .= '
-			<label>'.$this->l('Height:').'</label>
-			<div class="margin-form">
-				<input type="text" name="HOMESLIDER_HEIGHT" id="speed" size="3" value="'.Configuration::get('HOMESLIDER_HEIGHT').'" /> px
-			</div>';
-		/* Width field */
-		$this->_html .= '
-		<label>'.$this->l('Width:').'</label>
-		<div class="margin-form">
-			<input type="text" name="HOMESLIDER_WIDTH" id="pause" size="3" value="'.Configuration::get('HOMESLIDER_WIDTH').'" /> px
-		</div>';
-		/* Speed field */
-		$this->_html .= '
-			<label>'.$this->l('Speed:').'</label>
-			<div class="margin-form">
-				<input type="text" name="HOMESLIDER_SPEED" id="speed" size="3" value="'.Configuration::get('HOMESLIDER_SPEED').'" /> ms
-			</div>';
-		/* Pause field */
-		$this->_html .= '
-		<label>'.$this->l('Pause:').'</label>
-		<div class="margin-form">
-			<input type="text" name="HOMESLIDER_PAUSE" id="pause" size="3" value="'.Configuration::get('HOMESLIDER_PAUSE').'" /> ms
-		</div>';
-		/* Loop field */
-		$this->_html .= '
-		<label for="loop_on">'.$this->l('Loop:').'</label>
-		<div class="margin-form">
-			<img src="../img/admin/enabled.gif" alt="Yes" title="Yes" />
-			<input type="radio" name="HOMESLIDER_LOOP" id="loop_on" '.(Configuration::get('HOMESLIDER_LOOP') == 1 ? 'checked="checked"' : '').' value="1" />
-			<label class="t" for="loop_on">'.$this->l('Yes').'</label>
-			<img src="../img/admin/disabled.gif" alt="No" title="No" style="margin-left: 10px;" />
-			<input type="radio" name="HOMESLIDER_LOOP" id="loop_off" '.(Configuration::get('HOMESLIDER_LOOP') == 0 ? 'checked="checked" ' : '').' value="0" />
-			<label class="t" for="loop_off">'.$this->l('No').'</label>
-		</div>';
-		/* Save */
-		$this->_html .= '
-		<div class="margin-form">
-			<input type="submit" class="button" name="submitSlider" value="'.$this->l('Save').'" />
-		</div>';
-		/* End form */
-		$this->_html .= '</form>';
-		/* End fieldset slider */
-		$this->_html .= '</fieldset>';
-
-		$this->_html .= '<br /><br />';
-
-		/* Begin fieldset slides */
-		$this->_html .= '
-		<fieldset>
-			<legend><img src="'._PS_BASE_URL_.__PS_BASE_URI__.'modules/'.$this->name.'/logo.gif" alt="" /> '.$this->l('Slides configuration').'</legend>
-			<strong>
-				<a href="'.AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules').'&addSlide">
-					<img src="'._PS_ADMIN_IMG_.'add.gif" alt="" /> '.$this->l('Add Slide').'
-				</a>
-			</strong>';
-
-		/* Display notice if there are no slides yet */
-		if (!$slides)
-			$this->_html .= '<p style="margin-left: 40px;">'.$this->l('You have not added any slides yet.').'</p>';
-		else /* Display slides */
-		{
-			$this->_html .= '
-			<div id="slidesContent" style="width: 400px; margin-top: 30px;">
-				<ul id="slides">';
-
-			foreach ($slides as $slide)
-			{
-				$this->_html .= '
-					<li id="slides_'.$slide['id_slide'].'">
-						<strong>#'.$slide['id_slide'].'</strong> '.$slide['title'].'
-						<p style="float: right">'.
-							$this->displayStatus($slide['id_slide'], $slide['active']).'
-							<a href="'.AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules').'&id_slide='.(int)($slide['id_slide']).'" title="'.$this->l('Edit').'"><img src="'._PS_ADMIN_IMG_.'edit.gif" alt="" /></a>
-							<a href="'.AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules').'&delete_id_slide='.(int)($slide['id_slide']).'" title="'.$this->l('Delete').'"><img src="'._PS_ADMIN_IMG_.'delete.gif" alt="" /></a>
-						</p>
-					</li>';
-			}
-			$this->_html .= '</ul></div>';
-		}
-		// End fieldset
-		$this->_html .= '</fieldset>';
-	}
-
-	private function _displayAddForm()
-	{
-		/* Sets Slide : depends if edited or added */
-		$slide = null;
-		if (Tools::isSubmit('id_slide') && $this->slideExists((int)Tools::getValue('id_slide')))
-			$slide = new HomeSlide((int)Tools::getValue('id_slide'));
-		/* Checks if directory is writable */
-		if (!is_writable('.'))
-			$this->adminDisplayWarning(sprintf($this->l('modules %s must be writable (CHMOD 755 / 777)'), $this->name));
-
-		/* Gets languages and sets which div requires translations */
-		$defaultLanguage = (int)Configuration::get('PS_LANG_DEFAULT');
-		$languages = Language::getLanguages(false);
-		$divLangName = 'image¤title¤url¤legend¤description';
-		$this->_html .= '<script type="text/javascript">id_language = Number('.$defaultLanguage.');</script>';
-
-		/* Form */
-		$this->_html .= '<form action="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'" method="POST" enctype="multipart/form-data">';
-
-		/* Fieldset Upload */
-		$this->_html .= '
-		<fieldset class="width3">
-			<br />
-			<legend><img src="'._PS_ADMIN_IMG_.'add.gif" alt="" />1 - '.$this->l('Upload your slide').'</legend>';
-		/* Image */
-		$this->_html .= '<label>'.$this->l('Select a file:').' * </label><div class="margin-form">';
-		foreach ($languages as $language)
-		{
-			$this->_html .= '<div id="image_'.$language['id_lang'].'" style="display: '.($language['id_lang'] == $defaultLanguage ? 'block' : 'none').';float: left;">';
-			$this->_html .= '<input type="file" name="image_'.$language['id_lang'].'" id="image_'.$language['id_lang'].'" size="30" value="'.(isset($slide->image[$language['id_lang']]) ? $slide->image[$language['id_lang']] : '').'"/>';
-			/* Sets image as hidden in case it does not change */
-			if ($slide && $slide->image[$language['id_lang']])
-				$this->_html .= '<input type="hidden" name="image_old_'.$language['id_lang'].'" value="'.($slide->image[$language['id_lang']]).'" id="image_old_'.$language['id_lang'].'" />';
-			/* Display image */
-			if ($slide && $slide->image[$language['id_lang']])
-				$this->_html .= '<img src="'.__PS_BASE_URI__.'modules/'.$this->name.'/images/'.$slide->image[$language['id_lang']].'" width="'.(Configuration::get('HOMESLIDER_WIDTH')/2).'" height="'.(Configuration::get('HOMESLIDER_HEIGHT')/2).'" alt=""/>';
-			$this->_html .= '</div>';
-		}
-		$this->_html .= $this->displayFlags($languages, $defaultLanguage, $divLangName, 'image', true);
-		/* End Fieldset Upload */
-		$this->_html .= '</fieldset><br /><br />';
-
-		/* Fieldset edit/add */
-		$this->_html .= '<fieldset class="width3">';
-		if (Tools::isSubmit('addSlide')) /* Configure legend */
-			$this->_html .= '<legend><img src="'._PS_ADMIN_IMG_.'add.gif" alt="" /> 2 - '.$this->l('Configure your slide').'</legend>';
-		elseif (Tools::isSubmit('id_slide')) /* Edit legend */
-			$this->_html .= '<legend><img src="'._PS_BASE_URL_.__PS_BASE_URI__.'modules/'.$this->name.'/logo.gif" alt="" /> 2 - '.$this->l('Edit your slide').'</legend>';
-		/* Sets id slide as hidden */
-		if ($slide && Tools::getValue('id_slide'))
-			$this->_html .= '<input type="hidden" name="id_slide" value="'.$slide->id.'" id="id_slide" />';
-		/* Sets position as hidden */
-		$this->_html .= '<input type="hidden" name="position" value="'.(($slide != null) ? ($slide->position) : ($this->getNextPosition())).'" id="position" />';
-
-		/* Form content */
-		/* Title */
-		$this->_html .= '<br /><label>'.$this->l('Title:').' * </label><div class="margin-form">';
-		foreach ($languages as $language)
-		{
-			$this->_html .= '
-					<div id="title_'.$language['id_lang'].'" style="display: '.($language['id_lang'] == $defaultLanguage ? 'block' : 'none').';float: left;">
-						<input type="text" name="title_'.$language['id_lang'].'" id="title_'.$language['id_lang'].'" size="30" value="'.(isset($slide->title[$language['id_lang']]) ? $slide->title[$language['id_lang']] : '').'"/>
-					</div>';
-		}
-		$this->_html .= $this->displayFlags($languages, $defaultLanguage, $divLangName, 'title', true);
-		$this->_html .= '</div><br /><br />';
-
-		/* URL */
-		$this->_html .= '<label>'.$this->l('URL:').' * </label><div class="margin-form">';
-		foreach ($languages as $language)
-		{
-			$this->_html .= '
-					<div id="url_'.$language['id_lang'].'" style="display: '.($language['id_lang'] == $defaultLanguage ? 'block' : 'none').';float: left;">
-						<input type="text" name="url_'.$language['id_lang'].'" id="url_'.$language['id_lang'].'" size="30" value="'.(isset($slide->url[$language['id_lang']]) ? $slide->url[$language['id_lang']] : '').'"/>
-					</div>';
-		}
-		$this->_html .= $this->displayFlags($languages, $defaultLanguage, $divLangName, 'url', true);
-		$this->_html .= '</div><br /><br />';
-
-		/* Legend */
-		$this->_html .= '<label>'.$this->l('Legend:').' * </label><div class="margin-form">';
-		foreach ($languages as $language)
-		{
-			$this->_html .= '
-					<div id="legend_'.$language['id_lang'].'" style="display: '.($language['id_lang'] == $defaultLanguage ? 'block' : 'none').';float: left;">
-						<input type="text" name="legend_'.$language['id_lang'].'" id="legend_'.$language['id_lang'].'" size="30" value="'.(isset($slide->legend[$language['id_lang']]) ? $slide->legend[$language['id_lang']] : '').'"/>
-					</div>';
-		}
-		$this->_html .= $this->displayFlags($languages, $defaultLanguage, $divLangName, 'legend', true);
-		$this->_html .= '</div><br /><br />';
-
-		/* Description */
-		$this->_html .= '
-		<label>'.$this->l('Description:').' </label>
-		<div class="margin-form">';
-		foreach ($languages as $language)
-		{
-			$this->_html .= '<div id="description_'.$language['id_lang'].'" style="display: '.($language['id_lang'] == $defaultLanguage ? 'block' : 'none').';float: left;">
-				<textarea name="description_'.$language['id_lang'].'" rows="10" cols="29">'.(isset($slide->description[$language['id_lang']]) ? $slide->description[$language['id_lang']] : '').'</textarea>
-			</div>';
-		}
-		$this->_html .= $this->displayFlags($languages, $defaultLanguage, $divLangName, 'description', true);
-		$this->_html .= '</div><div class="clear"></div><br />';
-
-		/* Active */
-		$this->_html .= '
-		<label for="active_on">'.$this->l('Active:').'</label>
-		<div class="margin-form">
-			<img src="../img/admin/enabled.gif" alt="Yes" title="Yes" />
-			<input type="radio" name="active_slide" id="active_on" '.(($slide && (isset($slide->active) && (int)$slide->active == 0)) ? '' : 'checked="checked" ').' value="1" />
-			<label class="t" for="active_on">'.$this->l('Yes').'</label>
-			<img src="../img/admin/disabled.gif" alt="No" title="No" style="margin-left: 10px;" />
-			<input type="radio" name="active_slide" id="active_off" '.(($slide && (isset($slide->active) && (int)$slide->active == 0)) ? 'checked="checked" ' : '').' value="0" />
-			<label class="t" for="active_off">'.$this->l('No').'</label>
-		</div>';
-
-		/* Save */
-		$this->_html .= '
-		<p class="center">
-			<input type="submit" class="button" name="submitSlide" value="'.$this->l('Save').'" />
-			<a class="button" style="position:relative; padding:3px 3px 4px 3px; top:1px" href="'.AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules').'">'.$this->l('Cancel').'</a>
-		</p>';
-
-		/* End of fieldset & form */
-		$this->_html .= '
-			<p>*'.$this->l('Required fields').'</p>
-			</fieldset>
-		</form>';
 	}
 
 	private function _postValidation()
@@ -437,8 +234,9 @@ class HomeSlider extends Module
 		{
 
 			if (!Validate::isInt(Tools::getValue('HOMESLIDER_SPEED')) || !Validate::isInt(Tools::getValue('HOMESLIDER_PAUSE')) ||
-				!Validate::isInt(Tools::getValue('HOMESLIDER_WIDTH')) || !Validate::isInt(Tools::getValue('HOMESLIDER_HEIGHT')))
-					$errors[] = $this->l('Invalid values');
+				!Validate::isInt(Tools::getValue('HOMESLIDER_WIDTH'))
+			)
+				$errors[] = $this->l('Invalid values');
 		} /* Validation for status */
 		elseif (Tools::isSubmit('changeStatus'))
 		{
@@ -450,13 +248,15 @@ class HomeSlider extends Module
 		{
 			/* Checks state (active) */
 			if (!Validate::isInt(Tools::getValue('active_slide')) || (Tools::getValue('active_slide') != 0 && Tools::getValue('active_slide') != 1))
-				$errors[] = $this->l('Invalid slide state');
+				$errors[] = $this->l('Invalid slide state.');
 			/* Checks position */
 			if (!Validate::isInt(Tools::getValue('position')) || (Tools::getValue('position') < 0))
-				$errors[] = $this->l('Invalid slide position');
+				$errors[] = $this->l('Invalid slide position.');
 			/* If edit : checks id_slide */
 			if (Tools::isSubmit('id_slide'))
 			{
+
+				//d(var_dump(Tools::getValue('id_slide')));
 				if (!Validate::isInt(Tools::getValue('id_slide')) && !$this->slideExists(Tools::getValue('id_slide')))
 					$errors[] = $this->l('Invalid id_slide');
 			}
@@ -464,34 +264,34 @@ class HomeSlider extends Module
 			$languages = Language::getLanguages(false);
 			foreach ($languages as $language)
 			{
-				if (strlen(Tools::getValue('title_'.$language['id_lang'])) > 40)
-					$errors[] = $this->l('Title is too long');
-				if (strlen(Tools::getValue('legend_'.$language['id_lang'])) > 40)
-					$errors[] = $this->l('Legend is too long');
-				if (strlen(Tools::getValue('url_'.$language['id_lang'])) > 200)
-					$errors[] = $this->l('URL is too long');
-				if (strlen(Tools::getValue('description_'.$language['id_lang'])) > 400)
-					$errors[] = $this->l('Description is too long');
-				if (strlen(Tools::getValue('url_'.$language['id_lang'])) > 0 && !Validate::isUrl(Tools::getValue('url_'.$language['id_lang'])))
-					$errors[] = $this->l('URL format is not correct');
+				if (Tools::strlen(Tools::getValue('title_'.$language['id_lang'])) > 255)
+					$errors[] = $this->l('The title is too long.');
+				if (Tools::strlen(Tools::getValue('legend_'.$language['id_lang'])) > 255)
+					$errors[] = $this->l('The caption is too long.');
+				if (Tools::strlen(Tools::getValue('url_'.$language['id_lang'])) > 255)
+					$errors[] = $this->l('The URL is too long.');
+				if (Tools::strlen(Tools::getValue('description_'.$language['id_lang'])) > 4000)
+					$errors[] = $this->l('The description is too long.');
+				if (Tools::strlen(Tools::getValue('url_'.$language['id_lang'])) > 0 && !Validate::isUrl(Tools::getValue('url_'.$language['id_lang'])))
+					$errors[] = $this->l('The URL format is not correct.');
 				if (Tools::getValue('image_'.$language['id_lang']) != null && !Validate::isFileName(Tools::getValue('image_'.$language['id_lang'])))
-					$errors[] = $this->l('Invalid filename');
+					$errors[] = $this->l('Invalid filename.');
 				if (Tools::getValue('image_old_'.$language['id_lang']) != null && !Validate::isFileName(Tools::getValue('image_old_'.$language['id_lang'])))
-					$errors[] = $this->l('Invalid filename');
+					$errors[] = $this->l('Invalid filename.');
 			}
 
 			/* Checks title/url/legend/description for default lang */
-			$defaultLanguage = (int)Configuration::get('PS_LANG_DEFAULT');
-			if (strlen(Tools::getValue('title_'.$defaultLanguage)) == 0)
-				$errors[] = $this->l('Title is not set');
-			if (strlen(Tools::getValue('legend_'.$defaultLanguage)) == 0)
-				$errors[] = $this->l('Legend is not set');
-			if (strlen(Tools::getValue('url_'.$defaultLanguage)) == 0)
-				$errors[] = $this->l('URL is not set');
-			if (Tools::getValue('image_'.$defaultLanguage) == '' && !Validate::isFileName(Tools::getValue('image_'.$defaultLanguage)) && !Tools::getValue('image_old_'.defaultLanguage))
-				$errors[] = $this->l('Image is not set');
-			if (Tools::getValue('image_old_'.$defaultLanguage) && !Validate::isFileName(Tools::getValue('image_old_'.$defaultLanguage)))
-				$errors[] = $this->l('Image is not set');
+			$id_lang_default = (int)Configuration::get('PS_LANG_DEFAULT');
+			if (Tools::strlen(Tools::getValue('title_'.$id_lang_default)) == 0)
+				$errors[] = $this->l('The title is not set.');
+			if (Tools::strlen(Tools::getValue('legend_'.$id_lang_default)) == 0)
+				$errors[] = $this->l('The caption is not set.');
+			if (Tools::strlen(Tools::getValue('url_'.$id_lang_default)) == 0)
+				$errors[] = $this->l('The URL is not set.');
+			if (!Tools::isSubmit('has_picture') && (!isset($_FILES['image_'.$id_lang_default]) || empty($_FILES['image_'.$id_lang_default]['tmp_name'])))
+				$errors[] = $this->l('The image is not set.');
+			if (Tools::getValue('image_old_'.$id_lang_default) && !Validate::isFileName(Tools::getValue('image_old_'.$id_lang_default)))
+				$errors[] = $this->l('The image is not set.');
 		} /* Validation for deletion */
 		elseif (Tools::isSubmit('delete_id_slide') && (!Validate::isInt(Tools::getValue('delete_id_slide')) || !$this->slideExists((int)Tools::getValue('delete_id_slide'))))
 			$errors[] = $this->l('Invalid id_slide');
@@ -500,10 +300,12 @@ class HomeSlider extends Module
 		if (count($errors))
 		{
 			$this->_html .= $this->displayError(implode('<br />', $errors));
+
 			return false;
 		}
 
 		/* Returns if validation is ok */
+
 		return true;
 	}
 
@@ -515,13 +317,14 @@ class HomeSlider extends Module
 		if (Tools::isSubmit('submitSlider'))
 		{
 			$res = Configuration::updateValue('HOMESLIDER_WIDTH', (int)Tools::getValue('HOMESLIDER_WIDTH'));
-			$res &= Configuration::updateValue('HOMESLIDER_HEIGHT', (int)Tools::getValue('HOMESLIDER_HEIGHT'));
 			$res &= Configuration::updateValue('HOMESLIDER_SPEED', (int)Tools::getValue('HOMESLIDER_SPEED'));
 			$res &= Configuration::updateValue('HOMESLIDER_PAUSE', (int)Tools::getValue('HOMESLIDER_PAUSE'));
 			$res &= Configuration::updateValue('HOMESLIDER_LOOP', (int)Tools::getValue('HOMESLIDER_LOOP'));
+			$this->clearCache();
 			if (!$res)
-				$errors .= $this->displayError($this->l('Configuration could not be updated'));
-			$this->_html .= $this->displayConfirmation($this->l('Configuration updated'));
+				$errors[] = $this->displayError($this->l('The configuration could not be updated.'));
+			else
+				Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules', true).'&conf=6&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name);
 		} /* Process Slide status */
 		elseif (Tools::isSubmit('changeStatus') && Tools::isSubmit('id_slide'))
 		{
@@ -531,7 +334,8 @@ class HomeSlider extends Module
 			else
 				$slide->active = 0;
 			$res = $slide->update();
-			$this->_html .= ($res ? $this->displayConfirmation($this->l('Configuration updated')) : $this->displayError($this->l('Configuration could not be updated')));
+			$this->clearCache();
+			$this->_html .= ($res ? $this->displayConfirmation($this->l('Configuration updated')) : $this->displayError($this->l('The configuration could not be updated.')));
 		}
 		/* Processes Slide */
 		elseif (Tools::isSubmit('submitSlide'))
@@ -543,7 +347,8 @@ class HomeSlider extends Module
 				if (!Validate::isLoadedObject($slide))
 				{
 					$this->_html .= $this->displayError($this->l('Invalid id_slide'));
-					return;
+
+					return false;
 				}
 			}
 			else
@@ -557,39 +362,43 @@ class HomeSlider extends Module
 			$languages = Language::getLanguages(false);
 			foreach ($languages as $language)
 			{
-				if (Tools::getValue('title_'.$language['id_lang']) != '')
-					$slide->title[$language['id_lang']] = pSQL(Tools::getValue('title_'.$language['id_lang']));
-				if (Tools::getValue('url_'.$language['id_lang']) != '')
-					$slide->url[$language['id_lang']] = pSQL(Tools::getValue('url_'.$language['id_lang']));
-				if (Tools::getValue('legend_'.$language['id_lang']) != '')
-					$slide->legend[$language['id_lang']] = pSQL(Tools::getValue('legend_'.$language['id_lang']));
-				if (Tools::getValue('description_'.$language['id_lang']) != '')
-					$slide->description[$language['id_lang']] = pSQL(Tools::getValue('description_'.$language['id_lang']));
+				$slide->title[$language['id_lang']] = Tools::getValue('title_'.$language['id_lang']);
+				$slide->url[$language['id_lang']] = Tools::getValue('url_'.$language['id_lang']);
+				$slide->legend[$language['id_lang']] = Tools::getValue('legend_'.$language['id_lang']);
+				$slide->description[$language['id_lang']] = Tools::getValue('description_'.$language['id_lang']);
+
 				/* Uploads image and sets slide */
-				$type = strtolower(substr(strrchr($_FILES['image_'.$language['id_lang']]['name'], '.'), 1));
-				$imagesize = array();
+				$type = Tools::strtolower(Tools::substr(strrchr($_FILES['image_'.$language['id_lang']]['name'], '.'), 1));
 				$imagesize = @getimagesize($_FILES['image_'.$language['id_lang']]['tmp_name']);
 				if (isset($_FILES['image_'.$language['id_lang']]) &&
 					isset($_FILES['image_'.$language['id_lang']]['tmp_name']) &&
 					!empty($_FILES['image_'.$language['id_lang']]['tmp_name']) &&
 					!empty($imagesize) &&
-					in_array(strtolower(substr(strrchr($imagesize['mime'], '/'), 1)), array('jpg', 'gif', 'jpeg', 'png')) &&
-					in_array($type, array('jpg', 'gif', 'jpeg', 'png')))
+					in_array(
+						Tools::strtolower(Tools::substr(strrchr($imagesize['mime'], '/'), 1)), array(
+							'jpg',
+							'gif',
+							'jpeg',
+							'png'
+						)
+					) &&
+					in_array($type, array('jpg', 'gif', 'jpeg', 'png'))
+				)
 				{
 					$temp_name = tempnam(_PS_TMP_IMG_DIR_, 'PS');
 					$salt = sha1(microtime());
 					if ($error = ImageManager::validateUpload($_FILES['image_'.$language['id_lang']]))
-						$errors .= $error;
+						$errors[] = $error;
 					elseif (!$temp_name || !move_uploaded_file($_FILES['image_'.$language['id_lang']]['tmp_name'], $temp_name))
 						return false;
-					elseif (!ImageManager::resize($temp_name, dirname(__FILE__).'/images/'.Tools::encrypt($_FILES['image_'.$language['id_lang']]['name'].$salt).'.'.$type))
-						$errors .= $this->displayError($this->l('An error occurred during the image upload.'));
+					elseif (!ImageManager::resize($temp_name, dirname(__FILE__).'/images/'.Tools::encrypt($_FILES['image_'.$language['id_lang']]['name'].$salt).'.'.$type, null, null, $type))
+						$errors[] = $this->displayError($this->l('An error occurred during the image upload process.'));
 					if (isset($temp_name))
 						@unlink($temp_name);
-					$slide->image[$language['id_lang']] = pSQL(Tools::encrypt($_FILES['image_'.($language['id_lang'])]['name'].$salt).'.'.$type);
+					$slide->image[$language['id_lang']] = Tools::encrypt($_FILES['image_'.($language['id_lang'])]['name'].$salt).'.'.$type;
 				}
 				elseif (Tools::getValue('image_old_'.$language['id_lang']) != '')
-					$slide->image[$language['id_lang']] = pSQL(Tools::getValue('image_old_'.$language['id_lang']));
+					$slide->image[$language['id_lang']] = Tools::getValue('image_old_'.$language['id_lang']);
 			}
 
 			/* Processes if no errors  */
@@ -599,121 +408,113 @@ class HomeSlider extends Module
 				if (!Tools::getValue('id_slide'))
 				{
 					if (!$slide->add())
-						$errors .= $this->displayError($this->l('Slide could not be added'));
-				} /* Update */
+						$errors[] = $this->displayError($this->l('The slide could not be added.'));
+				}
+				/* Update */
 				elseif (!$slide->update())
-					$errors .= $this->displayError($this->l('Slide could not be updated'));
+					$errors[] = $this->displayError($this->l('The slide could not be updated.'));
+				$this->clearCache();
 			}
 		} /* Deletes */
 		elseif (Tools::isSubmit('delete_id_slide'))
 		{
 			$slide = new HomeSlide((int)Tools::getValue('delete_id_slide'));
 			$res = $slide->delete();
+			$this->clearCache();
 			if (!$res)
-				$this->_html .= $this->displayError('Could not delete');
+				$this->_html .= $this->displayError('Could not delete.');
 			else
-				$this->_html .= $this->displayConfirmation($this->l('Slide deleted'));
+				Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules', true).'&conf=1&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name);
 		}
 
 		/* Display errors if needed */
 		if (count($errors))
 			$this->_html .= $this->displayError(implode('<br />', $errors));
 		elseif (Tools::isSubmit('submitSlide') && Tools::getValue('id_slide'))
-			$this->_html .= $this->displayConfirmation($this->l('Slide updated'));
+			Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules', true).'&conf=4&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name);
 		elseif (Tools::isSubmit('submitSlide'))
-			$this->_html .= $this->displayConfirmation($this->l('Slide added'));
+			Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules', true).'&conf=3&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name);
 	}
 
-	private function _prepareHookDynamic()
+	private function _prepareHook()
 	{
-		$slider = array(
-			'width' => Configuration::get('HOMESLIDER_WIDTH'),
-			'height' => Configuration::get('HOMESLIDER_HEIGHT'),
-			'speed' => Configuration::get('HOMESLIDER_SPEED'),
-			'pause' => Configuration::get('HOMESLIDER_PAUSE'),
-			'loop' => Configuration::get('HOMESLIDER_LOOP'),
-		);
+		if (!$this->isCached('homeslider.tpl', $this->getCacheId()))
+		{
+			$slides = $this->getSlides(true);
+			if (is_array($slides))
+				foreach ($slides as &$slide)
+				{
+					$slide['sizes'] = @getimagesize((dirname(__FILE__).DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$slide['image']));
+					if (isset($slide['sizes'][3]) && $slide['sizes'][3])
+						$slide['size'] = $slide['sizes'][3];
+				}
 
-		$slides = $this->getSlides(true);
-		if (!$slides)
-			return false;
+			if (!$slides)
+				return false;
 
-		$this->smarty->assign('homeslider_slides', $slides);
-		$this->smarty->assign('homeslider', $slider);
-        
-        //$product = ProductSale::getBestSales(6);
-        //$product = Product::getNewProducts(6,2,5);
-        
-        for ($z=0;$z<5;$z++)
-            $product[] = Product::getRandomSpecial(6);
-        
-        if ($product == null) 
-            return;
-        if (isset($product[0]) == false)
-            $product = array($product);
-        
-        foreach ($product as &$p) {
-            $srcImg = _PS_IMG_DIR_."p/".$p['id_image'].".jpg";
-            $dstImg = _PS_IMG_DIR_."slides/".$p['id_image'].".jpg";
-            $p['path']="http://".$_SERVER['HTTP_HOST']._PS_IMG_."slides/".$p['id_image'].".jpg";
-            if (!file_exists($dstImg)) {
-                ImageManager::resize($srcImg,$dstImg,300,300);    
-            }
-        }
-        
-        $this->smarty->assign('p', $product);
-        
+			$this->smarty->assign(array('homeslider_slides' => $slides));
+		}
+
 		return true;
 	}
-    public function _prepareHook() {
-        
-        $product[0]['path'] = '/img/slides/dls-r6a.jpg';
-        $product[0]['link'] = 'http://www.audiorms.pl/car-audio/glosniki-samochodowe/p/DLS-R6A';
-        
-        $product[1]['path'] = '/img/slides/pc130.jpg'; 
-        $product[1]['link'] = 'http://www.audiorms.pl/car-audio/glosniki-samochodowe/p/Focal-PC-130'; 
-        
-        $this->smarty->assign('p', $product);
-        
-        return true;
-    }
-    
-    public function hookDisplayHome() {
-        
-        return '<div id="slider-space" style="height:460px;"></div>';
-    }
-    
-    
 
-	public function hookDisplaySlider()
+	public function hookdisplayHeader($params)
 	{
-        if ($_SERVER['REQUEST_URI'] != '/'  )
-            return;
-        
-		if(!$this->_prepareHook())
+		if (!isset($this->context->controller->php_self) || $this->context->controller->php_self != 'index')
+			return;
+		$this->context->controller->addCSS($this->_path.'homeslider.css');
+		$this->context->controller->addJS($this->_path.'js/homeslider.js');
+		$this->context->controller->addJqueryPlugin(array('bxslider'));
+
+		$slider = array(
+			'width' => Configuration::get('HOMESLIDER_WIDTH'),
+			'speed' => Configuration::get('HOMESLIDER_SPEED'),
+			'pause' => Configuration::get('HOMESLIDER_PAUSE'),
+			'loop' => (bool)Configuration::get('HOMESLIDER_LOOP'),
+		);
+
+		$this->smarty->assign('homeslider', $slider);
+		return $this->display(__FILE__, 'header.tpl');
+	}
+
+	public function hookdisplayTop($params)
+	{
+		return $this->hookdisplayTopColumn($params);
+	}
+
+	public function hookdisplayTopColumn($params)
+	{
+		if (!isset($this->context->controller->php_self) || $this->context->controller->php_self != 'index')
 			return;
 
-		//$this->context->controller->addJS($this->_path.'js/jquery.bxSlider.min.js');
-		//$this->context->controller->addCSS($this->_path.'bx_styles2.css');
-        
-        $this->context->controller->addCSS($this->_path.'plus/css/style.css');
-        $this->context->controller->addCSS($this->_path.'plus/css/plusslider.css');
-        $this->context->controller->addJS($this->_path.'plus/js/jquery.plusslider.js');
-		$this->context->controller->addJS($this->_path.'plus/js/plus.js');
-        
-		//return $this->display(__FILE__, 'homeslider.tpl');
-        //return $this->display(__FILE__, 'pieacemaker.tpl');
-        return $this->display(__FILE__, 'plus/index.tpl');
+		if (!$this->_prepareHook())
+			return false;
+
+		return $this->display(__FILE__, 'homeslider.tpl', $this->getCacheId());
+	}
+
+	public function hookDisplayHome()
+	{
+		if (!$this->_prepareHook())
+			return false;
+
+		return $this->display(__FILE__, 'homeslider.tpl', $this->getCacheId());
+	}
+
+	public function clearCache()
+	{
+		$this->_clearCache('homeslider.tpl');
 	}
 
 	public function hookActionShopDataDuplication($params)
 	{
 		Db::getInstance()->execute('
-			INSERT INTO '._DB_PREFIX_.'homeslider (id_homeslider_slides, id_shop)
+			INSERT IGNORE INTO '._DB_PREFIX_.'homeslider (id_homeslider_slides, id_shop)
 			SELECT id_homeslider_slides, '.(int)$params['new_id_shop'].'
 			FROM '._DB_PREFIX_.'homeslider
-			WHERE id_shop = '.(int)$params['old_id_shop'].'
-		');
+			WHERE id_shop = '.(int)$params['old_id_shop']
+		);
+		$this->clearCache();
 	}
 
 	public function headerHTML()
@@ -723,19 +524,7 @@ class HomeSlider extends Module
 
 		$this->context->controller->addJqueryUI('ui.sortable');
 		/* Style & js for fieldset 'slides configuration' */
-		$html = '
-		<style>
-		#slides li {
-			list-style: none;
-			margin: 0 0 4px 0;
-			padding: 10px;
-			background-color: #F4E6C9;
-			border: #CCCCCC solid 1px;
-			color:#000;
-		}
-		</style>
-		<script type="text/javascript" src="'.__PS_BASE_URI__.'js/jquery/jquery-ui.will.be.removed.in.1.6.js"></script>
-		<script type="text/javascript">
+		$html = '<script type="text/javascript">
 			$(function() {
 				var $mySlides = $("#slides");
 				$mySlides.sortable({
@@ -743,7 +532,7 @@ class HomeSlider extends Module
 					cursor: "move",
 					update: function() {
 						var order = $(this).sortable("serialize") + "&action=updateSlidesPosition";
-						$.post("'._PS_BASE_URL_.__PS_BASE_URI__.'modules/'.$this->name.'/ajax_'.$this->name.'.php?secure_key='.$this->secure_key.'", order);
+						$.post("'.$this->context->shop->physical_uri.$this->context->shop->virtual_uri.'modules/'.$this->name.'/ajax_'.$this->name.'.php?secure_key='.$this->secure_key.'", order);
 						}
 					});
 				$mySlides.hover(function() {
@@ -761,9 +550,9 @@ class HomeSlider extends Module
 	public function getNextPosition()
 	{
 		$row = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow('
-				SELECT MAX(hss.`position`) AS `next_position`
-				FROM `'._DB_PREFIX_.'homeslider_slides` hss, `'._DB_PREFIX_.'homeslider` hs
-				WHERE hss.`id_homeslider_slides` = hs.`id_homeslider_slides` AND hs.`id_shop` = '.(int)$this->context->shop->id
+			SELECT MAX(hss.`position`) AS `next_position`
+			FROM `'._DB_PREFIX_.'homeslider_slides` hss, `'._DB_PREFIX_.'homeslider` hs
+			WHERE hss.`id_homeslider_slides` = hs.`id_homeslider_slides` AND hs.`id_shop` = '.(int)$this->context->shop->id
 		);
 
 		return (++$row['next_position']);
@@ -776,31 +565,51 @@ class HomeSlider extends Module
 		$id_lang = $this->context->language->id;
 
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
-			SELECT hs.`id_homeslider_slides` as id_slide,
-					   hssl.`image`,
-					   hss.`position`,
-					   hss.`active`,
-					   hssl.`title`,
-					   hssl.`url`,
-					   hssl.`legend`,
-					   hssl.`description`
+			SELECT hs.`id_homeslider_slides` as id_slide, hssl.`image`, hss.`position`, hss.`active`, hssl.`title`,
+			hssl.`url`, hssl.`legend`, hssl.`description`, hssl.`image`
 			FROM '._DB_PREFIX_.'homeslider hs
 			LEFT JOIN '._DB_PREFIX_.'homeslider_slides hss ON (hs.id_homeslider_slides = hss.id_homeslider_slides)
 			LEFT JOIN '._DB_PREFIX_.'homeslider_slides_lang hssl ON (hss.id_homeslider_slides = hssl.id_homeslider_slides)
-			WHERE (id_shop = '.(int)$id_shop.')
+			WHERE id_shop = '.(int)$id_shop.'
 			AND hssl.id_lang = '.(int)$id_lang.
 			($active ? ' AND hss.`active` = 1' : ' ').'
-			ORDER BY hss.position');
+			ORDER BY hss.position'
+		);
+	}
+
+	public function getAllImagesBySlidesId($id_slides, $active = null, $id_shop = null)
+	{
+		$this->context = Context::getContext();
+		$images = array();
+
+		if (!isset($id_shop))
+			$id_shop = $this->context->shop->id;
+
+		$results = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+			SELECT hssl.`image`, hssl.`id_lang`
+			FROM '._DB_PREFIX_.'homeslider hs
+			LEFT JOIN '._DB_PREFIX_.'homeslider_slides hss ON (hs.id_homeslider_slides = hss.id_homeslider_slides)
+			LEFT JOIN '._DB_PREFIX_.'homeslider_slides_lang hssl ON (hss.id_homeslider_slides = hssl.id_homeslider_slides)
+			WHERE hs.`id_homeslider_slides` = '.(int)$id_slides.' AND hs.`id_shop` = '.(int)$id_shop.
+			($active ? ' AND hss.`active` = 1' : ' ')
+		);
+
+		foreach ($results as $result)
+			$images[$result['id_lang']] = $result['image'];
+
+		return $images;
 	}
 
 	public function displayStatus($id_slide, $active)
 	{
 		$title = ((int)$active == 0 ? $this->l('Disabled') : $this->l('Enabled'));
-		$img = ((int)$active == 0 ? 'disabled.gif' : 'enabled.gif');
-		$html = '<a href="'.AdminController::$currentIndex.
-				'&configure='.$this->name.'
+		$icon = ((int)$active == 0 ? 'icon-remove' : 'icon-check');
+		$class = ((int)$active == 0 ? 'btn-danger' : 'btn-success');
+		$html = '<a class="btn '.$class.'" href="'.AdminController::$currentIndex.
+			'&configure='.$this->name.'
 				&token='.Tools::getAdminTokenLite('AdminModules').'
-				&changeStatus&id_slide='.(int)$id_slide.'" title="'.$title.'"><img src="'._PS_ADMIN_IMG_.''.$img.'" alt="" /></a>';
+				&changeStatus&id_slide='.(int)$id_slide.'" title="'.$title.'"><i class="'.$icon.'"></i> '.$title.'</a>';
+
 		return $html;
 	}
 
@@ -810,6 +619,247 @@ class HomeSlider extends Module
 				FROM `'._DB_PREFIX_.'homeslider` hs
 				WHERE hs.`id_homeslider_slides` = '.(int)$id_slide;
 		$row = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow($req);
+
 		return ($row);
+	}
+
+	public function renderList()
+	{
+		$slides = $this->getSlides();
+		foreach ($slides as $key => $slide)
+			$slides[$key]['status'] = $this->displayStatus($slide['id_slide'], $slide['active']);
+
+		$this->context->smarty->assign(
+			array(
+				'link' => $this->context->link,
+				'slides' => $slides,
+				'image_baseurl' => $this->_path.'images/'
+			)
+		);
+
+		return $this->display(__FILE__, 'list.tpl');
+	}
+
+	public function renderAddForm()
+	{
+		$fields_form = array(
+			'form' => array(
+				'legend' => array(
+					'title' => $this->l('Slide informations'),
+					'icon' => 'icon-cogs'
+				),
+				'input' => array(
+					array(
+						'type' => 'file_lang',
+						'label' => $this->l('Select a file'),
+						'name' => 'image',
+						'lang' => true,
+						'desc' => $this->l(sprintf('Max image size %s', ini_get('upload_max_filesize')))
+					),
+					array(
+						'type' => 'text',
+						'label' => $this->l('Title'),
+						'name' => 'title',
+						'lang' => true,
+					),
+					array(
+						'type' => 'text',
+						'label' => $this->l('URL'),
+						'name' => 'url',
+						'lang' => true,
+					),
+					array(
+						'type' => 'text',
+						'label' => $this->l('Caption'),
+						'name' => 'legend',
+						'lang' => true,
+					),
+					array(
+						'type' => 'textarea',
+						'label' => $this->l('Description'),
+						'name' => 'description',
+						'autoload_rte' => true,
+						'lang' => true,
+					),
+					array(
+						'type' => 'switch',
+						'label' => $this->l('Active'),
+						'name' => 'active_slide',
+						'is_bool' => true,
+						'values' => array(
+							array(
+								'id' => 'active_on',
+								'value' => 1,
+								'label' => $this->l('Yes')
+							),
+							array(
+								'id' => 'active_off',
+								'value' => 0,
+								'label' => $this->l('No')
+							)
+						),
+					),
+				),
+				'submit' => array(
+					'title' => $this->l('Save'),
+				)
+			),
+		);
+
+		if (Tools::isSubmit('id_slide') && $this->slideExists((int)Tools::getValue('id_slide')))
+		{
+			$slide = new HomeSlide((int)Tools::getValue('id_slide'));
+			$fields_form['form']['input'][] = array('type' => 'hidden', 'name' => 'id_slide');
+			$fields_form['form']['images'] = $slide->image;
+
+			$has_picture = true;
+
+			foreach (Language::getLanguages(false) as $lang)
+				if (!isset($slide->image[$lang['id_lang']]))
+					$has_picture &= false;
+
+			if ($has_picture)
+				$fields_form['form']['input'][] = array('type' => 'hidden', 'name' => 'has_picture');
+		}
+
+		$helper = new HelperForm();
+		$helper->show_toolbar = false;
+		$helper->table = $this->table;
+		$lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+		$helper->default_form_language = $lang->id;
+		$helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
+		$this->fields_form = array();
+		$helper->module = $this;
+		$helper->identifier = $this->identifier;
+		$helper->submit_action = 'submitSlide';
+		$helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
+		$helper->token = Tools::getAdminTokenLite('AdminModules');
+		$language = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+		$helper->tpl_vars = array(
+			'base_url' => $this->context->shop->getBaseURL(),
+			'language' => array(
+				'id_lang' => $language->id,
+				'iso_code' => $language->iso_code
+			),
+			'fields_value' => $this->getAddFieldsValues(),
+			'languages' => $this->context->controller->getLanguages(),
+			'id_language' => $this->context->language->id,
+			'image_baseurl' => $this->_path.'images/'
+		);
+
+		$helper->override_folder = '/';
+
+		return $helper->generateForm(array($fields_form));
+	}
+
+	public function renderForm()
+	{
+		$fields_form = array(
+			'form' => array(
+				'legend' => array(
+					'title' => $this->l('Settings'),
+					'icon' => 'icon-cogs'
+				),
+				'input' => array(
+					array(
+						'type' => 'text',
+						'label' => $this->l('Max width'),
+						'name' => 'HOMESLIDER_WIDTH',
+						'suffix' => 'px'
+					),
+					array(
+						'type' => 'text',
+						'label' => $this->l('Speed'),
+						'name' => 'HOMESLIDER_SPEED',
+						'suffix' => 'ms'
+					),
+					array(
+						'type' => 'text',
+						'label' => $this->l('Pause'),
+						'name' => 'HOMESLIDER_PAUSE',
+						'suffix' => 'ms'
+					),
+					array(
+						'type' => 'switch',
+						'label' => $this->l('Auto play'),
+						'name' => 'HOMESLIDER_LOOP',
+						'values' => array(
+							array(
+								'id' => 'active_on',
+								'value' => 1,
+								'label' => $this->l('Enabled')
+							),
+							array(
+								'id' => 'active_off',
+								'value' => 0,
+								'label' => $this->l('Disabled')
+							)
+						),
+					)
+				),
+				'submit' => array(
+					'title' => $this->l('Save'),
+				)
+			),
+		);
+
+		$helper = new HelperForm();
+		$helper->show_toolbar = false;
+		$helper->table = $this->table;
+		$lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+		$helper->default_form_language = $lang->id;
+		$helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
+		$this->fields_form = array();
+
+		$helper->identifier = $this->identifier;
+		$helper->submit_action = 'submitSlider';
+		$helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
+		$helper->token = Tools::getAdminTokenLite('AdminModules');
+		$helper->tpl_vars = array(
+			'fields_value' => $this->getConfigFieldsValues(),
+			'languages' => $this->context->controller->getLanguages(),
+			'id_language' => $this->context->language->id
+		);
+
+		return $helper->generateForm(array($fields_form));
+	}
+
+	public function getConfigFieldsValues()
+	{
+		return array(
+			'HOMESLIDER_WIDTH' => Tools::getValue('HOMESLIDER_WIDTH', Configuration::get('HOMESLIDER_WIDTH')),
+			'HOMESLIDER_SPEED' => Tools::getValue('HOMESLIDER_SPEED', Configuration::get('HOMESLIDER_SPEED')),
+			'HOMESLIDER_PAUSE' => Tools::getValue('HOMESLIDER_PAUSE', Configuration::get('HOMESLIDER_PAUSE')),
+			'HOMESLIDER_LOOP' => Tools::getValue('HOMESLIDER_LOOP', Configuration::get('HOMESLIDER_LOOP')),
+		);
+	}
+
+	public function getAddFieldsValues()
+	{
+		$fields = array();
+
+		if (Tools::isSubmit('id_slide') && $this->slideExists((int)Tools::getValue('id_slide')))
+		{
+			$slide = new HomeSlide((int)Tools::getValue('id_slide'));
+			$fields['id_slide'] = (int)Tools::getValue('id_slide', $slide->id);
+		}
+		else
+			$slide = new HomeSlide();
+
+		$fields['active_slide'] = Tools::getValue('active_slide', $slide->active);
+		$fields['has_picture'] = true;
+
+		$languages = Language::getLanguages(false);
+
+		foreach ($languages as $lang)
+		{
+			$fields['image'][$lang['id_lang']] = Tools::getValue('image_'.(int)$lang['id_lang']);
+			$fields['title'][$lang['id_lang']] = Tools::getValue('title_'.(int)$lang['id_lang'], $slide->title[$lang['id_lang']]);
+			$fields['url'][$lang['id_lang']] = Tools::getValue('url_'.(int)$lang['id_lang'], $slide->url[$lang['id_lang']]);
+			$fields['legend'][$lang['id_lang']] = Tools::getValue('legend_'.(int)$lang['id_lang'], $slide->legend[$lang['id_lang']]);
+			$fields['description'][$lang['id_lang']] = Tools::getValue('description_'.(int)$lang['id_lang'], $slide->description[$lang['id_lang']]);
+		}
+
+		return $fields;
 	}
 }

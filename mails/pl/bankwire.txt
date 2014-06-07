@@ -1,19 +1,34 @@
+
+[{shop_url}] 
+
 Witaj {firstname} {lastname},
- 
-Zamowienie #{id_order}
- 
-Twoje zamowienie zostalo zlozone i zralizujemy je gdy tylko otrzymamy od ciebie zaplate.
- 
-Wybrales przelew bankowy jako metode zaplaty. Wyslij przelew na ponizsze dane :
 
-{bankwire_owner}
+Dziękujemy za zakupy {shop_name}! 
 
-{bankwire_details}
+Zamówienie z uwzględnieniem {order_name} zostało umieszczone
+pomyślnie i będzie WYSŁANE ZARAZ PO OTRZYMANIU PŁATNOŚCI. 
 
-{bankwire_address}
+Wybrałeś zapłacenie przelewem. 
 
-Calkowita kwota do zaplaty: {total_paid}
- 
-W sekcji "Historia zamowien" w "Twoim koncie" mozesz obejrzec swoje zamowienie i pobrac fakture.
- 
-{shop_name} oparty na systemie PrestaShop™
+Oto dane bankowe do przelewu:
+
+KWOTA: {total_paid}
+
+WŁAŚCICIEL KONTA: {bankwire_owner}
+
+DANE KONTA: {bankwire_details}
+
+ADRES BANKU: {bankwire_address} 		 
+
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
+"Historia zamówień" [{history_url}] na koncie
+klienta klikając w "Moje konto"
+[{my_account_url}] w naszym sklepie. 
+
+Jeśli masz konto Gościa, możesz śledzić swoje zamówienie za
+pośrednictwem sekcji "Śledzenie Gościa"
+[{guest_tracking_url}] w naszym sklepie. 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,15 +18,21 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7077 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
 <div id="mywishlist">
-	{capture name=path}<a href="{$link->getPageLink('my-account', true)}">{l s='My account' mod='blockwishlist'}</a><span class="navigation-pipe">{$navigationPipe}</span>{l s='My wishlists' mod='blockwishlist'}{/capture}
-	{include file="$tpl_dir./breadcrumb.tpl"}
+    {capture name=path}
+        <a href="{$link->getPageLink('my-account', true)|escape:'html'}">{l s='My account' mod='blockwishlist'}</a>
+        <span class="navigation-pipe">{$navigationPipe}</span>
+        <a href="{$link->getModuleLink('blockwishlist', 'mywishlist')|escape:'html'}">{l s='My wishlists' mod='blockwishlist'}</a>
+		{if isset($current_wishlist)}
+	        <span class="navigation-pipe">{$navigationPipe}</span>
+	        {$current_wishlist.name}
+		{/if}
+    {/capture}
 
 	<h2>{l s='My wishlists' mod='blockwishlist'}</h2>
 
@@ -37,9 +43,9 @@
 			<fieldset>
 				<h3>{l s='New wishlist' mod='blockwishlist'}</h3>
 				<p class="text">
-					<input type="hidden" name="token" value="{$token|escape:'htmlall':'UTF-8'}" />
+					<input type="hidden" name="token" value="{$token|escape:'html':'UTF-8'}" />
 					<label class="align_right" for="name">{l s='Name' mod='blockwishlist'}</label>
-					<input type="text" id="name" name="name" class="inputTxt" value="{if isset($smarty.post.name) and $errors|@count > 0}{$smarty.post.name|escape:'htmlall':'UTF-8'}{/if}" />
+					<input type="text" id="name" name="name" class="inputTxt" value="{if isset($smarty.post.name) and $errors|@count > 0}{$smarty.post.name|escape:'html':'UTF-8'}{/if}" />
 				</p>
 				<p class="submit">
 					<input type="submit" name="submitWishlist" id="submitWishlist" value="{l s='Save' mod='blockwishlist'}" class="exclusive" />
@@ -63,7 +69,7 @@
 				{section name=i loop=$wishlists}
 					<tr id="wishlist_{$wishlists[i].id_wishlist|intval}">
 						<td style="width:200px;">
-							<a href="javascript:;" onclick="javascript:WishlistManage('block-order-detail', '{$wishlists[i].id_wishlist|intval}');">{$wishlists[i].name|truncate:30:'...'|escape:'htmlall':'UTF-8'}</a>
+							<a href="javascript:;" onclick="javascript:WishlistManage('block-order-detail', '{$wishlists[i].id_wishlist|intval}');">{$wishlists[i].name|truncate:30:'...'|escape:'html':'UTF-8'}</a>
 						</td>
 						<td class="bold align_center">
 							{assign var=n value=0}
@@ -82,7 +88,7 @@
 						<td>{$wishlists[i].date_add|date_format:"%Y-%m-%d"}</td>
 						<td><a href="javascript:;" onclick="javascript:WishlistManage('block-order-detail', '{$wishlists[i].id_wishlist|intval}');">{l s='View' mod='blockwishlist'}</a></td>
 						<td class="wishlist_delete">
-							<a href="javascript:;"onclick="return (WishlistDelete('wishlist_{$wishlists[i].id_wishlist|intval}', '{$wishlists[i].id_wishlist|intval}', '{l s='Do you really want to delete this wishlist ?' mod='blockwishlist'}'));">{l s='Delete' mod='blockwishlist'}</a>
+							<a href="javascript:;"onclick="return (WishlistDelete('wishlist_{$wishlists[i].id_wishlist|intval}', '{$wishlists[i].id_wishlist|intval}', '{l s='Do you really want to delete this wishlist ?' mod='blockwishlist' js=1}'));">{l s='Delete' mod='blockwishlist'}</a>
 						</td>
 					</tr>
 				{/section}
@@ -94,7 +100,7 @@
 	{/if}
 
 	<ul class="footer_links">
-		<li><a href="{$link->getPageLink('my-account', true)}"><img src="{$img_dir}icon/my-account.gif" alt="" class="icon" /></a><a href="{$link->getPageLink('my-account', true)}">{l s='Back to Your Account' mod='blockwishlist'}</a></li>
+		<li><a href="{$link->getPageLink('my-account', true)}"><img src="{$img_dir}icon/my-account.gif" alt="" class="icon" /></a><a href="{$link->getPageLink('my-account', true)|escape:'html'}">{l s='Back to Your Account' mod='blockwishlist'}</a></li>
 		<li class="f_right"><a href="{$base_dir}"><img src="{$img_dir}icon/home.gif" alt="" class="icon" /></a><a href="{$base_dir}">{l s='Home' mod='blockwishlist'}</a></li>
 	</ul>
 </div>

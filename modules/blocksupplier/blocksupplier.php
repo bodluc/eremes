@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -34,107 +33,208 @@ class BlockSupplier extends Module
     {
         $this->name = 'blocksupplier';
         $this->tab = 'front_office_features';
-        $this->version = 1.0;
+        $this->version = 1.1;
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
-        parent::__construct();
+        $this->bootstrap = true;
+		parent::__construct();	
 
 		$this->displayName = $this->l('Suppliers block');
-        $this->description = $this->l('Adds a block displaying suppliers.');
+        $this->description = $this->l('Adds a block displaying your product suppliers.');
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
     }
 
 	function install()
 	{
 		if (!parent::install())
 			return false;
-		if (!$this->registerHook('displayLeftColumn'))
+		if (!$this->registerHook('displayHeader') ||
+				!$this->registerHook('actionObjectSupplierDeleteAfter') ||
+				!$this->registerHook('actionObjectSupplierAddAfter') ||
+				!$this->registerHook('actionObjectSupplierUpdateAfter')
+			)
 			return false;
-		if (!$this->registerHook('displayHeader'))
+
+		$theme = new Theme(Context::getContext()->shop->id_theme);
+		if ((!$theme->default_right_column || !$this->registerHook('rightColumn'))
+			&& (!$theme->default_left_column || !$this->registerHook('leftColumn'))
+		)
+		{
+			parent::uninstall();
+
 			return false;
+		}
 		Configuration::updateValue('SUPPLIER_DISPLAY_TEXT', true);
 		Configuration::updateValue('SUPPLIER_DISPLAY_TEXT_NB', 5);
-		Configuration::updateValue('SUPPLIER_DISPLAY_FORM', true);
+		Configuration::updateValue('SUPPLIER_DISPLAY_FORM', false);
+
 		return true;
 	}
 
+	public function uninstall()
+	{
+		if (!parent::uninstall())
+			return false;
+
+		/* remove the configuration variable */
+		$result = Configuration::deleteByName('SUPPLIER_DISPLAY_TEXT');
+		$result &= Configuration::deleteByName('SUPPLIER_DISPLAY_TEXT_NB');
+		$result &= Configuration::deleteByName('SUPPLIER_DISPLAY_FORM');
+
+		return $result;
+	}
+	
 	function hookDisplayLeftColumn($params)
 	{
 		$id_lang = (int)Context::getContext()->language->id;
-
-		$this->smarty->assign(array(
-			'suppliers' => Supplier::getSuppliers(false, $id_lang),
-			'link' => $this->context->link,
-			'text_list' => Configuration::get('SUPPLIER_DISPLAY_TEXT'),
-			'text_list_nb' => Configuration::get('SUPPLIER_DISPLAY_TEXT_NB'),
-			'form_list' => Configuration::get('SUPPLIER_DISPLAY_FORM'),
-			'display_link_supplier' => Configuration::get('PS_DISPLAY_SUPPLIERS')
-		));
-		return $this->display(__FILE__, 'blocksupplier.tpl');
+		if (!$this->isCached('blocksupplier.tpl', $this->getCacheId()))
+			$this->smarty->assign(array(
+				'suppliers' => Supplier::getSuppliers(false, $id_lang),
+				'link' => $this->context->link,
+				'text_list' => Configuration::get('SUPPLIER_DISPLAY_TEXT'),
+				'text_list_nb' => Configuration::get('SUPPLIER_DISPLAY_TEXT_NB'),
+				'form_list' => Configuration::get('SUPPLIER_DISPLAY_FORM'),
+				'display_link_supplier' => Configuration::get('PS_DISPLAY_SUPPLIERS')
+			));
+		return $this->display(__FILE__, 'blocksupplier.tpl', $this->getCacheId());
 	}
 
 	function getContent()
 	{
-		$output = '<h2>'.$this->displayName.'</h2>';
+		$output = '';
 		if (Tools::isSubmit('submitBlockSuppliers'))
 		{
-			$text_list = (int)(Tools::getValue('text_list'));
-			$text_nb = (int)(Tools::getValue('text_nb'));
-			$form_list = (int)(Tools::getValue('form_list'));
+			$text_list = (int)(Tools::getValue('SUPPLIER_DISPLAY_TEXT'));
+			$text_nb = (int)(Tools::getValue('SUPPLIER_DISPLAY_TEXT_NB'));
+			$form_list = (int)(Tools::getValue('SUPPLIER_DISPLAY_FORM'));
 			if ($text_list AND !Validate::isUnsignedInt($text_nb))
-				$errors[] = $this->l('Invalid number of elements');
+				$errors[] = $this->l('Invalid number of elements.');
 			elseif (!$text_list AND !$form_list)
-				$errors[] = $this->l('Please activate at least one system list.');
+				$errors[] = $this->l('Please activate at least one type of list.');
 			else
 			{
 				Configuration::updateValue('SUPPLIER_DISPLAY_TEXT', $text_list);
 				Configuration::updateValue('SUPPLIER_DISPLAY_TEXT_NB', $text_nb);
 				Configuration::updateValue('SUPPLIER_DISPLAY_FORM', $form_list);
+				$this->_clearCache('blocksupplier.tpl');
 			}
 			if (isset($errors) AND sizeof($errors))
 				$output .= $this->displayError(implode('<br />', $errors));
 			else
-				$output .= $this->displayConfirmation($this->l('Settings updated'));
+				$output .= $this->displayConfirmation($this->l('Settings updated.'));
 		}
-		return $output.$this->displayForm();
+		return $output.$this->renderForm();
 	}
 
-	public function displayForm()
-	{
-		$output = '
-		<form action="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'" method="post">
-			<fieldset><legend><img src="'.$this->_path.'logo.gif" alt="" title="" />'.$this->l('Settings').'</legend>
-				<label>'.$this->l('Use a plain-text list').'</label>
-				<div class="margin-form">
-					<input type="radio" name="text_list" id="text_list_on" value="1" '.(Tools::getValue('text_list', Configuration::get('SUPPLIER_DISPLAY_TEXT')) ? 'checked="checked" ' : '').'/>
-					<label class="t" for="text_list_on"> <img src="../img/admin/enabled.gif" alt="'.$this->l('Enabled').'" title="'.$this->l('Enabled').'" /></label>
-					<input type="radio" name="text_list" id="text_list_off" value="0" '.(!Tools::getValue('text_list', Configuration::get('SUPPLIER_DISPLAY_TEXT')) ? 'checked="checked" ' : '').'/>
-					<label class="t" for="text_list_off"> <img src="../img/admin/disabled.gif" alt="'.$this->l('Disabled').'" title="'.$this->l('Disabled').'" /></label>
-					&nbsp;&nbsp;&nbsp;'.$this->l('Display').' <input type="text" size="2" name="text_nb" value="'.(int)Tools::getValue('text_nb', Configuration::get('SUPPLIER_DISPLAY_TEXT_NB')).'" /> '.$this->l('elements').'
-					<p class="clear">'.$this->l('To display suppliers as a plain-text list').'</p>
-				</div>
-				<label>'.$this->l('Use a drop-down list').'</label>
-				<div class="margin-form">
-					<input type="radio" name="form_list" id="form_list_on" value="1" '.(Tools::getValue('form_list', Configuration::get('SUPPLIER_DISPLAY_FORM')) ? 'checked="checked" ' : '').'/>
-					<label class="t" for="form_list_on"> <img src="../img/admin/enabled.gif" alt="'.$this->l('Enabled').'" title="'.$this->l('Enabled').'" /></label>
-					<input type="radio" name="form_list" id="form_list_off" value="0" '.(!Tools::getValue('form_list', Configuration::get('SUPPLIER_DISPLAY_FORM')) ? 'checked="checked" ' : '').'/>
-					<label class="t" for="form_list_off"> <img src="../img/admin/disabled.gif" alt="'.$this->l('Disabled').'" title="'.$this->l('Disabled').'" /></label>
-					<p class="clear">'.$this->l('To display suppliers as a drop-down list').'</p>
-				</div>
-				<center><input type="submit" name="submitBlockSuppliers" value="'.$this->l('Save').'" class="button" /></center>
-			</fieldset>
-		</form>';
-		return $output;
-	}
-
-	function hookDisplayRightColumn($params)
+	public function hookDisplayRightColumn($params)
 	{
 		return $this->hookDisplayLeftColumn($params);
 	}
 
-	function hookDisplayHeader($params)
+	public function hookDisplayHeader($params)
 	{
 		$this->context->controller->addCSS(($this->_path).'blocksupplier.css', 'all');
 	}
-}
+	
+	public function hookActionObjectSupplierUpdateAfter($params)
+	{
+		$this->_clearCache('blocksupplier.tpl');
+	}
 
+	public function hookActionObjectSupplierAddAfter($params)
+	{
+		$this->_clearCache('blocksupplier.tpl');
+	}
+
+	public function hookActionObjectSupplierDeleteAfter($params)
+	{
+		$this->_clearCache('blocksupplier.tpl');
+	}
+	
+	public function renderForm()
+	{
+		$fields_form = array(
+			'form' => array(
+				'legend' => array(
+					'title' => $this->l('Settings'),
+					'icon' => 'icon-cogs'
+				),
+				'input' => array(
+					array(
+						'type' => 'switch',
+						'label' => $this->l('Use a plain-text list'),
+						'name' => 'SUPPLIER_DISPLAY_TEXT',
+						'desc' => $this->l('Display suppliers in a plain-text list.'),
+						'values' => array(
+									array(
+										'id' => 'active_on',
+										'value' => 1,
+										'label' => $this->l('Enabled')
+									),
+									array(
+										'id' => 'active_off',
+										'value' => 0,
+										'label' => $this->l('Disabled')
+									)
+								),
+					),
+					array(
+						'type' => 'text',
+						'label' => $this->l('Number of elements to display'),
+						'name' => 'SUPPLIER_DISPLAY_TEXT_NB',
+						'class' => 'fixed-width-xs'
+					),
+					array(
+						'type' => 'switch',
+						'label' => $this->l('Use a drop-down list'),
+						'name' => 'SUPPLIER_DISPLAY_FORM',
+						'desc' => $this->l('Display suppliers in a drop-down list.'),
+						'values' => array(
+									array(
+										'id' => 'active_on',
+										'value' => 1,
+										'label' => $this->l('Enabled')
+									),
+									array(
+										'id' => 'active_off',
+										'value' => 0,
+										'label' => $this->l('Disabled')
+									)
+								),
+					)
+				),
+				'submit' => array(
+					'title' => $this->l('Save'),
+				)
+			),
+		);
+		
+		$helper = new HelperForm();
+		$helper->show_toolbar = false;
+		$helper->table =  $this->table;
+		$lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+		$helper->default_form_language = $lang->id;
+		$helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
+		$helper->identifier = $this->identifier;
+		$helper->submit_action = 'submitBlockSuppliers';
+		$helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
+		$helper->token = Tools::getAdminTokenLite('AdminModules');
+		$helper->tpl_vars = array(
+			'fields_value' => $this->getConfigFieldsValues(),
+			'languages' => $this->context->controller->getLanguages(),
+			'id_language' => $this->context->language->id
+		);
+
+		return $helper->generateForm(array($fields_form));
+	}
+
+	public function getConfigFieldsValues()
+	{		
+		return array(
+			'SUPPLIER_DISPLAY_TEXT' => Tools::getValue('SUPPLIER_DISPLAY_TEXT', Configuration::get('SUPPLIER_DISPLAY_TEXT')),
+			'SUPPLIER_DISPLAY_TEXT_NB' => Tools::getValue('SUPPLIER_DISPLAY_TEXT_NB', Configuration::get('SUPPLIER_DISPLAY_TEXT_NB')),
+			'SUPPLIER_DISPLAY_FORM' => Tools::getValue('SUPPLIER_DISPLAY_FORM', Configuration::get('SUPPLIER_DISPLAY_FORM')),
+		);
+	}
+}

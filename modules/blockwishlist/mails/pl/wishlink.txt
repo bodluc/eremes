@@ -1,7 +1,13 @@
-Hi,
 
-{shop_name} invites you to send this link to your friends, so they can see your wishlist {wishlist} :
+[{shop_url}] 
 
-{message}
+Witaj, 
 
-{shop_url} realised by PrestaShop™
+{shop_name} zaprasza wysłać link do znajomych, aby mogli zobaczyć
+swoją listę życzeń: {wishlist}
+
+{message} [{message}] 		 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 8971 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
@@ -37,10 +36,10 @@
 {/block}
 
 {block name=script}
-		var langPackOk = "<img src=\"{$smarty.const._PS_IMG_}admin/information.png\" alt=\"\" /> {l s='A language pack is available for this ISO (name is'}";
-		var langPackVersion = "{l s='The compatible Prestashop version for this language and your system is:'}";
-		var langPackInfo = "{l s='After creating the language, you can import the content of the language pack, which you can download above under "Localization - Translations"'}";
-		var noLangPack = "<img src=\"{$smarty.const._PS_IMG_}admin/information.png\" alt=\"\" /> {l s='No language pack available on prestashop.com for this ISO code'}";
+		var langPackOk = "<img src=\"{$smarty.const._PS_IMG_}admin/information.png\" alt=\"\" /> {l s='A language pack is available for this ISO.'}";
+		var langPackVersion = "{l s='The Prestashop version compatible with this language and your system is:'}";
+		var langPackInfo = "{l s='After creating the language, you can import the content of the language pack, which you can download under "Localization -- Translations."'}";
+		var noLangPack = "<img src=\"{$smarty.const._PS_IMG_}admin/information.png\" alt=\"\" /> {l s='No language pack is available on prestashop.com for this ISO code'}";
 		var download = "{l s='Download'}";
 
 	$(document).ready(function() {
@@ -53,17 +52,16 @@
 {/block}
 
 {block name="other_fieldsets"}
-
 	{if isset($fields['new'])}
 		<br /><br />
-		<fieldset style="width:572px;">
+		<div class="panel" style="width:572px;">
 			{foreach $fields['new'] as $key => $field}
 				{if $key == 'legend'}
 					<legend>
 						{if isset($field.image)}<img src="{$field.image}" alt="{$field.title}" />{/if}
 						{$field.title}
 					</legend>
-					<p>{l s='This language is NOT complete and cannot be used in the Front or Back Office because some files are missing.'}</p>
+					<p>{l s='This language pack  is NOT complete and cannot be used in the Front or Back Office because some files are missing.'}</p>
 					<br />
 				{elseif $key == 'list_files'}
 					{foreach $field as $list}
@@ -86,7 +84,6 @@
 			{/foreach}
 			<br />
 			<div class="small">{l s='Missing files are marked in red'}</div>
-		</fieldset>
+		</div>
 	{/if}
-
 {/block}

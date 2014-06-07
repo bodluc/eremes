@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -30,96 +29,91 @@ if (!defined('_PS_VERSION_'))
 
 class BlockViewed extends Module
 {
-	private $_html = '';
-	private $_postErrors = array();
 
 	public function __construct()
 	{
 		$this->name = 'blockviewed';
 		$this->tab = 'front_office_features';
-		$this->version = 0.9;
+		$this->version = 1.1;
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
-		parent::__construct();
+		$this->bootstrap = true;
+		parent::__construct();	
 
 		$this->displayName = $this->l('Viewed products block');
-		$this->description = $this->l('Adds a block displaying last-viewed products.');
+		$this->description = $this->l('Adds a block displaying recently viewed products.');
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
 
 	public function install()
 	{
-		if (!parent::install()
-			OR !$this->registerHook('leftColumn')
-			OR !$this->registerHook('header')
-			OR !Configuration::updateValue('PRODUCTS_VIEWED_NBR', 2))
-			return false;
-		return true;
+		$success = (parent::install() && $this->registerHook('header') && Configuration::updateValue('PRODUCTS_VIEWED_NBR', 2));
+
+		if ($success)
+		{
+			// Hook the module either on the left or right column
+			$theme = new Theme(Context::getContext()->shop->id_theme);
+			if ((!$theme->default_left_column || !$this->registerHook('leftColumn'))
+				&& (!$theme->default_right_column || !$this->registerHook('rightColumn')))
+			{
+				// If there are no colums implemented by the template, throw an error and uninstall the module
+				$this->_errors[] = $this->l('This module need to be hooked in a column and your theme does not implement one');
+				parent::uninstall();
+				return false;
+			}
+		}
+		return $success;
 	}
 
 	public function getContent()
 	{
-		$output = '<h2>'.$this->displayName.'</h2>';
+		$output = '';
 		if (Tools::isSubmit('submitBlockViewed'))
 		{
-			if (!($productNbr = Tools::getValue('productNbr')) || empty($productNbr))
-				$output .= '<div class="alert error">'.$this->l('You must fill in the \'Products displayed\' field.').'</div>';
+			if (!($productNbr = Tools::getValue('PRODUCTS_VIEWED_NBR')) || empty($productNbr))
+				$output .= $this->displayError($this->l('You must fill in the \'Products displayed\' field.'));
 			elseif ((int)($productNbr) == 0)
-				$output .= '<div class="alert error">'.$this->l('Invalid number.').'</div>';
+				$output .= $this->displayError($this->l('Invalid number.'));
 			else
 			{
 				Configuration::updateValue('PRODUCTS_VIEWED_NBR', (int)$productNbr);
-				$output .= '<div class="conf confirm">'.$this->l('Settings updated').'</div>';
+				$output .= $this->displayConfirmation($this->l('Settings updated.'));
 			}
 		}
-		return $output.$this->displayForm();
-	}
-
-	public function displayForm()
-	{
-		$output = '
-		<form action="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'" method="post">
-			<fieldset><legend><img src="'.$this->_path.'logo.gif" alt="" title="" />'.$this->l('Settings').'</legend>
-				<label>'.$this->l('Products displayed').'</label>
-				<div class="margin-form">
-					<input type="text" name="productNbr" value="'.Configuration::get('PRODUCTS_VIEWED_NBR').'" />
-					<p class="clear">'.$this->l('Define the number of products displayed in this block').'</p>
-				</div>
-				<center><input type="submit" name="submitBlockViewed" value="'.$this->l('Save').'" class="button" /></center>
-			</fieldset>
-		</form>';
-		return $output;
+		return $output.$this->renderForm();
 	}
 
 	public function hookRightColumn($params)
 	{
-		$id_product = (int)Tools::getValue('id_product');
-		$productsViewed = (isset($params['cookie']->viewed) && !empty($params['cookie']->viewed)) ? array_slice(explode(',', $params['cookie']->viewed), 0, Configuration::get('PRODUCTS_VIEWED_NBR')) : array();
+		$productsViewed = (isset($params['cookie']->viewed) && !empty($params['cookie']->viewed)) ? array_slice(array_reverse(explode(',', $params['cookie']->viewed)), 0, Configuration::get('PRODUCTS_VIEWED_NBR')) : array();
 
-		if (sizeof($productsViewed))
+		if (count($productsViewed))
 		{
 			$defaultCover = Language::getIsoById($params['cookie']->id_lang).'-default';
 
 			$productIds = implode(',', $productsViewed);
 			$productsImages = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
-			SELECT i.id_image, p.id_product, il.legend, product_shop.active, pl.name, pl.description_short, pl.link_rewrite, cl.link_rewrite AS category_rewrite
+			SELECT MAX(image_shop.id_image) id_image, p.id_product, il.legend, product_shop.active, pl.name, pl.description_short, pl.link_rewrite, cl.link_rewrite AS category_rewrite
 			FROM '._DB_PREFIX_.'product p
-			LEFT JOIN '._DB_PREFIX_.'product_lang pl ON (pl.id_product = p.id_product'.Shop::addSqlRestrictionOnLang('pl').')
-			LEFT JOIN '._DB_PREFIX_.'image i ON (i.id_product = p.id_product AND i.cover = 1)
-			LEFT JOIN '._DB_PREFIX_.'image_lang il ON (il.id_image = i.id_image)
 			'.Shop::addSqlAssociation('product', 'p').'
+			LEFT JOIN '._DB_PREFIX_.'product_lang pl ON (pl.id_product = p.id_product'.Shop::addSqlRestrictionOnLang('pl').')
+			LEFT JOIN '._DB_PREFIX_.'image i ON (i.id_product = p.id_product)'.
+			Shop::addSqlAssociation('image', 'i', false, 'image_shop.cover=1').'
+			LEFT JOIN '._DB_PREFIX_.'image_lang il ON (il.id_image = image_shop.id_image)
 			LEFT JOIN '._DB_PREFIX_.'category_lang cl ON (cl.id_category = product_shop.id_category_default'.Shop::addSqlRestrictionOnLang('cl').')
 			WHERE p.id_product IN ('.$productIds.')
 			AND pl.id_lang = '.(int)($params['cookie']->id_lang).'
-			AND cl.id_lang = '.(int)($params['cookie']->id_lang)
+			AND cl.id_lang = '.(int)($params['cookie']->id_lang).'
+			GROUP BY product_shop.id_product'
 			);
 
 			$productsImagesArray = array();
-			foreach ($productsImages AS $pi)
+			foreach ($productsImages as $pi)
 				$productsImagesArray[$pi['id_product']] = $pi;
 
 			$productsViewedObj = array();
-			foreach ($productsViewed AS $productViewed)
+			foreach ($productsViewed as $productViewed)
 			{
 				$obj = (object)'Product';
 				if (!isset($productsImagesArray[$productViewed]) || (!$obj->active = $productsImagesArray[$productViewed]['active']))
@@ -127,6 +121,7 @@ class BlockViewed extends Module
 				else
 				{
 					$obj->id = (int)($productsImagesArray[$productViewed]['id_product']);
+					$obj->id_image = (int)$productsImagesArray[$productViewed]['id_image'];
 					$obj->cover = (int)($productsImagesArray[$productViewed]['id_product']).'-'.(int)($productsImagesArray[$productViewed]['id_image']);
 					$obj->legend = $productsImagesArray[$productViewed]['legend'];
 					$obj->name = $productsImagesArray[$productViewed]['name'];
@@ -145,29 +140,8 @@ class BlockViewed extends Module
 				}
 			}
 
-			if ($id_product AND !in_array($id_product, $productsViewed))
-			{
-				// Check if the user to the right of access to this product
-				$result = Db::getInstance()->getRow('
-				SELECT COUNT(cug.`id_customer`) AS total
-				FROM `'._DB_PREFIX_.'product` p
-				LEFT JOIN `'._DB_PREFIX_.'category_product` cp ON (cp.`id_product` = p.`id_product`)
-				LEFT JOIN `'._DB_PREFIX_.'category_group` cg ON (cg.`id_category` = cp.`id_category`)
-				LEFT JOIN `'._DB_PREFIX_.'customer_group` cug ON (cug.`id_group` = cg.`id_group`)
-				WHERE p.`id_product` = '.(int)($id_product).'
-				'.($this->context->customer->id ? 'AND cug.`id_customer` = '.(int)$this->context->customer->id :
-				'AND cg.`id_group` = 1')
-				);
-				if ($result['total'])
-					array_unshift($productsViewed, $id_product);
-			}
-			$viewed = '';
-			foreach ($productsViewed AS $id_product_viewed)
-				$viewed .= (int)($id_product_viewed).',';
-			$params['cookie']->viewed = rtrim($viewed, ',');
-
-			if (!sizeof($productsViewedObj))
-				return ;
+			if (!count($productsViewedObj))
+				return;
 
 			$this->smarty->assign(array(
 				'productsViewedObj' => $productsViewedObj,
@@ -175,9 +149,7 @@ class BlockViewed extends Module
 
 			return $this->display(__FILE__, 'blockviewed.tpl');
 		}
-		elseif ($id_product)
-			$params['cookie']->viewed = (int)($id_product);
-		return ;
+		return;
 	}
 
 	public function hookLeftColumn($params)
@@ -185,8 +157,76 @@ class BlockViewed extends Module
 		return $this->hookRightColumn($params);
 	}
 
+	public function hookFooter($params)
+	{
+		return $this->hookRightColumn($params);
+	}
+
 	public function hookHeader($params)
 	{
+		$id_product = (int)Tools::getValue('id_product');
+		$productsViewed = (isset($params['cookie']->viewed) && !empty($params['cookie']->viewed)) ? array_slice(array_reverse(explode(',', $params['cookie']->viewed)), 0, Configuration::get('PRODUCTS_VIEWED_NBR')) : array();
+
+		if ($id_product && !in_array($id_product, $productsViewed))
+		{
+			$product = new Product((int)$id_product);
+			if ($product->checkAccess((int)$this->context->customer->id))
+			{
+				if (isset($params['cookie']->viewed) && !empty($params['cookie']->viewed))
+					$params['cookie']->viewed .= ','.(int)$id_product;
+				else
+					$params['cookie']->viewed = (int)$id_product;
+			}
+		}
 		$this->context->controller->addCSS(($this->_path).'blockviewed.css', 'all');
+	}
+	
+	public function renderForm()
+	{
+		$fields_form = array(
+			'form' => array(
+				'legend' => array(
+					'title' => $this->l('Settings'),
+					'icon' => 'icon-cogs'
+				),
+				'input' => array(
+					array(
+						'type' => 'text',
+						'label' => $this->l('Products to display'),
+						'name' => 'PRODUCTS_VIEWED_NBR',
+						'class' => 'fixed-width-xs',
+						'desc' => $this->l('Define the number of products displayed in this block.')
+					),
+				),
+				'submit' => array(
+					'title' => $this->l('Save'),
+				)
+			),
+		);
+			
+		$helper = new HelperForm();
+		$helper->show_toolbar = false;
+		$helper->table =  $this->table;
+		$lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+		$helper->default_form_language = $lang->id;
+		$helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
+		$helper->identifier = $this->identifier;
+		$helper->submit_action = 'submitBlockViewed';
+		$helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
+		$helper->token = Tools::getAdminTokenLite('AdminModules');
+		$helper->tpl_vars = array(
+			'fields_value' => $this->getConfigFieldsValues(),
+			'languages' => $this->context->controller->getLanguages(),
+			'id_language' => $this->context->language->id
+		);
+
+		return $helper->generateForm(array($fields_form));
+	}
+	
+	public function getConfigFieldsValues()
+	{		
+		return array(
+			'PRODUCTS_VIEWED_NBR' => Tools::getValue('PRODUCTS_VIEWED_NBR', Configuration::get('PRODUCTS_VIEWED_NBR')),
+		);
 	}
 }

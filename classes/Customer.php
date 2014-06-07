@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7499 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -43,7 +42,10 @@ class CustomerCore extends ObjectModel
 	public $id_gender = 0;
 
 	/** @var integer Default group ID */
-	public $id_default_group = _PS_DEFAULT_CUSTOMER_GROUP_;
+	public $id_default_group;
+
+	/** @var integer Current language used by the customer */
+	public $id_lang;
 
 	/** @var string Lastname */
 	public $lastname;
@@ -96,7 +98,7 @@ class CustomerCore extends ObjectModel
 	/** @var integer Password */
 	public $passwd;
 
-	/** @var datetime Password */
+	/** @var string Datetime Password */
 	public $last_passwd_gen;
 
 	/** @var boolean Status */
@@ -136,6 +138,7 @@ class CustomerCore extends ObjectModel
 	protected $webserviceParameters = array(
 		'fields' => array(
 			'id_default_group' => array('xlink_resource' => 'groups'),
+			'id_lang' => array('xlink_resource' => 'languages'),
 			'newsletter_date_add' => array(),
 			'ip_registration_newsletter' => array(),
 			'last_passwd_gen' => array('setter' => null),
@@ -171,7 +174,7 @@ class CustomerCore extends ObjectModel
 			'company' =>					array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
 			'siret' =>						array('type' => self::TYPE_STRING, 'validate' => 'isSiret'),
 			'ape' =>						array('type' => self::TYPE_STRING, 'validate' => 'isApe'),
-			'outstanding_allow_amount' =>	array('type' => self::TYPE_INT, 'validate' => 'isFloat', 'copy_post' => false),
+			'outstanding_allow_amount' =>	array('type' => self::TYPE_FLOAT, 'validate' => 'isFloat', 'copy_post' => false),
 			'show_public_prices' =>			array('type' => self::TYPE_BOOL, 'validate' => 'isBool', 'copy_post' => false),
 			'id_risk' =>					array('type' => self::TYPE_INT, 'validate' => 'isUnsignedInt', 'copy_post' => false),
 			'max_payment_days' =>			array('type' => self::TYPE_INT, 'validate' => 'isUnsignedInt', 'copy_post' => false),
@@ -182,6 +185,7 @@ class CustomerCore extends ObjectModel
 			'id_shop' => 					array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId', 'copy_post' => false),
 			'id_shop_group' => 				array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId', 'copy_post' => false),
 			'id_default_group' => 			array('type' => self::TYPE_INT, 'copy_post' => false),
+			'id_lang' => 					array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId', 'copy_post' => false),
 			'date_add' => 					array('type' => self::TYPE_DATE, 'validate' => 'isDate', 'copy_post' => false),
 			'date_upd' => 					array('type' => self::TYPE_DATE, 'validate' => 'isDate', 'copy_post' => false),
 		),
@@ -190,11 +194,18 @@ class CustomerCore extends ObjectModel
 	protected static $_defaultGroupId = array();
 	protected static $_customerHasAddress = array();
 	protected static $_customer_groups = array();
-
+	
+	public function __construct($id = null)
+	{
+		$this->id_default_group = (int)Configuration::get('PS_CUSTOMER_GROUP');
+		parent::__construct($id);
+	}
+	
 	public function add($autodate = true, $null_values = true)
 	{
 		$this->id_shop = ($this->id_shop) ? $this->id_shop : Context::getContext()->shop->id;
 		$this->id_shop_group = ($this->id_shop_group) ? $this->id_shop_group : Context::getContext()->shop->id_shop_group;
+		$this->id_lang = ($this->id_lang) ? $this->id_lang : Context::getContext()->language->id;
 		$this->birthday = (empty($this->years) ? $this->birthday : (int)$this->years.'-'.(int)$this->months.'-'.(int)$this->days);
 		$this->secure_key = md5(uniqid(rand(), true));
 		$this->last_passwd_gen = date('Y-m-d H:i:s', strtotime('-'.Configuration::get('PS_PASSWD_TIME_FRONT').'minutes'));
@@ -202,11 +213,11 @@ class CustomerCore extends ObjectModel
 		if ($this->newsletter && !Validate::isDate($this->newsletter_date_add))
 			$this->newsletter_date_add = date('Y-m-d H:i:s');
 			
-		if ($this->id_default_group == _PS_DEFAULT_CUSTOMER_GROUP_)
+		if ($this->id_default_group == Configuration::get('PS_CUSTOMER_GROUP'))
 			if ($this->is_guest)
-				$this->id_default_group = Configuration::get('PS_GUEST_GROUP');
+				$this->id_default_group = (int)Configuration::get('PS_GUEST_GROUP');
 			else
-				$this->id_default_group = Configuration::get('PS_CUSTOMER_GROUP');
+				$this->id_default_group = (int)Configuration::get('PS_CUSTOMER_GROUP');
 
 		/* Can't create a guest customer, if this feature is disabled */
 		if ($this->is_guest && !Configuration::get('PS_GUEST_CHECKOUT_ENABLED'))
@@ -222,7 +233,7 @@ class CustomerCore extends ObjectModel
 
 		if ($this->newsletter && !Validate::isDate($this->newsletter_date_add))
 			$this->newsletter_date_add = date('Y-m-d H:i:s');
-		if (Context::getContext()->controller->controller_type == 'admin')
+		if (isset(Context::getContext()->controller) && Context::getContext()->controller->controller_type == 'admin')
 			$this->updateGroup($this->groupBox);
 			
 		if ($this->deleted)
@@ -240,14 +251,41 @@ class CustomerCore extends ObjectModel
 
 	public function delete()
 	{
-		$addresses = $this->getAddresses((int)Configuration::get('PS_LANG_DEFAULT'));
-		foreach ($addresses as $address)
+		if (!count(Order::getCustomerOrders((int)$this->id)))
 		{
-			$obj = new Address((int)$address['id_address']);
-			$obj->delete();
+			$addresses = $this->getAddresses((int)Configuration::get('PS_LANG_DEFAULT'));
+			foreach ($addresses as $address)
+			{
+				$obj = new Address((int)$address['id_address']);
+				$obj->delete();
+			}
 		}
 		Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'customer_group` WHERE `id_customer` = '.(int)$this->id);
-		Discount::deleteByIdCustomer((int)$this->id);
+		Db::getInstance()->execute('DELETE FROM '._DB_PREFIX_.'message WHERE id_customer='.(int)$this->id);
+		Db::getInstance()->execute('DELETE FROM '._DB_PREFIX_.'specific_price WHERE id_customer='.(int)$this->id);		
+		Db::getInstance()->execute('DELETE FROM '._DB_PREFIX_.'compare WHERE id_customer='.(int)$this->id);
+				
+		$carts = Db::getInstance()->executes('SELECT id_cart 
+															FROM '._DB_PREFIX_.'cart
+															WHERE id_customer='.(int)$this->id);
+		if ($carts)
+			foreach ($carts as $cart)
+			{
+				Db::getInstance()->execute('DELETE FROM '._DB_PREFIX_.'cart WHERE id_cart='.(int)$cart['id_cart']);
+				Db::getInstance()->execute('DELETE FROM '._DB_PREFIX_.'cart_product WHERE id_cart='.(int)$cart['id_cart']);
+			}
+		
+		$cts = Db::getInstance()->executes('SELECT id_customer_thread 
+															FROM '._DB_PREFIX_.'customer_thread
+															WHERE id_customer='.(int)$this->id);
+		if ($cts)
+			foreach ($cts as $ct)
+			{
+				Db::getInstance()->execute('DELETE FROM '._DB_PREFIX_.'customer_thread WHERE id_customer_thread='.(int)$ct['id_customer_thread']);
+				Db::getInstance()->execute('DELETE FROM '._DB_PREFIX_.'customer_message WHERE id_customer_thread='.(int)$ct['id_customer_thread']);
+			}
+
+		CartRule::deleteByIdCustomer((int)$this->id);
 		return parent::delete();
 	}
 
@@ -272,7 +310,7 @@ class CustomerCore extends ObjectModel
 	 * @param string $passwd Password is also checked if specified
 	 * @return Customer instance
 	 */
-	public function getByEmail($email, $passwd = null)
+	public function getByEmail($email, $passwd = null, $ignore_guest = true)
 	{
 		if (!Validate::isEmail($email) || ($passwd && !Validate::isPasswd($passwd)))
 			die (Tools::displayError());
@@ -282,15 +320,16 @@ class CustomerCore extends ObjectModel
 				WHERE `email` = \''.pSQL($email).'\'
 					'.Shop::addSqlRestriction(Shop::SHARE_CUSTOMER).'
 					'.(isset($passwd) ? 'AND `passwd` = \''.Tools::encrypt($passwd).'\'' : '').'
-					AND `deleted` = 0
-					AND `is_guest` = 0';
+					AND `deleted` = 0'.
+					($ignore_guest ? ' AND `is_guest` = 0' : '');
+
 		$result = Db::getInstance()->getRow($sql);
 
 		if (!$result)
 			return false;
 		$this->id = $result['id_customer'];
 		foreach ($result as $key => $value)
-			if (key_exists($key, $this))
+			if (array_key_exists($key, $this))
 				$this->{$key} = $value;
 
 		return $this;
@@ -323,15 +362,18 @@ class CustomerCore extends ObjectModel
 	{
 		if (!Validate::isUnsignedId($id_customer))
 			return true;
-		$result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow('
-		SELECT `id_customer`
-		FROM `'._DB_PREFIX_.'customer`
-		WHERE `id_customer` = \''.(int)$id_customer.'\'
-		AND active = 1
-		AND `deleted` = 0');
-		if (isset($result['id_customer']))
-			return false;
-		return true;
+		$cache_id = 'Customer::isBanned_'.(int)$id_customer;
+		if (!Cache::isStored($cache_id))
+		{
+			$result = (bool)!Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow('
+			SELECT `id_customer`
+			FROM `'._DB_PREFIX_.'customer`
+			WHERE `id_customer` = \''.(int)$id_customer.'\'
+			AND active = 1
+			AND `deleted` = 0');
+			Cache::store($cache_id, $result);
+		}
+		return Cache::retrieve($cache_id);
 	}
 
 	/**
@@ -345,8 +387,13 @@ class CustomerCore extends ObjectModel
 	public static function customerExists($email, $return_id = false, $ignore_guest = true)
 	{
 		if (!Validate::isEmail($email))
-			die (Tools::displayError());
-
+		{
+			if (defined('_PS_MODE_DEV_') && _PS_MODE_DEV_)
+				die (Tools::displayError('Invalid email'));
+			else
+				return false;
+		}
+		
 		$sql = 'SELECT `id_customer`
 				FROM `'._DB_PREFIX_.'customer`
 				WHERE `email` = \''.pSQL($email).'\'
@@ -368,16 +415,17 @@ class CustomerCore extends ObjectModel
 	 */
 	public static function customerHasAddress($id_customer, $id_address)
 	{
-		if (!array_key_exists($id_customer, self::$_customerHasAddress))
+		$key = (int)$id_customer.'-'.(int)$id_address;
+		if (!array_key_exists($key, self::$_customerHasAddress))
 		{
-			self::$_customerHasAddress[$id_customer] = (bool)Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
+			self::$_customerHasAddress[$key] = (bool)Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
 			SELECT `id_address`
 			FROM `'._DB_PREFIX_.'address`
 			WHERE `id_customer` = '.(int)$id_customer.'
 			AND `id_address` = '.(int)$id_address.'
 			AND `deleted` = 0');
 		}
-		return self::$_customerHasAddress[$id_customer];
+		return self::$_customerHasAddress[$key];
 	}
 
 	public static function resetAddressCache($id_customer)
@@ -394,13 +442,22 @@ class CustomerCore extends ObjectModel
 	 */
 	public function getAddresses($id_lang)
 	{
-		$sql = 'SELECT a.*, cl.`name` AS country, s.name AS state, s.iso_code AS state_iso
-				FROM `'._DB_PREFIX_.'address` a
-				LEFT JOIN `'._DB_PREFIX_.'country` c ON (a.`id_country` = c.`id_country`)
-				LEFT JOIN `'._DB_PREFIX_.'country_lang` cl ON (c.`id_country` = cl.`id_country`)
-				LEFT JOIN `'._DB_PREFIX_.'state` s ON (s.`id_state` = a.`id_state`)
-				WHERE `id_lang` = '.(int)$id_lang.' AND `id_customer` = '.(int)$this->id.' AND a.`deleted` = 0';
-		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+		$share_order = (bool)Context::getContext()->shop->getGroup()->share_order;
+		$cache_id = 'Customer::getAddresses'.(int)$this->id.'-'.(int)$id_lang.'-'.$share_order;
+		if (!Cache::isStored($cache_id))
+		{ 
+			$sql = 'SELECT DISTINCT a.*, cl.`name` AS country, s.name AS state, s.iso_code AS state_iso
+					FROM `'._DB_PREFIX_.'address` a
+					LEFT JOIN `'._DB_PREFIX_.'country` c ON (a.`id_country` = c.`id_country`)
+					LEFT JOIN `'._DB_PREFIX_.'country_lang` cl ON (c.`id_country` = cl.`id_country`)
+					LEFT JOIN `'._DB_PREFIX_.'state` s ON (s.`id_state` = a.`id_state`)
+					'.($share_order ? '' : Shop::addSqlAssociation('country', 'c')).' 
+					WHERE `id_lang` = '.(int)$id_lang.' AND `id_customer` = '.(int)$this->id.' AND a.`deleted` = 0';
+
+			$result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+			Cache::store($cache_id, $result);
+		}
+		return Cache::retrieve($cache_id);
 	}
 
 	/**
@@ -429,12 +486,17 @@ class CustomerCore extends ObjectModel
 	{
 		if (!Validate::isUnsignedId($id_customer) || !Validate::isMd5($passwd))
 			die (Tools::displayError());
-
-		$sql = 'SELECT `id_customer`
-				FROM `'._DB_PREFIX_.'customer`
-				WHERE `id_customer` = '.$id_customer.'
+		$cache_id = 'Customer::checkPassword'.(int)$id_customer.'-'.$passwd;
+		if (!Cache::isStored($cache_id))
+		{
+			$sql = 'SELECT `id_customer`
+					FROM `'._DB_PREFIX_.'customer`
+					WHERE `id_customer` = '.$id_customer.'
 					AND `passwd` = \''.$passwd.'\'';
-		return (bool)Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($sql);
+			$result = (bool)Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($sql);
+			Cache::store($cache_id, $result);
+		}
+		return Cache::retrieve($cache_id);
 	}
 
 	/**
@@ -527,12 +589,16 @@ class CustomerCore extends ObjectModel
 
 	public static function customerIdExistsStatic($id_customer)
 	{
-		$row = Db::getInstance()->getRow('
-		SELECT `id_customer`
-		FROM '._DB_PREFIX_.'customer c
-		WHERE c.`id_customer` = '.(int)$id_customer);
-
-		return isset($row['id_customer']);
+		$cache_id = 'Customer::customerIdExistsStatic'.(int)$id_customer;
+		if (!Cache::isStored($cache_id))
+		{
+			$result = (int)Db::getInstance()->getValue('
+			SELECT `id_customer`
+			FROM '._DB_PREFIX_.'customer c
+			WHERE c.`id_customer` = '.(int)$id_customer);
+			Cache::store($cache_id, $result);
+		}
+		return Cache::retrieve($cache_id);
 	}
 
 	/**
@@ -542,9 +608,11 @@ class CustomerCore extends ObjectModel
 	 */
 	public function updateGroup($list)
 	{
-		$this->cleanGroups();
 		if ($list && !empty($list))
+		{
+			$this->cleanGroups();
 			$this->addGroups($list);
+		}
 		else
 			$this->addGroups(array($this->id_default_group));
 	}
@@ -559,14 +627,17 @@ class CustomerCore extends ObjectModel
 		foreach ($groups as $group)
 		{
 			$row = array('id_customer' => (int)$this->id, 'id_group' => (int)$group);
-			Db::getInstance()->insert('customer_group', $row);
+			Db::getInstance()->insert('customer_group', $row, false, true, Db::INSERT_IGNORE);
 		}
 	}
 
 	public static function getGroupsStatic($id_customer)
 	{
-		if (!Group::isFeatureActive() || $id_customer == 0)
+		if (!Group::isFeatureActive())
 			return array(Configuration::get('PS_CUSTOMER_GROUP'));
+
+		if ($id_customer == 0)
+			self::$_customer_groups[$id_customer] = array((int)Configuration::get('PS_UNIDENTIFIED_GROUP'));
 
 		if (!isset(self::$_customer_groups[$id_customer]))
 		{

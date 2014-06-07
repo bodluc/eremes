@@ -1,15 +1,23 @@
-﻿Witaj {firstname} {lastname},
 
-Twoje zamowienie jest obecnie w tranzycie.
+[{shop_url}] 
 
-Mozesz sledzic przesylkę klikajac na ponizszy link: {followup}
+Witaj {firstname} {lastname}, 
 
-Mozna rowniez dokonac przegladu niniejszego zamowienia i pobrac faktury  z "Historia zamowien", klikajac "Moje konto" na naszej witrynie. 
+Twoje zamówienie o numerze {order_name} jest aktualnie w trakcie
+dostawy. 
 
-Dziekujemy za zakupy w naszym sklepie internetowym {shop_name}!
+Możesz śledzić paczkę korzystając z poniższego linku:
+{followup} [{followup}] 		 
 
-{shop_name} - {shop_url}
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
+"Historia zamówień" [{history_url}] na koncie
+klienta klikając w "Moje konto"
+[{my_account_url}] w naszym sklepie. 
 
+Jeśli posiadasz konto gościa, możesz śledzić swoje
+zamówienie w sekcji "Śledzenie Zamówienia"
+[{guest_tracking_url}?id_order={order_name}]. 
 
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
 
-{shop_url} oparty na systemie PrestaShop™

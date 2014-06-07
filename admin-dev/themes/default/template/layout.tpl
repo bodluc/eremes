@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,25 +18,26 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 17284 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
-{include file='header.tpl'}
+{$header}
+
 {if isset($conf)}
-	<div class="conf">
-		{$conf}
+	<div class="bootstrap">
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			{$conf}
+		</div>
 	</div>
 {/if}
 {if count($errors) && (!isset($disableDefaultErrorOutPut) || $disableDefaultErrorOutPut == false)}
-	<div class="error">
-		<span style="float:right">
-			<a id="hideError" href="#"><img alt="X" src="../img/admin/close.png" /></a>
-		</span>
-		
+	<div class="bootstrap">
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
 		{if count($errors) == 1}
-			{$errors[0]}
+			{reset($errors)}
 		{else}
 			{l s='%d errors' sprintf=$errors|count}
 			<br/>
@@ -46,50 +47,38 @@
 				{/foreach}
 			</ol>
 		{/if}
+		</div>
 	</div>
 {/if}
-
 {if isset($informations) && count($informations) && $informations}
-	<div class="hint clear" style="display:block;">
-		{foreach $informations as $info}
-			{$info}<br />
-		{/foreach}
-	</div><br />
-{/if}
-
-{if isset($confirmations) && count($confirmations) && $confirmations}
-	<div class="conf" style="display:block;">
-		{foreach $confirmations as $conf}
-			{$conf}<br />
-		{/foreach}
-	</div><br />
-{/if}
-
-{if count($warnings)}
-	<div class="warn">
-		<span style="float:right">
-			<a id="hideWarn" href=""><img alt="X" src="../img/admin/close.png" /></a>
-		</span>
-		{if count($warnings) > 1}
-			{l s='There are %d warnings.' sprintf=count($warnings)}
-			<span style="margin-left:20px;" id="labelSeeMore">
-				<a id="linkSeeMore" href="#" style="text-decoration:underline">{l s='Click here to see more'}</a>
-				<a id="linkHide" href="#" style="text-decoration:underline;display:none">{l s='Hide warning'}</a>
-			</span>
-			<ul {if count($warnings) > 1}style="display:none;"{/if} id="seeMore">
-			{foreach $warnings as $warning}
-				<li>{$warning}</li>
+	<div class="alert alert-info">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<ul id="infos_block" class="list-unstyled">
+			{foreach $informations as $info}
+				<li>{$info}</li>
 			{/foreach}
-			</ul>
-		{else}
-			<ul style="margin-top: 3px">
-			{foreach $warnings as $warning}
-				<li>{$warning}</li>
-			{/foreach}
-			</ul>
-		{/if}
+		</ul>
 	</div>
 {/if}
-
+{if isset($confirmations) && count($confirmations) && $confirmations}
+	<div class="alert alert-success" style="display:block;">
+		{foreach $confirmations as $conf}
+			{$conf}
+		{/foreach}
+	</div>
+{/if}
+{if count($warnings)}
+	<div class="alert alert-warning">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{if count($warnings) > 1}
+			<h4>{l s='There are %d warnings:' sprintf=count($warnings)}</h4>
+		{/if}
+		<ul class="list-unstyled">
+			{foreach $warnings as $warning}
+				<li>{$warning}</li>
+			{/foreach}
+		</ul>
+	</div>
+{/if}
 {$page}
-{include file='footer.tpl'}
+{$footer}

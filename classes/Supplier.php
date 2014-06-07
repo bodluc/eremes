@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7310 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -73,7 +72,7 @@ class SupplierCore extends ObjectModel
 			'date_upd' => 			array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
 
 			// Lang fields
-			'description' => 		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName'),
+			'description' => 		array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isCleanHtml'),
 			'meta_title' => 		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 128),
 			'meta_description' => 	array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 255),
 			'meta_keywords' => 		array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 255),
@@ -96,7 +95,7 @@ class SupplierCore extends ObjectModel
 
 	public function getLink()
 	{
-		return Tools::link_rewrite($this->name, false);
+		return Tools::link_rewrite($this->name);
 	}
 
 	/**
@@ -108,6 +107,8 @@ class SupplierCore extends ObjectModel
 	{
 		if (!$id_lang)
 			$id_lang = Configuration::get('PS_LANG_DEFAULT');
+		if (!Group::isFeatureActive())
+			$all_groups = true;
 
 		$query = new DbQuery();
 		$query->select('s.*, sl.`description`');
@@ -118,7 +119,6 @@ class SupplierCore extends ObjectModel
 			$query->where('s.`active` = 1');
 		$query->orderBy(' s.`name` ASC');
 		$query->limit($n, ($p - 1) * $n);
-		$query->groupBy('s.id_supplier');
 
 		$suppliers = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($query);
 		if ($suppliers === false)
@@ -131,6 +131,7 @@ class SupplierCore extends ObjectModel
 				$groups = FrontController::getCurrentCustomerGroups();
 				$sql_groups = (count($groups) ? 'IN ('.implode(',', $groups).')' : '= 1');
 			}
+
 			foreach ($suppliers as $key => $supplier)
 			{
 				$sql = '
@@ -141,6 +142,7 @@ class SupplierCore extends ObjectModel
 					WHERE ps.`id_supplier` = '.(int)$supplier['id_supplier'].'
 					AND ps.id_product_attribute = 0'.
 					($active ? ' AND product_shop.`active` = 1' : '').
+					' AND product_shop.`visibility` NOT IN ("none")'.
 					($all_groups ? '' :'
 					AND ps.`id_product` IN (
 						SELECT cp.`id_product`
@@ -156,10 +158,7 @@ class SupplierCore extends ObjectModel
 		$nb_suppliers = count($suppliers);
 		$rewrite_settings = (int)Configuration::get('PS_REWRITING_SETTINGS');
 		for ($i = 0; $i < $nb_suppliers; $i++)
-			if ($rewrite_settings)
-				$suppliers[$i]['link_rewrite'] = Tools::link_rewrite($suppliers[$i]['name'], false);
-			else
-				$suppliers[$i]['link_rewrite'] = 0;
+				$suppliers[$i]['link_rewrite'] = ($rewrite_settings ? Tools::link_rewrite($suppliers[$i]['name']) : 0);
 		return $suppliers;
 	}
 
@@ -206,31 +205,31 @@ class SupplierCore extends ObjectModel
 		if (!Validate::isOrderBy($order_by) || !Validate::isOrderWay($order_way))
 			die (Tools::displayError());
 
-		$groups = FrontController::getCurrentCustomerGroups();
-		$sql_groups = (count($groups) ? 'IN ('.implode(',', $groups).')' : '= 1');
+		$sql_groups = '';
+		if (Group::isFeatureActive())
+		{
+			$groups = FrontController::getCurrentCustomerGroups();
+			$sql_groups = 'WHERE cg.`id_group` '.(count($groups) ? 'IN ('.implode(',', $groups).')' : '= 1');
+		}
 
 		/* Return only the number of products */
 		if ($get_total)
-		{
-			$sql = '
-				SELECT DISTINCT(ps.`id_product`)
-				FROM `'._DB_PREFIX_.'product_supplier` ps
-				JOIN `'._DB_PREFIX_.'product` p ON (ps.`id_product`= p.`id_product`)
-				'.Shop::addSqlAssociation('product', 'p').'
-				WHERE ps.`id_supplier` = '.(int)$id_supplier.'
-				AND ps.id_product_attribute = 0'.
-				($active ? ' AND product_shop.`active` = 1' : '').'
-				'.($front ? ' AND product_shop.`visibility` IN ("both", "catalog")' : '').'
-				AND p.`id_product` IN (
-					SELECT cp.`id_product`
-					FROM `'._DB_PREFIX_.'category_group` cg
-					LEFT JOIN `'._DB_PREFIX_.'category_product` cp ON (cp.`id_category` = cg.`id_category`)'.
-					($active_category ? ' INNER JOIN `'._DB_PREFIX_.'category` ca ON cp.`id_category` = ca.`id_category` AND ca.`active` = 1' : '').'
-					WHERE cg.`id_group` '.$sql_groups.'
-				)';
-			$result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
-			return (int)count($result);
-		}
+			return (int)Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
+			SELECT COUNT(DISTINCT ps.`id_product`)
+			FROM `'._DB_PREFIX_.'product_supplier` ps
+			JOIN `'._DB_PREFIX_.'product` p ON (ps.`id_product`= p.`id_product`)
+			'.Shop::addSqlAssociation('product', 'p').'
+			WHERE ps.`id_supplier` = '.(int)$id_supplier.'
+			AND ps.id_product_attribute = 0
+			'.($active ? ' AND product_shop.`active` = 1' : '').'
+			'.($front ? ' AND product_shop.`visibility` IN ("both", "catalog")' : '').'
+			AND p.`id_product` IN (
+				SELECT cp.`id_product`
+				FROM `'._DB_PREFIX_.'category_product` cp
+				'.(Group::isFeatureActive() ? 'LEFT JOIN `'._DB_PREFIX_.'category_group` cg ON (cp.`id_category` = cg.`id_category`)' : '').'
+				'.($active_category ? ' INNER JOIN `'._DB_PREFIX_.'category` ca ON cp.`id_category` = ca.`id_category` AND ca.`active` = 1' : '').'
+				'.$sql_groups.'
+			)');
 
 		$nb_days_new_product = Validate::isUnsignedInt(Configuration::get('PS_NB_DAYS_NEW_PRODUCT')) ? Configuration::get('PS_NB_DAYS_NEW_PRODUCT') : 20;
 
@@ -240,10 +239,16 @@ class SupplierCore extends ObjectModel
 			$order_by = pSQL($order_by[0]).'.`'.pSQL($order_by[1]).'`';
 		}
 		$alias = '';
-		if ($order_by == 'price')
+		if (in_array($order_by, array('price', 'date_add', 'date_upd')))
 			$alias = 'product_shop.';
 		elseif ($order_by == 'id_product')
 			$alias = 'p.';
+		elseif ($order_by == 'manufacturer_name')
+		{
+			$order_by = 'name';
+			$alias = 'm.';
+		}
+
 		$sql = 'SELECT p.*, product_shop.*, stock.out_of_stock,
 					IFNULL(stock.quantity, 0) as quantity,
 					pl.`description`,
@@ -253,13 +258,10 @@ class SupplierCore extends ObjectModel
 					pl.`meta_keywords`,
 					pl.`meta_title`,
 					pl.`name`,
-					i.`id_image`,
+					MAX(image_shop.`id_image`) id_image,
 					il.`legend`,
 					s.`name` AS supplier_name,
-					tl.`name` AS tax_name,
-					t.`rate`,
 					DATEDIFF(p.`date_add`, DATE_SUB(NOW(), INTERVAL '.($nb_days_new_product).' DAY)) > 0 AS new,
-					(p.`price` * ((100 + (t.`rate`))/100)) AS orderprice,
 					m.`name` AS manufacturer_name
 				FROM `'._DB_PREFIX_.'product` p
 				'.Shop::addSqlAssociation('product', 'p').'
@@ -267,30 +269,24 @@ class SupplierCore extends ObjectModel
 					AND ps.id_product_attribute = 0)
 				LEFT JOIN `'._DB_PREFIX_.'product_lang` pl ON (p.`id_product` = pl.`id_product`
 					AND pl.`id_lang` = '.(int)$id_lang.Shop::addSqlRestrictionOnLang('pl').')
-				LEFT JOIN `'._DB_PREFIX_.'image` i ON (i.`id_product` = p.`id_product`
-					AND i.`cover` = 1)
+				LEFT JOIN `'._DB_PREFIX_.'image` i ON (i.`id_product` = p.`id_product`)'.
+				Shop::addSqlAssociation('image', 'i', false, 'image_shop.cover=1').'
 				LEFT JOIN `'._DB_PREFIX_.'image_lang` il ON (i.`id_image` = il.`id_image`
 					AND il.`id_lang` = '.(int)$id_lang.')
-				LEFT JOIN `'._DB_PREFIX_.'tax_rule` tr ON (product_shop.`id_tax_rules_group` = tr.`id_tax_rules_group`
-					AND tr.`id_country` = '.(int)Context::getContext()->country->id.'
-					AND tr.`id_state` = 0
-					AND tr.`zipcode_from` = 0)
-				LEFT JOIN `'._DB_PREFIX_.'tax` t ON (t.`id_tax` = tr.`id_tax`)
-				LEFT JOIN `'._DB_PREFIX_.'tax_lang` tl ON (t.`id_tax` = tl.`id_tax`
-					AND tl.`id_lang` = '.(int)$id_lang.')
 				LEFT JOIN `'._DB_PREFIX_.'supplier` s ON s.`id_supplier` = p.`id_supplier`
 				LEFT JOIN `'._DB_PREFIX_.'manufacturer` m ON m.`id_manufacturer` = p.`id_manufacturer`
 				'.Product::sqlStock('p').'
-				WHERE ps.`id_supplier` = '.(int)$id_supplier.
-					($active ? ' AND product_shop.`active` = 1' : '').'
+				WHERE ps.`id_supplier` = '.(int)$id_supplier.'
+					'.($active ? ' AND product_shop.`active` = 1' : '').'
 					'.($front ? ' AND product_shop.`visibility` IN ("both", "catalog")' : '').'
 					AND p.`id_product` IN (
 						SELECT cp.`id_product`
-						FROM `'._DB_PREFIX_.'category_group` cg
-						LEFT JOIN `'._DB_PREFIX_.'category_product` cp ON (cp.`id_category` = cg.`id_category`)'.
-						($active_category ? ' INNER JOIN `'._DB_PREFIX_.'category` ca ON cp.`id_category` = ca.`id_category` AND ca.`active` = 1' : '').'
-						WHERE cg.`id_group` '.$sql_groups.'
+						FROM `'._DB_PREFIX_.'category_product` cp
+						'.(Group::isFeatureActive() ? 'LEFT JOIN `'._DB_PREFIX_.'category_group` cg ON (cp.`id_category` = cg.`id_category`)' : '').'
+						'.($active_category ? ' INNER JOIN `'._DB_PREFIX_.'category` ca ON cp.`id_category` = ca.`id_category` AND ca.`active` = 1' : '').'
+						'.$sql_groups.'
 					)
+				GROUP BY product_shop.id_product
 				ORDER BY '.$alias.pSQL($order_by).' '.pSQL($order_way).'
 				LIMIT '.(((int)$p - 1) * (int)$n).','.(int)$n;
 

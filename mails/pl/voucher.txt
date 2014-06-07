@@ -1,10 +1,16 @@
-Witaj {firstname} {lastname},
- 
-Zamowienie #{id_order}
- 
-Dzieki zlozeniu zamowienia #{id_order} otrzymales od nas rabat na nastepne zamowienia.
- 
-Oto twoj kod rabatowy: {voucher_num}, na kwote {voucher_amount}.
-Przy nastepnym zamowieniu wklej ten kod podczas skladania zamowienia przed zaplaceniem.
- 
-{shop_name} oparty na systemie PrestaShop™
+
+[{shop_url}] 
+
+Witaj {firstname} {lastname}, 
+
+W związku z Twoim zamówieniem o numerze {order_name} został
+wygenerowany dla Ciebie kupon.
+
+KOD KUPONU: {voucher_num} w wysokości {voucher_amount}
+
+Po prostu skopiuj/wklej ten kod podczas procesu płatności dla
+następnego zamówienia. 		 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

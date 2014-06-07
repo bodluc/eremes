@@ -1,5 +1,5 @@
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 10575 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -269,6 +268,10 @@ function updateAmounts(order)
 		$(this).html(old_quantity + 1);
 		$(this).fadeIn('slow');
 	});
+	$('#shipping_table .weight').fadeOut('slow', function() {
+		$(this).html(order.weight);
+		$(this).fadeIn('slow');
+	});
 }
 
 function closeAddProduct()
@@ -285,29 +288,57 @@ function closeAddProduct()
 	$('#add_product_product_quantity').val('1');
 	$('#add_product_product_attribute_id option').remove();
 	$('#add_product_product_attribute_area').hide();
-	$('#add_product_product_stock').html('0');
+	if (stock_management)
+		$('#add_product_product_stock').html('0');
 	current_product = null;
 }
+
+
 
 /**
  * This method allow to initialize all events
  */
 function init()
 {
-	$('.add_product').unbind('click');
-	$('.add_product').click(function() {
+	$('#txt_msg').on('keyup', function(){
+		var length = $('#txt_msg').val().length;
+		if (length > 600) length = '600+';
+		$('#nbchars').html(length+'/600');
+	});
+
+	$('#newMessage').unbind('click');
+	$('#newMessage').click(function() {
+		$(this).hide();
+		$('#message').show();
+		return false;
+	});
+
+	$('#cancelMessage').unbind('click');
+	$('#cancelMessage').click(function() {
+		$('#newMessage').show();
+		$('#message').hide();
+		return false;
+	});
+
+	$('#add_product').unbind('click');
+	$('#add_product').click(function() {
 		$('.cancel_product_change_link:visible').trigger('click');
 		$('.add_product_fields').show();
-		$('.edit_product_fields').hide();
-		$('.standard_refund_fields').hide();
-		$('.partial_refund_fields').hide();
+		$('.edit_product_fields, .standard_refund_fields, .partial_refund_fields, .order_action').hide();
 		$('tr#new_product').slideDown('fast', function () {
-			$('tr#new_product td').fadeIn('fast');
+			$('tr#new_product td').fadeIn('fast', function() {
+				$('#add_product_product_name').focus();
+				$.scrollTo('tr#new_product', 1200, {offset: -100});
+			});
 		});
 
-		$.scrollTo('tr#new_product', 1200, {offset: -100});
-
 		return false;
+	});
+
+	$('#cancelAddProduct').unbind('click');
+	$('#cancelAddProduct').click(function() {
+		$('.order_action').show();
+		$('tr#new_product td').fadeOut('fast');
 	});
 
 	$("#add_product_product_name").autocomplete(admin_order_tab_link,
@@ -324,8 +355,9 @@ function init()
 			},
 			parse: function(data) {
 				var products = new Array();
-				for (var i = 0; i < data.products.length; i++)
-					products[i] = { data: data.products[i], value: data.products[i].name };
+				if (typeof(data.products) != 'undefined')
+					for (var i = 0; i < data.products.length; i++)
+						products[i] = { data: data.products[i], value: data.products[i].name };
 				return products;
 			},
 			extraParams: {
@@ -335,6 +367,7 @@ function init()
 				id_lang: id_lang,
 				id_currency: id_currency,
 				id_address: id_address,
+				id_customer: id_customer,
 				product_search: function() { return $('#add_product_product_name').val(); }
 			}
 		}
@@ -344,12 +377,12 @@ function init()
 		{
 			$('tr#new_product input, tr#new_product select').each(function() {
 				if ($(this).attr('id') != 'add_product_product_name')
-					$('tr#new_product input, tr#new_product select').attr('disabled', true);
+					$('tr#new_product input, tr#new_product select, tr#new_product button').attr('disabled', true);
 			});
 		}
 		else
 		{
-			$('tr#new_product input, tr#new_product select').removeAttr('disabled');
+			$('tr#new_product input, tr#new_product select, tr#new_product button').removeAttr('disabled');
 			// Keep product variable
 			current_product = data;
 			$('#add_product_product_id').val(data.id_product);
@@ -357,7 +390,8 @@ function init()
 			$('#add_product_product_price_tax_incl').val(data.price_tax_incl);
 			$('#add_product_product_price_tax_excl').val(data.price_tax_excl);
 			addProductRefreshTotal();
-			$('#add_product_product_stock').html(data.qty_in_stock);
+			if (stock_management)
+				$('#add_product_product_stock').html(data.stock[0]);
 
 			if (current_product.combinations.length !== 0)
 			{
@@ -368,7 +402,8 @@ function init()
 					$('select#add_product_product_attribute_id').append('<option value="'+this.id_product_attribute+'"'+(this.default_on == 1 ? ' selected="selected"' : '')+'>'+this.attributes+'</option>');
 					if (this.default_on == 1)
 					{
-						$('#add_product_product_stock').html(this.qty_in_stock);
+						if (stock_management)
+							$('#add_product_product_stock').html(this.qty_in_stock);
 						defaultAttribute = this.id_product_attribute;
 					}
 				});
@@ -397,24 +432,26 @@ function init()
 		populateWarehouseList(current_product.warehouse_list[$(this).val()]);
 
 		addProductRefreshTotal();
-
-		$('#add_product_product_stock').html(current_product.combinations[$(this).val()].qty_in_stock);
+		if (stock_management)
+			$('#add_product_product_stock').html(current_product.combinations[$(this).val()].qty_in_stock);
 	});
 
 	$('input#add_product_product_quantity').unbind('keyup');
 	$('input#add_product_product_quantity').keyup(function() {
-		var quantity = parseInt($(this).val());
-		if (quantity < 1 || isNaN(quantity))
-			quantity = 1;
-		var stock_available = parseInt($('#add_product_product_stock').html());
+		if (stock_management)
+		{
+			var quantity = parseInt($(this).val());
+			if (quantity < 1 || isNaN(quantity))
+				quantity = 1;
+			var stock_available = parseInt($('#add_product_product_stock').html());
+			// stock status update
+			if (quantity > stock_available)
+				$('#add_product_product_stock').css('font-weight', 'bold').css('color', 'red').css('font-size', '1.2em');
+			else
+				$('#add_product_product_stock').css('font-weight', 'normal').css('color', 'black').css('font-size', '1em');
+		}
 		// total update
 		addProductRefreshTotal();
-
-		// stock status update
-		if (quantity > stock_available)
-			$('#add_product_product_stock').css('font-weight', 'bold').css('color', 'red').css('font-size', '1.2em');
-		else
-			$('#add_product_product_stock').css('font-weight', 'normal').css('color', 'black').css('font-size', '1em');
 	});
 
 	$('#submitAddProduct').unbind('click');
@@ -464,8 +501,7 @@ function init()
 					cache: false,
 					dataType: 'json',
 					data : query,
-					success : function(data)
-					{
+					success : function(data) {
 						if (data.result)
 						{
 							go = false;
@@ -481,12 +517,12 @@ function init()
 
 							$('.standard_refund_fields').hide();
 							$('.partial_refund_fields').hide();
+							$('.order_action').show();
 						}
 						else
 							jAlert(data.error);
 					},
-					error : function(XMLHttpRequest, textStatus, errorThrown)
-					{
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
 						jAlert("Impossible to add the product to the cart.\n\ntextStatus: '" + textStatus + "'\nerrorThrown: '" + errorThrown + "'\nresponseText:\n" + XMLHttpRequest.responseText);
 					}
 				});
@@ -553,8 +589,7 @@ function init()
 
 	$('.edit_product_change_link').unbind('click');
 	$('.edit_product_change_link').click(function() {
-		$('.add_product_fields').hide();
-		$('.standard_refund_fields').hide();
+		$('.add_product_fields, .standard_refund_fields, .order_action').hide();
 		$('.edit_product_fields').show();
 		$('.cancel_product_change_link:visible').trigger('click');
 		closeAddProduct();
@@ -568,7 +603,7 @@ function init()
 				ajax: 1,
 				token: token,
 				action: 'loadProductInformation',
-				id_order_detail: $(this).parent().parent().find('input.edit_product_id_order_detail').val(),
+				id_order_detail: element.closest('tr.product-line-row').find('input.edit_product_id_order_detail').val(),
 				id_address: id_address,
 				id_order: id_order
 			},
@@ -580,30 +615,21 @@ function init()
 					
 					var element_list = $('.customized-' + element.parent().parent().find('.edit_product_id_order_detail').val());
 					if (!element_list.length)
-						element_list = element.parent().parent();
-
-					element_list.css('background-color', '#E8EDC2');
-
+						element_list = element.parent().parent().parent();
 					element_list.find('td .product_price_show').hide();
 					element_list.find('td .product_quantity_show').hide();
-					element_list.find('td .product_price_edit').parent().attr('align', 'left');
 					element_list.find('td .product_price_edit').show();
 					element_list.find('td .product_quantity_edit').show();
-
 					element_list.find('td.cancelCheck').hide();
 					element_list.find('td.cancelQuantity').hide();
 					element_list.find('td.product_invoice').show();
-
 					$('td.product_action').attr('colspan', 3);
 					$('th.edit_product_fields').show();
 					$('th.edit_product_fields').attr('colspan',  2);
 					element_list.find('td.product_action').attr('colspan', 1);
-
-					element.parent().children('.delete_product_line').hide();
-					element.parent().children('.edit_product_change_link').hide();
-					element.parent().children('input[name=submitProductChange]').show();
-					element.parent().children('.cancel_product_change_link').show();
-
+					element.parent().children('.edit_product_change_link').parent().hide();
+					element.parent().parent().find('button.submitProductChange').show();
+					element.parent().parent().find('.cancel_product_change_link').show();
 					$('.standard_refund_fields').hide();
 					$('.partial_refund_fields').hide();
 				}
@@ -611,7 +637,6 @@ function init()
 					jAlert(data.error);
 			}
 		});
-
 		return false;
 	});
 
@@ -622,49 +647,40 @@ function init()
 		var element_list = $('.customized-' + $(this).parent().parent().find('.edit_product_id_order_detail').val());
 		if (!element_list.length)
 			element_list = $($(this).parent().parent());
-
-		element_list.css('background-color', '#FFF');
-
 		element_list.find('td .product_price_show').show();
 		element_list.find('td .product_quantity_show').show();
-		element_list.find('td .product_price_edit').parent().attr('align', 'center');
 		element_list.find('td .product_price_edit').hide();
 		element_list.find('td .product_quantity_edit').hide();
-
 		element_list.find('td.product_invoice').hide();
 		element_list.find('td.cancelCheck').show();
 		element_list.find('td.cancelQuantity').show();
-
-		element_list.find('.delete_product_line').show();
-		element_list.find('.edit_product_change_link').show();
-		element_list.find('input[name=submitProductChange]').hide();
+		element_list.find('.edit_product_change_link').parent().show();
+		element_list.find('button.submitProductChange').hide();
 		element_list.find('.cancel_product_change_link').hide();
+		$('.order_action').show();
 		$('.standard_refund_fields').hide();
 		return false;
 	});
 
-	$('input[name=submitProductChange]').unbind('click');
-	$('input[name=submitProductChange]').click(function() {
-		if ($(this).parent().parent().find('td .edit_product_quantity').val() <= 0)
+	$('button.submitProductChange').unbind('click');
+	$('button.submitProductChange').click(function(e) {
+		e.preventDefault();
+
+		if ($(this).closest('tr.product-line-row').find('td .edit_product_quantity').val() <= 0)
 		{
 			jAlert(txt_add_product_no_product_quantity);
 			return false;
 		}
-
-		if ($(this).parent().parent().find('td .edit_product_price').val() <= 0)
+		if ($(this).closest('tr.product-line-row').find('td .edit_product_price').val() <= 0)
 		{
 			jAlert(txt_add_product_no_product_price);
 			return false;
 		}
-
 		if (confirm(txt_confirm))
 		{
 			var element = $(this);
-			
 			var element_list = $('.customized-' + $(this).parent().parent().find('.edit_product_id_order_detail').val());
-
 			query = 'ajax=1&token='+token+'&action=editProductOnOrder&id_order='+id_order+'&';
-
 			if (element_list.length)
 				query += element_list.parent().parent().find('input:visible, select:visible, .edit_product_id_order_detail').serialize();
 			else
@@ -691,6 +707,9 @@ function init()
 
 						$('.standard_refund_fields').hide();
 						$('.partial_refund_fields').hide();
+						$('.add_product_fields').hide();
+						$('.add_product_fields').hide();
+						$('td.product_action').attr('colspan', 3);
 					}
 					else
 						jAlert(data.error);
@@ -706,10 +725,8 @@ function init()
 		var price_tax_excl = parseFloat($(this).val());
 		if (price_tax_excl < 0 || isNaN(price_tax_excl))
 			price_tax_excl = 0;
-
 		var tax_rate = current_product.tax_rate / 100 + 1;
 		$('.edit_product_price_tax_incl:visible').val(ps_round(price_tax_excl * tax_rate, 2));
-
 		// Update total product
 		editProductRefreshTotal($(this));
 	});
@@ -722,7 +739,6 @@ function init()
 
 		var tax_rate = current_product.tax_rate / 100 + 1;
 		$('.edit_product_price_tax_excl:visible').val(ps_round(price_tax_incl / tax_rate, 2));
-
 		// Update total product
 		editProductRefreshTotal($(this));
 	});
@@ -732,7 +748,6 @@ function init()
 		var quantity = parseInt($(this).val());
 		if (quantity < 1 || isNaN(quantity))
 			quantity = 1;
-
 		var stock_available = parseInt($(this).parent().parent().parent().find('td.product_stock').html());
 		// total update
 		editProductRefreshTotal($(this));
@@ -742,9 +757,8 @@ function init()
 	$('.delete_product_line').click(function() {
 		if (!confirm(txt_confirm))
 			return false;
-
-		var tr_product = $(this).parent().parent();
-		var id_order_detail = $(this).parent().parent().find('td .edit_product_id_order_detail').val();
+		var tr_product = $(this).closest('.product-line-row');
+		var id_order_detail = $(this).closest('.product-line-row').find('td .edit_product_id_order_detail').val();
 		var query = 'ajax=1&action=deleteProductLine&token='+token+'&id_order_detail='+id_order_detail+'&id_order='+id_order;
 
 		$.ajax({
@@ -786,17 +800,17 @@ function init()
 
 	$('#add_voucher').unbind('click');
 	$('#add_voucher').click(function() {
-		$(this).parent().parent().hide();
-		$('#voucher_form').parent().show();
-
+		$('.order_action').hide();
+		$('.panel-vouchers,#voucher_form').show();
 		return false;
 	});
 
 	$('#cancel_add_voucher').unbind('click');
 	$('#cancel_add_voucher').click(function() {
-		$('#voucher_form').parent().hide();
-		$('#add_voucher').parent().parent().show();
-
+		$('#voucher_form').hide();
+		if (!has_voucher)
+			$('.panel-vouchers').hide();
+		$('.order_action').show();
 		return false;
 	});
 
@@ -845,68 +859,48 @@ function init()
 }
 
 
-
-
-
-
 /* Refund system script */
 var flagRefund = '';
 
 $(document).ready(function() {
 	$('#desc-order-standard_refund').click(function() {
-
 		$('.cancel_product_change_link:visible').trigger('click');
 		closeAddProduct();
-
-		$.scrollTo('#refundForm', 1200, {offset: -100});
-
-		if (flagRefund == 'standard')
-		{
+		if (flagRefund == 'standard') {
 			flagRefund = '';
 			$('.partial_refund_fields').hide();
 			$('.standard_refund_fields').hide();
 		}
-		else
-		{
+		else {
 			flagRefund = 'standard';
 			$('.partial_refund_fields').hide();
 			$('.standard_refund_fields').fadeIn();
 		}
-
-		return false;
 	});
-
 	$('#desc-order-partial_refund').click(function() {
-
 		$('.cancel_product_change_link:visible').trigger('click');
 		closeAddProduct();
-
-		$.scrollTo('#refundForm', 1200, {offset: -100});
-
-		if (flagRefund == 'partial')
-		{
+		if (flagRefund == 'partial') {
 			flagRefund = '';
 			$('.partial_refund_fields').hide();
 			$('.standard_refund_fields').hide();
 		}
-		else
-		{
+		else {
 			flagRefund = 'partial';
-			$('.standard_refund_fields').hide();
+			$('.standard_refund_fields, .product_action, .order_action').hide();
+			$('.product_action').hide();
 			$('.partial_refund_fields').fadeIn();
 		}
-
-		return false;
 	});
 });
 
 function checkPartialRefundProductQuantity(it)
 {
-	if (parseInt($(it).val()) > parseInt($(it).parent().parent().find('.partialRefundProductQuantity').val()))
-		$(it).val($(it).parent().parent().find('.partialRefundProductQuantity').val());
+	if (parseInt($(it).val()) > parseInt($(it).closest('td').find('.partialRefundProductQuantity').val()))
+		$(it).val($(it).closest('td').find('.partialRefundProductQuantity').val());
 }
 function checkPartialRefundProductAmount(it)
 {
-	if (parseInt($(it).val()) > parseInt($(it).parent().parent().find('.partialRefundProductAmount').val()))
-		$(it).val($(it).parent().parent().find('.partialRefundProductAmount').val());
+	if (parseInt($(it).val()) > parseInt($(it).closest('td').find('.partialRefundProductAmount').val()))
+		$(it).val($(it).closest('td').find('.partialRefundProductAmount').val());
 }

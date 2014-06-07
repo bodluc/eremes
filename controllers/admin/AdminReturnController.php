@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7060 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -29,12 +28,16 @@ class AdminReturnControllerCore extends AdminController
 {
 	public function __construct()
 	{
+		$this->bootstrap = true;
 		$this->context = Context::getContext();
 	 	$this->table = 'order_return';
 	 	$this->className = 'OrderReturn';
 		$this->colorOnBackground = true;
-		$this->_select = 'orsl.`name`';
+		$this->_select = 'orsl.`name`, o.`id_shop`';
 		$this->_join = 'LEFT JOIN '._DB_PREFIX_.'order_return_state_lang orsl ON (orsl.`id_order_return_state` = a.`state` AND orsl.`id_lang` = '.(int)$this->context->language->id.')';
+		$this->_join .= ' LEFT JOIN '._DB_PREFIX_.'orders o ON (o.`id_order` = a.`id_order`)';
+		$this->_group = ' GROUP BY o.`id_order`';
+
 
  		$this->fields_list = array(
 			'id_order_return' => array('title' => $this->l('ID'), 'align' => 'center', 'width' => 25),
@@ -47,14 +50,16 @@ class AdminReturnControllerCore extends AdminController
 			'general' => array(
 				'title' =>	$this->l('Merchandise return (RMA) options'),
 				'fields' =>	array(
-					'PS_ORDER_RETURN' => array('title' => $this->l('Enable returns:'), 'desc' => $this->l('Select whether or not to activate merchandise returns for your shop'), 'cast' => 'intval', 'type' => 'bool'),
-					'PS_ORDER_RETURN_NB_DAYS' => array('title' => $this->l('Time limit of validity:'), 'desc' => $this->l('Number of days the customer can make a return after the delivery date'), 'cast' => 'intval', 'type' => 'text', 'size' => '2'),
+					'PS_ORDER_RETURN' => array('title' => $this->l('Enable returns'), 'desc' => $this->l('Would you like to allow merchandise returns in your shop?'), 'cast' => 'intval', 'type' => 'bool'),
+					'PS_ORDER_RETURN_NB_DAYS' => array('title' => $this->l('Time limit of validity'), 'desc' => $this->l('How many days after the delivery date does the customer have to return a product?'), 'cast' => 'intval', 'type' => 'text', 'size' => '2'),
 				),
-				'submit' => array()
+				'submit' => array('title' => $this->l('Save'))
 			),
 		);
 
 		parent::__construct();
+
+		$this->_where = Shop::addSqlRestriction(false, 'o');
 	}
 
 	public function renderForm()
@@ -75,28 +80,28 @@ class AdminReturnControllerCore extends AdminController
 				),
 				array(
 					'type' => 'text_customer',
-					'label' => $this->l('Customer:'),
+					'label' => $this->l('Customer'),
 					'name' => '',
 					'size' => '',
 					'required' => false,
 				),
 				array(
 					'type' => 'text_order',
-					'label' => $this->l('Order:'),
+					'label' => $this->l('Order'),
 					'name' => '',
 					'size' => '',
 					'required' => false,
 				),
 				array(
 					'type' => 'free',
-					'label' => $this->l('Customer explanation:'),
+					'label' => $this->l('Customer explanation'),
 					'name' => 'question',
 					'size' => '',
 					'required' => false,
 				),
 				array(
 					'type' => 'select',
-					'label' => $this->l('Status:'),
+					'label' => $this->l('Status'),
 					'name' => 'state',
 					'required' => false,
 					'options' => array(
@@ -104,20 +109,27 @@ class AdminReturnControllerCore extends AdminController
 						'id' => 'id_order_return_state',
 						'name' => 'name'
 					),
-					'desc' => $this->l('Merchandise return (RMA) status')
+					'desc' => $this->l('Merchandise return (RMA) status.')
 				),
 				array(
 					'type' => 'list_products',
-					'label' => $this->l('Products:'),
+					'label' => $this->l('Products'),
 					'name' => '',
 					'size' => '',
 					'required' => false,
-					'desc' => $this->l('List of products in return package')
+					'desc' => $this->l('List of products in return package.')
+				),
+				array(
+					'type' => 'pdf_order_return',
+					'label' => $this->l('Return slip'),
+					'name' => '',
+					'size' => '',
+					'required' => false,
+					'desc' => $this->l('The link is only available after validation and before the parcel gets delivered.')
 				),
 			),
 			'submit' => array(
-				'title' => $this->l('   Save   '),
-				'class' => 'button'
+				'title' => $this->l('Save'),
 			)
 		);
 
@@ -137,16 +149,17 @@ class AdminReturnControllerCore extends AdminController
 		$this->tpl_form_vars = array(
 			'customer' => new Customer($this->object->id_customer),
 			'url_customer' => 'index.php?tab=AdminCustomers&id_customer='.(int)$this->object->id_customer.'&viewcustomer&token='.Tools::getAdminToken('AdminCustomers'.(int)(Tab::getIdFromClassName('AdminCustomers')).(int)$this->context->employee->id),
-			'text_order' => sprintf($this->l('Order #%1$d from %2$s'), $order->id, Tools::displayDate($order->date_upd, $order->id_lang)),
+			'text_order' => sprintf($this->l('Order #%1$d from %2$s'), $order->id, Tools::displayDate($order->date_upd)),
 			'url_order' => 'index.php?tab=AdminOrders&id_order='.(int)$order->id.'&vieworder&token='.Tools::getAdminToken('AdminOrders'.(int)Tab::getIdFromClassName('AdminOrders').(int)$this->context->employee->id),
 			'picture_folder' => _THEME_PROD_PIC_DIR_,
-			'type_file' => Product::CUSTOMIZE_FILE,
-			'type_textfield' => Product::CUSTOMIZE_TEXTFIELD,
 			'returnedCustomizations' => $returnedCustomizations,
+			'customizedDatas' => Product::getAllCustomizedDatas((int)($order->id_cart)),
 			'products' => $products,
 			'quantityDisplayed' => $quantityDisplayed,
 			'id_order_return' => $this->object->id,
+			'state_order_return' => $this->object->state,
 		);
+
 		return parent::renderForm();
 	}
 
@@ -185,7 +198,7 @@ class AdminReturnControllerCore extends AdminController
 							if (OrderReturn::deleteOrderReturnDetail($id_order_return, $id_order_detail, (int)(Tools::getValue('id_customization', 0))))
 								Tools::redirectAdmin(self::$currentIndex.'&conf=4token='.$this->token);
 							else
-								$this->errors[] = Tools::displayError('An error occurred while deleting details of your order return.');
+								$this->errors[] = Tools::displayError('An error occurred while deleting the details of your order return.');
 						}
 						else
 							$this->errors[] = Tools::displayError('You need at least one product.');
@@ -197,7 +210,7 @@ class AdminReturnControllerCore extends AdminController
 					$this->errors[] = Tools::displayError('The order return content is invalid.');
 			}
 			else
-				$this->errors[] = Tools::displayError('You do not have permission to delete here.');
+				$this->errors[] = Tools::displayError('You do not have permission to delete this.');
 		}
 		elseif (Tools::isSubmit('submitAddorder_return') || Tools::isSubmit('submitAddorder_returnAndStay'))
 		{
@@ -217,7 +230,7 @@ class AdminReturnControllerCore extends AdminController
 						'{firstname}' => $customer->firstname,
 						'{id_order_return}' => $id_order_return,
 						'{state_order_return}' => (isset($orderReturnState->name[(int)$order->id_lang]) ? $orderReturnState->name[(int)$order->id_lang] : $orderReturnState->name[(int)Configuration::get('PS_LANG_DEFAULT')]));
-						Mail::Send((int)$order->id_lang, 'order_return_state', Mail::l('Your order return state has changed', $order->id_lang),
+						Mail::Send((int)$order->id_lang, 'order_return_state', Mail::l('Your order return status has changed', $order->id_lang),
 							$vars, $customer->email, $customer->firstname.' '.$customer->lastname, null, null, null,
 							null, _PS_MAIL_DIR_, true, (int)$order->id_shop);
 
@@ -228,10 +241,10 @@ class AdminReturnControllerCore extends AdminController
 					}
 				}
 				else
-					$this->errors[] = Tools::displayError('No order return ID.');
+					$this->errors[] = Tools::displayError('No order return ID has been specified.');
 			}
 			else
-				$this->errors[] = Tools::displayError('You do not have permission to edit here.');
+				$this->errors[] = Tools::displayError('You do not have permission to edit this.');
 		}
 		parent::postProcess();
 	}

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tab_modules_list>
+<tab class_name="AdminProducts" display_type="slider_list">
+<module name="prediggo" position="1"/>
+<module name="ecopresto" position="2"/>
+<module name="illicopresta" position="3"/>
+<module name="shopgate" position="4"/>
+<module name="prestagiftvouchers" position="5"/>
+<module name="dmuassocprodcat" position="6"/>
+</tab>
+<tab class_name="AdminCategories" display_type="slider_list">
+<module name="prediggo" position="1"/>
+<module name="ecopresto" position="2"/>
+<module name="illicopresta" position="3"/>
+<module name="innovativemenu" position="4"/>
+<module name="productsbycategoryslider" position="5"/>
+<module name="slidercategory" position="6"/>
+</tab>
+<tab class_name="AdminFeatures" display_type="slider_list">
+<module name="pm_multiplefeatures" position="1"/>
+</tab>
+<tab class_name="AdminManufacturers" display_type="slider_list">
+<module name="ebay" position="1"/>
+<module name="nqgatewayneteven" position="2"/>
+<module name="ecopresto" position="3"/>
+<module name="illicopresta" position="4"/>
+<module name="twenga" position="5"/>
+<module name="shoppingfluxexport" position="6"/>
+<module name="amazon" position="7"/>
+<module name="gmerchantcenter" position="8"/>
+<module name="leguide" position="9"/>
+<module name="productsbybrandslider" position="10"/>
+</tab>
+<tab class_name="AdminSuppliers" display_type="slider_list">
+<module name="ecopresto" position="1"/>
+<module name="illicopresta" position="2"/>
+</tab>
+<tab class_name="AdminTags" display_type="slider_list">
+<module name="prediggo" position="1"/>
+</tab>
+<tab class_name="AdminAttachments" display_type="slider_list">
+</tab>
+<tab class_name="AdminOrders" display_type="slider_list">
+<module name="ebay" position="1"/>
+<module name="gshopping" position="2"/>
+<module name="nqgatewayneteven" position="3"/>
+<module name="ecopresto" position="4"/>
+<module name="illicopresta" position="5"/>
+<module name="fianetfraud" position="6"/>
+<module name="twenga" position="7"/>
+<module name="shoppingfluxexport" position="8"/>
+<module name="orlique" position="9"/>
+<module name="printlabels" position="10"/>
+<module name="pushoncart" position="11"/>
+<module name="prestafraud" position="12"/>
+</tab>
+<tab class_name="AdminInvoices" display_type="slider_list">
+<module name="m4pdf" position="1"/>
+<module name="neotaxesupdater" position="2"/>
+<module name="ordertaxprofitreport" position="3"/>
+<module name="illicopresta" position="4"/>
+</tab>
+<tab class_name="AdminDeliverySlip" display_type="slider_list">
+<module name="globkurier" position="1"/>
+<module name="mondialrelay" position="2"/>
+<module name="kialasmall" position="3"/>
+<module name="kiala" position="4"/>
+<module name="seur" position="5"/>
+<module name="clickline" position="6"/>
+<module name="socolissimo" position="7"/>
+<module name="tntcarrier" position="8"/>
+<module name="dpd" position="9"/>
+<module name="expeditor" position="10"/>
+</tab>
+<tab class_name="AdminSlip" display_type="slider_list">
+<module name="lgabonos" position="1"/>
+<module name="dmulistecommandes" position="2"/>
+</tab>
+<tab class_name="AdminOrderMessage" display_type="slider_list">
+<module name="textmaster" position="1"/>
+</tab>
+<tab class_name="AdminCustomers" display_type="slider_list">
+<module name="netreviews" position="1"/>
+<module name="trustpilot" position="2"/>
+<module name="fianetsceau" position="3"/>
+<module name="feedaty" position="4"/>
+<module name="emailverify" position="5"/>
+<module name="allinone_rewards" position="6"/>
+<module name="allexport" position="7"/>
+</tab>
+<tab class_name="AdminGroups" display_type="slider_list">
+<module name="siret_customer_group" position="1"/>
+<module name="groupinc" position="2"/>
+<module name="jcaccountgroup" position="3"/>
+</tab>
+<tab class_name="AdminCarts" display_type="slider_list">
+<module name="affinityitems" position="1"/>
+<module name="followup" position="2"/>
+<module name="cartabandonmentpro" position="3"/>
+</tab>
+<tab class_name="AdminCustomerThreads" display_type="slider_list">
+<module name="sendinblue" position="1"/>
+<module name="mailjet" position="2"/>
+<module name="fianetsceau" position="3"/>
+</tab>
+<tab class_name="AdminContacts" display_type="slider_list">
+<module name="sendinblue" position="1"/>
+<module name="mailjet" position="2"/>
+<module name="iadvize" position="3"/>
+<module name="olark" position="4"/>
+<module name="webcallback" position="5"/>
+</tab>
+<tab class_name="AdminCartRules" display_type="slider_list">
+<module name="affinityitems" position="1"/>
+<module name="pushoncart" position="2"/>
+<module name="cartabandonmentpro" position="3"/>
+</tab>
+<tab class_name="AdminSpecificPriceRule" display_type="slider_list">
+<module name="pushoncart" position="1"/>
+<module name="vente_flash" position="2"/>
+<module name="privatesale" position="3"/>
+</tab>
+<tab class_name="AdminMarketing" display_type="default_list">
+<module name="ebay" position="1"/>
+<module name="gadwords" position="2"/>
+<module name="netreviews" position="3"/>
+<module name="shopgate" position="4"/>
+<module name="affinityitems" position="5"/>
+<module name="nqgatewayneteven" position="6"/>
+<module name="shoppingfluxexport" position="7"/>
+<module name="fianetsceau" position="8"/>
+<module name="feedaty" position="9"/>
+<module name="trustpilot" position="10"/>
+<module name="twenga" position="11"/>
+<module name="yotpo" position="12"/>
+<module name="innovativemenu" position="13"/>
+<module name="pushoncart" position="14"/>
+<module name="prestanotify" position="15"/>
+<module name="pushslide" position="16"/>
+<module name="seohelping" position="17"/>
+<module name="vente_flash" position="18"/>
+<module name="privatesale" position="19"/>
+<module name="browsi" position="20"/>
+<module name="giveit" position="21"/>
+<module name="loyalty" position="22"/>
+<module name="referralprogram" position="23"/>
+</tab>
+<tab class_name="AdminCarriers" display_type="slider_list">
+<module name="globkurier" position="1"/>
+<module name="mondialrelay" position="2"/>
+<module name="kialasmall" position="3"/>
+<module name="kiala" position="4"/>
+<module name="seur" position="5"/>
+<module name="clickline" position="6"/>
+<module name="boxdrop" position="7"/>
+<module name="socolissimo" position="8"/>
+<module name="tntcarrier" position="9"/>
+<module name="dpd" position="10"/>
+<module name="dpdpoland" position="11"/>
+<module name="dpdgeopost" position="12"/>
+<module name="purolator" position="13"/>
+<module name="uspsstatus" position="14"/>
+<module name="expeditor" position="15"/>
+<module name="shipwire" position="16"/>
+<module name="upstracking" position="17"/>
+</tab>
+<tab class_name="AdminShipping" display_type="slider_list">
+<module name="globkurier" position="1"/>
+<module name="mondialrelay" position="2"/>
+<module name="kialasmall" position="3"/>
+<module name="kiala" position="4"/>
+<module name="seur" position="5"/>
+<module name="clickline" position="6"/>
+<module name="socolissimo" position="7"/>
+<module name="tntcarrier" position="8"/>
+<module name="dpd" position="9"/>
+<module name="gointerpay" position="10"/>
+<module name="printlabels" position="11"/>
+<module name="expeditor" position="12"/>
+<module name="orderpreparation" position="13"/>
+<module name="upstracking" position="14"/>
+<module name="dateofdelivery" position="15"/>
+<module name="carriercompare" position="16"/>
+</tab>
+<tab class_name="AdminLocalization" display_type="slider_list">
+<module name="textmaster" position="1"/>
+</tab>
+<tab class_name="AdminLanguages" display_type="slider_list">
+<module name="textmaster" position="1"/>
+</tab>
+<tab class_name="AdminTaxes" display_type="slider_list">
+<module name="avalaratax" position="1"/>
+<module name="vatnumber" position="2"/>
+</tab>
+<tab class_name="AdminTaxRulesGroup" display_type="slider_list">
+<module name="vatnumber" position="1"/>
+<module name="banipmod" position="2"/>
+</tab>
+<tab class_name="AdminPayment" display_type="default_list">
+<module name="ferbuy" position="1"/>
+<module name="paypal" position="2"/>
+<module name="desjardins" position="3"/>
+<module name="paypalusa" position="4"/>
+<module name="paymill" position="5"/>
+<module name="moneybookers" position="6"/>
+<module name="adyen" position="7"/>
+<module name="syspay" position="8"/>
+<module name="ogone" position="9"/>
+<module name="sofortbanking" position="10"/>
+<module name="trustly" position="11"/>
+<module name="hipay" position="12"/>
+<module name="klikandpay" position="13"/>
+<module name="realexredirect" position="14"/>
+<module name="payplug" position="15"/>
+<module name="authorizeaim" position="16"/>
+<module name="kwixo" position="17"/>
+<module name="atos" position="18"/>
+<module name="firstdata" position="19"/>
+<module name="payulatam" position="20"/>
+<module name="cmcicpaiement" position="21"/>
+<module name="pagseguro" position="22"/>
+<module name="paybox" position="23"/>
+<module name="lacaixa" position="24"/>
+<module name="qiwi" position="25"/>
+<module name="worldpay" position="26"/>
+<module name="dotpay" position="27"/>
+<module name="alliance3" position="28"/>
+<module name="cashondelivery" position="29"/>
+<module name="bankwire" position="30"/>
+<module name="cheque" position="31"/>
+</tab>
+<tab class_name="AdminOrderPreferences" display_type="slider_list">
+<module name="mailalerts" position="1"/>
+</tab>
+<tab class_name="AdminPPreferences" display_type="slider_list">
+<module name="prediggo" position="1"/>
+<module name="mailalerts" position="2"/>
+<module name="feeder" position="3"/>
+</tab>
+<tab class_name="AdminCustomerPreferences" display_type="slider_list">
+<module name="trustpilot" position="1"/>
+<module name="fianetsceau" position="2"/>
+<module name="feedaty" position="3"/>
+<module name="netreviews" position="4"/>
+</tab>
+<tab class_name="AdminThemes" display_type="slider_list">
+<module name="shopgate" position="1"/>
+</tab>
+<tab class_name="AdminMeta" display_type="slider_list">
+<module name="gadwords" position="1"/>
+<module name="seohelping" position="2"/>
+<module name="pm_seointernallinking" position="3"/>
+<module name="ec_seo404" position="4"/>
+<module name="gmerchantcenter" position="5"/>
+<module name="gsitemap" position="6"/>
+</tab>
+<tab class_name="AdminCmsCategories" display_type="slider_list">
+<module name="textmaster" position="1"/>
+<module name="wic_pushproductcms" position="2"/>
+<module name="wordpresssync" position="3"/>
+</tab>
+<tab class_name="AdminImages" display_type="slider_list">
+<module name="watermark" position="1"/>
+</tab>
+<tab class_name="AdminSearchConf" display_type="slider_list">
+<module name="prediggo" position="1"/>
+<module name="pm_advancedsearch4" position="2"/>
+</tab>
+<tab class_name="AdminEmails" display_type="slider_list">
+<module name="sendinblue" position="1"/>
+<module name="mailjet" position="2"/>
+<module name="newsletter" position="3"/>
+<module name="mynewsletter" position="4"/>
+<module name="mailchimp" position="5"/>
+</tab>
+<tab class_name="AdminAdminPreferences" display_type="slider_list">
+<module name="cgvhaas" position="1"/>
+<module name="pm_cachemanager" position="2"/>
+<module name="lgcookieslaw" position="3"/>
+</tab>
+<tab class_name="AdminStats" display_type="slider_list">
+<module name="ganalytics" position="1"/>
+<module name="statsstock" position="2"/>
+<module name="statsbestcategories" position="3"/>
+<module name="statsbestcustomers" position="4"/>
+<module name="statsbestmanufacturers" position="5"/>
+<module name="statsbestproducts" position="6"/>
+<module name="statscarrier" position="7"/>
+<module name="statscheckup" position="8"/>
+<module name="statscatalog" position="9"/>
+<module name="statsregistrations" position="10"/>
+<module name="statssales" position="11"/>
+<module name="statsdata" position="12"/>
+<module name="favoriteproducts" position="13"/>
+<module name="statsgeolocation" position="14"/>
+<module name="ganalytics" position="15"/>
+<module name="statsnewsletter" position="16"/>
+<module name="pagesnotfound" position="17"/>
+<module name="statsproduct" position="18"/>
+<module name="statspersonalinfos" position="19"/>
+<module name="sekeywords" position="20"/>
+<module name="statssearch" position="21"/>
+<module name="statsequipment" position="22"/>
+<module name="statsforecast" position="23"/>
+<module name="statslive" position="24"/>
+<module name="statsorigin" position="25"/>
+<module name="statsvisits" position="26"/>
+<module name="ordertaxprofitreport" position="27"/>
+<module name="dmurealtimestats" position="28"/>
+<module name="totshowmailalerts" position="29"/>
+</tab>
+<tab class_name="AdminSearchEngines" display_type="slider_list">
+<module name="gadwords" position="1"/>
+</tab>
+<tab class_name="AdminReferrers" display_type="slider_list">
+<module name="trackingfront" position="1"/>
+<module name="gadwords" position="2"/>
+</tab>
+</tab_modules_list>

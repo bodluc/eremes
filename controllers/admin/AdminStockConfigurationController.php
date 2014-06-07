@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 16746 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -35,6 +34,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 	 */
 	public function __construct()
 	{
+		$this->bootstrap = true;
 		$this->context = Context::getContext();
 	 	$this->table = 'stock_mvt_reason';
 	 	$this->className = 'StockMvtReason';
@@ -46,12 +46,11 @@ class AdminStockConfigurationControllerCore extends AdminController
 			'id_stock_mvt_reason' => array(
 				'title' => $this->l('ID'),
 				'align' => 'center',
-				'width' => 40,
 				'search' => false,
+				'class' => 'fixed-width-xs'
 			),
 			'sign' => array(
 				'title' => $this->l('Sign'),
-				'width' => 100,
 				'align' => 'center',
 				'type' => 'select',
 				'filter_key' => 'a!sign',
@@ -63,12 +62,12 @@ class AdminStockConfigurationControllerCore extends AdminController
 					-1 => 'remove_stock.png',
 					1 => 'add_stock.png'
 				),
-				'orderby' => false
+				'orderby' => false,
+				'class' => 'fixed-width-sm'
 			),
 			'name' => array(
 				'title' => $this->l('Name'),
-				'filter_key' => 'b!name',
-				'width' => 250
+				'filter_key' => 'b!name'
 			),
 		);
 
@@ -85,7 +84,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 				'title' =>	$this->l('Options'),
 				'fields' =>	array(
 					'PS_STOCK_MVT_INC_REASON_DEFAULT' => array(
-						'title' => $this->l('Default label when increasing stock:'),
+						'title' => $this->l('Default label for increasing stock'),
 						'cast' => 'intval',
 						'type' => 'select',
 						'list' => $reasons_inc,
@@ -93,7 +92,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 						'visibility' => Shop::CONTEXT_ALL
 					),
 					'PS_STOCK_MVT_DEC_REASON_DEFAULT' => array(
-						'title' => $this->l('Default label when decreasing stock:'),
+						'title' => $this->l('Default label for decreasing stock'),
 						'cast' => 'intval',
 						'type' => 'select',
 						'list' => $reasons_dec,
@@ -101,7 +100,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 						'visibility' => Shop::CONTEXT_ALL
 					),
 					'PS_STOCK_CUSTOMER_ORDER_REASON' => array(
-						'title' => $this->l('Default label when decreasing stock when a customer order is shipped:'),
+						'title' => $this->l('Default label for decreasing stock when a customer order is shipped'),
 						'cast' => 'intval',
 						'type' => 'select',
 						'list' => $reasons_dec,
@@ -109,7 +108,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 						'visibility' => Shop::CONTEXT_ALL
 					),
 					'PS_STOCK_MVT_SUPPLY_ORDER' => array(
-						'title' => $this->l('Default label when increasing stock when a supply order is received:'),
+						'title' => $this->l('Default label for increasing stock when a supply order is received'),
 						'cast' => 'intval',
 						'type' => 'select',
 						'list' => $reasons_inc,
@@ -117,7 +116,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 						'visibility' => Shop::CONTEXT_ALL
 					),
 				),
-				'submit' => array(),
+				'submit' => array('title' => $this->l('Save')),
 			)
 		);
 
@@ -126,7 +125,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 
 	public function init()
 	{
-		// if we are managing the second list (i.e. supply order state)
+		// if we are managing the second list (i.e. supply order status)
 		if (Tools::isSubmit('submitAddsupply_order_state') ||
 			Tools::isSubmit('addsupply_order_state') ||
 			Tools::isSubmit('updatesupply_order_state') ||
@@ -156,21 +155,20 @@ class AdminStockConfigurationControllerCore extends AdminController
 
 			$this->fields_form = array(
 				'legend' => array(
-					'title' => $this->l('Stock Movement Label'),
-					'image' => '../img/admin/edit.gif'
+					'title' => $this->l('Stock Movement label'),
+					'icon' => 'icon-pencil'
 				),
 				'input' => array(
 					array(
 						'type' => 'text',
 						'lang' => true,
-						'label' => $this->l('Name:'),
+						'label' => $this->l('Name'),
 						'name' => 'name',
-						'size' => 50,
 						'required' => true
 					),
 					array(
 						'type' => 'select',
-						'label' => $this->l('Action:'),
+						'label' => $this->l('Action'),
 						'name' => 'sign',
 						'required' => true,
 						'options' => array(
@@ -187,16 +185,15 @@ class AdminStockConfigurationControllerCore extends AdminController
 							'id' => 'id',
 							'name' => 'name'
 						),
-						'desc' => $this->l('Select the corresponding action: increase or decrease stock.')
+						'hint' => $this->l('Select the corresponding action: Increase or decrease stock?')
 					),
 				),
 				'submit' => array(
-					'title' => $this->l('Save'),
-					'class' => 'button'
+					'title' => $this->l('Save')
 				)
 			);
 		}
-		// else, if we are managing Supply Order State
+		// else, if we are managing Supply Order Status
 		else if (Tools::isSubmit('addsupply_order_state') ||
 				 Tools::isSubmit('updatesupply_order_state') ||
 				 Tools::isSubmit('submitAddsupply_order_state') ||
@@ -205,30 +202,27 @@ class AdminStockConfigurationControllerCore extends AdminController
 			$this->fields_form = array(
 					'legend' => array(
 						'title' => $this->l('Supply Order Status'),
-						'image' => '../img/admin/edit.gif'
+						'icon' => 'icon-pencil'
 					),
 					'input' => array(
 						array(
 							'type' => 'text',
 							'lang' => true,
-							'label' => $this->l('Status:'),
+							'label' => $this->l('Status'),
 							'name' => 'name',
-							'size' => 50,
 							'required' => true
 						),
 						array(
 							'type' => 'color',
-							'label' => $this->l('Color:'),
+							'label' => $this->l('Color'),
 							'name' => 'color',
-							'size' => 20,
-							'desc' => $this->l('Back Office background will be displayed in this color. HTML colors only.'),
+							'hint' => $this->l('Status will be highlighted in this color. HTML colors only.'),
 						),
 						array(
-							'type' => 'radio',
-							'label' => $this->l('Editable:'),
+							'type' => 'switch',
+							'label' => $this->l('Editable'),
 							'name' => 'editable',
 							'required' => true,
-							'class' => 't',
 							'is_bool' => true,
 							'values' => array(
 								array(
@@ -242,14 +236,13 @@ class AdminStockConfigurationControllerCore extends AdminController
 									'label' => $this->l('No')
 								)
 							),
-							'desc' => $this->l('Define if it is possible to edit the order. An editable order is not valid to send to the supplier.')
+							'hint' => $this->l('Is it is possible to edit the order? Keep in mind that an editable order cannot be sent to the supplier.')
 						),
 						array(
-							'type' => 'radio',
-							'label' => $this->l('Delivery note:'),
+							'type' => 'switch',
+							'label' => $this->l('Delivery note'),
 							'name' => 'delivery_note',
 							'required' => true,
-							'class' => 't',
 							'is_bool' => true,
 							'values' => array(
 								array(
@@ -263,14 +256,13 @@ class AdminStockConfigurationControllerCore extends AdminController
 									'label' => $this->l('No')
 								)
 							),
-							'desc' => $this->l('Define if it is possible to generate a delivery note of the order.')
+							'hint' => $this->l('Is it possible to generate a delivery note for the order?')
 						),
 						array(
-							'type' => 'radio',
-							'label' => $this->l('Delivery state:'),
+							'type' => 'switch',
+							'label' => $this->l('Delivery status'),
 							'name' => 'receipt_state',
 							'required' => true,
-							'class' => 't',
 							'is_bool' => true,
 							'values' => array(
 								array(
@@ -284,14 +276,13 @@ class AdminStockConfigurationControllerCore extends AdminController
 									'label' => $this->l('No')
 								)
 							),
-							'desc' => $this->l('Define if products have been partially/completely received. This allows you to know if the products ordered have to be added to the corresponding warehouse.'),
+							'hint' => $this->l('Define if products have been either partially or completely received. This will allow you to know if ordered products have to be added to the corresponding warehouse.'),
 						),
 						array(
-							'type' => 'radio',
-							'label' => $this->l('Pending receipt:'),
+							'type' => 'switch',
+							'label' => $this->l('Pending receipt'),
 							'name' => 'pending_receipt',
 							'required' => true,
-							'class' => 't',
 							'is_bool' => true,
 							'values' => array(
 								array(
@@ -305,12 +296,11 @@ class AdminStockConfigurationControllerCore extends AdminController
 									'label' => $this->l('No')
 								)
 							),
-							'desc' => $this->l('Customer is awaiting delivery')
+							'hint' => $this->l('The customer is awaiting delivery.')
 						),
 					),
 					'submit' => array(
-						'title' => $this->l('Save'),
-						'class' => 'button'
+						'title' => $this->l('Save')
 					)
 				);
 
@@ -318,7 +308,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 					$this->toolbar_title = $this->l('Stock: Add supply order status');
 				else
 				{
-					$this->toolbar_title = $this->l('Stock: Update Supply order status');
+					$this->toolbar_title = $this->l('Stock: Update supply order status');
 
 					$id_supply_order_state = Tools::getValue('id_supply_order_state', 0);
 
@@ -327,29 +317,26 @@ class AdminStockConfigurationControllerCore extends AdminController
 					{
 						$this->fields_form = array(
 							'legend' => array(
-								'title' => $this->l('Supply Order status'),
-								'image' => '../img/admin/edit.gif'
+								'title' => $this->l('Supply order status'),
+								'icon' => 'icon-pencil'
 							),
 							'input' => array(
 								array(
 									'type' => 'text',
 									'lang' => true,
-									'label' => $this->l('Status:'),
+									'label' => $this->l('Status'),
 									'name' => 'name',
-									'size' => 50,
 									'required' => true
 								),
 								array(
 									'type' => 'color',
-									'label' => $this->l('Back Office color:'),
+									'label' => $this->l('Color'),
 									'name' => 'color',
-									'size' => 20,
-									'desc' => $this->l('Back Office background will be displayed in this color. HTML colors only'),
+									'desc' => $this->l('Status will be highlighted in this color. HTML colors only.'),
 								),
 							),
 							'submit' => array(
-								'title' => $this->l('Save'),
-								'class' => 'button'
+								'title' => $this->l('Save')
 							)
 						);
 					}
@@ -381,7 +368,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 		/**
 		 * General messages displayed for all lists
 		 */
-		$this->displayInformation($this->l('This interface allows you to configure your supply order statuses and stock movement labels.').'<br />');
+		$this->displayInformation($this->l('This interface allows you to configure your supply order status and stock movement labels.').'<br />');
 
 		// Checks access
 		if (!($this->tabAccess['add'] === '1'))
@@ -434,7 +421,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 		$this->list_no_link = true;
 		$this->_orderBy = null;
 		$this->addRowActionSkipList('delete', array(1, 2, 3, 4, 5, 6));
-		$this->toolbar_title = $this->l('Stock: Supply Order status');
+		$this->toolbar_title = $this->l('Stock: Supply order status');
 		$this->initToolbar();
 
 		$this->fields_list = array(
@@ -443,59 +430,49 @@ class AdminStockConfigurationControllerCore extends AdminController
 				'color' => 'color',
 			),
 			'editable' => array(
-				'title' => $this->l('Editable?'),
+				'title' => $this->l('Supply order can be edited?'),
 				'align' => 'center',
-				'icon' => array(
-					'1' => 'enabled.gif',
-					'0' => 'disabled.gif'
-				),
+				'active' => 'editable',
 				'type' => 'bool',
-				'width' => 170,
-				'orderby' => false
+				'orderby' => false,
+				'class' => 'fixed-width-sm',
+				'ajax' => true
 			),
 			'delivery_note' => array(
-				'title' => $this->l('Delivery note available?'),
+				'title' => $this->l('Delivery note is available?'),
 				'align' => 'center',
-				'icon' => array(
-					'1' => 'enabled.gif',
-					'0' => 'disabled.gif'
-				),
+				'active' => 'deliveryNote',
 				'type' => 'bool',
-				'width' => 170,
-				'orderby' => false
+				'orderby' => false,
+				'class' => 'fixed-width-sm',
+				'ajax' => true
 			),
 			'pending_receipt' => array(
-				'title' => $this->l('Is a pending receipt state?'),
+				'title' => $this->l('Delivery is expected?'),
 				'align' => 'center',
-				'icon' => array(
-					'1' => 'enabled.gif',
-					'0' => 'disabled.gif'
-				),
+				'active' => 'pendingReceipt',
 				'type' => 'bool',
-				'width' => 170,
-				'orderby' => false
+				'orderby' => false,
+				'class' => 'fixed-width-sm',
+				'ajax' => true
 			),
 			'receipt_state' => array(
-				'title' => $this->l('Is a delivery state?'),
+				'title' => $this->l('Stock has been delivered?'),
 				'align' => 'center',
-				'icon' => array(
-					'1' => 'enabled.gif',
-					'0' => 'disabled.gif'
-				),
+				'active' => 'receiptState',
 				'type' => 'bool',
-				'width' => 170,
-				'orderby' => false
+				'orderby' => false,
+				'class' => 'fixed-width-sm',
+				'ajax' => true
 			),
 			'enclosed' => array(
-				'title' => $this->l('Is an enclosed order state?'),
+				'title' => $this->l('Order is closed?'),
 				'align' => 'center',
-				'icon' => array(
-					'1' => 'enabled.gif',
-					'0' => 'disabled.gif'
-				),
+				'active' => 'enclosed',
 				'type' => 'bool',
-				'width' => 170,
-				'orderby' => false
+				'orderby' => false,
+				'class' => 'fixed-width-sm',
+				'ajax' => true
 			),
 		);
 
@@ -548,7 +525,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 					$item = &$this->_list[$i];
 
 					if (empty($item['product_name']))
-						$item['product_name'] = $this->l('The name of this product is not available. It may been deleted from the system.');
+						$item['product_name'] = $this->l('The name of this product is not available. It may have been deleted from the system.');
 				}
 			}
 	}
@@ -557,7 +534,7 @@ class AdminStockConfigurationControllerCore extends AdminController
 	{
 		if (!Configuration::get('PS_ADVANCED_STOCK_MANAGEMENT'))
 		{
-			$this->warnings[md5('PS_ADVANCED_STOCK_MANAGEMENT')] = $this->l('You need to activate advanced stock management prior to use this feature.');
+			$this->warnings[md5('PS_ADVANCED_STOCK_MANAGEMENT')] = $this->l('You need to activate advanced stock management before using this feature.');
 			return false;
 		}
 		parent::initContent();
@@ -567,9 +544,74 @@ class AdminStockConfigurationControllerCore extends AdminController
 	{
 		if (!Configuration::get('PS_ADVANCED_STOCK_MANAGEMENT'))
 		{
-			$this->warnings[md5('PS_ADVANCED_STOCK_MANAGEMENT')] = $this->l('You need to activate advanced stock management prior to use this feature.');
+			$this->warnings[md5('PS_ADVANCED_STOCK_MANAGEMENT')] = $this->l('You need to activate advanced stock management before using this feature.');
 			return false;
 		}
 		parent::initProcess();	
+	}
+
+	public function ajaxProcessEditableSupplyOrderState()
+	{
+		$id_supply_order_state = (int)Tools::getValue('id_supply_order_state');
+
+		$sql = 'UPDATE '._DB_PREFIX_.'supply_order_state SET `editable` = NOT `editable` WHERE id_supply_order_state='.$id_supply_order_state;
+		$result = Db::getInstance()->execute($sql);
+
+		if ($result)
+			echo json_encode(array('success' => 1, 'text' => $this->l('The status has been updated successfully.')));
+		else
+			echo json_encode(array('success' => 0, 'text' => $this->l('An error occurred while updating this meta.')));
+	}
+
+	public function ajaxProcessDeliveryNoteSupplyOrderState()
+	{
+		$id_supply_order_state = (int)Tools::getValue('id_supply_order_state');
+
+		$sql = 'UPDATE '._DB_PREFIX_.'supply_order_state SET `delivery_note` = NOT `delivery_note` WHERE id_supply_order_state='.$id_supply_order_state;
+		$result = Db::getInstance()->execute($sql);
+
+		if ($result)
+			echo json_encode(array('success' => 1, 'text' => $this->l('The status has been updated successfully.')));
+		else
+			echo json_encode(array('success' => 0, 'text' => $this->l('An error occurred while updating this meta.')));
+	}
+
+	public function ajaxProcessPendingReceiptSupplyOrderState()
+	{
+		$id_supply_order_state = (int)Tools::getValue('id_supply_order_state');
+
+		$sql = 'UPDATE '._DB_PREFIX_.'supply_order_state SET `pending_receipt` = NOT `pending_receipt` WHERE id_supply_order_state='.$id_supply_order_state;
+		$result = Db::getInstance()->execute($sql);
+
+		if ($result)
+			echo json_encode(array('success' => 1, 'text' => $this->l('The status has been updated successfully.')));
+		else
+			echo json_encode(array('success' => 0, 'text' => $this->l('An error occurred while updating this meta.')));
+	}
+
+	public function ajaxProcessReceiptStateSupplyOrderState()
+	{
+		$id_supply_order_state = (int)Tools::getValue('id_supply_order_state');
+
+		$sql = 'UPDATE '._DB_PREFIX_.'supply_order_state SET `receipt_state` = NOT `receipt_state` WHERE id_supply_order_state='.$id_supply_order_state;
+		$result = Db::getInstance()->execute($sql);
+
+		if ($result)
+			echo json_encode(array('success' => 1, 'text' => $this->l('The status has been updated successfully.')));
+		else
+			echo json_encode(array('success' => 0, 'text' => $this->l('An error occurred while updating this meta.')));
+	}
+
+	public function ajaxProcessEnclosedSupplyOrderState()
+	{
+		$id_supply_order_state = (int)Tools::getValue('id_supply_order_state');
+
+		$sql = 'UPDATE '._DB_PREFIX_.'supply_order_state SET `enclosed`= NOT `enclosed` WHERE id_supply_order_state='.$id_supply_order_state;
+		$result = Db::getInstance()->execute($sql);
+
+		if ($result)
+			echo json_encode(array('success' => 1, 'text' => $this->l('The status has been updated successfully.')));
+		else
+			echo json_encode(array('success' => 0, 'text' => $this->l('An error occurred while updating this meta.')));
 	}
 }

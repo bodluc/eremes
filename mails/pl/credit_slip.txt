@@ -1,9 +1,16 @@
-Witaj {firstname} {lastname},
- 
-Zamowienie #{id_order} 
- 
-Informujemy, ze zostala wystawiona nota korygujaca do zamowienia #{id_order}.
- 
-W sekcji "Historia zamowien" w "Twoim koncie" mozesz obejrzec historie swojego zamowienia.
- 
-{shop_name} oparty na systemie PrestaShop™
+
+[{shop_url}] 
+
+Witaj {firstname} {lastname}, 
+
+Wygenerowaliśmy pokwitowanie z Twoimi danymi dla zamówienia o
+numerze {order_name}. 
+
+Możesz przejrzeć tę notę kredytową oraz pobrać fakturę z
+sekcji "Moje noty kredytowe" [{history_url}] na
+Twoim koncie klikając "Moje konto"
+[{my_account_url}] w naszym sklepie. 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

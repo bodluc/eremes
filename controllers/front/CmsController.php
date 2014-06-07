@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 16035 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -31,10 +30,13 @@ class CmsControllerCore extends FrontController
 	public $assignCase;
 	public $cms;
 	public $cms_category;
+	public $ssl = false;
 
 	public function canonicalRedirection($canonicalURL = '')
 	{
-		if (Validate::isLoadedObject($this->cms) && ($canonicalURL = $this->context->link->getCMSLink($this->cms)))
+		if (Tools::getValue('live_edit'))
+			return ;
+		if (Validate::isLoadedObject($this->cms) && ($canonicalURL = $this->context->link->getCMSLink($this->cms, $this->cms->link_rewrite, $this->ssl)))
 			parent::canonicalRedirection($canonicalURL);
 		else if (Validate::isLoadedObject($this->cms_category) && ($canonicalURL = $this->context->link->getCMSCategoryLink($this->cms_category)))
 			parent::canonicalRedirection($canonicalURL);
@@ -46,22 +48,37 @@ class CmsControllerCore extends FrontController
 	 */
 	public function init()
 	{
-		parent::init();
-
 		if ($id_cms = (int)Tools::getValue('id_cms'))
 			$this->cms = new CMS($id_cms, $this->context->language->id);
 		else if ($id_cms_category = (int)Tools::getValue('id_cms_category'))
 			$this->cms_category = new CMSCategory($id_cms_category, $this->context->language->id);
+
+		if (Configuration::get('PS_SSL_ENABLED') && Tools::getValue('content_only') && Tools::getValue('id_cms') == (int)Configuration::get('PS_CONDITIONS_CMS_ID') && Validate::isLoadedObject($this->cms))
+			$this->ssl = true;
+		
+		parent::init();
+
 		$this->canonicalRedirection();
 
-		/* assignCase (1 = CMS page, 2 = CMS category) */
-		if (Validate::isLoadedObject($this->cms)
-			&& ($this->cms->isAssociatedToShop() && $this->cms->active || (Tools::getValue('adtoken') == Tools::getAdminToken('AdminCmsContent'.(int)Tab::getIdFromClassName('AdminCmsContent').(int)Tools::getValue('id_employee')))))
-			$this->assignCase = 1;
+		// assignCase (1 = CMS page, 2 = CMS category)
+		if (Validate::isLoadedObject($this->cms))
+		{
+			$adtoken = Tools::getAdminToken('AdminCmsContent'.(int)Tab::getIdFromClassName('AdminCmsContent').(int)Tools::getValue('id_employee'));
+			if (!$this->cms->isAssociatedToShop() || !$this->cms->active && Tools::getValue('adtoken') != $adtoken)
+			{
+				header('HTTP/1.1 404 Not Found');
+				header('Status: 404 Not Found');
+			}
+			else
+				$this->assignCase = 1;
+		}
 		else if (Validate::isLoadedObject($this->cms_category))
 			$this->assignCase = 2;
 		else
-			Tools::redirect('index.php?controller=404');
+		{
+			header('HTTP/1.1 404 Not Found');
+			header('Status: 404 Not Found');
+		}
 	}
 
 	public function setMedia()
@@ -88,23 +105,29 @@ class CmsControllerCore extends FrontController
 		$this->context->smarty->assign('cgv_id', Configuration::get('PS_CONDITIONS_CMS_ID'));
 		if (isset($this->cms->id_cms_category) && $this->cms->id_cms_category)
 			$path = Tools::getFullPath($this->cms->id_cms_category, $this->cms->meta_title, 'CMS');
-		else
+		else if (isset($this->cms_category->meta_title))
 			$path = Tools::getFullPath(1, $this->cms_category->meta_title, 'CMS');
 		if ($this->assignCase == 1)
 		{
 			$this->context->smarty->assign(array(
 				'cms' => $this->cms,
 				'content_only' => (int)(Tools::getValue('content_only')),
-				'path' => $path
+				'path' => $path,
+				'body_classes' => array($this->php_self.'-'.$this->cms->id, $this->php_self.'-'.$this->cms->link_rewrite)
 			));
+
+			if ($this->cms->indexation == 0)
+				$this->context->smarty->assign('nobots', true);
 		}
 		else if ($this->assignCase == 2)
 		{
 			$this->context->smarty->assign(array(
-				'category' => $this->cms_category,
+				'category' => $this->cms_category, //for backward compatibility
+				'cms_category' => $this->cms_category,
 				'sub_category' => $this->cms_category->getSubCategories($this->context->language->id),
-				'cms_pages' => CMS::getCMSPages($this->context->language->id, (int)($this->cms_category->id) ),
+				'cms_pages' => CMS::getCMSPages($this->context->language->id, (int)($this->cms_category->id), true, (int)$this->context->shop->id),
 				'path' => ($this->cms_category->id !== 1) ? Tools::getPath($this->cms_category->id, $this->cms_category->name, false, 'CMS') : '',
+				'body_classes' => array($this->php_self.'-'.$this->cms_category->id, $this->php_self.'-'.$this->cms_category->link_rewrite)
 			));
 		}
 

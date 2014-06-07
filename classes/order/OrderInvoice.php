@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -124,6 +123,28 @@ class OrderInvoiceCore extends ObjectModel
 		AND od.`id_order_invoice` = '.(int)$this->id);
 	}
 
+	public static function getInvoiceByNumber($id_invoice)
+	{
+		if (is_numeric($id_invoice))
+			$id_invoice = (int)($id_invoice);
+		elseif (is_string($id_invoice))
+		{
+			$matches = array();
+			if (preg_match('/^(?:'.Configuration::get('PS_INVOICE_PREFIX', Context::getContext()->language->id).')\s*([0-9]+)$/i', $id_invoice, $matches))
+				$id_invoice = $matches[1];
+		}
+		if (!$id_invoice)
+			return false;
+		
+		$id_order_invoice = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
+			SELECT `id_order_invoice`
+			FROM `'._DB_PREFIX_.'order_invoice`
+			WHERE number = '.(int)$id_invoice
+		);
+
+		return ($id_order_invoice ? new OrderInvoice($id_order_invoice) : false);
+	}
+
 	/**
 	 * Get order products
 	 *
@@ -208,16 +229,17 @@ class OrderInvoiceCore extends ObjectModel
 	{
 		if (isset($product['product_attribute_id']) && $product['product_attribute_id'])
 			$id_image = Db::getInstance()->getValue('
-				SELECT id_image
-				FROM '._DB_PREFIX_.'product_attribute_image
+				SELECT image_shop.id_image
+				FROM '._DB_PREFIX_.'product_attribute_image pai'.
+				Shop::addSqlAssociation('image', 'pai', true).'
 				WHERE id_product_attribute = '.(int)$product['product_attribute_id']);
 
-		if (!isset($image['id_image']) || !$image['id_image'])
+		if (!isset($id_image) || !$id_image)
 			$id_image = Db::getInstance()->getValue('
-				SELECT id_image
-				FROM '._DB_PREFIX_.'image
-				WHERE id_product = '.(int)($product['product_id']).' AND cover = 1
-			');
+				SELECT image_shop.id_image
+				FROM '._DB_PREFIX_.'image i'.
+				Shop::addSqlAssociation('image', 'i', true, 'image_shop.cover=1').'
+				WHERE id_product = '.(int)($product['product_id']));
 
 		$product['image'] = null;
 		$product['image_size'] = null;
@@ -243,7 +265,7 @@ class OrderInvoiceCore extends ObjectModel
 		WHERE od.`id_order` = '.(int)$this->id_order.'
 		AND od.`id_order_invoice` = '.(int)$this->id.'
 		AND od.`tax_computation_method` = '.(int)TaxCalculator::ONE_AFTER_ANOTHER_METHOD
-		);
+		) || Configuration::get('PS_INVOICE_TAXES_BREAKDOWN');
 	}
 
 	/**
@@ -301,7 +323,7 @@ class OrderInvoiceCore extends ObjectModel
 		{
 			// sum by order details in order to retrieve real taxes rate
 			$taxes_infos = Db::getInstance()->executeS('
-			SELECT odt.`id_order_detail`, t.`rate` AS `name`, SUM(od.`total_price_tax_excl`) AS total_price_tax_excl, SUM(t.`rate`) AS rate, SUM(`total_amount`) AS `total_amount`
+			SELECT odt.`id_order_detail`, t.`rate` AS `name`, od.`total_price_tax_excl` AS total_price_tax_excl, SUM(t.`rate`) AS rate, SUM(`total_amount`) AS `total_amount`, od.`ecotax`, od.`ecotax_tax_rate`, od.`product_quantity`
 			FROM `'._DB_PREFIX_.'order_detail_tax` odt
 			LEFT JOIN `'._DB_PREFIX_.'tax` t ON (t.`id_tax` = odt.`id_tax`)
 			LEFT JOIN `'._DB_PREFIX_.'order_detail` od ON (od.`id_order_detail` = odt.`id_order_detail`)
@@ -323,10 +345,9 @@ class OrderInvoiceCore extends ObjectModel
 
 				$ratio = $tax_infos['total_price_tax_excl'] / $this->total_products;
 				$order_reduction_amount = $this->total_discount_tax_excl * $ratio;
-
-				$tmp_tax_infos[$tax_infos['rate']]['total_amount'] += $tax_infos['total_amount'];
+				$tmp_tax_infos[$tax_infos['rate']]['total_amount'] += ($tax_infos['total_amount'] - Tools::ps_round($tax_infos['ecotax'] * $tax_infos['product_quantity'] * $tax_infos['ecotax_tax_rate'] / 100, 2));
 				$tmp_tax_infos[$tax_infos['rate']]['name'] = $tax_infos['name'];
-				$tmp_tax_infos[$tax_infos['rate']]['total_price_tax_excl'] += ($tax_infos['total_price_tax_excl'] - $order_reduction_amount);
+				$tmp_tax_infos[$tax_infos['rate']]['total_price_tax_excl'] += $tax_infos['total_price_tax_excl'] - $order_reduction_amount - Tools::ps_round($tax_infos['ecotax'] * $tax_infos['product_quantity'], 2);
 			}
 		}
 
@@ -346,6 +367,11 @@ class OrderInvoiceCore extends ObjectModel
 		// shipping cost are added in the product taxes breakdown
 		if ($this->useOneAfterAnotherTaxComputationMethod())
 			return $taxes_breakdown;
+		
+		// No shipping breakdown if it's free!
+		foreach ($order->getCartRules() as $cart_rule)
+			if ($cart_rule['free_shipping'])
+				return $taxes_breakdown;
 
 		$shipping_tax_amount = $this->total_shipping_tax_incl - $this->total_shipping_tax_excl;
 
@@ -380,14 +406,22 @@ class OrderInvoiceCore extends ObjectModel
 	 */
 	public function getEcoTaxTaxesBreakdown()
 	{
-		return Db::getInstance()->executeS('
-		SELECT `ecotax_tax_rate` as `rate`, SUM(`ecotax`) as `ecotax_tax_excl`, SUM(`ecotax`) as `ecotax_tax_incl`
+		$result = Db::getInstance()->executeS('
+		SELECT `ecotax_tax_rate` as `rate`, SUM(`ecotax` * `product_quantity`) as `ecotax_tax_excl`, SUM(`ecotax` * `product_quantity`) as `ecotax_tax_incl`
 		FROM `'._DB_PREFIX_.'order_detail`
 		WHERE `id_order` = '.(int)$this->id_order.'
 		AND `id_order_invoice` = '.(int)$this->id.'
-		GROUP BY `ecotax_tax_rate`'
-		);
+		GROUP BY `ecotax_tax_rate`');
 
+		$taxes = array();
+		foreach ($result as $row)
+			if ($row['ecotax_tax_excl'] > 0)
+			{
+				$row['ecotax_tax_incl'] = Tools::ps_round($row['ecotax_tax_excl'] + ($row['ecotax_tax_excl'] * $row['rate'] / 100), 2);
+				$row['ecotax_tax_excl'] = Tools::ps_round($row['ecotax_tax_excl'], 2);
+				$taxes[] = $row;
+			}
+		return $taxes;
 	}
 
 	/**
@@ -426,14 +460,8 @@ class OrderInvoiceCore extends ObjectModel
 			SELECT oi.*
 			FROM `'._DB_PREFIX_.'order_invoice` oi
 			LEFT JOIN `'._DB_PREFIX_.'orders` o ON (o.`id_order` = oi.`id_order`)
-			WHERE '.(int)$id_order_state.' = (
-				SELECT id_order_state
-				FROM '._DB_PREFIX_.'order_history oh
-				WHERE oh.id_order = o.id_order
-				ORDER BY date_add DESC, id_order_history DESC
-				LIMIT 1
-			)
-			'.Shop::addSqlRestriction(Shop::SHARE_ORDER, 'o').'
+			WHERE '.(int)$id_order_state.' = o.current_state 
+			'.Shop::addSqlRestriction(Shop::SHARE_ORDER, 'o').' 
 			ORDER BY oi.`date_add` ASC
 		');
 
@@ -454,7 +482,7 @@ class OrderInvoiceCore extends ObjectModel
 			FROM `'._DB_PREFIX_.'order_invoice` oi
 			LEFT JOIN `'._DB_PREFIX_.'orders` o ON (o.`id_order` = oi.`id_order`)
 			WHERE DATE_ADD(oi.delivery_date, INTERVAL -1 DAY) <= \''.pSQL($date_to).'\'
-			AND oi.date_add >= \''.pSQL($date_from).'\'
+			AND oi.delivery_date >= \''.pSQL($date_from).'\'
 			'.Shop::addSqlRestriction(Shop::SHARE_ORDER, 'o').'
 			ORDER BY oi.delivery_date ASC
 		');
@@ -510,14 +538,16 @@ class OrderInvoiceCore extends ObjectModel
 	 */
 	public function getTotalPaid()
 	{
-		if (!array_key_exists($this->id, self::$_total_paid_cache))
+		$cache_id = 'order_invoice_paid_'.(int)$this->id;
+		if (!Cache::isStored($cache_id))
 		{
-			self::$_total_paid_cache[$this->id] = 0;
+			$amount = 0;
 			$payments = OrderPayment::getByInvoiceId($this->id);
 			foreach ($payments as $payment)
-				self::$_total_paid_cache[$this->id] += $payment->amount;
+				$amount += $payment->amount;
+			Cache::store($cache_id, $amount);
 		}
-		return self::$_total_paid_cache[$this->id];
+		return Cache::retrieve($cache_id);
 	}
 
 	/**
@@ -535,6 +565,7 @@ class OrderInvoiceCore extends ObjectModel
 	 * Return collection of order invoice object linked to the payments of the current order invoice object
 	 * 
 	 * @since 1.5.0.14
+     * @return PrestaShopCollection|array Collection of OrderInvoice or empty array
 	 */
 	public function getSibling()
 	{
@@ -553,7 +584,7 @@ class OrderInvoiceCore extends ObjectModel
 		foreach ($invoices as $invoice)
 			$invoice_list[] = $invoice['id_order_invoice'];
 		
-		$payments = new Collection('OrderInvoice');
+		$payments = new PrestaShopCollection('OrderInvoice');
 		$payments->where('id_order_invoice', 'IN', $invoice_list);
 		
 		return $payments;
@@ -635,7 +666,7 @@ class OrderInvoiceCore extends ObjectModel
 
 	/**
 	 * @since 1.5.0.2
-	 * @return Collection of Order payment
+	 * @return PrestaShopCollection Collection of Order payment
 	 */
 	public function getOrderPaymentCollection()
 	{
@@ -648,9 +679,9 @@ class OrderInvoiceCore extends ObjectModel
 	 * @param int $id_lang for invoice_prefix
 	 * @return string
 	 */
-	public function getInvoiceNumberFormatted($id_lang)
+	public function getInvoiceNumberFormatted($id_lang, $id_shop = null)
 	{
-		return '#'.Configuration::get('PS_INVOICE_PREFIX', $id_lang).sprintf('%06d', $this->number);
+		return '#'.Configuration::get('PS_INVOICE_PREFIX', $id_lang, null, $id_shop).sprintf('%06d', $this->number);
 	}
 
 	public function saveCarrierTaxCalculator(array $taxes_amount)

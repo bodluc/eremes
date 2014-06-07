@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7095 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -29,8 +28,6 @@ class MenuTopLinks
 {
 	public static function gets($id_lang, $id_linksmenutop = null, $id_shop)
 	{
-		$id_shop = (int)((bool) Configuration::get('PS_MULTISHOP_FEATURE_ACTIVE')) ? $id_shop : 0;
-
 		$sql = 'SELECT l.id_linksmenutop, l.new_window, ll.link, ll.label
 				FROM '._DB_PREFIX_.'linksmenutop l
 				LEFT JOIN '._DB_PREFIX_.'linksmenutop_lang ll ON (l.id_linksmenutop = ll.id_linksmenutop AND ll.id_lang = '.(int)$id_lang.' AND ll.id_shop='.(int)$id_shop.')
@@ -101,7 +98,6 @@ class MenuTopLinks
 
 	public static function update($link, $labels, $newWindow = 0, $id_shop, $id_link)
 	{
-		d($id_shop);
 		if(!is_array($labels))
 			return false;
 		if(!is_array($link))
@@ -136,5 +132,3 @@ class MenuTopLinks
 	}
 
 }
-
-?>

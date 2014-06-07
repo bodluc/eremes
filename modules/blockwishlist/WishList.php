@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -138,7 +137,8 @@ class WishList extends ObjectModel
 		SELECT `id_wishlist`, `name`, `token`
 		  FROM `'._DB_PREFIX_.'wishlist`
 		WHERE `id_wishlist` = '.(int)($id_wishlist).'
-		AND `id_customer` = '.(int)($id_customer));
+		AND `id_customer` = '.(int)($id_customer).'
+		AND `id_shop` = '.(int)Context::getContext()->shop->id);
 		if (empty($result) === false AND $result != false AND sizeof($result))
 		{
 			if ($return === false)
@@ -172,6 +172,8 @@ class WishList extends ObjectModel
 	 */
 	public static function getByIdCustomer($id_customer)
 	{
+		if (!Validate::isUnsignedId($id_customer))
+			die (Tools::displayError());
 		if (Shop::getContextShopID())
 			$shop_restriction = 'AND id_shop = '.(int)Shop::getContextShopID();
 		elseif (Shop::getContextShopGroupID())
@@ -179,14 +181,18 @@ class WishList extends ObjectModel
 		else
 			$shop_restriction = '';
 
-		if (!Validate::isUnsignedId($id_customer))
-			die (Tools::displayError());
-		return (Db::getInstance()->executeS('
-		SELECT w.`id_wishlist`, w.`name`, w.`token`, w.`date_add`, w.`date_upd`, w.`counter`
-		FROM `'._DB_PREFIX_.'wishlist` w
-		WHERE `id_customer` = '.(int)($id_customer).'
-		'.$shop_restriction.'
-		ORDER BY w.`name` ASC'));
+		$cache_id = 'WhishList::getByIdCustomer_'.(int)$id_customer.'-'.(int)Shop::getContextShopID().'-'.(int)Shop::getContextShopGroupID();
+		if (!Cache::isStored($cache_id))
+		{
+			$result = Db::getInstance()->executeS('
+			SELECT w.`id_wishlist`, w.`name`, w.`token`, w.`date_add`, w.`date_upd`, w.`counter`
+			FROM `'._DB_PREFIX_.'wishlist` w
+			WHERE `id_customer` = '.(int)($id_customer).'
+			'.$shop_restriction.'
+			ORDER BY w.`name` ASC');
+			Cache::store($cache_id, $result);
+		}
+		return Cache::retrieve($cache_id);
 	}
 
 	public static function refreshWishList($id_wishlist)

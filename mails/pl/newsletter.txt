@@ -1,5 +1,10 @@
-Newsletter w {shop_name}
- 
-{message}
- 
-{shop_name} oparty na systemie PrestaShop™
+
+[{shop_url}] 
+
+Witaj {firstname} {lastname}, 
+
+{message} 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

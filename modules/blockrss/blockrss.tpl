@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,20 +18,19 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6594 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
 <!-- Block RSS module-->
 <div id="rss_block_left" class="block">
-	<h4>{$title}</h4>
-	<div class="block_content">
+	<h4 class="title_block">{$title}</h4>
+	<div class="block_content list-block">
 		{if $rss_links}
 			<ul>
 				{foreach from=$rss_links item='rss_link'}
-					<li><a href="{$rss_link.url}">{$rss_link.title}</a></li>
+					<li><a href="{$rss_link.url}" title="{$rss_link.title}">{$rss_link.title}</a></li>
 				{/foreach}
 			</ul>
 		{else}

@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,24 +18,25 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 13573 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 {extends file="helpers/options/options.tpl"}
 {block name="after"}
 {if $use_sync}
-		<fieldset><legend>{l s='Sync'}</legend>
+		<div class="panel">
+			<legend>{l s='Sync'}</legend>
 			<label>{l s='Run sync:'}</label>
 			<div class="margin-form">
-				<button class="button" id="run_sync" onclick="run_sync();">{l s='Run sync'}</button>
+				<button class="btn" id="run_sync" onclick="run_sync();">{l s='Run sync'}</button>
 				<p>{l s='Click to synchronize mail automatically'}</p>
 				<div id="ajax_loader"></div>
 				<div class="error" style="display:none" id="ajax_error"></div>
-				<div class="conf" style="display:none" id="ajax_conf"></div>
+				<div class="alert" style="display:none" id="ajax_conf"></div>
 			</div>
-		</fieldset><br/>
+		</div>
+
 		<script type="text/javascript"> 
 			var ajaxQueries = new Array();
 			function run_sync()
@@ -50,8 +51,15 @@
 				$('#ajax_loader').html('<img src="{$smarty.const._PS_ADMIN_IMG_}ajax-loader.gif">');
 				ajaxQuery = $.ajax({
 					type: "POST",
-					url: "ajax.php",
-					data: "syncImapMail=1",
+					url: "index.php",
+					data: {
+						ajax: "1",
+						token: "{$token}", 
+						syncImapMail: "1",
+						ajax:"1",
+						action:"syncImap",
+						tab:"AdminCustomerThreads"
+					},
 					dataType : "json",
 					success: function(jsonData) {
 						jsonError = '';

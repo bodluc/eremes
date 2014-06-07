@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,8 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
+
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -37,12 +37,14 @@ class blocksharefb extends Module
 			$this->tab = 'front_office_features';
 		else
 			$this->tab = 'Blocks';
-		$this->version = '1.0';
+		$this->version = '1.2';
+		$this->author = 'PrestaShop';
 
 		parent::__construct();
 
-		$this->displayName = $this->l('Block Share on Facebook');
-		$this->description = $this->l('Adds a block to display a link "Share on Facebook" on product pages.');
+		$this->displayName = $this->l('Facebook sharing block');
+		$this->description = $this->l('Allows customers to share your products or content on Facebook.');
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
 	
 	public function install()
@@ -64,7 +66,7 @@ class blocksharefb extends Module
 
 		if (isset($id_product) && $id_product != '')
 		{		
-			$product_infos = new Product((int)$id_product, true, $cookie->id_lang);
+			$product_infos = $this->context->controller->getProduct();
 			$smarty->assign(array(
 				'product_link' => urlencode($link->getProductLink($product_infos)),
 				'product_title' => urlencode($product_infos->name),
@@ -76,4 +78,4 @@ class blocksharefb extends Module
 		}
 	}
 }
-?>
+

@@ -99,16 +99,10 @@
 #layered_block_left .color-option.disable {
 	opacity: 0.5;
 	filter:alpha(opacity=50);
-	-moz-opacity:0.5;
+	-moz-opacity:0.5; 
 }
 #layered_block_left .nomargin a {
 	display: inline;
-}
-#layered_form {
-    background: #EAF6FF;
-    border:1px solid #abd8f9;
-    border-radius:5px;
-    padding: 7px;
 }
 #layered_form .select {
 	width: 165px;

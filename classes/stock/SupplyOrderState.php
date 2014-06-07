@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 10019 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -94,7 +93,7 @@ class SupplyOrderStateCore extends ObjectModel
 	);
 
 	/**
-	 * Gets the list of supply order states
+	 * Gets the list of supply order statuses
 	 *
 	 * @param int $id_state_referrer Optional, used to know what state is available after this one
 	 * @param int $id_lang Optional Id Language
@@ -144,7 +143,7 @@ class SupplyOrderStateCore extends ObjectModel
 	}
 
 	/**
-	 * Gets the list of supply order states
+	 * Gets the list of supply order statuses
 	 *
 	 * @param array $ids Optional Do not include these ids in the result
 	 * @param int $id_lang Optional

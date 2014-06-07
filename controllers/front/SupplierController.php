@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -39,6 +38,8 @@ class SupplierControllerCore extends FrontController
 
 	public function canonicalRedirection($canonicalURL = '')
 	{
+		if (Tools::getValue('live_edit'))
+			return ;
 		if (Validate::isLoadedObject($this->supplier))
 			parent::canonicalRedirection($this->context->link->getSupplierLink($this->supplier));
 	}
@@ -59,7 +60,7 @@ class SupplierControllerCore extends FrontController
 			{
 				header('HTTP/1.1 404 Not Found');
 				header('Status: 404 Not Found');
-				$this->errors[] = Tools::displayError('Supplier does not exist.');
+				$this->errors[] = Tools::displayError('The chosen supplier does not exist.');
 			}
 			else
 				$this->canonicalRedirection();
@@ -92,14 +93,31 @@ class SupplierControllerCore extends FrontController
 	 */
 	protected function assignOne()
 	{
-		$nbProducts = $this->supplier->getProducts($this->supplier->id, null, null, null, $this->orderBy, $this->orderWay, true);
-		$this->pagination((int)$nbProducts);
-		$this->context->smarty->assign(array(
-			'nb_products' => $nbProducts,
-			'products' => $this->supplier->getProducts($this->supplier->id, $this->context->cookie->id_lang, (int)$this->p, (int)$this->n, $this->orderBy, $this->orderWay),
-			'path' => ($this->supplier->active ? Tools::safeOutput($this->supplier->name) : ''),
-			'supplier' => $this->supplier,
-		));
+		if (Configuration::get('PS_DISPLAY_SUPPLIERS'))
+		{
+			$this->supplier->description = Tools::nl2br(trim($this->supplier->description));
+			$nbProducts = $this->supplier->getProducts($this->supplier->id, null, null, null, $this->orderBy, $this->orderWay, true);
+			$this->pagination((int)$nbProducts);
+
+			$products = $this->supplier->getProducts($this->supplier->id, $this->context->cookie->id_lang, (int)$this->p, (int)$this->n, $this->orderBy, $this->orderWay);
+			$this->addColorsToProductList($products);
+
+			$this->context->smarty->assign(
+				array(
+					'nb_products' => $nbProducts,
+					'products' => $products,
+					'path' => ($this->supplier->active ? Tools::safeOutput($this->supplier->name) : ''),
+					'supplier' => $this->supplier,
+					'comparator_max_item' => Configuration::get('PS_COMPARATOR_MAX_ITEM'),
+					'body_classes' => array(
+						$this->php_self.'-'.$this->supplier->id,
+						$this->php_self.'-'.$this->supplier->link_rewrite
+					)
+				)
+			);
+		}
+		else
+			Tools::redirect('index.php?controller=404');
 	}
 
 	/**
@@ -115,17 +133,17 @@ class SupplierControllerCore extends FrontController
 
 			$suppliers = Supplier::getSuppliers(true, $this->context->language->id, true, $this->p, $this->n);
 			foreach ($suppliers as &$row)
-				$row['image'] = (!file_exists(_PS_SUPP_IMG_DIR_.'/'.$row['id_supplier'].'-medium.jpg')) ? $this->context->language->iso_code.'-default' : $row['id_supplier'];
+				$row['image'] = (!file_exists(_PS_SUPP_IMG_DIR_.'/'.$row['id_supplier'].'-'.ImageType::getFormatedName('medium').'.jpg')) ? $this->context->language->iso_code.'-default' : $row['id_supplier'];
 
 			$this->context->smarty->assign(array(
 				'pages_nb' => ceil($nbProducts / (int)$this->n),
 				'nbSuppliers' => $nbProducts,
-				'mediumSize' => Image::getSize('medium'),
+				'mediumSize' => Image::getSize(ImageType::getFormatedName('medium')),
 				'suppliers_list' => $suppliers,
 				'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
 			));
 		}
 		else
-			$this->context->smarty->assign('nbSuppliers', 0);
+			Tools::redirect('index.php?controller=404');
 	}
 }

@@ -1,9 +1,18 @@
-Witaj {firstname} {lastname},
- 
-Zwrot #{id_order_return}
- 
-Status twojego zwrotu zostal zmieniony na "{state_order_return}".
- 
-W sekcji "Historia zamowien" w "Twoim koncie" mozesz obejrzec swoj zwrot.
- 
-{shop_name} oparty na systemie PrestaShop™
+
+[{shop_url}] 
+
+Witaj {firstname} {lastname}, 
+
+Zaktualizowaliśmy postęp w sprawie Twojego zwrotu
+#{id_order_return}, nowy status to: "{state_order_return}"
+
+WIADOMOŚĆ: {message} 		 
+
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
+"Historia zamówień" [{history_url}] na koncie
+klienta klikając w "Moje konto"
+[{my_account_url}] w naszym sklepie. 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 8971 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -29,6 +28,7 @@ class AdminStatusesControllerCore extends AdminController
 {
 	public function __construct()
 	{
+		$this->bootstrap = true;
 		$this->table = 'order_state';
 		$this->className = 'OrderState';
 		$this->lang = true;
@@ -36,6 +36,7 @@ class AdminStatusesControllerCore extends AdminController
 		$this->colorOnBackground = false;
 		$this->bulk_actions = array('delete' => array('text' => $this->l('Delete selected'), 'confirm' => $this->l('Delete selected items?')));
 		$this->context = Context::getContext();
+		$this->multishop_context = Shop::CONTEXT_ALL;
 		$this->imageType = 'gif';
 		$this->fieldImageSettings = array(
 			'name' => 'icon',
@@ -51,9 +52,9 @@ class AdminStatusesControllerCore extends AdminController
 		if (Tools::isSubmit('updateorder_return_state'))
 			$this->display = 'edit';
 
-		parent::init();
+		return parent::init();
 	}
-	
+
 	/**
 	 * init all variables to render the order status list
 	 */
@@ -61,19 +62,20 @@ class AdminStatusesControllerCore extends AdminController
 	{
 		$this->addRowAction('edit');
 		$this->addRowAction('delete');
-		
+
 		$this->bulk_actions = array(
 			'delete' => array(
 				'text' => $this->l('Delete selected'),
-				'confirm' => $this->l('Delete selected items?')
-				)
-			);
-		
+				'confirm' => $this->l('Delete selected items?'),
+				'icon' => 'icon-trash',
+			)
+		);
+
 		$this->fields_list = array(
 			'id_order_state' => array(
 				'title' => $this->l('ID'),
-				'align' => 'center',
-				'width' => 25
+				'align' => 'text-center',
+				'class' => 'fixed-width-xs'
 			),
 			'name' => array(
 				'title' => $this->l('Name'),
@@ -82,42 +84,46 @@ class AdminStatusesControllerCore extends AdminController
 			),
 			'logo' => array(
 				'title' => $this->l('Icon'),
-				'align' => 'center',
+				'align' => 'text-center',
 				'image' => 'os',
-				'width' => 25,
 				'orderby' => false,
-				'search' => false
+				'search' => false,
+				'class' => 'fixed-width-xs'
 			),
 			'send_email' => array(
-				'title' => $this->l('Send e-mail to customer'),
-				'align' => 'center',
-				'icon' => array(
-					'1' => 'enabled.gif',
-					'0' => 'disabled.gif'
-				),
-				'width' => 190,
+				'title' => $this->l('Send email to customer'),
+				'align' => 'text-center',
+				'active' => 'sendEmail',
 				'type' => 'bool',
-				'orderby' => false
+				'ajax' => true,
+				'orderby' => false,
+				'class' => 'fixed-width-sm'
 			),
+			'delivery' => array(
+				'title' => $this->l('Delivery'),
+				'align' => 'text-center',
+				'active' => 'delivery',
+				'type' => 'bool',
+				'ajax' => true,
+				'orderby' => false,
+				'class' => 'fixed-width-sm'
+			)
+			,
 			'invoice' => array(
 				'title' => $this->l('Invoice'),
-				'align' => 'center',
-				'width' => 25,
-				'icon' => array(
-					'1' => 'enabled.gif',
-					'0' => 'disabled.gif'
-				),
+				'align' => 'text-center',
+				'active' => 'invoice',
 				'type' => 'bool',
-				'orderby' => false
+				'ajax' => true,
+				'orderby' => false,
+				'class' => 'fixed-width-sm'
 			),
 			'template' => array(
-				'title' => $this->l('E-mail template'),
-				'width' => 120
+				'title' => $this->l('Email template')
 			)
 		);
-		
 	}
-	
+
 	/**
 	 * init all variables to render the order return list
 	 */
@@ -125,16 +131,18 @@ class AdminStatusesControllerCore extends AdminController
 	{
 		$this->table = 'order_return_state';
 		$this->_defaultOrderBy = $this->identifier = 'id_order_return_state';
+		$this->list_id = 'order_return_state';
 		$this->deleted = false;
 		$this->_orderBy = null;
 
 		$this->addRowAction('editstatus');
+		$this->addRowActionSkipList('delete', array(1, 2, 3, 4, 5));
 
 		$this->fields_list = array(
 			'id_order_return_state' => array(
 				'title' => $this->l('ID'),
 				'align' => 'center',
-				'width' => 25
+				'class' => 'fixed-width-xs'
 			),
 			'name' => array(
 				'title' => $this->l('Name'),
@@ -143,22 +151,18 @@ class AdminStatusesControllerCore extends AdminController
 				'color' => 'color'
 			)
 		);
-
-		// call postProcess() for take care about actions and filters
-		$this->postProcess();
-		$this->toolbar_title = $this->l('Return statuses');
 	}
-	
+
 	protected function initOrderReturnsForm()
 	{
 		$id_order_return_state = (int)Tools::getValue('id_order_return_state');
 
 		// Create Object OrderReturnState
 		$order_return_state = new OrderReturnState($id_order_return_state);
-		
+
 		//init field form variable for order return form
 		$this->fields_form = array();
-		
+
 		//$this->initToolbar();
 		$this->getlanguages();
 		$helper = new HelperForm();
@@ -171,19 +175,42 @@ class AdminStatusesControllerCore extends AdminController
 		$helper->languages = $this->_languages;
 		$helper->default_form_language = $this->default_form_language;
 		$helper->allow_employee_form_lang = $this->allow_employee_form_lang;
-		
+
 		if ($order_return_state->id)
 			$helper->fields_value = array(
 				'name' => $this->getFieldValue($order_return_state, 'name'),
 				'color' => $this->getFieldValue($order_return_state, 'color'),
 			);
 		else
-			$helper->fields_value = $this->getFieldsValue($order_return_state);
+			$helper->fields_value = array(
+				'name' => $this->getFieldValue($order_return_state, 'name'),
+				'color' => "#ffffff",
+			);
+
 		$helper->toolbar_btn = $this->toolbar_btn;
-		$helper->title = $this->l('Edit Order Statuses');
+		$helper->title = $this->l('Edit Return Status');
 		return $helper;
 	}
-	
+
+	public function initPageHeaderToolbar()
+	{
+		if (empty($this->display))
+		{
+			$this->page_header_toolbar_btn['new_order_state'] = array(
+				'href' => self::$currentIndex.'&addorder_state&token='.$this->token,
+				'desc' => $this->l('Add new order status', null, null, false),
+				'icon' => 'process-icon-new'
+			);
+			$this->page_header_toolbar_btn['new_order_return_state'] = array(
+				'href' => self::$currentIndex.'&addorder_return_state&token='.$this->token,
+				'desc' => $this->l('Add new order return status', null, null, false),
+				'icon' => 'process-icon-new'
+			);
+		}
+
+		parent::initPageHeaderToolbar();
+	}
+
 	/**
 	 * Function used to render the list to display for this controller
 	 */
@@ -192,16 +219,22 @@ class AdminStatusesControllerCore extends AdminController
 		//init and render the first list
 		$this->initOrderStatutsList();
 		$lists = parent::renderList();
-		
+
 		//init and render the second list
+		$this->_filter = false;
 		$this->initOrdersReturnsList();
+
+		// call postProcess() to take care of actions and filters
+		$this->postProcess();
+		$this->toolbar_title = $this->l('Return status');
 		$this->checkFilterForOrdersReturnsList();
+
 		parent::initToolbar();
 		$lists .= parent::renderList();
-		
+
 		return $lists;
 	}
-	
+
 	protected function checkFilterForOrdersReturnsList()
 	{
 		// test if a filter is applied for this list
@@ -213,55 +246,47 @@ class AdminStatusesControllerCore extends AdminController
 			$this->action = 'reset_filters';
 		else
 			$this->action = '';
-	
+
 	}
-	
+
 	public function renderForm()
-	{
-		if (Tools::isSubmit('updateorder_state') || Tools::isSubmit('addorder_state'))
-			return $this->renderOrderStatusForm();
-		else if (Tools::isSubmit('updateorder_return_state') || Tools::isSubmit('addorder_return_state'))
-			return $this->renderOrderReturnsForm();
-	}
-	
-	protected function renderOrderStatusForm()
 	{
 		$this->fields_form = array(
 			'tinymce' => true,
 			'legend' => array(
-				'title' => $this->l('Order statuses'),
-				'image' => '../img/admin/time.gif'
+				'title' => $this->l('Order status'),
+				'icon' => 'icon-time'
 			),
 			'input' => array(
 				array(
 					'type' => 'text',
-					'label' => $this->l('Status name:'),
+					'label' => $this->l('Status name'),
 					'name' => 'name',
 					'lang' => true,
-					'size' => 40,
 					'required' => true,
-					'hint' => $this->l('Invalid characters: numbers and').' !<>,;?=+()@#"�{}_$%:',
-					'desc' => $this->l('Order status (e.g. \'Pending\')')
+					'hint' => array(
+						$this->l('Order status (e.g. \'Pending\').'),
+						$this->l('Invalid characters: numbers and').' !<>,;?=+()@#"{}_$%:'
+					)
 				),
 				array(
 					'type' => 'file',
-					'label' => $this->l('Icon:'),
+					'label' => $this->l('Icon'),
 					'name' => 'icon',
-					'desc' => $this->l('Upload an icon from your computer (File type: .gif, suggested size: 16x16)')
+					'hint' => $this->l('Upload an icon from your computer (File type: .gif, suggested size: 16x16).')
 				),
 				array(
 					'type' => 'color',
-					'label' => $this->l('Color:'),
+					'label' => $this->l('Color'),
 					'name' => 'color',
-					'size' => 30,
-					'desc' => $this->l('Status will be highlighted in this color. HTML colors only (e.g.').' "lightblue", "#CC6600")'
+					'hint' => $this->l('Status will be highlighted in this color. HTML colors only.').' "lightblue", "#CC6600")'
 				),
 				array(
 					'type' => 'checkbox',
 					'name' => 'logable',
 					'values' => array(
 						'query' => array(
-							array('id' => 'on', 'name' => $this->l('Consider the associated order as validated'), 'val' => '1'),
+							array('id' => 'on', 'name' => $this->l('Consider the associated order as validated.'), 'val' => '1'),
 							),
 						'id' => 'id',
 						'name' => 'name'
@@ -272,7 +297,7 @@ class AdminStatusesControllerCore extends AdminController
 					'name' => 'invoice',
 					'values' => array(
 						'query' => array(
-							array('id' => 'on', 'name' => $this->l('Allow customer to download and view PDF version of invoice'), 'val' => '1'),
+							array('id' => 'on', 'name' => $this->l('Allow a customer to download and view PDF versions of his/her invoices.'), 'val' => '1'),
 							),
 						'id' => 'id',
 						'name' => 'name'
@@ -283,7 +308,7 @@ class AdminStatusesControllerCore extends AdminController
 					'name' => 'hidden',
 					'values' => array(
 						'query' => array(
-							array('id' => 'on', 'name' => $this->l('Hide this state in order for customer'), 'val' => '1'),
+							array('id' => 'on', 'name' => $this->l('Hide this status in all customer orders.'), 'val' => '1'),
 							),
 						'id' => 'id',
 						'name' => 'name'
@@ -294,7 +319,7 @@ class AdminStatusesControllerCore extends AdminController
 					'name' => 'send_email',
 					'values' => array(
 						'query' => array(
-							array('id' => 'on', 'name' => $this->l('Send e-mail to customer when order status is changed'), 'val' => '1'),
+							array('id' => 'on', 'name' => $this->l('Send an email to the customer when his/her order status has changed.'), 'val' => '1'),
 							),
 						'id' => 'id',
 						'name' => 'name'
@@ -305,7 +330,7 @@ class AdminStatusesControllerCore extends AdminController
 					'name' => 'shipped',
 					'values' => array(
 						'query' => array(
-							array('id' => 'on',  'name' => $this->l('Set order as shipped'), 'val' => '1'),
+							array('id' => 'on',  'name' => $this->l('Set the order as shipped.'), 'val' => '1'),
 							),
 						'id' => 'id',
 						'name' => 'name'
@@ -316,7 +341,18 @@ class AdminStatusesControllerCore extends AdminController
 					'name' => 'paid',
 					'values' => array(
 						'query' => array(
-							array('id' => 'on', 'name' => $this->l('Set order as paid'), 'val' => '1'),
+							array('id' => 'on', 'name' => $this->l('Set the order as paid.'), 'val' => '1'),
+							),
+						'id' => 'id',
+						'name' => 'name'
+					)
+				),
+				array(
+					'type' => 'checkbox',
+					'name' => 'delivery',
+					'values' => array(
+						'query' => array(
+							array('id' => 'on', 'name' => $this->l('Show delivery PDF.'), 'val' => '1'),
 							),
 						'id' => 'id',
 						'name' => 'name'
@@ -324,7 +360,7 @@ class AdminStatusesControllerCore extends AdminController
 				),
 				array(
 					'type' => 'select_template',
-					'label' => $this->l('Template:'),
+					'label' => $this->l('Template'),
 					'name' => 'template',
 					'lang' => true,
 					'options' => array(
@@ -332,16 +368,27 @@ class AdminStatusesControllerCore extends AdminController
 						'id' => 'id',
 						'name' => 'name'
 					),
-					'hint' => $this->l('Only letters, number and -_ are allowed'),
-					'desc' => $this->l('E-mail template for both .html and .txt')
+					'hint' => array(
+						$this->l('Only letters, numbers and underscores ("_") are allowed.'),
+						$this->l('Email template for both .html and .txt.')
+					)
 				)
 			),
 			'submit' => array(
 				'title' => $this->l('Save'),
-				'class' => 'button'
 			)
 		);
 
+		if (Tools::isSubmit('updateorder_state') || Tools::isSubmit('addorder_state'))
+			return $this->renderOrderStatusForm();
+		else if (Tools::isSubmit('updateorder_return_state') || Tools::isSubmit('addorder_return_state'))
+			return $this->renderOrderReturnsForm();
+		else
+			return parent::renderForm();
+	}
+
+	protected function renderOrderStatusForm()
+	{
 		if (!($obj = $this->loadObject(true)))
 			return;
 
@@ -351,49 +398,62 @@ class AdminStatusesControllerCore extends AdminController
 			'hidden_on' => $this->getFieldValue($obj, 'hidden'),
 			'send_email_on' => $this->getFieldValue($obj, 'send_email'),
 			'shipped_on' => $this->getFieldValue($obj, 'shipped'),
-			'paid_on' => $this->getFieldValue($obj, 'paid')
+			'paid_on' => $this->getFieldValue($obj, 'paid'),
+			'delivery_on' => $this->getFieldValue($obj, 'delivery'),
 		);
+
+		if ($this->getFieldValue($obj, 'color') !== false)
+			$this->fields_value['color'] = $this->getFieldValue($obj, 'color');
+		else
+			$this->fields_value['color'] = "#ffffff";
 
 		return parent::renderForm();
 	}
-	
+
 	protected function renderOrderReturnsForm()
 	{
 		$helper = $this->initOrderReturnsForm();
-			
+		$helper->show_cancel_button = true;
+
+		$back = Tools::safeOutput(Tools::getValue('back', ''));
+		if (empty($back))
+			$back = self::$currentIndex.'&token='.$this->token;
+		if (!Validate::isCleanHtml($back))
+			die(Tools::displayError());
+
+		$helper->back_url = $back;
+
 		$this->fields_form[0]['form'] = array(
 			'tinymce' => true,
 			'legend' => array(
-				'title' => $this->l('Order statuses'),
-				'image' => '../img/admin/time.gif'
+				'title' => $this->l('Return status'),
+				'icon' => 'icon-time'
 			),
 			'input' => array(
 				array(
 					'type' => 'text',
-					'label' => $this->l('Status name:'),
+					'label' => $this->l('Status name'),
 					'name' => 'name',
 					'lang' => true,
-					'size' => 40,
 					'required' => true,
-					'hint' => $this->l('Invalid characters: numbers and').' !<>,;?=+()@#"�{}_$%:',
-					'desc' => $this->l('Order return status name')
+					'hint' => array(
+						$this->l('Order\'s return status name.'),
+						$this->l('Invalid characters: numbers and').' !<>,;?=+()@#"�{}_$%:'
+					)
 				),
 				array(
 					'type' => 'color',
-					'label' => $this->l('Color:'),
+					'label' => $this->l('Color'),
 					'name' => 'color',
-					'size' => 30,
-					'desc' => $this->l('Status will be highlighted in this color. HTML colors only (e.g.').' "lightblue", "#CC6600")'
+					'hint' => $this->l('Status will be highlighted in this color. HTML colors only.').' "lightblue", "#CC6600")'
 				)
 			),
 			'submit' => array(
 				'title' => $this->l('Save'),
-				'class' => 'button'
 			)
 		);
 		return $helper->generateForm($this->fields_form);
 	}
-	
 
 	protected function getTemplates($iso_code)
 	{
@@ -411,10 +471,12 @@ class AdminStatusesControllerCore extends AdminController
 		return $array;
 	}
 
-
 	public function postProcess()
 	{
-		if (Tools::isSubmit('submitAddorder_return_state') || Tools::isSubmit('submitAddorder_return_state'))
+		if (Tools::isSubmit($this->table.'Orderby') || Tools::isSubmit($this->table.'Orderway'))
+			$this->filter = true;
+
+		if (Tools::isSubmit('submitAddorder_return_state'))
 		{
 			$id_order_return_state = Tools::getValue('id_order_return_state');
 
@@ -429,11 +491,11 @@ class AdminStatusesControllerCore extends AdminController
 
 			// Update object
 			if (!$order_return_state->save())
-				$this->errors[] = Tools::displayError('An error has occurred: Can\'t save the current order return state');
+				$this->errors[] = Tools::displayError('An error has occurred: Can\'t save the current order\'s return status.');
 			else
 				Tools::redirectAdmin(self::$currentIndex.'&conf=4&token='.$this->token);
 		}
-		
+
 		if (Tools::isSubmit('submitBulkdeleteorder_return_state'))
 		{
 			$this->className = 'OrderReturnState';
@@ -448,13 +510,13 @@ class AdminStatusesControllerCore extends AdminController
 
 			// Create Object OrderReturnState
 			$order_return_state = new OrderReturnState((int)$id_order_return_state);
-			
+
 			if (!$order_return_state->delete())
-				$this->errors[] = Tools::displayError('An error has occurred: Can\'t delete the current order return state');
+				$this->errors[] = Tools::displayError('An error has occurred: Can\'t delete the current order\'s return status.');
 			else
 				Tools::redirectAdmin(self::$currentIndex.'&conf=1&token='.$this->token);
 		}
-		
+
 		if (Tools::isSubmit('submitAdd'.$this->table))
 		{
 			$this->deleted = false; // Disabling saving historisation
@@ -464,6 +526,7 @@ class AdminStatusesControllerCore extends AdminController
 			$_POST['hidden'] = (int)Tools::getValue('hidden_on');
 			$_POST['shipped'] = (int)Tools::getValue('shipped_on');
 			$_POST['paid'] = (int)Tools::getValue('paid_on');
+			$_POST['delivery'] = (int)Tools::getValue('delivery_on');
 			if (!$_POST['send_email'])
 			{
 				$languages = Language::getLanguages(false);
@@ -499,6 +562,68 @@ class AdminStatusesControllerCore extends AdminController
 		else
 			return parent::postProcess();
 	}
+
+	protected function filterToField($key, $filter)
+	{
+		if ($this->table == 'order_state')
+			$this->initOrderStatutsList();
+		elseif ($this->table == 'order_return_state')
+			$this->initOrdersReturnsList();
+		return parent::filterToField($key, $filter);
+	}
+
+	protected function afterImageUpload()
+	{
+		parent::afterImageUpload();
+
+		if (($id_order_state = (int)Tools::getValue('id_order_state')) &&
+			 isset($_FILES) && count($_FILES) && file_exists(_PS_ORDER_STATE_IMG_DIR_.$id_order_state.'.gif'))
+		{
+			$current_file = _PS_TMP_IMG_DIR_.'order_state_mini_'.$id_order_state.'_'.$this->context->shop->id.'.gif';
+
+			if (file_exists($current_file))
+				unlink($current_file);
+		}
+
+		return true;
+	}
+
+	public function ajaxProcessSendEmailOrderState()
+	{
+		$id_order_state = (int)Tools::getValue('id_order_state');
+
+		$sql = 'UPDATE '._DB_PREFIX_.'order_state SET `send_email`= NOT `send_email` WHERE id_order_state='.$id_order_state;
+		$result = Db::getInstance()->execute($sql);
+
+		if ($result)
+			echo json_encode(array('success' => 1, 'text' => $this->l('The status has been updated successfully.')));
+		else
+			echo json_encode(array('success' => 0, 'text' => $this->l('An error occurred while updating this meta.')));
+	}
+
+	public function ajaxProcessDeliveryOrderState()
+	{
+		$id_order_state = (int)Tools::getValue('id_order_state');
+
+		$sql = 'UPDATE '._DB_PREFIX_.'order_state SET `delivery`= NOT `delivery` WHERE id_order_state='.$id_order_state;
+		$result = Db::getInstance()->execute($sql);
+
+		if ($result)
+			echo json_encode(array('success' => 1, 'text' => $this->l('The status has been updated successfully.')));
+		else
+			echo json_encode(array('success' => 0, 'text' => $this->l('An error occurred while updating this meta.')));
+	}
+
+	public function ajaxProcessInvoiceOrderState()
+	{
+		$id_order_state = (int)Tools::getValue('id_order_state');
+
+		$sql = 'UPDATE '._DB_PREFIX_.'order_state SET `invoice`= NOT `invoice` WHERE id_order_state='.$id_order_state;
+		$result = Db::getInstance()->execute($sql);
+
+		if ($result)
+			echo json_encode(array('success' => 1, 'text' => $this->l('The status has been updated successfully.')));
+		else
+			echo json_encode(array('success' => 0, 'text' => $this->l('An error occurred while updating this meta.')));
+	}
 }
-
-

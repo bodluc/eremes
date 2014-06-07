@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,19 +19,24 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
+
 global $smarty;
 $smarty->setTemplateDir(_PS_THEME_DIR_.'tpl');
+
+if (Configuration::get('PS_HTML_THEME_COMPRESSION'))
+	$smarty->registerFilter('output', 'smartyMinifyHTML');
+if (Configuration::get('PS_JS_HTML_THEME_COMPRESSION'))
+	$smarty->registerFilter('output', 'smartyPackJSinHTML');
 
 function smartyTranslate($params, &$smarty)
 {
 	global $_LANG;
 
-	if (!isset($params['js'])) $params['js'] = 0;
+	if (!isset($params['js'])) $params['js'] = false;
 	if (!isset($params['pdf'])) $params['pdf'] = false;
 	if (!isset($params['mod'])) $params['mod'] = false;
 	if (!isset($params['sprintf'])) $params['sprintf'] = null;
@@ -46,9 +51,9 @@ function smartyTranslate($params, &$smarty)
 		$key = 'override_'.$key;
 
 	if ($params['mod'])
-		return Translate::getModuleTranslation($params['mod'], $params['s'], $basename, $params['sprintf']);
+		return Translate::smartyPostProcessTranslation(Translate::getModuleTranslation($params['mod'], $params['s'], $basename, $params['sprintf'], $params['js']), $params);
 	else if ($params['pdf'])
-		return Translate::getPdfTranslation($params['s']);
+		return Translate::smartyPostProcessTranslation(Translate::getPdfTranslation($params['s']), $params);
 
 	if ($_LANG != null && isset($_LANG[$key]))
 		$msg = $_LANG[$key];
@@ -57,12 +62,13 @@ function smartyTranslate($params, &$smarty)
 	else
 		$msg = $params['s'];
 
-	if ($msg != $params['s'])
-		$msg = $params['js'] ? addslashes($msg) : stripslashes($msg);
+	if ($msg != $params['s'] && !$params['js'])
+		$msg = stripslashes($msg);
+	elseif ($params['js'])
+		$msg = addslashes($msg);
 
 	if ($params['sprintf'] !== null)
 		$msg = Translate::checkAndReplaceArgs($msg, $params['sprintf']);
 
-	return $params['js'] ? $msg : Tools::htmlentitiesUTF8($msg);
+	return Translate::smartyPostProcessTranslation($params['js'] ? $msg : Tools::safeOutput($msg), $params);
 }
-

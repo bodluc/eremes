@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7310 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -62,7 +61,6 @@ class AddressFormatCore extends ObjectModel
 	public static $forbiddenPropertyList = array(
 		'deleted',
 		'date_add',
-		'other',
 		'alias',
 		'secure_key',
 		'note',
@@ -75,6 +73,7 @@ class AddressFormatCore extends ObjectModel
 		'active',
 		'is_guest',
 		'date_upd',
+		'country',		
 		'years',
 		'days',
 		'months',
@@ -100,6 +99,7 @@ class AddressFormatCore extends ObjectModel
 		'outstanding_allow_amount',
 		'call_prefix',
 		'definition',
+		'debug_list'
 	);
 
 	public static $forbiddenClassList = array(
@@ -133,7 +133,7 @@ class AddressFormatCore extends ObjectModel
 			{
 				$propertyName = $property->getName();
 				if (($propertyName == $fieldName) && ($isIdField ||
-						(!preg_match('#id|id_\w#', $propertyName))))
+						(!preg_match('/\bid\b|id_\w+|\bid[A-Z]\w+/', $propertyName))))
 					$isValide = true;
 			}
 
@@ -227,6 +227,7 @@ class AddressFormatCore extends ObjectModel
 					}
 				}
 			}
+
 		return (count($this->_errorFormatList)) ? false : true;
 	}
 
@@ -379,7 +380,7 @@ class AddressFormatCore extends ObjectModel
 					$addressText .= (!empty($tmpText)) ? $tmpText.$newLine: '';
 				}
 
-		$addressText = rtrim($addressText, $newLine);
+		$addressText = preg_replace('/'.preg_quote($newLine,'/').'$/i', '', $addressText);
 		$addressText = rtrim($addressText, $separator);
 
 		return $addressText;
@@ -491,7 +492,13 @@ class AddressFormatCore extends ObjectModel
 		{
 			$layoutData['ordered'] = AddressFormat::getOrderedAddressFields((int)$address->id_country);
 			$layoutData['formated'] = AddressFormat::getFormattedAddressFieldsValues($address, $layoutData['ordered']);
-			$layoutData['object'] = get_object_vars($address);
+			$layoutData['object'] = array();
+
+			$reflect = new ReflectionObject($address);
+			$public_properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
+			foreach ($public_properties as $property)
+				if (isset($address->{$property->getName()}))
+					$layoutData['object'][$property->getName()] = $address->{$property->getName()};
 		}
 		return $layoutData;
 	}

@@ -1,7 +1,6 @@
 <?php
-
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -20,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 16624 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -34,9 +32,6 @@ class TaxRulesTaxManagerCore implements TaxManagerInterface
 	public $address;
 	public $type;
 	public $tax_calculator;
-
-	protected static $cache_tax_calculator;
-
 
 	/**
 	 * 
@@ -66,18 +61,24 @@ class TaxRulesTaxManagerCore implements TaxManagerInterface
 	*/
 	public function getTaxCalculator()
 	{
+		static $tax_enabled = null;
+
 		if (isset($this->tax_calculator))
 			return $this->tax_calculator;
 
+		if ($tax_enabled === null)
+			$tax_enabled = Configuration::get('PS_TAX');
+		
+		if (!$tax_enabled)
+			return new TaxCalculator(array());
+	
 		$taxes = array();
-		if (!Configuration::get('PS_TAX'))
-			return new TaxCalculator($taxes);
-
 		$postcode = 0;
 		if (!empty($this->address->postcode))
 			$postcode = $this->address->postcode;
 
-		if (!isset(self::$cache_tax_calculator[$postcode.'-'.$this->type]))
+		$cache_id = (int)$this->address->id_country.'-'.(int)$this->address->id_state.'-'.$postcode.'-'.(int)$this->type;
+		if (!Cache::isStored($cache_id))
 		{
 			$rows = Db::getInstance()->executeS('
 			SELECT *
@@ -85,7 +86,7 @@ class TaxRulesTaxManagerCore implements TaxManagerInterface
 			WHERE `id_country` = '.(int)$this->address->id_country.'
 			AND `id_tax_rules_group` = '.(int)$this->type.'
 			AND `id_state` IN (0, '.(int)$this->address->id_state.')
-			AND (\''.pSQL($postcode).'\' BETWEEN `zipcode_from` AND `zipcode_to` OR `zipcode_from` = 0 OR `zipcode_from` = \''.pSQL($postcode).'\')
+			AND (\''.pSQL($postcode).'\' BETWEEN `zipcode_from` AND `zipcode_to` OR (`zipcode_to` = 0 AND `zipcode_from` IN(0, \''.pSQL($postcode).'\')))
 			ORDER BY `zipcode_from` DESC, `zipcode_to` DESC, `id_state` DESC, `id_country` DESC');
 
 			$behavior = 0;
@@ -107,11 +108,8 @@ class TaxRulesTaxManagerCore implements TaxManagerInterface
 				if ($row['behavior'] == 0)
 					 break;
 			}
-
-			self::$cache_tax_calculator[$postcode.'-'.$this->type] = new TaxCalculator($taxes, $behavior);
+			Cache::store($cache_id, new TaxCalculator($taxes, $behavior));
 		}
-
-		return self::$cache_tax_calculator[$postcode.'-'.$this->type];
+		return Cache::retrieve($cache_id);
 	}
 }
-

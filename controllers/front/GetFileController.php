@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7104 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -84,7 +83,7 @@ class GetFileControllerCore extends FrontController
 			if (!isset($info['id_product_download']) || empty($info['id_product_download']))
 				$this->displayCustomError('This product has been deleted.');
 
-			if (!file_exists(_PS_DOWNLOAD_DIR_.$filename))
+			if (!Validate::isFileName($info['filename']) || !file_exists(_PS_DOWNLOAD_DIR_.$info['filename']))
 				$this->displayCustomError('This file no longer exists.');
 
             if (isset($info['product_quantity_refunded']) && isset($info['product_quantity_return']) &&
@@ -271,12 +270,16 @@ class GetFileControllerCore extends FrontController
 				$mimeType = 'application/octet-stream';
 		}
 
+		if (ob_get_level() && ob_get_length() > 0)
+			ob_end_clean();
+
 		/* Set headers for download */
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Type: '.$mimeType);
 		header('Content-Length: '.filesize($file));
 		header('Content-Disposition: attachment; filename="'.$filename.'"');
-		ob_end_flush();
+		//prevents max execution timeout, when reading large files
+		@set_time_limit(0);
 		$fp = fopen($file, 'rb');
 		while (!feof($fp))
 			echo fgets($fp, 16384);
@@ -295,14 +298,15 @@ class GetFileControllerCore extends FrontController
 		'This product does not exist in our store.' => Tools::displayError('This product does not exist in our store.'),
 		'This product has been deleted.' => Tools::displayError('This product has been deleted.'),
 		'This file no longer exists.'	=> Tools::displayError('This file no longer exists.'),
-        'This product has been refunded.' => Tools::displayError('This product has been refunded.'),
+		'This product has been refunded.' => Tools::displayError('This product has been refunded.'),
 		'The product deadline is in the past.' => Tools::displayError('The product deadline is in the past.'),
-		'Expiration date exceeded' => Tools::displayError('Expiration date has passed, you cannot download this product'),
-		'You have reached the maximum number of allowed downloads.' => Tools::displayError('You have reached the maximum number of allowed downloads.'));
+		'Expiration date exceeded' => Tools::displayError('The product expiration date has passed, preventing you from download this product.'),
+		'Expiration date has passed, you cannot download this product' => Tools::displayError('Expiration date has passed, you cannot download this product.'),
+		'You have reached the maximum number of allowed downloads.' => Tools::displayError('You have reached the maximum number of downloads allowed.'));
 		?>
 		<script type="text/javascript">
 		//<![CDATA[
-		alert("<?php echo html_entity_decode($translations[$msg], ENT_QUOTES, 'utf-8'); ?>");
+		alert("<?php echo isset($translations[$msg]) ? html_entity_decode($translations[$msg], ENT_QUOTES, 'utf-8') : html_entity_decode($msg, ENT_QUOTES, 'utf-8'); ?>");
 		window.location.href = '<?php echo __PS_BASE_URI__ ?>';
 		//]]>
 		</script>

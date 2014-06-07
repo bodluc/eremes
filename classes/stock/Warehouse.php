@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 17132 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -132,14 +131,17 @@ class WarehouseCore extends ObjectModel
 	 *
 	 * @return array Ids of the associated carriers
 	 */
-	public function getCarriers()
+	public function getCarriers($return_reference = false)
 	{
 		$ids_carrier = array();
 
 		$query = new DbQuery();
-		$query->select('wc.id_carrier');
+		if ($return_reference)
+			$query->select('wc.id_carrier');
+		else
+			$query->select('c.id_carrier');
 		$query->from('warehouse_carrier', 'wc');
-		$query->innerJoin('carrier', 'c', 'c.id_carrier = wc.id_carrier');
+		$query->innerJoin('carrier', 'c', 'c.id_reference = wc.id_carrier');
 		$query->where($this->def['primary'].' = '.(int)$this->id);
 		$query->where('c.deleted = 0');
 		$res = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($query);
@@ -492,7 +494,7 @@ class WarehouseCore extends ObjectModel
 	 * For a given pack, returns the warehouse it can be shipped from
 	 *
 	 * @param int $id_product
-	 * @return int|bool id_warehouse or false
+	 * @return array|bool id_warehouse or false
 	 */
 	public static function getPackWarehouses($id_product, $id_shop = null)
 	{
@@ -520,7 +522,7 @@ class WarehouseCore extends ObjectModel
 			if ($product->advanced_stock_management)
 			{
 				// gets the warehouses of one product
-				$product_warehouses = Warehouse::getProductWarehouseList((int)$product->id, 0, (int)$id_shop);
+				$product_warehouses = Warehouse::getProductWarehouseList((int)$product->id, (int)$product->cache_default_attribute, (int)$id_shop);
 				$list[(int)$product->id] = array();
 				// fills array with warehouses for this product
 				foreach ($product_warehouses as $product_warehouse)

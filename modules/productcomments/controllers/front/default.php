@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 15094 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -74,26 +73,26 @@ class ProductCommentsDefaultModuleFrontController extends ModuleFrontController
 		$errors = array();
 		// Validation
 		if (!Validate::isInt(Tools::getValue('id_product')))
-			$errors[] = $module_instance->l('ID product is incorrect');
+			$errors[] = $module_instance->l('Product ID is incorrect', 'default');
 		if (!Tools::getValue('title') || !Validate::isGenericName(Tools::getValue('title')))
-			$errors[] = $module_instance->l('Title is incorrect');
+			$errors[] = $module_instance->l('Title is incorrect', 'default');
 		if (!Tools::getValue('content') || !Validate::isMessage(Tools::getValue('content')))
-			$errors[] = $module_instance->l('Comment is incorrect');
+			$errors[] = $module_instance->l('Comment is incorrect', 'default');
 		if (!$id_customer && (!Tools::isSubmit('customer_name') || !Tools::getValue('customer_name') || !Validate::isGenericName(Tools::getValue('customer_name'))))
-			$errors[] = $module_instance->l('Customer name is incorrect');
+			$errors[] = $module_instance->l('Customer name is incorrect', 'default');
 		if (!$this->context->customer->id && !Configuration::get('PRODUCT_COMMENTS_ALLOW_GUESTS'))
-			$errors[] = $module_instance->l('You must be logged in order to send a comment');
+			$errors[] = $module_instance->l('You must be connected in order to send a comment', 'default');
 		if (!count(Tools::getValue('criterion')))
-			$errors[] = $module_instance->l('You must give a rating');
+			$errors[] = $module_instance->l('You must give a rating', 'default');
 
 		$product = new Product(Tools::getValue('id_product'));
 		if (!$product->id)
-			$errors[] = $module_instance->l('Product not found');
+			$errors[] = $module_instance->l('Product not found', 'default');
 
 		if (!count($errors))
 		{
 			$customer_comment = ProductComment::getByCustomer(Tools::getValue('id_product'), $id_customer, true, $id_guest);
-			if (!$customer_comment || ($customer_comment && (strtotime($customer_comment['date_add']) + Configuration::get('PRODUCT_COMMENTS_MINIMAL_TIME')) < time()))
+			if (!$customer_comment || ($customer_comment && (strtotime($customer_comment['date_add']) + (int)Configuration::get('PRODUCT_COMMENTS_MINIMAL_TIME')) < time()))
 			{
 
 				$comment = new ProductComment();
@@ -125,11 +124,12 @@ class ProductCommentsDefaultModuleFrontController extends ModuleFrontController
 					$comment->save();
 				}
 				$result = true;
+				Tools::clearCache(Context::getContext()->smarty, $this->getTemplatePath('productcomments-reviews.tpl'));
 			}
 			else
 			{
 				$result = false;
-				$errors[] = $module_instance->l('You should wait').' '.Configuration::get('PRODUCT_COMMENTS_MINIMAL_TIME').' '.$module_instance->l('seconds before posting a new comment');
+				$errors[] = $module_instance->l('Please wait before posting another comment').' '.Configuration::get('PRODUCT_COMMENTS_MINIMAL_TIME').' '.$module_instance->l('seconds before posting a new comment');
 			}
 		}
 		else

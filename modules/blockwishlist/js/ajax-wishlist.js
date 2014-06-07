@@ -1,5 +1,5 @@
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -59,7 +58,7 @@ function WishlistCart(id, action, id_product, id_product_attribute, quantity)
 			if($('#' + id).length != 0)
 			{
 				$('#' + id).slideUp('normal');
-				document.getElementById(id).innerHTML = data;
+				$('#' + id).html(data);
 				$('#' + id).slideDown('normal');
 			}
 		}
@@ -82,7 +81,7 @@ function WishlistChangeDefault(id, id_wishlist)
 		success: function(data)
 		{
 			$('#' + id).slideUp('normal');
-			document.getElementById(id).innerHTML = data;
+			$('#' + id).html(data);
 			$('#' + id).slideDown('normal');
 		}
 	});
@@ -148,7 +147,7 @@ function WishlistManage(id, id_wishlist)
 		success: function(data)
 		{
 			$('#' + id).hide();
-			document.getElementById(id).innerHTML = data;
+			$('#' + id).html(data);
 			$('#' + id).fadeIn('slow');
 		}
 	});
@@ -190,10 +189,14 @@ function WishlistDelete(id, id_wishlist, msg)
 	var res = confirm(msg);
 	if (res == false)
 		return (false);
+
+	if (typeof mywishlist_url == 'undefined')
+		return (false);
+
 	$.ajax({
 		type: 'GET',
 		async: true,
-		url: baseDir + 'modules/blockwishlist/mywishlist.php',
+		url: mywishlist_url + '&rand=' + new Date().getTime(),
 		cache: false,
 		data: 'deleted&id_wishlist=' + id_wishlist,
 		success: function(data)

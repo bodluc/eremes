@@ -1,9 +1,20 @@
-Witaj {firstname} {lastname},
- 
-Zamowienie #{id_order}
- 
-Twoje zamowienie zostalo przyjete do realizacji.
- 
-W sekcji "Historia zamowien" w "Twoim koncie" mozesz obejrzec swoje zamowienie i pobrac fakture.
- 
-{shop_name} oparty na systemie PrestaShop™
+
+[{shop_url}] 
+
+Witaj {firstname} {lastname}, 
+
+Obecnie zajmujemy się zamówieniem o numerze {order_name} w
+sklepie {shop_name}. 
+
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
+"Historia zamówień" [{history_url}] na koncie
+klienta klikając w "Moje konto"
+[{my_account_url}] w naszym sklepie. 
+
+Jeśli posiadasz konto gościa, możesz śledzić swoje
+zamówienie w sekcji "Śledzenie Zamówienia"
+[{guest_tracking_url}?id_order={order_name}]. 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

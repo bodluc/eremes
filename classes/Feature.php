@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -79,16 +78,14 @@ class FeatureCore extends ObjectModel
 	 * @return array Multiple arrays with feature's data
 	 * @static
 	 */
-	public static function getFeatures($id_lang)
+	public static function getFeatures($id_lang, $with_shop = true)
 	{
 		return Db::getInstance()->executeS('
-			SELECT *
-			FROM `'._DB_PREFIX_.'feature` f
-			'.Shop::addSqlAssociation('feature', 'f').'
-			LEFT JOIN `'._DB_PREFIX_.'feature_lang` fl
-				ON (f.`id_feature` = fl.`id_feature` AND fl.`id_lang` = '.(int)$id_lang.')
-			ORDER BY f.`position` ASC
-		');
+		SELECT DISTINCT f.id_feature, f.*, fl.*
+		FROM `'._DB_PREFIX_.'feature` f
+		'.($with_shop ? Shop::addSqlAssociation('feature', 'f') : '').'
+		LEFT JOIN `'._DB_PREFIX_.'feature_lang` fl ON (f.`id_feature` = fl.`id_feature` AND fl.`id_lang` = '.(int)$id_lang.')
+		ORDER BY f.`position` ASC');
 	}
 
 	/**
@@ -205,19 +202,31 @@ class FeatureCore extends ObjectModel
 			WHERE `name` = \''.pSQL($name).'\'
 			GROUP BY `id_feature`
 		');
-		if (!empty($rq))
+		if (empty($rq))
+		{
+			// Feature doesn't exist, create it
+			$feature = new Feature();
+			$languages = Language::getLanguages();
+			foreach ($languages as $language)
+				$feature->name[$language['id_lang']] = strval($name);
+			if ($position)
+				$feature->position = (int)$position;
+			else
+				$feature->position = Feature::getHigherPosition() + 1;
+			$feature->add();
+			return $feature->id;
+		}
+		elseif(isset($rq['id_feature']) && $rq['id_feature'])
+		{
+			if (is_numeric($position) && $feature = new Feature((int)$rq['id_feature']))
+			{
+				$feature->position = (int)$position;
+				if (Validate::isLoadedObject($feature))
+					$feature->update();
+			}
+
 			return (int)$rq['id_feature'];
-		// Feature doesn't exist, create it
-		$feature = new Feature();
-		$languages = Language::getLanguages();
-		foreach ($languages as $language)
-			$feature->name[$language['id_lang']] = strval($name);
-		if ($position)
-			$feature->position = (int)$position;
-		else
-			$feature->position = Feature::getHigherPosition() + 1;
-		$feature->add();
-		return $feature->id;
+		}
 	}
 
 	public static function getFeaturesForComparison($list_ids_product, $id_lang)
@@ -304,21 +313,40 @@ class FeatureCore extends ObjectModel
 	 */
 	public static function cleanPositions()
 	{
-		$return = true;
+		//Reordering positions to remove "holes" in them (after delete for instance)
+		$sql = "SELECT id_feature, position FROM "._DB_PREFIX_."feature ORDER BY position";
+		$db = Db::getInstance();
+		$r = $db->executeS($sql, false);
+		$shiftTable = array(); //List of update queries (one query is necessary for each "hole" in the table)
+		$currentDelta = 0;
+		$minId = 0;
+		$maxId = 0;
+		$futurePosition = 0;
+		while ($line = $db->nextRow($r))
+		{
+			$delta = $futurePosition - $line['position']; //Difference between current position and future position
+			if ($delta != $currentDelta)
+			{
+				$shiftTable[] = array('minId' => $minId, 'maxId' => $maxId, 'delta' => $currentDelta);
+				$currentDelta = $delta;
+				$minId = $line['id_feature'];
+			}
+			$futurePosition++;
+		}
 
-		$sql = '
-		SELECT `id_feature`
-		FROM `'._DB_PREFIX_.'feature`
-		ORDER BY `position`';
-		$result = Db::getInstance()->executeS($sql);
-
-		$i = 0;
-		foreach ($result as $value)
-			$return = Db::getInstance()->execute('
-			UPDATE `'._DB_PREFIX_.'feature`
-			SET `position` = '.(int)$i++.'
-			WHERE `id_feature` = '.(int)$value['id_feature']);
-		return $return;
+		$shiftTable[] = array('minId' => $minId, 'delta' => $currentDelta);
+		
+		//Executing generated queries
+		foreach ($shiftTable as $line)
+		{
+			$delta = $line['delta'];
+			if ($delta == 0)
+				continue;
+			$delta = $delta > 0 ? '+'.(int)$delta : (int)$delta;
+			$minId = $line['minId'];
+			$sql = 'UPDATE '._DB_PREFIX_.'feature SET position = position '.(int)$delta.' WHERE id_feature = '.(int)$minId;
+			Db::getInstance()->execute($sql);
+		}
 	}
 
 	/**

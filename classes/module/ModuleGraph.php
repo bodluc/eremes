@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7329 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -29,13 +28,13 @@ abstract class ModuleGraphCore extends Module
 {
 	protected $_employee;
 
-	/** @var integer array graph data */
+	/** @var array of integers graph data */
 	protected	$_values = array();
 
-	/** @var string array graph legends (X axis) */
+	/** @var array of strings graph legends (X axis) */
 	protected	$_legend = array();
 
-	/**@var string graph titles */
+	/**@var array string graph titles */
 	protected	$_titles = array('main' => null, 'x' => null, 'y' => null);
 
 	/** @var ModuleGraphEngine graph engine */
@@ -223,7 +222,8 @@ abstract class ModuleGraphCore extends Module
 
 	protected function _displayCsv()
 	{
-		ob_end_clean();
+		if (ob_get_level() && ob_get_length() > 0)
+			ob_end_clean();
 		header('Content-Type: application/octet-stream');
 		header('Content-Disposition: attachment; filename="'.$this->displayName.' - '.time().'.csv"');
 		echo $this->_csv;
@@ -293,10 +293,14 @@ abstract class ModuleGraphCore extends Module
 
 	protected static function getEmployee($employee = null, Context $context = null)
 	{
-		if (!$context)
-			$context = Context::getContext();
-		if (!$employee)
+		if (!Validate::isLoadedObject($employee))
+		{
+			if (!$context)
+				$context = Context::getContext();
+			if (!Validate::isLoadedObject($context->employee))
+				return false;
 			$employee = $context->employee;
+		}
 
 		if (empty($employee->stats_date_from) || empty($employee->stats_date_to)
 			|| $employee->stats_date_from == '0000-00-00' || $employee->stats_date_to == '0000-00-00')
@@ -317,8 +321,9 @@ abstract class ModuleGraphCore extends Module
 
 	public static function getDateBetween($employee = null)
 	{
-		$employee = ModuleGraph::getEmployee($employee);
-		return ' \''.$employee->stats_date_from.' 00:00:00\' AND \''.$employee->stats_date_to.' 23:59:59\' ';
+		if ($employee = ModuleGraph::getEmployee($employee))
+			return ' \''.$employee->stats_date_from.' 00:00:00\' AND \''.$employee->stats_date_to.' 23:59:59\' ';
+		return ' \''.date('Y-m').'-01 00:00:00\' AND \''.date('Y-m-t').' 23:59:59\' ';
 	}
 
 	public function getLang()

@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 9202 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -468,20 +467,25 @@ class StockManagerCore implements StockManagerInterface
 
 		// Gets client_orders_qty
 		$query = new DbQuery();
-		$query->select('SUM(od.product_quantity) + SUM(od.product_quantity_refunded)');
+		$query->select('od.product_quantity, od.product_quantity_refunded');
 		$query->from('order_detail', 'od');
 		$query->leftjoin('orders', 'o', 'o.id_order = od.id_order');
 		$query->where('od.product_id = '.(int)$id_product);
 		if (0 != $id_product_attribute)
 			$query->where('od.product_attribute_id = '.(int)$id_product_attribute);
-		$query->leftJoin('order_history', 'oh', 'oh.id_order = o.id_order AND oh.date_add = o.date_upd');
+		$query->leftJoin('order_history', 'oh', 'oh.id_order = o.id_order AND oh.id_order_state = o.current_state');
 		$query->leftJoin('order_state', 'os', 'os.id_order_state = oh.id_order_state');
 		$query->where('os.shipped != 1');
 		$query->where('o.valid = 1 OR (os.id_order_state != '.(int)Configuration::get('PS_OS_ERROR').'
 					   AND os.id_order_state != '.(int)Configuration::get('PS_OS_CANCELED').')');
-		//if (count($ids_warehouse))
-			//$query->where('od.id_warehouse IN('.implode(', ', $ids_warehouse).')');
-		$client_orders_qty = (int)Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($query);
+		$query->groupBy('od.id_order_detail');
+		if (count($ids_warehouse))
+			$query->where('od.id_warehouse IN('.implode(', ', $ids_warehouse).')');
+		$res = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($query);
+		$client_orders_qty = 0;
+		if (count($res))
+			foreach ($res as $row)
+				$client_orders_qty += ($row['product_quantity'] - $row['product_quantity_refunded']);
 
 		// Gets supply_orders_qty
 		$query = new DbQuery();
@@ -622,7 +626,7 @@ class StockManagerCore implements StockManagerInterface
 	 * For a given stock, calculates its new WA(Weighted Average) price based on the new quantities and price
 	 * Formula : (physicalStock * lastCump + quantityToAdd * unitPrice) / (physicalStock + quantityToAdd)
 	 *
-	 * @param Stock $stock
+	 * @param Stock|PrestaShopCollection $stock
 	 * @param int $quantity
 	 * @param float $price_te
 	 * @return int WA
@@ -639,11 +643,11 @@ class StockManagerCore implements StockManagerInterface
 	 * @param int $id_product_attribute
 	 * @param int $id_warehouse Optional
 	 * @param int $price_te Optional
-	 * @return Collection of Stock
+	 * @return PrestaShopCollection Collection of Stock
 	 */
 	protected function getStockCollection($id_product, $id_product_attribute, $id_warehouse = null, $price_te = null)
 	{
-		$stocks = new Collection('Stock');
+		$stocks = new PrestaShopCollection('Stock');
 		$stocks->where('id_product', '=', $id_product);
 		$stocks->where('id_product_attribute', '=', $id_product_attribute);
 		if ($id_warehouse)

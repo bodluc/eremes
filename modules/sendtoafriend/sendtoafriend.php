@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7040 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -37,7 +36,7 @@ class sendToAFriend extends Module
 	function __construct($dontTranslate = false)
  	{
  	 	$this->name = 'sendtoafriend';
- 	 	$this->version = '1.2';
+		$this->version = '1.7.2';
 		$this->author = 'PrestaShop';
  	 	$this->tab = 'front_office_features';
 		$this->need_instance = 0;
@@ -50,6 +49,7 @@ class sendToAFriend extends Module
 			$this->displayName = $this->l('Send to a Friend module');
 			$this->description = $this->l('Allows customers to send a product link to a friend.');
  		}
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
 
 	public function install()
@@ -80,6 +80,11 @@ class sendToAFriend extends Module
 
 	public function hookHeader($params)
 	{
-		$this->context->controller->addCSS($this->_path.'sendtoafriend.css', 'all');
+		$this->page_name = Dispatcher::getInstance()->getController();
+		if ($this->page_name == 'product')
+		{
+			$this->context->controller->addCSS($this->_path.'sendtoafriend.css', 'all');
+			$this->context->controller->addJS($this->_path.'sendtoafriend.js');
+		}
 	}
 }

@@ -1,17 +1,32 @@
+
+[{shop_url}] 
+
 Witaj {firstname} {lastname},
- 
-Zamowienie #{id_order}
- 
-Twoje zamowienie zostalo zlozone i zralizujemy je gdy tylko otrzymamy od ciebie zaplate.
- 
-Wybrales czek jako metode zaplaty. Prosze wyslac czek na ponizsze dane:
 
-- kwota {total_paid}
+Dziękujemy za zakupy {shop_name}! 
 
-- zamowienie {cheque_name}
+Zamówienie z uwzględnieniem {order_name} zostało umieszczone
+pomyślnie i będzie WYSŁANE ZARAZ PO OTRZYMANIU PŁATNOŚCI. 
 
-- na adres {cheque_address}
- 
-W sekcji "Historia zamowien" w "Twoim koncie" mozesz obejrzec swoje zamowienie i pobrac fakture.
- 
-{shop_name} oparty na systemie PrestaShop™
+Wybrałeś płatność czekiem. 
+
+Oto dane bankowe dla czeku:
+
+KWOTA: {total_paid}
+
+PŁATNE NA ZLECENIE: {cheque_name}
+
+PROSIMY O PRZESŁANIE CZEKU DO: {cheque_address_html} 		 
+
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
+"Historia zamówień" [{history_url}] na koncie
+klienta klikając w "Moje konto"
+[{my_account_url}] w naszym sklepie. 
+
+Jeśli masz konto Gościa, możesz śledzić swoje zamówienie za
+pośrednictwem sekcji "Śledzenie Gościa"
+[{guest_tracking_url}] w naszym sklepie. 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

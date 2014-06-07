@@ -1,0 +1,13 @@
+
+[{shop_url}] 
+
+Witaj, 
+
+{firstname} {lastname} zaproszony może chce zobaczyć jego/jej
+listę życzeń: {wishlist}
+
+{wishlist} [{message}] 		 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

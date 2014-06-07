@@ -1,5 +1,5 @@
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -35,12 +34,12 @@ function getTax()
 
 function getEcotaxTaxIncluded()
 {
-	return ($('#ecotax').length && $('#ecotax').val()  != '') ? parseFloat($('#ecotax').val()) : 0;
+	return ps_round(ecotax_tax_excl * (1 + ecotaxTaxRate), 2);
 }
 
 function getEcotaxTaxExcluded()
 {
-	return getEcotaxTaxIncluded() / (1 + ecotaxTaxRate);
+	return ecotax_tax_excl;
 }
 
 function formatPrice(price)
@@ -70,12 +69,13 @@ function calcPriceTI()
 	document.getElementById('finalPriceWithoutTax').innerHTML = (isNaN(priceTE) == true || priceTE < 0) ? '' :
 		(ps_round(priceTE, 2) + getEcotaxTaxExcluded()).toFixed(2);
 	calcReduction();
-	$('#priceTI').value = (parseFloat($('#priceTI').val()) + getEcotaxTaxIncluded()).toFixed(2);
-	$('#finalPrice').innerHTML = parseFloat($('#priceTI').val()).toFixed(2);
+	$('#priceTI').val((parseFloat($('#priceTI').val()) + getEcotaxTaxIncluded()).toFixed(2));
+	$('#finalPrice').html(parseFloat($('#priceTI').val()).toFixed(2));
 }
 
 function calcPriceTE()
 {
+	ecotax_tax_excl =  $('#ecotax').val() / (1 + ecotaxTaxRate);
 	var tax = getTax();
 	var priceTI = parseFloat(document.getElementById('priceTI').value.replace(/,/g, '.'));
 	var newPrice = ps_round(priceTI - getEcotaxTaxIncluded(), 2) / ((tax / 100) + 1);

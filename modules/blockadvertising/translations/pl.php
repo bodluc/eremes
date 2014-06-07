@@ -2,14 +2,17 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{blockadvertising}prestashop>blockadvertising_fd4c71c948857cce596a69fbaea7426b'] = 'Blok Reklamowy';
-$_MODULE['<{blockadvertising}prestashop>blockadvertising_a7339a98fd0ebea5ed982f92eed11c70'] = 'Dodaje blok do wyświetlenia reklamy.';
-$_MODULE['<{blockadvertising}prestashop>blockadvertising_226ed577d0eff50725be6447bcd5a2f0'] = 'Błąd przenoszenia wczytywanego pliku';
-$_MODULE['<{blockadvertising}prestashop>blockadvertising_6e7be6d836003f069c00cd217660913b'] = 'Konfiguracja bloku reklamy';
-$_MODULE['<{blockadvertising}prestashop>blockadvertising_83b5a65e518c21ed0a5f2b383dd9b617'] = 'Usuń zdjęcie';
-$_MODULE['<{blockadvertising}prestashop>blockadvertising_706bebc78ad992a07e4c1ce0f39def81'] = 'brak obrazka';
-$_MODULE['<{blockadvertising}prestashop>blockadvertising_8c38cf08a0d0a01bd44c682479432350'] = 'Zmień obrazek';
-$_MODULE['<{blockadvertising}prestashop>blockadvertising_936823d20c5582b055bccdc6fd03b9d1'] = 'Obraz będzie wyświetlany jako 155x163';
+
+$_MODULE['<{blockadvertising}prestashop>blockadvertising_bedd646b07e65f588b06f275bd47be07'] = 'Blok reklam';
+$_MODULE['<{blockadvertising}prestashop>blockadvertising_dc23a0e1424eda56d0700f7ebe628c78'] = 'Dodaje blok z reklamami w wybranych sekcjach Twojego sklepu.';
+$_MODULE['<{blockadvertising}prestashop>blockadvertising_b15e7271053fe9dd22d80db100179085'] = 'Ten moduł powinien być umieszczony w kolumnie, a Twój szablon ich nie posiada';
+$_MODULE['<{blockadvertising}prestashop>blockadvertising_070e16b4f77b90e802f789b5be583cfa'] = 'Błąd wczytywania pliku.';
+$_MODULE['<{blockadvertising}prestashop>blockadvertising_254f642527b45bc260048e30704edb39'] = 'Konfiguracja';
+$_MODULE['<{blockadvertising}prestashop>blockadvertising_89ca5c48bbc6b7a648a5c1996767484c'] = 'Blok zdjęcia';
+$_MODULE['<{blockadvertising}prestashop>blockadvertising_05177d68c546e5b754e39ae3ce211cc2'] = 'Grafika zostanie wyświetlona w rozmiarze 155 na 163 pikseli.';
 $_MODULE['<{blockadvertising}prestashop>blockadvertising_9ce38727cff004a058021a6c7351a74a'] = 'Adres obrazka';
 $_MODULE['<{blockadvertising}prestashop>blockadvertising_b78a3223503896721cca1303f776159b'] = 'Tytuł';
-$_MODULE['<{blockadvertising}prestashop>blockadvertising_ad3d06d03d94223fa652babc913de686'] = 'Zatwiedź';
+$_MODULE['<{blockadvertising}prestashop>blockadvertising_c9cc8cce247e49bae79f15173ce97354'] = 'Zapisz';
+
+
+return $_MODULE;

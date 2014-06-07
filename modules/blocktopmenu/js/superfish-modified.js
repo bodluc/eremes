@@ -10,7 +10,7 @@
  * CHANGELOG: http://users.tpg.com.au/j_birch/plugins/superfish/changelog.txt
  */
 
-;(function($){
+(function($){
 	$.fn.superfish = function(op){
 
 		var sf = $.fn.superfish,
@@ -85,7 +85,7 @@
 		hoverClass	: 'sfHover',
 		pathClass	: 'overideThisToUse',
 		pathLevels	: 1,
-		delay		: 100,
+		delay		: 800,
 		animation	: {opacity:'show'},
 		speed		: 'fast',
 		autoArrows	: true,

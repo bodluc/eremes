@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 8797 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -55,7 +54,7 @@ class PDFCore
 	public function render($display = true)
 	{
 		$render = false;
-		$this->pdf_renderer->setFontForLang('fr');
+		$this->pdf_renderer->setFontForLang(Context::getContext()->language->iso_code);
 		foreach ($this->objects as $object)
 		{
 			$template = $this->getTemplateObject($object);
@@ -81,7 +80,12 @@ class PDFCore
 		}
 
 		if ($render)
+		{
+			// clean the output buffer
+			if (ob_get_level() && ob_get_length() > 0)
+				ob_clean();
 			return $this->pdf_renderer->render($this->filename, $display);
+		}
 	}
 
 	public function getTemplateObject($object)

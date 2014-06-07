@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -29,6 +28,7 @@ class AdminOutstandingControllerCore  extends AdminController
 {
 	public function __construct()
 	{
+		$this->bootstrap = true;
 	 	$this->table = 'order_invoice';
 		$this->className = 'OrderInvoice';
 		$this->addRowAction('view');
@@ -52,13 +52,10 @@ class AdminOutstandingControllerCore  extends AdminController
 
 		$this->fields_list = array(
 			'number' => array(
-				'title' => $this->l('Invoice Number'),
-				'align' => 'center',
-				'width' => 20
+				'title' => $this->l('Invoice')
  			),
 			'date_add' => array(
 				'title' => $this->l('Date'),
-				'width' => 150,
 				'type' => 'date',
 				'align' => 'right',
 				'filter_key' => 'a!date_add'
@@ -70,13 +67,11 @@ class AdminOutstandingControllerCore  extends AdminController
  			),
 			'company' => array(
 				'title' => $this->l('Company'),
-				'align' => 'center',
-				'width' => 20
+				'align' => 'center'
  			),
 			'risk' => array(
 				'title' => $this->l('Risk'),
 				'align' => 'center',
-				'width' => 100,
 				'orderby' => false,
 				'type' => 'select',
 				'color' => 'color',
@@ -87,7 +82,6 @@ class AdminOutstandingControllerCore  extends AdminController
 			'outstanding_allow_amount' => array(
 				'title' => $this->l('Outstanding Allow'),
 				'align' => 'center',
-				'width' => 50,
 				'prefix' => '<b>',
 				'suffix' => '</b>',
 				'type' => 'price'
@@ -95,14 +89,12 @@ class AdminOutstandingControllerCore  extends AdminController
 			'outstanding' => array(
 				'title' => $this->l('Current Outstanding'),
 				'align' => 'center',
-				'width' => 50,
 				'callback' => 'printOutstandingCalculation',
 				'orderby' => false,
 				'search' => false
  			),
 			'id_invoice' => array(
-				'title' => $this->l('PDF'),
-				'width' => 35,
+				'title' => $this->l('Invoice'),
 				'align' => 'center',
 				'callback' => 'printPDFIcons',
 				'orderby' => false,
@@ -149,7 +141,7 @@ class AdminOutstandingControllerCore  extends AdminController
 		if (!Validate::isLoadedObject($order_invoice))
 			throw new PrestaShopException('object Customer can\'t be loaded');
 
-		return '<b>'.$customer->getOutstanding().'</b>';
+		return '<b>'.Tools::displayPrice($customer->getOutstanding(), Context::getContext()->currency).'</b>';
 	}
 
 	/**

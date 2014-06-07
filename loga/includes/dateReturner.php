@@ -1,1 +1,0 @@
-<?phpinclude_once "../common.inc.php";if(!empty($_REQUEST["dateString"])){	echo date($_REQUEST["dateString"],time());}if(!empty($_REQUEST["defaultFormat"])){	$dateFormat = unserialize(getGlobalSetting("profileDateFormat",$dateFormat));	echo implode(",",$dateFormat);}?>

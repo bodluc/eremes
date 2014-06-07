@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7307 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -31,6 +30,7 @@ class AdminPaymentControllerCore extends AdminController
 
 	public function __construct()
 	{
+		$this->bootstrap = true;
 		parent::__construct();
 
 		$shop_id = Context::getContext()->shop->id;
@@ -84,8 +84,21 @@ class AdminPaymentControllerCore extends AdminController
 			}
 	}
 
+	public function initToolbarTitle()
+	{
+		$this->toolbar_title = array_unique($this->breadcrumbs);
+	}
+
+	public function initPageHeaderToolbar()
+	{
+		parent::initPageHeaderToolbar();
+		$this->page_header_toolbar_btn = array();
+	}
+
 	public function postProcess()
 	{
+		if (Tools::getValue('action') == 'GetModuleQuickView' && Tools::getValue('ajax') == '1')
+			$this->ajaxProcessGetModuleQuickView();
 		if ($this->action)
 			$this->saveRestrictions($this->action);
 	}
@@ -102,7 +115,7 @@ class AdminPaymentControllerCore extends AdminController
 				$this->action = 'group';
 		}
 		else
-			$this->errors[] = Tools::displayError('You do not have permission to edit here.');
+			$this->errors[] = Tools::displayError('You do not have permission to edit this.');
 	}
 
 
@@ -142,6 +155,12 @@ class AdminPaymentControllerCore extends AdminController
 		return parent::initContent();
 	}
 
+	public function setMedia()
+	{
+		parent::setMedia();
+		$this->addJqueryPlugin('fancybox');
+	}
+
 	public function renderView()
 	{
 		$this->toolbar_title = $this->l('Payment');
@@ -153,7 +172,7 @@ class AdminPaymentControllerCore extends AdminController
 			$this->tpl_view_vars = array('shop_context' => $shop_context);
 			return parent::renderView();
 		}
-	
+
 		// link to modules page
 		if (isset($this->payment_modules[0]))
 			$token_modules = Tools::getAdminToken('AdminModules'.(int)Tab::getIdFromClassName('AdminModules').(int)$this->context->employee->id);
@@ -169,24 +188,24 @@ class AdminPaymentControllerCore extends AdminController
 		$lists = array(
 					array('items' => Currency::getCurrencies(),
 						  'title' => $this->l('Currency restrictions'),
-						  'desc' => $this->l('Please mark the checkbox(es) for the currency or currencies for which you want the payment module(s) to be available.'),
+						  'desc' => $this->l('Please mark each checkbox for the currency, or currencies, in which you want the payment module(s) to be available.'),
 						  'name_id' => 'currency',
 						  'identifier' => 'id_currency',
-						  'icon' => 'dollar',
+						  'icon' => 'icon-money',
 					),
 					array('items' => Group::getGroups($this->context->language->id),
 						  'title' => $this->l('Group restrictions'),
-						  'desc' => $this->l('Please mark the checkbox(es) for the groups for which you want the payment module(s) available.'),
+						  'desc' => $this->l('Please mark each checkbox for the customer group(s), in which you want the payment module(s) to be available.'),
 						  'name_id' => 'group',
 						  'identifier' => 'id_group',
-						  'icon' => 'group',
+						  'icon' => 'icon-group',
 					),
 					array('items' =>Country::getCountries($this->context->language->id),
 						  'title' => $this->l('Country restrictions'),
-						  'desc' => $this->l('Please mark the checkbox(es) for the country or countries for which you want the payment module(s) to be available.'),
+						  'desc' => $this->l('Please mark each checkbox for the country, or countries, in which you want the payment module(s) to be available.'),
 						  'name_id' => 'country',
 						  'identifier' => 'id_country',
-						  'icon' => 'world',
+						  'icon' => 'icon-globe',
 					)
 				);
 
@@ -214,6 +233,7 @@ class AdminPaymentControllerCore extends AdminController
 					if ($name_id == 'country'
 						&& isset($module->limited_countries)
 						&& !empty($module->limited_countries)
+						&& is_array($module->limited_countries)
 						&& !(in_array(strtoupper($item['iso_code']), array_map('strtoupper', $module->limited_countries))))
 						$list['items'][$key_item]['check_list'][$key_module] = null;
 				}
@@ -223,7 +243,7 @@ class AdminPaymentControllerCore extends AdminController
 		}
 
 		$this->tpl_view_vars = array(
-			'url_modules' => isset($token_modules) ? 'index.php?tab=AdminModules&token='.$token_modules.'&&filterCategory=payments_gateways' : null,
+			'modules_list' => $this->renderModulesList(),
 			'display_restrictions' => $display_restrictions,
 			'lists' => $lists,
 			'ps_base_uri' => __PS_BASE_URI__,
@@ -234,5 +254,35 @@ class AdminPaymentControllerCore extends AdminController
 
 		return parent::renderView();
 	}
+
+	public function ajaxProcessGetModuleQuickView()
+	{
+		$modules = Module::getModulesOnDisk();
+
+		foreach ($modules as $module)
+			if ($module->name == Tools::getValue('module'))
+				break;
+
+		$url = $module->url;
+
+		if (isset($module->type) && ($module->type == 'addonsPartner' || $module->type == 'addonsNative'))
+			$url = $this->context->link->getAdminLink('AdminModules').'&install='.urlencode($module->name).'&tab_module='.$module->tab.'&module_name='.$module->name.'&anchor='.ucfirst($module->name);
+
+		$this->context->smarty->assign(array(
+			'displayName' => $module->displayName,
+			'image' => $module->image,
+			'nb_rates' => (int)$module->nb_rates[0],
+			'avg_rate' => (int)$module->avg_rate[0],
+			'badges' => $module->badges,
+			'compatibility' => $module->compatibility,
+			'description_full' => $module->description_full,
+			'additional_description' => $module->additional_description,
+			'is_addons_partner' => (isset($module->type) && ($module->type == 'addonsPartner' || $module->type == 'addonsNative')),
+			'url' => $url
+		));
+		$this->smartyOutputContent('controllers/modules/quickview.tpl');
+		die(1);
+	}
+
 }
 

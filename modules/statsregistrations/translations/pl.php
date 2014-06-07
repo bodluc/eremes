@@ -2,19 +2,23 @@
 
 global $_MODULE;
 $_MODULE = array();
+
 $_MODULE['<{statsregistrations}prestashop>statsregistrations_8b15fc6468c919d299f9a601b61b95fc'] = 'Konta klientów';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_089c9061407fd978366e78b6ad1d0111'] = 'Wyświetlenie postępu rejestracji klienta';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_75abad0b891bc086fd4837e81a8c488a'] = 'Użytkownicy, którzy zatrzymali się już na etapie rejestracji:';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_4e4f3af3fb18136b8eec4b77f25095ce'] = 'Użytkownicy, którzy złożyli zamówienie bezpośrednio po rejestracji:';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_f14056d6fef225c8aafd5a99d4c70fa8'] = 'Dodaje kartę do postępu rejestracji do Statystyki tablicy.';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_247b3bdef50a59d5a83f23c4f1c8fa47'] = 'Użytkownicy, którzy zatrzymali się już na etapie rejestracji:';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_479c1246d97709e234574e1d2921994d'] = 'Odwiedzający, którzy złożyli zamówienie bezposrednio po rejestracji:';
 $_MODULE['<{statsregistrations}prestashop>statsregistrations_a751e9cc4ed4c7585ecc0d97781cb48a'] = 'Ogółem kont klientów:';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_998e4c5c80f27dec552e99dfed34889a'] = 'Eksport Csv';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_6602bbeb2956c035fb4cb5e844a4861b'] = 'Przewodnik';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_6602bbeb2956c035fb4cb5e844a4861b'] = 'Poradnik';
 $_MODULE['<{statsregistrations}prestashop>statsregistrations_fba0e64541196123bbf8e3737bf9287b'] = 'Liczba utworzonych kont klientów';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_a286f4eaef73a0b4f955c42b84472444'] = 'Nie należy traktować łączną liczbę stworzonych kont użytkownika jako najpełniejszy obraz sytuacji. Należy ją raczej wykorzystywać do analizy liczby założonych kont w danym rozkładzie czasu, co powinno pomóc w ocenie czy  rozwój sklepu następuje w dobrym kierunku.';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_76dcf557776c2b40d47b72ebcd9ac6b7'] = 'Ogólna liczba utworzonych kont użytkowników sama w sobie nie jest ważną informacją. Natomiast warto analizować ilość kont tworzonych w określonym przedziale czasu. Wskaże to czy sprawy idą właściwym torem czy nie.';
 $_MODULE['<{statsregistrations}prestashop>statsregistrations_57a6f41a27c9baa5b402d30e97d4c1e8'] = 'Jak się działać nad rozwojem rejestracji?';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_f123e4522d188fba4cbe1dc58034f95c'] = 'Jeśli nie będziesz wprowadzał ciągłych zmian, liczba zarejestrowanych klientów prawodopodobnie pozostanie niezmienna, bądź nieznacznie będzie spadać. ';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_f8426f15c536f4341dbeb4d806f76167'] = 'Znaczący wzrost lub spadek może wynikać z wprowadzonych zmian do twojego sklepu. Jeśli zmiany spowodowały znaczący spadek zarejestrowanych klientów, należy je cofnąć natomiast w przypadku gdy nastąpił znaczny wzrost ilości rejestracji zmiany należy kontynuować.';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_48ad285c9749cc74821048c49aea6a50'] = 'Zobacz, co może mieć wpływ na tworzenie kont klientów:';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_cd0d9770ca8ee818040fa3453fbaa1ae'] = 'Właściwie przeprowadzona kampania reklamowa może przyciągnąć większą liczbę odwiedzających. Wzrost kont klientów klientów będzie wynikał z jakości przeprowadzonej kampanii. Kampania skierowana do właściwej grupy docelowej może być bardziej skuteczna niż kampania na dużą skalę.';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_b2eceb617c0a86e0dbe5d844f0ec353e'] = 'Promocje, wyprzedaże i konkursy zwracają większą uwagę i zainteresowanie klientów sklepem, powodując nie tylko podtrzywywanie sklepu, ale także wzrost ruchu. W ten sposób, możesz zachęcić kupujących do składania zamówień.';
-$_MODULE['<{statsregistrations}prestashop>statsregistrations_52a6042899eefb32fcd219672c0c7179'] = 'Dla odwiedzających i klientów wygląd i ergonomia są ważniejsze niż kiedykolwiek: źle dobrane, trudny w odbiorze i skomplikowany motyw graficzny może zniechęcić odwiedzających. Należy znaleźć właściwą równowagę między wyglądem, a łatwością poruszania się po sklepie. Prawidłowe użycie słów i jasne opisy mogą zachęcić więcej odwiedzających do składania zamówień.';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_271ef73d55b8e3cc30963ca9413d4a52'] = 'Jeśli pozwolisz swój sklep uruchomić bez zmieniania czegokolwiek, liczba rejestracji klientów powinny pozostać stabilne lub wykazują niewielki spadek.';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_bcabec23c8f36cecde037bd35ca4c709'] = 'Znaczący wzrost lub spadek rejestracji użytkownika pokazuje, że była prawdopodobnie zmiana sklepu. Mając to na uwadze, proponujemy określić przyczynę, rozwiązać ten problem i wrócić w biznesie zarabiać!';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_ded9c8756dc14fd26e3150c4718cd9d0'] = 'Oto podsumowanie tego, co może wpływać na tworzenie kont klientów:';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_87c365f80449f43460a0567d3b24f29f'] = 'Kampania reklamowa może przyciągnąć większą liczbę użytkowników do sklepu internetowego. To prawdopodobnie następuje wzrost rachunków klientów i marż, co będzie zależeć od klienta "jakości". Dobrze ukierunkowane reklamy są zazwyczaj bardziej skuteczne niż reklamy na dużą skalę ... i to jest tańsze!';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_aa09be43df78c214e64ac3c3b255708e'] = 'Promocje, sprzedaże, promocje i/lub konkursy zazwyczaj domagają grzeczności dla kupujących. Oferując takie rzeczy utrzyma się nie tylko firmę żywą, będzie to również zwiększenie ruchu, budowanie lojalność klientów i rzeczywiście zmienić aktualną koncepcję e-commerce.';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_8cb5605d77d1d2f9eab6191c0e027747'] = 'Wygląd i przystępność są jeszcze ważniejsze niż kiedykolwiek: nieprzemyślana lub ciężka do nawigacji struktura i grafika może ograniczyć odwiedzających. Musisz wypośrodkować pomiędzy innowacyjnym designem i łatwością poruszania się przez odwiedzających. Odpowiednia pisownia i przejrzystość powodują więcej zaufania klientów do sklepu.';
+$_MODULE['<{statsregistrations}prestashop>statsregistrations_998e4c5c80f27dec552e99dfed34889a'] = 'Export CSV';
+
+
+return $_MODULE;

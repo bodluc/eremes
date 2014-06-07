@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7506 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -47,11 +46,15 @@ class PricesDropControllerCore extends FrontController
 		$nbProducts = Product::getPricesDrop($this->context->language->id, null, null, true);
 		$this->pagination($nbProducts);
 
+		$products = Product::getPricesDrop($this->context->language->id, (int)$this->p - 1, (int)$this->n, false, $this->orderBy, $this->orderWay);
+		$this->addColorsToProductList($products);
+
 		$this->context->smarty->assign(array(
-			'products' => Product::getPricesDrop($this->context->language->id, (int)$this->p - 1, (int)$this->n, false, $this->orderBy, $this->orderWay),
+			'products' => $products,
 			'add_prod_display' => Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY'),
 			'nbProducts' => $nbProducts,
-			'homeSize' => Image::getSize('home')
+			'homeSize' => Image::getSize(ImageType::getFormatedName('home')),
+			'comparator_max_item' => Configuration::get('PS_COMPARATOR_MAX_ITEM')
 		));
 
 		$this->setTemplate(_PS_THEME_DIR_.'prices-drop.tpl');

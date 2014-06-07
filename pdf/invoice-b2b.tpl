@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6753 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
@@ -98,10 +97,10 @@
 		<td style="width: 15%; padding-right: 7px; text-align: right; vertical-align: top; font-size: 7pt;">
 			<!-- CUSTOMER INFORMATIONS -->
 			<b>{l s='Order Number:' pdf='true'}</b><br />
-			{'%06d'|sprintf:$order->id}<br />
+			{$order->getUniqReference()}<br />
 			<br />
 			<b>{l s='Order Date:' pdf='true'}</b><br />
-			{$order->date_add|date_format:"%d-%m-%Y %H:%M"}<br />
+			{dateFormat date=$order->date_add full=0}<br />
 			<br />
 			<b>{l s='Payment Method:' pdf='true'}</b><br />
 			<table style="width: 100%;">
@@ -125,17 +124,17 @@
 					<td style="text-align: left; background-color: #4D4D4D; color: #FFF; padding-left: 10px; font-weight: bold; width: 45%">{l s='Product / Reference' pdf='true'}</td>
                     <!-- unit price tax excluded is mandatory -->
 					{if !$tax_excluded_display}
-					    <td style="background-color: #4D4D4D; color: #FFF; text-align: right; font-weight: bold;; width: 10%">{l s='Unit Price' pdf='true'} <br />{l s='(Tax Excl.)' pdf='true'}</td>
+					    <td style="background-color: #4D4D4D; color: #FFF; text-align: right; font-weight: bold; width: 10%">{l s='Unit Price' pdf='true'} <br />{l s='(Tax Excl.)' pdf='true'}</td>
    					{/if}
-				    <td style="background-color: #4D4D4D; color: #FFF; text-align: right; font-weight: bold;; width: 10%">{l s='Unit Price' pdf='true'}</td>
-				    <td style="background-color: #4D4D4D; color: #FFF; text-align: right; font-weight: bold;; width: 10%">{l s='Discount' pdf='true'}</td>
+				    <td style="background-color: #4D4D4D; color: #FFF; text-align: right; font-weight: bold; width: 10%">{l s='Unit Price' pdf='true'}</td>
+				    <td style="background-color: #4D4D4D; color: #FFF; text-align: right; font-weight: bold; width: 10%">{l s='Discount' pdf='true'}</td>
 					<td style="background-color: #4D4D4D; color: #FFF; text-align: center; font-weight: bold; width: 10%">{l s='Qty' pdf='true'}</td>
-					<td style="background-color: #4D4D4D; color: #FFF; text-align: right; font-weight: bold;; width: 15%">{l s='Total' pdf='true'}</td>
+					<td style="background-color: #4D4D4D; color: #FFF; text-align: right; font-weight: bold; width: 15%">{l s='Total' pdf='true'}</td>
 				</tr>
 				{foreach $order_details as $order_detail}
 				{cycle values='#FFF,#DDD' assign=bgcolor}
 				<tr style="line-height:6px;background-color:{$bgcolor};">
-					<td style="text-align: left; width: 45%">{$order_detail.product_name}</td>
+					<td style="text-align: left; width: 45%">{$order_detail.product_name}{if isset($order_detail.product_reference) && !empty($order_detail.product_reference)} ({l s='Reference:' pdf='true'} {$order_detail.product_reference}){/if}</td>
                     <!-- unit price tax excluded is mandatory -->
 					{if !$tax_excluded_display}
 					    <td style="text-align: right; width: 10%">
@@ -152,7 +151,7 @@
 					<td style="text-align: right; width: 10%">
                     {if (isset($order_detail.reduction_amount) && $order_detail.reduction_amount > 0)}
                         -{displayPrice currency=$order->id_currency price=$order_detail.reduction_amount}
-                    {else if (isset($order_detail.reduction_percent) && $order_detail.reduction_percent > 0)}
+                    {elseif (isset($order_detail.reduction_percent) && $order_detail.reduction_percent > 0)}
                         -{$order_detail.reduction_percent}%
                     {else}
                     --

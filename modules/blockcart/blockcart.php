@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -34,17 +33,19 @@ class BlockCart extends Module
 	{
 		$this->name = 'blockcart';
 		$this->tab = 'front_office_features';
-		$this->version = '1.2';
+		$this->version = '1.5';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
-		parent::__construct();
+		$this->bootstrap = true;
+		parent::__construct();	
 
 		$this->displayName = $this->l('Cart block');
 		$this->description = $this->l('Adds a block containing the customer\'s shopping cart.');
+		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 	}
 
-	public function assignContentVars(&$params)
+	public function assignContentVars($params)
 	{
 		global $errors;
 
@@ -54,13 +55,7 @@ class BlockCart extends Module
 		else
 			$currency = $this->context->currency;
 
-		if ($params['cart']->id_customer)
-		{
-			$customer = new Customer((int)$params['cart']->id_customer);
-			$taxCalculationMethod = Group::getPriceDisplayMethod((int)$customer->id_default_group);
-		}
-		else
-			$taxCalculationMethod = Group::getDefaultPriceDisplayMethod();
+		$taxCalculationMethod = Group::getPriceDisplayMethod((int)Group::getCurrent()->id);
 
 		$useTax = !($taxCalculationMethod == PS_TAX_EXC);
 
@@ -70,8 +65,9 @@ class BlockCart extends Module
 			$nbTotalProducts += (int)$product['cart_quantity'];
 		$cart_rules = $params['cart']->getCartRules();
 
-		$shipping_cost = Tools::displayPrice($params['cart']->getOrderTotal($useTax, Cart::ONLY_SHIPPING), $currency);
-		$shipping_cost_float = Tools::convertPrice($params['cart']->getOrderTotal($useTax, Cart::ONLY_SHIPPING), $currency);
+		$base_shipping = $params['cart']->getOrderTotal($useTax, Cart::ONLY_SHIPPING);
+		$shipping_cost = Tools::displayPrice($base_shipping, $currency);
+		$shipping_cost_float = Tools::convertPrice($base_shipping, $currency);
 		$wrappingCost = (float)($params['cart']->getOrderTotal($useTax, Cart::ONLY_WRAPPING));
 		$totalToPay = $params['cart']->getOrderTotal($useTax);
 
@@ -96,12 +92,24 @@ class BlockCart extends Module
 				foreach ($products as &$product)
 					if ($product['id_product'] == $cart_rule['gift_product'] && $product['id_product_attribute'] == $cart_rule['gift_product_attribute'])
 					{
+						$product['is_gift'] = 1;
 						$product['total_wt'] = Tools::ps_round($product['total_wt'] - $product['price_wt'], (int)$currency->decimals * _PS_PRICE_DISPLAY_PRECISION_);
 						$product['total'] = Tools::ps_round($product['total'] - $product['price'], (int)$currency->decimals * _PS_PRICE_DISPLAY_PRECISION_);
 						$cart_rule['value_real'] = Tools::ps_round($cart_rule['value_real'] - $product['price_wt'], (int)$currency->decimals * _PS_PRICE_DISPLAY_PRECISION_);
 						$cart_rule['value_tax_exc'] = Tools::ps_round($cart_rule['value_tax_exc'] - $product['price'], (int)$currency->decimals * _PS_PRICE_DISPLAY_PRECISION_);
 					}
 			}
+		}
+
+		$total_free_shipping = 0;
+		if ($free_shipping = Tools::convertPrice(floatval(Configuration::get('PS_SHIPPING_FREE_PRICE')), $currency))
+		{
+			$total_free_shipping =  floatval($free_shipping - ($params['cart']->getOrderTotal(true, Cart::ONLY_PRODUCTS) + $params['cart']->getOrderTotal(true, Cart::ONLY_DISCOUNTS)));
+			$discounts = $params['cart']->getCartRules(CartRule::FILTER_ACTION_SHIPPING);
+			if ($total_free_shipping < 0)
+				$total_free_shipping = 0;
+			if (is_array($discounts) && count($discounts))
+				$total_free_shipping = 0;
 		}
 
 		$this->smarty->assign(array(
@@ -120,7 +128,8 @@ class BlockCart extends Module
 			'total' => Tools::displayPrice($totalToPay, $currency),
 			'order_process' => Configuration::get('PS_ORDER_PROCESS_TYPE') ? 'order-opc' : 'order',
 			'ajax_allowed' => (int)(Configuration::get('PS_BLOCK_CART_AJAX')) == 1 ? true : false,
-			'static_token' => Tools::getToken(false)
+			'static_token' => Tools::getToken(false),
+			'free_shipping' => $total_free_shipping
 		));
 		if (count($errors))
 			$this->smarty->assign('errors', $errors);
@@ -130,38 +139,24 @@ class BlockCart extends Module
 
 	public function getContent()
 	{
-		$output = '<h2>'.$this->displayName.'</h2>';
+		$output = '';
 		if (Tools::isSubmit('submitBlockCart'))
 		{
-			$ajax = Tools::getValue('cart_ajax');
+			$ajax = Tools::getValue('PS_BLOCK_CART_AJAX');
 			if ($ajax != 0 && $ajax != 1)
-				$output .= '<div class="alert error">'.$this->l('Ajax : Invalid choice.').'</div>';
+				$output .= $this->displayError($this->l('Ajax: Invalid choice.'));
 			else
 				Configuration::updateValue('PS_BLOCK_CART_AJAX', (int)($ajax));
-			$output .= '<div class="conf confirm">'.$this->l('Settings updated').'</div>';
+
+			if (($productNbr = (int)Tools::getValue('PS_BLOCK_CART_XSELL_LIMIT') < 0))
+				$output .= $this->displayError($this->l('Please complete the "Products to display" field.'));
+			else
+			{
+				Configuration::updateValue('PS_BLOCK_CART_XSELL_LIMIT', (int)(Tools::getValue('PS_BLOCK_CART_XSELL_LIMIT')));
+				$output .= $this->displayConfirmation($this->l('Settings updated'));
+			}
 		}
-		return $output.$this->displayForm();
-	}
-
-	public function displayForm()
-	{
-		return '
-		<form action="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'" method="post">
-			<fieldset>
-				<legend><img src="'.$this->_path.'logo.gif" alt="" title="" />'.$this->l('Settings').'</legend>
-
-				<label>'.$this->l('Ajax cart').'</label>
-				<div class="margin-form">
-					<input type="radio" name="cart_ajax" id="ajax_on" value="1" '.(Tools::getValue('cart_ajax', Configuration::get('PS_BLOCK_CART_AJAX')) ? 'checked="checked" ' : '').'/>
-					<label class="t" for="ajax_on"> <img src="../img/admin/enabled.gif" alt="'.$this->l('Enabled').'" title="'.$this->l('Enabled').'" /></label>
-					<input type="radio" name="cart_ajax" id="ajax_off" value="0" '.(!Tools::getValue('cart_ajax', Configuration::get('PS_BLOCK_CART_AJAX')) ? 'checked="checked" ' : '').'/>
-					<label class="t" for="ajax_off"> <img src="../img/admin/disabled.gif" alt="'.$this->l('Disabled').'" title="'.$this->l('Disabled').'" /></label>
-					<p class="clear">'.$this->l('Activate AJAX mode for cart (compatible with the default theme)').'</p>
-				</div>
-
-				<center><input type="submit" name="submitBlockCart" value="'.$this->l('Save').'" class="button" /></center>
-			</fieldset>
-		</form>';
+		return $output.$this->renderForm();
 	}
 
 	public function install()
@@ -170,7 +165,9 @@ class BlockCart extends Module
 			parent::install() == false
 			|| $this->registerHook('top') == false
 			|| $this->registerHook('header') == false
-			|| Configuration::updateValue('PS_BLOCK_CART_AJAX', 1) == false)
+			|| $this->registerHook('actionCartListOverride') == false
+			|| Configuration::updateValue('PS_BLOCK_CART_AJAX', 1) == false
+			|| Configuration::updateValue('PS_BLOCK_CART_XSELL_LIMIT', 12) == false)
 			return false;
 		return true;
 	}
@@ -181,7 +178,10 @@ class BlockCart extends Module
 			return;
 
 		// @todo this variable seems not used
-		$this->smarty->assign('order_page', strpos($_SERVER['PHP_SELF'], 'order') !== false);
+		$this->smarty->assign(array(
+			'order_page' => (strpos($_SERVER['PHP_SELF'], 'order') !== false),
+			'blockcart_top' => (isset($params['blockcart_top']) && $params['blockcart_top']) ? true : false,
+		));
 		$this->assignContentVars($params);
 		return $this->display(__FILE__, 'blockcart.tpl');
 	}
@@ -197,22 +197,118 @@ class BlockCart extends Module
 			return;
 
 		$this->assignContentVars($params);
-		$res = $this->display(__FILE__, 'blockcart-json.tpl');
+		$res = Tools::jsonDecode($this->display(__FILE__, 'blockcart-json.tpl'), true);
+		if (is_array($res) && $id_product = Tools::getValue('id_product'))
+		{
+			$this->smarty->assign('orderProducts', OrderDetail::getCrossSells($id_product, $this->context->language->id, Configuration::get('PS_BLOCK_CART_XSELL_LIMIT')));
+			$res['crossSelling'] = $this->display(__FILE__, 'crossselling.tpl');
+		}
+		$res = Tools::jsonEncode($res);
 		return $res;
+	}
+
+	public function hookActionCartListOverride($params)
+	{
+		if (!Configuration::get('PS_BLOCK_CART_AJAX'))
+			return;
+
+		$this->assignContentVars(array('cookie' => $this->context->cookie, 'cart' => $this->context->cart));
+		$params['json'] = $this->display(__FILE__, 'blockcart-json.tpl');
 	}
 
 	public function hookHeader()
 	{
 		if (Configuration::get('PS_CATALOG_MODE'))
 			return;
+
 		$this->context->controller->addCSS(($this->_path).'blockcart.css', 'all');
 		if ((int)(Configuration::get('PS_BLOCK_CART_AJAX')))
+		{
 			$this->context->controller->addJS(($this->_path).'ajax-cart.js');
+			$this->context->controller->addJqueryPlugin(array('scrollTo', 'serialScroll', 'bxslider'));
+		}
 	}
 	
 	public function hookTop($params)
 	{
+		$params['blockcart_top'] = true;
 		return $this->hookRightColumn($params);
 	}
-}
+	
+	public function hookDisplayNav($params)
+	{
+		$params['blockcart_top'] = true;
+		return $this->hookTop($params);
+	}
+	
+	public function renderForm()
+	{
+		$fields_form = array(
+			'form' => array(
+				'legend' => array(
+					'title' => $this->l('Settings'),
+					'icon' => 'icon-cogs'
+				),
+				'input' => array(
+					array(
+						'type' => 'switch',
+						'label' => $this->l('Ajax cart'),
+						'name' => 'PS_BLOCK_CART_AJAX',
+						'is_bool' => true,
+						'desc' => $this->l('Activate Ajax mode for the cart (compatible with the default theme).'),
+						'values' => array(
+									array(
+										'id' => 'active_on',
+										'value' => 1,
+										'label' => $this->l('Enabled')
+									),
+									array(
+										'id' => 'active_off',
+										'value' => 0,
+										'label' => $this->l('Disabled')
+									)
+								),
+						),
+					array(
+						'type' => 'text',
+						'label' => $this->l('Products to display in cross-selling'),
+						'name' => 'PS_BLOCK_CART_XSELL_LIMIT',
+						'class' => 'fixed-width-xs',
+						'desc' => $this->l('Define the number of products to be displayed in the cross-selling block.')
+					),
+				),
+				'submit' => array(
+					'title' => $this->l('Save')
+				)
+			),
+		);
+		
+		$helper = new HelperForm();
+		$helper->show_toolbar = false;
+		$helper->table =  $this->table;
+		$lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+		$helper->default_form_language = $lang->id;
+		$helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
+		$this->fields_form = array();
 
+		$helper->identifier = $this->identifier;
+		$helper->submit_action = 'submitBlockCart';
+		$helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
+		$helper->token = Tools::getAdminTokenLite('AdminModules');
+		$helper->tpl_vars = array(
+			'fields_value' => $this->getConfigFieldsValues(),
+			'languages' => $this->context->controller->getLanguages(),
+			'id_language' => $this->context->language->id
+		);
+
+		return $helper->generateForm(array($fields_form));
+	}
+	
+	public function getConfigFieldsValues()
+	{
+		return array(
+			'PS_BLOCK_CART_AJAX' => (bool)Tools::getValue('PS_BLOCK_CART_AJAX', Configuration::get('PS_BLOCK_CART_AJAX')),
+			'PS_BLOCK_CART_XSELL_LIMIT' => (int)Tools::getValue('PS_BLOCK_CART_XSELL_LIMIT', Configuration::get('PS_BLOCK_CART_XSELL_LIMIT'))
+		);
+	}
+}

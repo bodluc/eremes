@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -73,6 +72,25 @@ class OrderSlipCore extends ObjectModel
 			'partial' =>				array('type' => self::TYPE_INT),
 			'date_add' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
 			'date_upd' => 				array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
+		),
+	);
+
+	protected $webserviceParameters = array(
+		'objectNodeName' => 'order_slip',
+		'objectsNodeName' => 'order_slips',
+		'fields' => array(
+			'id_customer' => array('xlink_resource'=> 'customers'),
+			'id_order' => array('xlink_resource'=> 'orders'),
+		),
+		'associations' => array(
+			'order_slip_details' => array('resource' => 'order_slip_detail', 'setter' => false, 'virtual_entity' => true,
+				'fields' => array(
+					'id' =>  array(),
+					'id_order_detail' => array('required' => true),
+					'product_quantity' => array('required' => true),
+					'amount_tax_excl' => array('required' => true),
+					'amount_tax_incl' => array('required' => true),
+				)),
 		),
 	);
 
@@ -130,19 +148,6 @@ class OrderSlipCore extends ObjectModel
 			{
 				$products[$key] = $product;
 				$products[$key]['product_quantity'] = $slip_quantity[$product['id_order_detail']];
-				if (count($cart_rules))
-				{
-					$order->setProductPrices($product);
-					$realProductPrice = $products[$key]['product_price'];
-					// Todo : must be updated to use the cart rules
-					foreach ($cart_rules as $cart_rule)
-					{
-						if ($cart_rule['reduction_percent'])
-							$products[$key]['product_price'] -= $realProductPrice * ($cart_rule['reduction_percent'] / 100);
-						elseif ($cart_rule['reduction_amount'])
-							$products[$key]['product_price'] -= (($cart_rule['reduction_amount'] * ($product['product_price_wt'] / $order->total_products_wt)) / (1.00 + ($product['tax_rate'] / 100)));
-					}
-				}
 			}
 		return $order->getProducts($products);
 	}
@@ -213,9 +218,19 @@ class OrderSlipCore extends ObjectModel
 		$orderSlip = new OrderSlip();
 		$orderSlip->id_customer = (int)($order->id_customer);
 		$orderSlip->id_order = (int)($order->id);
-		$orderSlip->shipping_cost = (int)($shipping_cost);
+		$orderSlip->shipping_cost = (int)$shipping_cost;
+		if ($orderSlip->shipping_cost)
+			$orderSlip->shipping_cost_amount = $order->total_shipping_tax_incl;
 		$orderSlip->conversion_rate = $currency->conversion_rate;
 		$orderSlip->partial = 0;
+
+		$orderSlip->amount = $orderSlip->shipping_cost_amount;
+		foreach ($productList as $id_order_detail)
+		{
+			$order_detail = new OrderDetail((int)$id_order_detail);
+			$orderSlip->amount += $order_detail->unit_price_tax_incl * $qtyList[(int)$id_order_detail];
+		}
+
 		if (!$orderSlip->add())
 			return false;
 
@@ -285,6 +300,53 @@ class OrderSlipCore extends ObjectModel
 			
 			Db::getInstance()->insert('order_slip_detail', $insertOrderSlip);
 		}
+	}
+	
+	public function getEcoTaxTaxesBreakdown()
+	{
+		$ecotax_detail = array(); 
+		foreach ($this->getOrdersSlipDetail((int)$this->id) as $order_slip_details)
+		{
+				$row = Db::getInstance()->getRow('
+					SELECT `ecotax_tax_rate` as `rate`, `ecotax` as `ecotax_tax_excl`, `ecotax` as `ecotax_tax_incl`, `product_quantity`
+					FROM `'._DB_PREFIX_.'order_detail`
+					WHERE `id_order_detail` = '.(int)$order_slip_details['id_order_detail']
+				);
+				
+			if (!isset($ecotax_detail[$row['rate']]))
+				$ecotax_detail[$row['rate']] = array('ecotax_tax_incl' => 0, 'ecotax_tax_excl' => 0, 'rate' => $row['rate']);
+
+			$ecotax_detail[$row['rate']]['ecotax_tax_incl'] += Tools::ps_round(($row['ecotax_tax_excl'] * $order_slip_details['product_quantity']) + ($row['ecotax_tax_excl'] * $order_slip_details['product_quantity'] * $row['rate'] / 100), 2);
+			$ecotax_detail[$row['rate']]['ecotax_tax_excl'] += Tools::ps_round($row['ecotax_tax_excl'] * $order_slip_details['product_quantity'], 2);
+		}
+
+		return $ecotax_detail;
+	}
+
+	public function getWsOrderSlipDetails()
+	{
+		$query = 'SELECT id_order_slip as id, id_order_detail, product_quantity, amount_tax_excl, amount_tax_incl 
+		FROM `'._DB_PREFIX_.'order_slip_detail`
+		WHERE id_order_slip = '.(int)$this->id;
+		$result = Db::getInstance()->executeS($query);
+		return $result;
+	}
+
+	public function setWsOrderSlipDetails($values)
+	{
+		if (Db::getInstance()->execute('DELETE from `'._DB_PREFIX_.'order_slip_detail` where id_order_slip = '.(int)$this->id))
+		{
+			$query = 'INSERT INTO `'._DB_PREFIX_.'order_slip_detail`(`id_order_slip`, `id_order_detail`, `product_quantity`, `amount_tax_excl`, `amount_tax_incl`) VALUES ';
+
+			foreach ($values as $value)
+				$query .= '('.(int)$this->id.', '.(int)$value['id_order_detail'].', '.(int)$value['product_quantity'].', '.
+					(isset($value['amount_tax_excl']) ? (float)$value['amount_tax_excl'] : 'NULL').', '.
+					(isset($value['amount_tax_incl']) ? (float)$value['amount_tax_incl'] : 'NULL').
+					'),';
+			$query = rtrim($query, ',');
+			Db::getInstance()->execute($query);
+		}
+		return true;
 	}
 }
 

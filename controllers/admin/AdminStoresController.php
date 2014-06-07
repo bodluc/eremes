@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 8971 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -29,6 +28,7 @@ class AdminStoresControllerCore extends AdminController
 {
 	public function __construct()
 	{
+		$this->bootstrap = true;
 	 	$this->table = 'store';
 		$this->className = 'Store';
 	 	$this->lang = false;
@@ -45,23 +45,25 @@ class AdminStoresControllerCore extends AdminController
 		);
 
 		$this->fields_list = array(
-			'id_store' => array('title' => $this->l('ID'), 'align' => 'center', 'width' => 25),
-			'name' => array('title' => $this->l('Name'), 'width' => 120, 'filter_key' => 'a!name'),
-			'address1' => array('title' => $this->l('Address'), 'width' => 120, 'filter_key' => 'a!address1'),
-			'city' => array('title' => $this->l('City'), 'width' => 100),
-			'postcode' => array('title' => $this->l('Zip code'), 'width' => 50),
-			'state' => array('title' => $this->l('State'), 'width' => 100, 'filter_key' => 'st!name'),
-			'country' => array('title' => $this->l('Country'), 'width' => 100, 'filter_key' => 'cl!name'),
-			'phone' => array('title' => $this->l('Phone'), 'width' => 70),
-			'fax' => array('title' => $this->l('Fax'), 'width' => 70),
-			'active' => array('title' => $this->l('Enabled'), 'width' => 70, 'align' => 'center', 'active' => 'status', 'type' => 'bool', 'orderby' => false)
+			'id_store' => array('title' => $this->l('ID'), 'align' => 'center', 'class' => 'fixed-width-xs'),
+			'name' => array('title' => $this->l('Name'), 'filter_key' => 'a!name'),
+			'address1' => array('title' => $this->l('Address'), 'filter_key' => 'a!address1'),
+			'city' => array('title' => $this->l('City')),
+			'postcode' => array('title' => $this->l('Zip/postal code')),
+			'state' => array('title' => $this->l('State'), 'filter_key' => 'st!name'),
+			'country' => array('title' => $this->l('Country'), 'filter_key' => 'cl!name'),
+			'phone' => array('title' => $this->l('Phone')),
+			'fax' => array('title' => $this->l('Fax')),
+			'active' => array('title' => $this->l('Enabled'), 'align' => 'center', 'active' => 'status', 'type' => 'bool', 'orderby' => false)
 		);
 
 	 	$this->bulk_actions = array(
-			'delete' => array('text' => $this->l('Delete selected'), 'confirm' => $this->l('Delete selected items?')),
-			'enableSelection' => array('text' => $this->l('Enable selection')),
-			'disableSelection' => array('text' => $this->l('Disable selection'))
-			);
+			'delete' => array(
+				'text' => $this->l('Delete selected'),
+				'confirm' => $this->l('Delete selected items?'),
+				'icon' => 'icon-trash'
+			)
+		);
 
 		$this->fields_options = array(
 			'general' => array(
@@ -69,37 +71,38 @@ class AdminStoresControllerCore extends AdminController
 				'fields' =>	array(
 					'PS_STORES_DISPLAY_FOOTER' => array(
 						'title' => $this->l('Display in the footer'),
-						'desc' => $this->l('Display a link to the store locator in the footer'),
+						'hint' => $this->l('Display a link to the store locator in the footer.'),
 						'cast' => 'intval',
 						'type' => 'bool'
 					),
 					'PS_STORES_DISPLAY_SITEMAP' => array(
 						'title' => $this->l('Display in the sitemap page'),
-						'desc' => $this->l('Display a link to the store locator in the sitemap page'),
+						'hint' => $this->l('Display a link to the store locator in the sitemap page.'),
 						'cast' => 'intval',
 						'type' => 'bool'
 					),
 					'PS_STORES_SIMPLIFIED' => array(
 						'title' => $this->l('Show a simplified store locator'),
-						'desc' => $this->l('No map, no search, only a store directory'),
+						'hint' => $this->l('No map, no search, only a store directory.'),
 						'cast' => 'intval',
 						'type' => 'bool'
 					),
 					'PS_STORES_CENTER_LAT' => array(
-						'title' => $this->l('Latitude by default'),
-						'desc' => $this->l('Used for the position by default of the map'),
+						'title' => $this->l('Default latitude'),
+						'hint' => $this->l('Used for the initial position of the map.'),
 						'cast' => 'floatval',
 						'type' => 'text',
 						'size' => '10'
 					),
 					'PS_STORES_CENTER_LONG' => array(
-						'title' => $this->l('Longitude by default'),
-						'desc' => $this->l('Used for the position by default of the map'),
+						'title' => $this->l('Default longitude'),
+						'hint' => $this->l('Used for the initial position of the map.'),
 						'cast' => 'floatval',
 						'type' => 'text',
 						'size' => '10'
 					)
-				)
+				),
+				'submit' => array('title' => $this->l('Save'))
 			)
 		);
 
@@ -125,8 +128,20 @@ class AdminStoresControllerCore extends AdminController
 
 		if ($this->display == 'options')
 			unset($this->toolbar_btn['new']);
-		else
+		else if ($this->display != 'add' && $this->display != 'edit')
 			unset($this->toolbar_btn['save']);
+	}
+
+	public function initPageHeaderToolbar()
+	{
+		if (empty($this->display))
+			$this->page_header_toolbar_btn['new_store'] = array(
+				'href' => self::$currentIndex.'&addstore&token='.$this->token,
+				'desc' => $this->l('Add new store', null, null, false),
+				'icon' => 'process-icon-new'
+			);
+		
+		parent::initPageHeaderToolbar();
 	}
 
 	public function renderList()
@@ -151,47 +166,51 @@ class AdminStoresControllerCore extends AdminController
 
 	public function renderForm()
 	{
+		if (!($obj = $this->loadObject(true)))
+			return;
+
+		$image = _PS_STORE_IMG_DIR_.$obj->id.'.jpg';
+		$image_url = ImageManager::thumbnail($image, $this->table.'_'.(int)$obj->id.'.'.$this->imageType, 350,
+			$this->imageType, true, true);
+		$image_size = file_exists($image) ? filesize($image) / 1000 : false;
+
 		$this->fields_form = array(
 			'legend' => array(
 				'title' => $this->l('Stores'),
-				'image' => '../img/admin/home.gif'
+				'icon' => 'icon-home'
 			),
 			'input' => array(
 				array(
 					'type' => 'text',
 					'label' => $this->l('Name'),
 					'name' => 'name',
-					'size' => 33,
 					'required' => false,
-					'hint' => sprintf($this->l('Allowed characters: letters, spaces and %s'), '().-'),
-					'desc' => $this->l('Store name (e.g. Citycentre Mall Store)')
+					'hint' => array(
+						$this->l('Store name (e.g. City Center Mall Store).'),
+						$this->l('Allowed characters: letters, spaces and %s')
+					)
 				),
 				array(
 					'type' => 'text',
 					'label' => $this->l('Address'),
 					'name' => 'address1',
-					'size' => 33,
 					'required' => true
 				),
 				array(
 					'type' => 'text',
 					'label' => $this->l('Address (2)'),
-					'name' => 'address2',
-					'size' => 33
+					'name' => 'address2'
 				),
 				array(
 					'type' => 'text',
-					'label' => $this->l('Postal Code/Zip Code'),
+					'label' => $this->l('Zip/postal Code'),
 					'name' => 'postcode',
-					'size' => 6,
 					'required' => true
 				),
 				array(
 					'type' => 'text',
 					'label' => $this->l('City'),
 					'name' => 'city',
-					'size' => 33,
-					'class' => 'uppercase',
 					'required' => true
 				),
 				array(
@@ -222,27 +241,23 @@ class AdminStoresControllerCore extends AdminController
 					'label' => $this->l('Latitude / Longitude'),
 					'name' => 'latitude',
 					'required' => true,
-					'size' => 11,
 					'maxlength' => 12,
-					'desc' => $this->l('Store coordinates (e.g. 45.265469/-47.226478)')
+					'hint' => $this->l('Store coordinates (e.g. 45.265469/-47.226478).')
 				),
 				array(
 					'type' => 'text',
 					'label' => $this->l('Phone'),
-					'name' => 'phone',
-					'size' => 33
+					'name' => 'phone'
 				),
 				array(
 					'type' => 'text',
 					'label' => $this->l('Fax'),
-					'name' => 'fax',
-					'size' => 33
+					'name' => 'fax'
 				),
 				array(
 					'type' => 'text',
-					'label' => $this->l('E-mail address'),
-					'name' => 'email',
-					'size' => 33
+					'label' => $this->l('Email address'),
+					'name' => 'email'
 				),
 				array(
 					'type' => 'textarea',
@@ -252,11 +267,10 @@ class AdminStoresControllerCore extends AdminController
 					'rows' => 4
 				),
 				array(
-					'type' => 'radio',
+					'type' => 'switch',
 					'label' => $this->l('Status'),
 					'name' => 'active',
 					'required' => false,
-					'class' => 't',
 					'is_bool' => true,
 					'values' => array(
 						array(
@@ -270,20 +284,22 @@ class AdminStoresControllerCore extends AdminController
 							'label' => $this->l('Disabled')
 						)
 					),
-					'desc' => $this->l('Whether or not to display this store')
-				)
-			),
-			'rightCols' => array (
-				'input' => array(
+					'hint' => $this->l('Whether or not to display this store.')
+				),
+				array(
 					'type' => 'file',
 					'label' => $this->l('Picture'),
 					'name' => 'image',
-					'desc' => $this->l('Storefront picture')
+					'display_image' => true,
+					'image' => $image_url ? $image_url : false,
+					'size' => $image_size,
+					'hint' => $this->l('Storefront picture.')
 				)
 			),
+			'hours' => array(
+			),
 			'submit' => array(
-				'title' => $this->l('   Save   '),
-				'class' => 'button'
+				'title' => $this->l('Save'),
 			)
 		);
 		
@@ -291,15 +307,10 @@ class AdminStoresControllerCore extends AdminController
 		{
 			$this->fields_form['input'][] = array(
 				'type' => 'shop',
-				'label' => $this->l('Shop association:'),
+				'label' => $this->l('Shop association'),
 				'name' => 'checkBoxShopAsso',
 			);
 		}
-
-		if (!($obj = $this->loadObject(true)))
-			return;
-
-		$image = ImageManager::thumbnail(_PS_STORE_IMG_DIR_.'/'.$obj->id.'.jpg', $this->table.'_'.(int)$obj->id.'.'.$this->imageType, 350, $this->imageType, true);
 
 		$days = array();
 		$days[1] = $this->l('Monday');
@@ -317,8 +328,6 @@ class AdminStoresControllerCore extends AdminController
 		$this->fields_value = array(
 			'latitude' => $this->getFieldValue($obj, 'latitude') ? $this->getFieldValue($obj, 'latitude') : Configuration::get('PS_STORES_CENTER_LAT'),
 			'longitude' => $this->getFieldValue($obj, 'longitude') ? $this->getFieldValue($obj, 'longitude') : Configuration::get('PS_STORES_CENTER_LONG'),
-			'image' => $image ? $image : false,
-			'size' => $image ? filesize(_PS_STORE_IMG_DIR_.'/'.$obj->id.'.jpg') / 1000 : false,
 			'days' => $days,
 			'hours' => isset($hours_unserialized) ? $hours_unserialized : false
 		);
@@ -332,8 +341,12 @@ class AdminStoresControllerCore extends AdminController
 		{
 			/* Cleaning fields */
 			foreach ($_POST as $kp => $vp)
-				if ($kp != 'checkBoxShopAsso_store')
+				if (!in_array($kp, array('checkBoxShopGroupAsso_store', 'checkBoxShopAsso_store')))
 					$_POST[$kp] = trim($vp);
+
+			/* Rewrite latitude and longitude to 8 digits */
+			$_POST['latitude'] = number_format($_POST['latitude'], 8);
+			$_POST['longitude'] = number_format($_POST['longitude'], 8);
 
 			/* If the selected country does not contain states */
 			$id_state = (int)Tools::getValue('id_state');
@@ -341,7 +354,7 @@ class AdminStoresControllerCore extends AdminController
 			$country = new Country((int)$id_country);
 
 			if ($id_country && $country && !(int)$country->contains_states && $id_state)
-				$this->errors[] = Tools::displayError('You have selected a state for a country that does not contain states.');
+				$this->errors[] = Tools::displayError('You\'ve selected a state for a country that does not contain states.');
 
 			/* If the selected country contains states, then a state have to be selected */
 			if ((int)$country->contains_states && !$id_state)
@@ -352,40 +365,15 @@ class AdminStoresControllerCore extends AdminController
 
 			if (empty($latitude) || empty($longitude))
 			   $this->errors[] = Tools::displayError('Latitude and longitude are required.');
-
-			/* Check zip code */
-			if ($country->need_zip_code)
-			{
-				$zip_code_format = $country->zip_code_format;
-				if (($postcode = Tools::getValue('postcode')) && $zip_code_format)
-				{
-					$zip_regexp = '/^'.$zip_code_format.'$/ui';
-					$zip_regexp = str_replace(' ', '( |)', $zip_regexp);
-					$zip_regexp = str_replace('-', '(-|)', $zip_regexp);
-					$zip_regexp = str_replace('N', '[0-9]', $zip_regexp);
-					$zip_regexp = str_replace('L', '[a-zA-Z]', $zip_regexp);
-					$zip_regexp = str_replace('C', $country->iso_code, $zip_regexp);
-					if (!preg_match($zip_regexp, $postcode))
-						$this->errors[] = Tools::displayError('Your Postal Code/Zip Code is incorrect.').'<br />'.Tools::displayError('Must be typed as follows:').' '.
-											str_replace(
-												'C',
-												$country->iso_code,
-												str_replace(
-													'N',
-													'0',
-													str_replace(
-														'L',
-														'A',
-														$zip_code_format
-													)
-												)
-											);
-				}
-				else if ($zip_code_format)
-					$this->errors[] = Tools::displayError('Postal Code/Zip Code required.');
-				else if ($postcode && !preg_match('/^[0-9a-zA-Z -]{4,9}$/ui', $postcode))
-					$this->errors[] = Tools::displayError('Your Postal Code/Zip Code is incorrect.');
-			}
+			
+			$postcode = Tools::getValue('postcode');		
+			/* Check zip code format */
+			if ($country->zip_code_format && !$country->checkZipCode($postcode))
+				$this->errors[] = Tools::displayError('Your Zip/postal code is incorrect.').'<br />'.Tools::displayError('It must be entered as follows:').' '.str_replace('C', $country->iso_code, str_replace('N', '0', str_replace('L', 'A', $country->zip_code_format)));
+			elseif(empty($postcode) && $country->need_zip_code)
+				$this->errors[] = Tools::displayError('A Zip/postal code is required.');
+			elseif ($postcode && !Validate::isPostCode($postcode))
+				$this->errors[] = Tools::displayError('The Zip/postal code is invalid.');
 
 			/* Store hours */
 			$_POST['hours'] = array();
@@ -432,24 +420,21 @@ class AdminStoresControllerCore extends AdminController
 		$formFields = array(
 			'PS_SHOP_NAME' => array(
 				'title' => $this->l('Shop name'),
-				'desc' => $this->l('Displayed in e-mails and page titles'),
+				'hint' => $this->l('Displayed in emails and page titles.'),
 				'validation' => 'isGenericName',
 				'required' => true,
-				'size' => 30,
 				'type' => 'text'
 			),
-			'PS_SHOP_EMAIL' => array('title' => $this->l('Shop e-mail'),
-				'desc' => $this->l('Displayed in e-mails sent to customers'),
+			'PS_SHOP_EMAIL' => array('title' => $this->l('Shop email'),
+				'hint' => $this->l('Displayed in emails sent to customers.'),
 				'validation' => 'isEmail',
 				'required' => true,
-				'size' => 30,
 				'type' => 'text'
 			),
 			'PS_SHOP_DETAILS' => array(
 				'title' => $this->l('Registration'),
-				'desc' => $this->l('Shop registration information (e.g. SIRET or RCS)'),
+				'hint' => $this->l('Shop registration information (e.g. SIRET or RCS).'),
 				'validation' => 'isGenericName',
-				'size' => 30,
 				'type' => 'textarea',
 				'cols' => 30,
 				'rows' => 5
@@ -457,25 +442,21 @@ class AdminStoresControllerCore extends AdminController
 			'PS_SHOP_ADDR1' => array(
 				'title' => $this->l('Shop address line 1'),
 				'validation' => 'isAddress',
-				'size' => 30,
 				'type' => 'text'
 			),
 			'PS_SHOP_ADDR2' => array(
-				'title' => 'Address line 2',
+				'title' => $this->l('Shop address line 2'),
 				'validation' => 'isAddress',
-				'size' => 30,
 				'type' => 'text'
 			),
 			'PS_SHOP_CODE' => array(
-				'title' => $this->l('Postal Code/Zip code'),
+				'title' => $this->l('Zip/postal code'),
 				'validation' => 'isGenericName',
-				'size' => 6,
 				'type' => 'text'
 			),
 			'PS_SHOP_CITY' => array(
 				'title' => $this->l('City'),
 				'validation' => 'isGenericName',
-				'size' => 30,
 				'type' => 'text'
 			),
 			'PS_SHOP_COUNTRY_ID' => array(
@@ -498,13 +479,11 @@ class AdminStoresControllerCore extends AdminController
 			'PS_SHOP_PHONE' => array(
 				'title' => $this->l('Phone'),
 				'validation' => 'isGenericName',
-				'size' => 30,
 				'type' => 'text'
 			),
 			'PS_SHOP_FAX' => array(
 				'title' => $this->l('Fax'),
 				'validation' => 'isGenericName',
-				'size' => 30,
 				'type' => 'text'
 			),
 		);
@@ -540,9 +519,9 @@ class AdminStoresControllerCore extends AdminController
 		$fields = $formFields;
 		$this->fields_options['contact'] = array(
 			'title' =>	$this->l('Contact details'),
-			'icon' =>	'tab-contact',
+			'icon' =>	'icon-user',
 			'fields' =>	$fields,
-			'submit' => array('title' => $this->l('   Save   '), 'class' => 'button')
+			'submit' => array('title' => $this->l('Save'))
 		);
 	}
 
@@ -555,7 +534,7 @@ class AdminStoresControllerCore extends AdminController
 						AND `id_state` = '.(int)Tools::getValue('PS_SHOP_STATE_ID');
 			$isStateOk = Db::getInstance()->getValue($sql);
 			if ($isStateOk != 1)
-				$this->errors[] = Tools::displayError('This state is not in this country.');
+				$this->errors[] = Tools::displayError('The specified state is not located in this country.');
 		}
 	}
 

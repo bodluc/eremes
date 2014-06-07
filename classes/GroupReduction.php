@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -133,11 +132,15 @@ class GroupReductionCore extends ObjectModel
 
 	public static function getValueForProduct($id_product, $id_group)
 	{
+		if (!Group::isFeatureActive())
+			return 0;
+	
 		if (!isset(self::$reduction_cache[$id_product.'-'.$id_group]))
 			self::$reduction_cache[$id_product.'-'.$id_group] = Db::getInstance()->getValue('
 			SELECT `reduction`
 			FROM `'._DB_PREFIX_.'product_group_reduction_cache`
 			WHERE `id_product` = '.(int)$id_product.' AND `id_group` = '.(int)$id_group);
+		// Should return string (decimal in database) and not a float
 		return self::$reduction_cache[$id_product.'-'.$id_group];
 	}
 
@@ -149,41 +152,57 @@ class GroupReductionCore extends ObjectModel
 		WHERE `id_group` = '.(int)$id_group.' AND `id_category` = '.(int)$id_category);
 	}
 
+	public static function getGroupsByCategoryId($id_category)
+	{
+		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+			SELECT gr.`id_group` as id_group, gr.`reduction` as reduction, id_group_reduction
+			FROM `'._DB_PREFIX_.'group_reduction` gr
+			WHERE `id_category` = '.(int)$id_category
+		);	
+	}
+	
 	public static function getGroupByCategoryId($id_category)
 	{
+		Tools::displayAsDeprecated('Use GroupReduction::getGroupsByCategoryId($id_category)');
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow('
-			SELECT gr.`id_group` as id_group, gr.`reduction` as reduction
+			SELECT gr.`id_group` as id_group, gr.`reduction` as reduction, id_group_reduction
 			FROM `'._DB_PREFIX_.'group_reduction` gr
-			WHERE `id_category` = '.(int)$id_category,
-		false);
+			WHERE `id_category` = '.(int)$id_category
+		, false);
 	}
 
+	public static function getGroupsReductionByCategoryId($id_category)
+	{
+		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+			SELECT gr.`id_group_reduction` as id_group_reduction, id_group
+			FROM `'._DB_PREFIX_.'group_reduction` gr
+			WHERE `id_category` = '.(int)$id_category
+		);
+	}
+	
 	public static function getGroupReductionByCategoryId($id_category)
 	{
+		Tools::displayAsDeprecated('Use GroupReduction::getGroupsByCategoryId($id_category)');
 		return Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow('
 			SELECT gr.`id_group_reduction` as id_group_reduction
 			FROM `'._DB_PREFIX_.'group_reduction` gr
-			WHERE `id_category` = '.(int)$id_category,
-		false);
+			WHERE `id_category` = '.(int)$id_category
+		, false);
 	}
 
-	public static function setProductReduction($id_product, $id_group, $id_category, $reduction)
+	public static function setProductReduction($id_product, $id_group = null, $id_category, $reduction = null)
 	{
-		Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow('
-			SELECT pgr.`id_product`, pgr.`id_group`, pgr.`reduction`
-			FROM `'._DB_PREFIX_.'product_group_reduction_cache` pgr
-			WHERE pgr.`id_product` = '.(int)$id_product
-		);
+		$res = true;
+		GroupReduction::deleteProductReduction((int)$id_product);
+		$reductions = GroupReduction::getGroupsByCategoryId((int)$id_category);
+		if ($reductions)
+		{
+			foreach ($reductions as $reduction)
+				$res &= Db::getInstance()->execute('INSERT INTO `'._DB_PREFIX_.'product_group_reduction_cache` (`id_product`, `id_group`, `reduction`)
+								VALUES ('.(int)$id_product.', '.(int)$reduction['id_group'].', '.(float)$reduction['reduction'].')');
+		}
 
-		if (Db::getInstance()->NumRows() == 0)
-			$query = 'INSERT INTO `'._DB_PREFIX_.'product_group_reduction_cache` (`id_product`, `id_group`, `reduction`)
-                                  VALUES ('.(int)$id_product.', '.(int)$id_group.', '.(float)$reduction.')';
-		else
-			$query = 'UPDATE `'._DB_PREFIX_.'product_group_reduction_cache`
-                                  SET `reduction` = '.(float)$reduction.'
-                                  WHERE `id_product` = '.(int)$id_product.' AND `id_group` = '.(int)$id_group;
-
-		return (Db::getInstance()->execute($query));
+		return $res;
 	}
 
 	public static function deleteProductReduction($id_product)
@@ -196,23 +215,30 @@ class GroupReductionCore extends ObjectModel
 
 	public static function duplicateReduction($id_product_old, $id_product)
 	{
-		$row = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow('
+		$res = Db::getInstance(_PS_USE_SQL_SLAVE_)->executes('
 			SELECT pgr.`id_product`, pgr.`id_group`, pgr.`reduction`
 			FROM `'._DB_PREFIX_.'product_group_reduction_cache` pgr
 			WHERE pgr.`id_product` = '.(int)$id_product_old
 		);
-		if (!$row)
+
+		if (!$res)
 			return true;
 
-		$query = 'INSERT INTO `'._DB_PREFIX_.'product_group_reduction_cache` (`id_product`, `id_group`, `reduction`) VALUES ';
-		$query .= '('.(int)$id_product.', '.(int)$row['id_group'].', '.(float)$row['reduction'].')';
-		return (Db::getInstance()->execute($query));
+		$query = '';
+
+		foreach ($res as $row)
+		{
+			$query .= 'INSERT INTO `'._DB_PREFIX_.'product_group_reduction_cache` (`id_product`, `id_group`, `reduction`) VALUES ';
+			$query .= '('.(int)$id_product.', '.(int)$row['id_group'].', '.(float)$row['reduction'].') ON DUPLICATE KEY UPDATE `reduction` = '.(float)$row['reduction'].';';
+		}
+
+		return Db::getInstance()->execute($query);
 	}
 
 	public static function deleteCategory($id_category)
 	{
 		$query = 'DELETE FROM `'._DB_PREFIX_.'group_reduction` WHERE `id_category` = '.(int)$id_category;
-		if (Db::getInstance()->execute($query) === false)
+		if (Db::getInstance()->Execute($query) === false)
 			return false;
 		return true;
 	}

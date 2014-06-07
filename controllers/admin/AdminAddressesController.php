@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 17107 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -32,17 +31,27 @@ class AdminAddressesControllerCore extends AdminController
 
 	public function __construct()
 	{
+		$this->bootstrap = true;
 		$this->required_database = true;
 		$this->required_fields = array('company','address2', 'postcode', 'other', 'phone', 'phone_mobile', 'vat_number', 'dni');
 	 	$this->table = 'address';
 	 	$this->className = 'Address';
 	 	$this->lang = false;
 		$this->addressType = 'customer';
+		$this->explicitSelect = true;
 		$this->context = Context::getContext();
 
 		$this->addRowAction('edit');
 		$this->addRowAction('delete');
-	 	$this->bulk_actions = array('delete' => array('text' => $this->l('Delete selected'), 'confirm' => $this->l('Delete selected items?')));
+		$this->bulk_actions = array(
+			'delete' => array(
+				'text' => $this->l('Delete selected'),
+				'confirm' => $this->l('Delete selected items?'),
+				'icon' => 'icon-trash'
+			)
+		);
+
+		$this->allow_export = true;
 
 		if (!Tools::getValue('realedit'))
 			$this->deleted = true;
@@ -52,28 +61,44 @@ class AdminAddressesControllerCore extends AdminController
 			$this->countries_array[$country['id_country']] = $country['name'];
 
 		$this->fields_list = array(
-			'id_address' => array('title' => $this->l('ID'), 'align' => 'center', 'width' => 25),
-			'firstname' => array('title' => $this->l('First name'), 'width' => 120, 'filter_key' => 'a!firstname'),
-			'lastname' => array('title' => $this->l('Last name'), 'width' => 140, 'filter_key' => 'a!lastname'),
+			'id_address' => array('title' => $this->l('ID'), 'align' => 'center', 'class' => 'fixed-width-xs'),
+			'firstname' => array('title' => $this->l('First Name'), 'filter_key' => 'a!firstname'),
+			'lastname' => array('title' => $this->l('Last Name'), 'filter_key' => 'a!lastname'),
 			'address1' => array('title' => $this->l('Address')),
-			'postcode' => array('title' => $this->l('Postal Code/Zip Code'), 'align' => 'right', 'width' => 80),
-			'city' => array('title' => $this->l('City'), 'width' => 150),
-			'country' => array('title' => $this->l('Country'), 'width' => 100, 'type' => 'select', 'list' => $this->countries_array, 'filter_key' => 'cl!id_country'));
+			'postcode' => array('title' => $this->l('Zip/Postal Code'), 'align' => 'right'),
+			'city' => array('title' => $this->l('City')),
+			'country' => array('title' => $this->l('Country'), 'type' => 'select', 'list' => $this->countries_array, 'filter_key' => 'cl!id_country'));
 
 		parent::__construct();
-	}
 
-	public function renderList()
-	{
 		$this->_select = 'cl.`name` as country';
 		$this->_join = '
 			LEFT JOIN `'._DB_PREFIX_.'country_lang` cl ON (cl.`id_country` = a.`id_country` AND cl.`id_lang` = '.(int)$this->context->language->id.')
 			LEFT JOIN `'._DB_PREFIX_.'customer` c ON a.id_customer = c.id_customer
 		';
-
 		$this->_where = 'AND a.id_customer != 0 '.Shop::addSqlRestriction(Shop::SHARE_CUSTOMER, 'c');
+	}
 
-		return parent::renderList();
+	public function initToolbar()
+	{
+		parent::initToolbar();
+		if (!$this->display)
+			$this->toolbar_btn['import'] = array(
+				'href' => $this->context->link->getAdminLink('AdminImport', true).'&import_type=addresses',
+				'desc' => $this->l('Import')
+			);
+	}
+
+	public function initPageHeaderToolbar()
+	{
+		if (empty($this->display))
+			$this->page_header_toolbar_btn['new_address'] = array(
+				'href' => self::$currentIndex.'&addaddress&token='.$this->token,
+				'desc' => $this->l('Add new address', null, null, false),
+				'icon' => 'process-icon-new'
+			);
+
+		parent::initPageHeaderToolbar();
 	}
 
 	public function renderForm()
@@ -81,60 +106,59 @@ class AdminAddressesControllerCore extends AdminController
 		$this->fields_form = array(
 			'legend' => array(
 				'title' => $this->l('Addresses'),
-				'image' => '../img/admin/contact.gif'
+				'icon' => 'icon-envelope-alt'
 			),
 			'input' => array(
 				array(
 					'type' => 'text_customer',
 					'label' => $this->l('Customer'),
 					'name' => 'id_customer',
-					'size' => 33,
 					'required' => false,
 				),
 				array(
 					'type' => 'text',
 					'label' => $this->l('Identification Number'),
 					'name' => 'dni',
-					'size' => 30,
 					'required' => false,
-					'desc' => $this->l('DNI / NIF / NIE')
+					'col' => '4',
+					'hint' => $this->l('DNI / NIF / NIE')
 				),
 				array(
 					'type' => 'text',
 					'label' => $this->l('Address alias'),
 					'name' => 'alias',
-					'size' => 33,
 					'required' => true,
-					'hint' => $this->l('Invalid characters:').' <>;=#{}'
+					'col' => '4',
+					'hint' => $this->l('Invalid characters:').' &lt;&gt;;=#{}'
 				),
 				array(
 					'type' => 'text',
 					'label' => $this->l('Home phone'),
 					'name' => 'phone',
-					'size' => 33,
 					'required' => false,
+					'col' => '4',
+					'hint' => Configuration::get('PS_ONE_PHONE_AT_LEAST') ? sprintf($this->l('You must register at least one phone number.')) : ''
 				),
 				array(
 					'type' => 'text',
 					'label' => $this->l('Mobile phone'),
 					'name' => 'phone_mobile',
-					'size' => 33,
 					'required' => false,
-					'desc' => sprintf($this->l('You must register at least one phone number %s'), '<sup>*</sup>')
+					'col' => '4',
+					'hint' => Configuration::get('PS_ONE_PHONE_AT_LEAST') ? sprintf($this->l('You must register at least one phone number.')) : ''
 				),
 				array(
 					'type' => 'textarea',
 					'label' => $this->l('Other'),
 					'name' => 'other',
-					'cols' => 36,
-					'rows' => 4,
 					'required' => false,
-					'hint' => $this->l('Forbidden characters:').' <>;=#{}<span class="hint-pointer">&nbsp;</span>'
+					'cols' => 15,
+					'rows' => 3,
+					'hint' => $this->l('Forbidden characters:').' &lt;&gt;;=#{}'
 				),
 			),
 			'submit' => array(
-				'title' => $this->l('   Save   '),
-				'class' => 'button'
+				'title' => $this->l('Save'),
 			)
 		);
 		$id_customer = (int)Tools::getValue('id_customer');
@@ -146,18 +170,7 @@ class AdminAddressesControllerCore extends AdminController
 			$token_customer = Tools::getAdminToken('AdminCustomers'.(int)(Tab::getIdFromClassName('AdminCustomers')).(int)$this->context->employee->id);
 		}
 
-		// @todo in 1.4, this include was done before the class declaration
-		// We should use a hook now
-		if (Configuration::get('VATNUMBER_MANAGEMENT') && file_exists(_PS_MODULE_DIR_.'vatnumber/vatnumber.php'))
-			include_once(_PS_MODULE_DIR_.'vatnumber/vatnumber.php');
-		if (Configuration::get('VATNUMBER_MANAGEMENT'))
-			if (file_exists(_PS_MODULE_DIR_.'vatnumber/vatnumber.php') && VatNumber::isApplicable(Configuration::get('PS_COUNTRY_DEFAULT')))
-				$vat = 'is_applicable';
-			else
-				$vat = 'management';
-
 		$this->tpl_form_vars = array(
-			'vat' => isset($vat) ? $vat : null,
 			'customer' => isset($customer) ? $customer : null,
 			'tokenCustomer' => isset ($token_customer) ? $token_customer : null
 		);
@@ -177,15 +190,15 @@ class AdminAddressesControllerCore extends AdminController
 					'type' => 'text',
 					'label' => $this->l('Company'),
 					'name' => 'company',
-					'size' => 33,
 					'required' => false,
-					'hint' => $this->l('Invalid characters:').' <>;=#{}<span class="hint-pointer">&nbsp;</span>'
+					'col' => '4',
+					'hint' => $this->l('Invalid characters:').' &lt;&gt;;=#{}'
 				);
 				$temp_fields[] = array(
 					'type' => 'text',
 					'label' => $this->l('VAT number'),
-					'name' => 'vat_number',
-					'size' => 33,
+					'col' => '2',
+					'name' => 'vat_number'
 				);
 			}
 			else if ($addr_field_item == 'lastname')
@@ -200,11 +213,11 @@ class AdminAddressesControllerCore extends AdminController
 
 				$temp_fields[] = array(
 					'type' => 'text',
-					'label' => $this->l('Last name'),
+					'label' => $this->l('Last Name'),
 					'name' => 'lastname',
-					'size' => 33,
 					'required' => true,
-					'hint' => $this->l('Invalid characters:').' 0-9!<>,;?=+()@#"�{}_$%:<span class="hint-pointer">&nbsp;</span>',
+					'col' => '4',
+					'hint' => $this->l('Invalid characters:').' 0-9!&amp;lt;&amp;gt;,;?=+()@#"�{}_$%:',
 					'default_value' => $default_value,
 				);
 			}
@@ -220,11 +233,11 @@ class AdminAddressesControllerCore extends AdminController
 
 				$temp_fields[] = array(
 					'type' => 'text',
-					'label' => $this->l('First name'),
+					'label' => $this->l('First Name'),
 					'name' => 'firstname',
-					'size' => 33,
 					'required' => true,
-					'hint' => $this->l('Invalid characters:').' 0-9!<>,;?=+()@#"�{}_$%:<span class="hint-pointer">&nbsp;</span>',
+					'col' => '4',
+					'hint' => $this->l('Invalid characters:').' 0-9!&amp;lt;&amp;gt;,;?=+()@#"�{}_$%:',
 					'default_value' => $default_value,
 				);
 			}
@@ -234,7 +247,7 @@ class AdminAddressesControllerCore extends AdminController
 					'type' => 'text',
 					'label' => $this->l('Address'),
 					'name' => 'address1',
-					'size' => 33,
+					'col' => '6',
 					'required' => true,
 				);
 			}
@@ -244,7 +257,7 @@ class AdminAddressesControllerCore extends AdminController
 					'type' => 'text',
 					'label' => $this->l('Address').' (2)',
 					'name' => 'address2',
-					'size' => 33,
+					'col' => '6',
 					'required' => false,
 				);
 			}
@@ -252,9 +265,9 @@ class AdminAddressesControllerCore extends AdminController
 			{
 				$temp_fields[] = array(
 					'type' => 'text',
-					'label' => $this->l('Postal Code/Zip Code'),
+					'label' => $this->l('Zip/Postal Code'),
 					'name' => 'postcode',
-					'size' => 33,
+					'col' => '2',
 					'required' => true,
 				);
 			}
@@ -264,7 +277,7 @@ class AdminAddressesControllerCore extends AdminController
 					'type' => 'text',
 					'label' => $this->l('City'),
 					'name' => 'city',
-					'size' => 33,
+					'col' => '4',
 					'required' => true,
 				);
 			}
@@ -272,14 +285,15 @@ class AdminAddressesControllerCore extends AdminController
 			{
 				$temp_fields[] = array(
 					'type' => 'select',
-					'label' => $this->l('Country:'),
+					'label' => $this->l('Country'),
 					'name' => 'id_country',
 					'required' => false,
+					'col' => '4',
 					'default_value' => (int)$this->context->country->id,
 					'options' => array(
 						'query' => Country::getCountries($this->context->language->id),
 						'id' => 'id_country',
-						'name' => 'name',
+						'name' => 'name'
 					)
 				);
 				$temp_fields[] = array(
@@ -287,10 +301,11 @@ class AdminAddressesControllerCore extends AdminController
 					'label' => $this->l('State'),
 					'name' => 'id_state',
 					'required' => false,
+					'col' => '4',
 					'options' => array(
 						'query' => array(),
 						'id' => 'id_state',
-						'name' => 'name',
+						'name' => 'name'
 					)
 				);
 			}
@@ -304,15 +319,18 @@ class AdminAddressesControllerCore extends AdminController
 
 	public function processSave()
 	{
+		if (Tools::getValue('submitFormAjax'))
+			$this->redirect_after = false;
+
 		// Transform e-mail in id_customer for parent processing
 		if (Validate::isEmail(Tools::getValue('email')))
 		{
 			$customer = new Customer();
-			$customer->getByEmail(Tools::getValue('email'));
+			$customer->getByEmail(Tools::getValue('email'), null, false);
 			if (Validate::isLoadedObject($customer))
 				$_POST['id_customer'] = $customer->id;
 			else
-				$this->errors[] = Tools::displayError('This e-mail address is not registered.');
+				$this->errors[] = Tools::displayError('This email address is not registered.');
 		}
 		else if ($id_customer = Tools::getValue('id_customer'))
 		{
@@ -325,7 +343,7 @@ class AdminAddressesControllerCore extends AdminController
 		else
 			$this->errors[] = Tools::displayError('Unknown customer');
 		if (Country::isNeedDniByCountryId(Tools::getValue('id_country')) && !Tools::getValue('dni'))
-			$this->errors[] = Tools::displayError('Identification number is incorrect or has already been used.');
+			$this->errors[] = Tools::displayError('The identification number is incorrect or has already been used.');
 
 		/* If the selected country does not contain states */
 		$id_state = (int)Tools::getValue('id_state');
@@ -338,28 +356,17 @@ class AdminAddressesControllerCore extends AdminController
 		if ((int)$country->contains_states && !$id_state)
 			$this->errors[] = Tools::displayError('An address located in a country containing states must have a state selected.');
 
-		/* Check zip code */
-		if ($country->need_zip_code)
-		{
-			$zip_code_format = $country->zip_code_format;
-			if (($postcode = Tools::getValue('postcode')) && $zip_code_format)
-			{
-				$zip_regexp = '/^'.$zip_code_format.'$/ui';
-				$zip_regexp = str_replace(' ', '( |)', $zip_regexp);
-				$zip_regexp = str_replace('-', '(-|)', $zip_regexp);
-				$zip_regexp = str_replace('N', '[0-9]', $zip_regexp);
-				$zip_regexp = str_replace('L', '[a-zA-Z]', $zip_regexp);
-				$zip_regexp = str_replace('C', $country->iso_code, $zip_regexp);
-				if (!preg_match($zip_regexp, $postcode))
-					$this->errors[] = Tools::displayError('Your Postal Code/Zip Code is incorrect.').'<br />'.
-									   Tools::displayError('Must be typed as follows:').' '.
-									   str_replace('C', $country->iso_code, str_replace('N', '0', str_replace('L', 'A', $zip_code_format)));
-			}
-			else if ($zip_code_format)
-				$this->errors[] = Tools::displayError('Postal Code/Zip Code required.');
-			else if ($postcode && !preg_match('/^[0-9a-zA-Z -]{4,9}$/ui', $postcode))
-				$this->errors[] = Tools::displayError('Your Postal Code/Zip Code is incorrect.');
-		}
+		$postcode = Tools::getValue('postcode');		
+		/* Check zip code format */
+		if ($country->zip_code_format && !$country->checkZipCode($postcode))
+			$this->errors[] = Tools::displayError('Your Zip/postal code is incorrect.').'<br />'.Tools::displayError('It must be entered as follows:').' '.str_replace('C', $country->iso_code, str_replace('N', '0', str_replace('L', 'A', $country->zip_code_format)));
+		elseif(empty($postcode) && $country->need_zip_code)
+			$this->errors[] = Tools::displayError('A Zip/postal code is required.');
+		elseif ($postcode && !Validate::isPostCode($postcode))
+			$this->errors[] = Tools::displayError('The Zip/postal code is invalid.');
+
+		if (Configuration::get('PS_ONE_PHONE_AT_LEAST') && !Tools::getValue('phone') && !Tools::getValue('phone_mobile'))		
+			$this->errors[] = Tools::displayError('You must register at least one phone number.');
 
 		/* If this address come from order's edition and is the same as the other one (invoice or delivery one)
 		** we delete its id_address to force the creation of a new one */
@@ -444,9 +451,46 @@ class AdminAddressesControllerCore extends AdminController
 			if (!empty($customer))
 			{
 				$customer = $customer['0'];
-				echo Tools::jsonEncode(array('infos' => pSQL($customer['firstname']).'_'.pSQL($customer['lastname'])));
+				echo Tools::jsonEncode(array('infos' => pSQL($customer['firstname']).'_'.pSQL($customer['lastname']).'_'.pSQL($customer['company'])));
 			}
 		}
 		die;
+	}
+
+	/**
+	 * Object Delete
+	 */
+	public function processDelete()
+	{
+		if (Validate::isLoadedObject($object = $this->loadObject()))
+			if (!$object->isUsed())
+				$this->deleted = false;
+
+		return parent::processDelete();
+	}
+
+	/**
+	 * Delete multiple items
+	 *
+	 * @return boolean true if succcess
+	 */
+	protected function processBulkDelete()
+	{
+		if (is_array($this->boxes) && !empty($this->boxes))
+		{
+			$deleted = false;
+			foreach ($this->boxes as $id)
+			{
+				$to_delete = new Address((int)$id);
+				if ($to_delete->isUsed())
+				{
+					$deleted = true;
+					break;
+				}
+			}
+			$this->deleted = $deleted;
+		}
+
+		return parent::processBulkDelete();
 	}
 }

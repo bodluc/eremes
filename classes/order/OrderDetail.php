@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -245,6 +244,26 @@ class OrderDetailCore extends ObjectModel
 		if ($this->context != null && isset($this->context->shop))
 			$id_shop = $this->context->shop->id;
 		parent::__construct($id, $id_lang, $id_shop);
+
+		if ($context == null)
+			$context = Context::getContext();
+		$this->context = $context->cloneContext();
+	}
+
+	public function delete()
+	{
+		if(!$res = parent::delete())
+			return false;
+
+		Db::getInstance()->delete('order_detail_tax', 'id_order_detail='.(int)$this->id);
+
+		return $res;
+	}
+
+	protected function setContext($id_shop)
+	{
+		if ($this->context->shop->id != $id_shop)
+			$this->context->shop = new Shop((int)$id_shop);
 	}
 
 	public static function getDownloadFromHash($hash)
@@ -308,7 +327,7 @@ class OrderDetailCore extends ObjectModel
 	 * @since 1.5.0.1
 	 * @return boolean
 	 */
-	public function saveTaxCalculator(Order $order)
+	public function saveTaxCalculator(Order $order, $replace = false)
 	{
 		// Nothing to save
 		if ($this->tax_calculator == null)
@@ -335,11 +354,24 @@ class OrderDetailCore extends ObjectModel
 			$values .= '('.(int)$this->id.','.(float)$id_tax.','.$unit_amount.','.(float)$total_amount.'),';
 		}
 
+		if ($replace)
+			Db::getInstance()->execute('DELETE FROM `'._DB_PREFIX_.'order_detail_tax` WHERE id_order_detail='.(int)$this->id);
+			
 		$values = rtrim($values, ',');
 		$sql = 'INSERT INTO `'._DB_PREFIX_.'order_detail_tax` (id_order_detail, id_tax, unit_amount, total_amount)
 				VALUES '.$values;
-
+		
 		return Db::getInstance()->execute($sql);
+	}
+	
+	public function updateTaxAmount($order)
+	{
+		$this->setContext((int)$this->id_shop);
+		$address = new Address((int)($order->{Configuration::get('PS_TAX_ADDRESS_TYPE')}));
+		$tax_manager = TaxManagerFactory::getManager($address, (int)Product::getIdTaxRulesGroupByIdProduct((int)$this->product_id, $this->context));
+		$this->tax_calculator = $tax_manager->getTaxCalculator();
+
+		return $this->saveTaxCalculator($order, true);
 	}
 
 	/**
@@ -373,7 +405,7 @@ class OrderDetailCore extends ObjectModel
 	}
 
 	/**
-	 * Check the order state
+	 * Check the order status
 	 * @param array $product
 	 * @param int $id_order_state
 	 */
@@ -406,7 +438,8 @@ class OrderDetailCore extends ObjectModel
 		// Exclude VAT
 		if (!Tax::excludeTaxeOption())
 		{
-			$id_tax_rules = (int)Product::getIdTaxRulesGroupByIdProduct((int)$product['id_product']);
+			$this->setContext((int)$product['id_shop']);
+			$id_tax_rules = (int)Product::getIdTaxRulesGroupByIdProduct((int)$product['id_product'], $this->context);
 
 			$tax_manager = TaxManagerFactory::getManager($this->vat_address, $id_tax_rules);
 			$this->tax_calculator = $tax_manager->getTaxCalculator();
@@ -424,7 +457,7 @@ class OrderDetailCore extends ObjectModel
 	 * Set specific price of the product
 	 * @param object $order
 	 */
-	protected function setSpecificPrice(Order $order)
+	protected function setSpecificPrice(Order $order, $product = null)
 	{
 		$this->reduction_amount = 0.00;
 		$this->reduction_percent = 0.00;
@@ -442,12 +475,13 @@ class OrderDetailCore extends ObjectModel
 					$price = Tools::convertPrice($this->specificPrice['reduction'], $order->id_currency);
 					$this->reduction_amount = (float)(!$this->specificPrice['id_currency'] ?
 					$price : $this->specificPrice['reduction']);
-
-					$id_tax_rules = (int)Product::getIdTaxRulesGroupByIdProduct((int)$this->specificPrice['id_product']);
+					if ($product !== null)
+						$this->setContext((int)$product['id_shop']);
+					$id_tax_rules = (int)Product::getIdTaxRulesGroupByIdProduct((int)$this->specificPrice['id_product'], $this->context);
 					$tax_manager = TaxManagerFactory::getManager($this->vat_address, $id_tax_rules);
 					$this->tax_calculator = $tax_manager->getTaxCalculator();
 
-                    $this->reduction_amount_tax_incl = $this->reduction_amount;
+					$this->reduction_amount_tax_incl = $this->reduction_amount;
 					$this->reduction_amount_tax_excl = Tools::ps_round($this->tax_calculator->removeTaxes($this->reduction_amount_tax_incl), 2);
 				break;
 			}
@@ -461,10 +495,11 @@ class OrderDetailCore extends ObjectModel
 	 */
 	protected function setDetailProductPrice(Order $order, Cart $cart, $product)
 	{
-		Product::getPriceStatic((int)$product['id_product'], true, (int)$product['id_product_attribute'], 6, null, false, true, $product['cart_quantity'], false, (int)$order->id_customer, (int)$order->id_cart, (int)$order->{Configuration::get('PS_TAX_ADDRESS_TYPE')}, $specific_price);
+		$this->setContext((int)$product['id_shop']);
+		Product::getPriceStatic((int)$product['id_product'], true, (int)$product['id_product_attribute'], 6, null, false, true, $product['cart_quantity'], false, (int)$order->id_customer, (int)$order->id_cart, (int)$order->{Configuration::get('PS_TAX_ADDRESS_TYPE')}, $specific_price, true, true, $this->context);
 		$this->specificPrice = $specific_price;
 
-		$this->original_product_price = Product::getPriceStatic($product['id_product'], false, (int)$product['id_product_attribute'], 6, null, false, false, 1, false);
+		$this->original_product_price = Product::getPriceStatic($product['id_product'], false, (int)$product['id_product_attribute'], 6, null, false, false, 1, false, null, null, null, $null, true, true, $this->context);
 		$this->product_price = $this->original_product_price;
 		$this->unit_price_tax_incl = (float)$product['price_wt'];
 		$this->unit_price_tax_excl = (float)$product['price'];
@@ -473,25 +508,21 @@ class OrderDetailCore extends ObjectModel
 
         $this->purchase_supplier_price = (float)$product['wholesale_price'];
         if ($product['id_supplier'] > 0)
-            $this->purchase_supplier_price = (float)ProductSupplier::getProductPrice((int)$product['id_supplier'], $product['id_product'], $product['id_product_attribute']);
+            $this->purchase_supplier_price = (float)ProductSupplier::getProductPrice((int)$product['id_supplier'], $product['id_product'], $product['id_product_attribute'], true);
 
-		$this->setSpecificPrice($order);
+		$this->setSpecificPrice($order, $product);
 
 		$this->group_reduction = (float)(Group::getReduction((int)($order->id_customer)));
 
-		if (isset($this->context->shop))
-			$shop_id = $this->context->shop->id;
-		else
-			$shop_id = $cart->id_shop;
+		$shop_id = $this->context->shop->id;
 
 		$quantityDiscount = SpecificPrice::getQuantityDiscount((int)$product['id_product'], $shop_id,
 			(int)$cart->id_currency, (int)$this->vat_address->id_country,
-			(int)$this->customer->id_default_group, (int)$product['cart_quantity']);
+			(int)$this->customer->id_default_group, (int)$product['cart_quantity'], false, null, null, $null, true, true, $this->context);
 
 		$unitPrice = Product::getPriceStatic((int)$product['id_product'], true,
 			($product['id_product_attribute'] ? intval($product['id_product_attribute']) : null),
-			2, null, false, true, 1, false, (int)$order->id_customer, null, (int)$order->{Configuration::get('PS_TAX_ADDRESS_TYPE')});
-
+			2, null, false, true, 1, false, (int)$order->id_customer, null, (int)$order->{Configuration::get('PS_TAX_ADDRESS_TYPE')}, $null, true, true, $this->context);
 		$this->product_quantity_discount = 0.00;
 		if ($quantityDiscount)
 		{
@@ -623,4 +654,62 @@ class OrderDetailCore extends ObjectModel
     	$query->where('od.`id_order_detail` = '.(int)$this->id_order_detail);
     	return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($query);
     }
+
+	public static function getCrossSells($id_product, $id_lang, $limit = 12)
+	{
+		if (!$id_product || !$id_lang)
+			return;
+
+		$front = true;
+		if (!in_array(Context::getContext()->controller->controller_type, array('front', 'modulefront')))
+			$front = false;
+
+		$orders = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+		SELECT o.id_order
+		FROM '._DB_PREFIX_.'orders o
+		LEFT JOIN '._DB_PREFIX_.'order_detail od ON (od.id_order = o.id_order)
+		WHERE o.valid = 1 AND od.product_id = '.(int)$id_product);
+
+		if (sizeof($orders))
+		{
+			$list = '';
+			foreach ($orders AS $order)
+				$list .= (int)$order['id_order'].',';
+			$list = rtrim($list, ',');
+
+			$orderProducts = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+				SELECT DISTINCT od.product_id, p.id_product, pl.name, pl.link_rewrite, p.reference, i.id_image, product_shop.show_price, cl.link_rewrite category, p.ean13, p.out_of_stock, p.id_category_default
+				FROM '._DB_PREFIX_.'order_detail od
+				LEFT JOIN '._DB_PREFIX_.'product p ON (p.id_product = od.product_id)
+				'.Shop::addSqlAssociation('product', 'p').'
+				LEFT JOIN '._DB_PREFIX_.'product_lang pl ON (pl.id_product = od.product_id'.Shop::addSqlRestrictionOnLang('pl').')
+				LEFT JOIN '._DB_PREFIX_.'category_lang cl ON (cl.id_category = product_shop.id_category_default'.Shop::addSqlRestrictionOnLang('cl').')
+				LEFT JOIN '._DB_PREFIX_.'image i ON (i.id_product = od.product_id)
+				WHERE od.id_order IN ('.$list.')
+					AND pl.id_lang = '.(int)$id_lang.'
+					AND cl.id_lang = '.(int)$id_lang.'
+					AND od.product_id != '.(int)$id_product.'
+					AND i.cover = 1
+					AND product_shop.active = 1'
+					.($front ? ' AND product_shop.`visibility` IN ("both", "catalog")' : '').'
+				ORDER BY RAND()
+				LIMIT '.(int)$limit.'
+			');
+
+			$taxCalc = Product::getTaxCalculationMethod();
+			if (is_array($orderProducts))
+			{
+				foreach ($orderProducts AS &$orderProduct)
+				{
+					$orderProduct['image'] = Context::getContext()->link->getImageLink($orderProduct['link_rewrite'], (int)$orderProduct['product_id'].'-'.(int)$orderProduct['id_image'], ImageType::getFormatedName('medium'));
+					$orderProduct['link'] = Context::getContext()->link->getProductLink((int)$orderProduct['product_id'], $orderProduct['link_rewrite'], $orderProduct['category'], $orderProduct['ean13']);
+					if ($taxCalc == 0 OR $taxCalc == 2)
+						$orderProduct['displayed_price'] = Product::getPriceStatic((int)$orderProduct['product_id'], true, NULL);
+					elseif ($taxCalc == 1)
+						$orderProduct['displayed_price'] = Product::getPriceStatic((int)$orderProduct['product_id'], false, NULL);
+				}
+				return Product::getProductsProperties($id_lang, $orderProducts);
+			}
+		}
+	}
 }

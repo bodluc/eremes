@@ -2,12 +2,15 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_1bd130f5640104712b3c7dec66b7b0a1'] = 'Blok logo płatności';
-$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_8e27bf58ec687eea4b244d563dcbd8ac'] = 'Dodaj blok wyświetlający wszystkie loga płatności.';
-$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_8fc87743f34723d06ebff41629d2fdb5'] = 'Logo płatności';
-$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_7ccf58c950043c9fbfed668df13ce608'] = 'Ustawienia zostały zaktualizowane';
-$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_d16dbbe71a327e22461456cfc5e7dfb2'] = 'Strona CMS jest niedostępna';
-$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_f1206f9fadc5ce41694f69129aecac26'] = 'Konfiguruj';
-$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_4b3c34d991275b9fdb0facfcea561be9'] = 'Link strony CMS';
-$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_01bb71b3e70e9e5057c9678a903d47ac'] = 'Wybierz stronę';
-$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_d4dccb8ca2dac4e53c01bd9954755332'] = 'Zapisz ustawienia';
+
+$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_bbbd74a260217265015b9c8ff13b903e'] = 'Blok logo płatności.';
+$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_3fd11fa0ede1bd0ace9b3fcdbf6a71c9'] = 'Dodaje blok, który wyświetla wszystkie Twoje logo płatności.';
+$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_b15e7271053fe9dd22d80db100179085'] = 'Ten moduł powinien być umieszczony w kolumnie, a Twój szablon ich nie posiada';
+$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_efc226b17e0532afff43be870bff0de7'] = 'Ustawienia są zaktualizowane';
+$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_5c5e5371da7ab2c28d1af066a1a1cc0d'] = 'Strona CMS nie jest dostępna';
+$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_f4f70727dc34561dfde1a3c529b6205c'] = 'Ustawienia';
+$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_829cb250498661a9f98a58dc670a9675'] = 'Strona docelowa linku bloku';
+$_MODULE['<{blockpaymentlogo}prestashop>blockpaymentlogo_c9cc8cce247e49bae79f15173ce97354'] = 'Zapisz';
+
+
+return $_MODULE;

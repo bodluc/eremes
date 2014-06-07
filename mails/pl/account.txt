@@ -1,17 +1,30 @@
-﻿Witaj {firstname} {lastname},
- 
-Dane Twojego konta
- 
-Adres e-mail: {email}
-Haslo: {passwd}
- 
-Porady dotyczace bezpieczenstwa:
 
-* Przechowuj dane Twojego konta w bezpiecznym miejscu.
-* Nie ujawniaj nikomu swojego hasla.
-* Regularnie zmieniaj swoje haslo.
-* Jesli bedziesz miec podejrzenia, ze ktos uzywa twojego konta nielegalnie, prosimy powiadomic nas o tym natychmiast.
- 
-Mozesz juz skladac zamowienia w sklepie: {shop_name}.
- 
-{shop_name}  oparty na systemie PrestaShop™
+[{shop_url}] 
+
+Witaj {firstname} {lastname},
+
+Dziękujemy za utworzenie konta klienta na stronie {shop_name}. 
+
+Oto twoje dane logowania:
+
+ADRES E-MAIL: {email}
+
+HASŁO: {passwd} 		 
+
+Ważne wskazówki bezpieczeństwa:
+
+* Zawsze trzymaj dane konta w bezpiecznym miejscu.
+
+* Nigdy nie ujawniaj hasła nikomu.
+
+* Regularnie zmieniać hasło.
+
+* Jeśli podejrzewasz, że ktoś jest przy użyciu konta
+nielegalnie, prosimy o poinformowanie nas o tym natychmiast.
+
+Nie można składać zamówienia w naszym sklepie: {shop_name}
+[{shop_url}] 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

@@ -1,9 +1,24 @@
+
+[{shop_url}] 
+
 Witaj {firstname} {lastname},
- 
-Zamowienie #{id_order}
- 
-Aktualnie oczekujemy na dostawe jednego lub wiecej produktow z twojego zamowienia #{id_order}. Moze to spowodowac niewielkie opoznienia w realizacji zamowienia. Robimy co mozemy aby jak najszybciej zrealizowac zamowienie. Przepraszamy za opoznienia.
- 
-W sekcji "Historia zamowien" w "Twoim koncie" mozesz obejrzec swoje zamowienie i pobrac fakture.
- 
-{shop_name} oparty na systemie PrestaShop™
+
+Dziękujemy za Twoje zamówienie o numerze {order_name} złożone w
+{shop_name}. 
+
+Niestety jeden lub więcej produktów nie jest już dostępny.
+Może to spowodować delikatne opóźnienie w dostawie. Przepraszamy
+za powstałe utrudnienia, zapewniamy że pracujemy by to skorygować. 
+
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
+"Historia zamówień" [{history_url}] na koncie
+klienta klikając w "Moje konto"
+[{my_account_url}] w naszym sklepie. 
+
+Jeśli posiadasz konto gościa, możesz śledzić swoje
+zamówienie w sekcji "Śledzenie Zamówienia"
+[{guest_tracking_url}?id_order={order_name}]. 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

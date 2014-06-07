@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6844 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -145,7 +144,7 @@ abstract class CacheCore
 	 */
 	public function set($key, $value, $ttl = 0)
 	{
-		if ($this->_set($key, $value))
+		if ($this->_set($key, $value, $ttl))
 		{
 			if ($ttl < 0)
 				$ttl = 0;
@@ -206,7 +205,6 @@ abstract class CacheCore
 			foreach ($this->keys as $k => $ttl)
 				if (preg_match('#^'.$pattern.'$#', $k))
 					$keys[] = $k;
-
 		}
 
 		// Delete keys
@@ -236,25 +234,38 @@ abstract class CacheCore
 
 		if (is_null($this->sql_tables_cached))
 		{
-			$this->sql_tables_cached = $this->get(self::SQL_TABLES_NAME);
+			$this->sql_tables_cached = $this->get(Tools::encryptIV(self::SQL_TABLES_NAME));
 			if (!is_array($this->sql_tables_cached))
 				$this->sql_tables_cached = array();
 		}
 
 		// Store query results in cache if this query is not already cached
-		$key = md5($query);
+		$key = Tools::encryptIV($query);
 		if ($this->exists($key))
 			return true;
 		$this->set($key, $result);
 
 		// Get all table from the query and save them in cache
-		if (preg_match_all('/('._DB_PREFIX_.'[a-z_-]*)`?.*/i', $query, $res))
-			foreach ($res[1] as $table)
+		if ($tables = $this->getTables($query))
+			foreach ($tables as $table)
 				if (!isset($this->sql_tables_cached[$table][$key]))
 					$this->sql_tables_cached[$table][$key] = true;
-		$this->set(self::SQL_TABLES_NAME, $this->sql_tables_cached);
+		$this->set(Tools::encryptIV(self::SQL_TABLES_NAME), $this->sql_tables_cached);
 	}
 
+	protected function getTables($string)
+	{
+		if (preg_match_all('/(?:from|join|update|into)\s+`?('._DB_PREFIX_.'[0-9a-z_-]+)(?:`?\s{0,},\s{0,}`?('._DB_PREFIX_.'[0-9a-z_-]+)`?)?(?:`|\s+|\Z)(?!\s*,)/Umsi', $string, $res))
+		{
+			foreach ($res[2] as $table)
+				if ($table != '')
+					$res[1][] = $table;
+			return array_unique($res[1]);
+		}
+		else
+			return false;
+	}
+	
 	/**
 	 * Delete a query from cache
 	 *
@@ -264,13 +275,13 @@ abstract class CacheCore
 	{
 		if (is_null($this->sql_tables_cached))
 		{
-			$this->sql_tables_cached = $this->get(self::SQL_TABLES_NAME);
+			$this->sql_tables_cached = $this->get(Tools::encryptIV(self::SQL_TABLES_NAME));
 			if (!is_array($this->sql_tables_cached))
 				$this->sql_tables_cached = array();
 		}
 
-		if (preg_match_all('/('._DB_PREFIX_.'[a-z_-]*)`?.*/i', $query, $res))
-			foreach ($res[1] as $table)
+		if ($tables = $this->getTables($query))
+			foreach ($tables as $table)
 				if (isset($this->sql_tables_cached[$table]))
 				{
 					foreach (array_keys($this->sql_tables_cached[$table]) as $fs_key)
@@ -280,7 +291,7 @@ abstract class CacheCore
 					}
 					unset($this->sql_tables_cached[$table]);
 				}
-		$this->set(self::SQL_TABLES_NAME, $this->sql_tables_cached);
+		$this->set(Tools::encryptIV(self::SQL_TABLES_NAME), $this->sql_tables_cached);
 	}
 
 	/**
@@ -292,7 +303,7 @@ abstract class CacheCore
 	protected function isBlacklist($query)
 	{
 		foreach ($this->blacklist as $find)
-			if (strpos($query, $find))
+			if (strpos($query, '`'._DB_PREFIX_.$find.'`') || strpos($query, ' '._DB_PREFIX_.$find.' '))
 				return true;
 		return false;
 	}
@@ -319,7 +330,7 @@ abstract class CacheCore
 
 	public static function clean($key)
 	{
-		if (strpos($key, '*'))
+		if (strpos($key, '*') !== false)
 		{
 			$regexp = str_replace('\\*', '.*', preg_quote($key, '#'));
 			foreach (array_keys(Cache::$local) as $key)

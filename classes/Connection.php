@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6883 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -71,8 +70,6 @@ class ConnectionCore extends ObjectModel
 	 */
 	public function getFields()
 	{
-		if (!$this->id_shop)
-			$this->id_shop = Context::getContext()->shop->id;
 		if (!$this->id_shop_group)
 			$this->id_shop_group = Context::getContext()->shop->id_shop_group;
 
@@ -82,11 +79,16 @@ class ConnectionCore extends ObjectModel
 
 	public static function setPageConnection($cookie, $full = true)
 	{
+		$id_page = false;
 		// The connection is created if it does not exist yet and we get the current page id
 		if (!isset($cookie->id_connections) || !strstr(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '', Tools::getHttpHost(false, false)))
 			$id_page = Connection::setNewConnection($cookie);
-		if (!isset($id_page) || !$id_page)
+		// If we do not track the pages, no need to get the page id
+		if (!Configuration::get('PS_STATSDATA_PAGESVIEWS') && !Configuration::get('PS_STATSDATA_CUSTOMER_PAGESVIEWS'))
+			return array();
+		if (!$id_page)
 			$id_page = Page::getCurrentId();
+		// If we do not track the page views by customer, the id_page is the only information needed
 		if (!Configuration::get('PS_STATSDATA_CUSTOMER_PAGESVIEWS'))
 			return array('id_page' => $id_page);
 
@@ -96,7 +98,7 @@ class ConnectionCore extends ObjectModel
 			'id_connections' => (int)$cookie->id_connections,
 			'id_page' => (int)$id_page,
 			'time_start' => $time_start
-		));
+		), false, true, Db::INSERT_IGNORE);
 
 		// This array is serialized and used by the ajax request to identify the page
 		return array(
@@ -113,7 +115,7 @@ class ConnectionCore extends ObjectModel
 			// This is a bot and we have to retrieve its connection ID
 			$sql = 'SELECT `id_connections` FROM `'._DB_PREFIX_.'connections`
 					WHERE ip_address = '.ip2long(Tools::getRemoteAddr()).'
-						AND DATE_ADD(`date_add`, INTERVAL 30 MINUTE) > \''.pSQL(date('Y-m-d H:i:00')).'\'
+						AND `date_add` > \''.pSQL(date('Y-m-d H:i:00', time() - 1800)).'\'
 						'.Shop::addSqlRestriction(Shop::SHARE_CUSTOMER).'
 					ORDER BY `date_add` DESC';
 			if ($id_connections = Db::getInstance()->getValue($sql))
@@ -127,7 +129,7 @@ class ConnectionCore extends ObjectModel
 		$sql = 'SELECT `id_guest`
 				FROM `'._DB_PREFIX_.'connections`
 				WHERE `id_guest` = '.(int)$cookie->id_guest.'
-					AND DATE_ADD(`date_add`, INTERVAL 30 MINUTE) > \''.pSQL(date('Y-m-d H:i:00')).'\'
+					AND `date_add` > \''.pSQL(date('Y-m-d H:i:00', time() - 1800)).'\'
 					'.Shop::addSqlRestriction(Shop::SHARE_CUSTOMER).'
 				ORDER BY `date_add` DESC';
 		$result = Db::getInstance()->getRow($sql);
@@ -148,7 +150,7 @@ class ConnectionCore extends ObjectModel
 			$connection->id_shop_group = Context::getContext()->shop->id_shop_group;
 			$connection->date_add = $cookie->date_add;
 			if (Validate::isAbsoluteUrl($referer))
-				$connection->http_referer = $referer;
+				$connection->http_referer = substr($referer, 0, 254);
 			$connection->add();
 			$cookie->id_connections = $connection->id;
 			return $connection->id_page;

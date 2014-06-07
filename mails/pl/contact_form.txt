@@ -1,17 +1,20 @@
-Hello,
 
-Your message has been sent successfully to {shop_name} Customer Service.
+[{shop_url}] 
 
-Your message:
+Twoja wiadomość do {shop_name} Obsługa klienta 
 
-{message}
+Twoja wiadomość została wysłana pomyślnie.
 
-Order ID : {id_order}
+WIADOMOŚĆ: {message}
 
-Attached file : {attached_file}
+ID ZAMÓWIENIA: {order_name}
 
-We will respond as soon as possible.
+PRODUKT: {product_name}
 
-Regards,
+ZAŁĄCZONY PLIK: {attached_file} 		 
 
-{shop_url} powered by PrestaShop™
+Postaramy się odpowiedzieć tak szybko jak to możliwe. 
+
+{shop_name} [{shop_url}] wspierany przez
+PrestaShop(tm) [http://www.prestashop.com/] 
+

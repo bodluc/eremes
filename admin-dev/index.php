@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,17 +19,28 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7451 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
 $timer_start = microtime(true);
-define('_PS_ADMIN_DIR_', getcwd());
+if (!defined('_PS_ADMIN_DIR_'))
+	define('_PS_ADMIN_DIR_', getcwd());
 
-require(dirname(__FILE__).'/../config/config.inc.php');
-require(dirname(__FILE__).'/functions.php');
+if (!defined('PS_ADMIN_DIR'))
+	define('PS_ADMIN_DIR', _PS_ADMIN_DIR_);
+
+require(_PS_ADMIN_DIR_.'/../config/config.inc.php');
+require(_PS_ADMIN_DIR_.'/functions.php');
+
+//small test to clear cache after upgrade
+if (Configuration::get('PS_UPGRADE_CLEAR_CACHE'))
+{
+	header('Cache-Control: max-age=0, must-revalidate');
+	header('Expires: Mon, 06 Jun 1985 06:06:00 GMT+1');
+	Configuration::updateValue('PS_UPGRADE_CLEAR_CACHE', 0);
+}
 
 // For retrocompatibility with "tab" parameter
 if (!isset($_GET['controller']) && isset($_GET['tab']))

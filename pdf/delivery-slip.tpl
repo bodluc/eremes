@@ -1,5 +1,5 @@
 {*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 6753 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
@@ -72,13 +71,13 @@
 <!-- PRODUCTS TAB -->
 <table style="width: 100%">
 	<tr>
-		<td style="width: 20%; padding-right: 7px; text-align: right; vertical-align: top">
+		<td style="width: 22%; padding-right: 7px; text-align: right; vertical-align: top">
 			<!-- CUSTOMER INFORMATIONS -->
 			<b>{l s='Order Number:' pdf='true'}</b><br />
-			{'%06d'|sprintf:$order->id}<br />
+			{$order->getUniqReference()}<br />
 			<br />
 			<b>{l s='Order Date:' pdf='true'}</b><br />
-			{$order->date_add|date_format:"%d-%m-%Y %H:%M"}<br />
+			{dateFormat date=$order->date_add full=0}<br />
 			<br />
 			<b>{l s='Payment Method:' pdf='true'}</b><br />
 			<table style="width: 100%;">
@@ -94,9 +93,14 @@
 			{/foreach}
 			</table>
 			<br />
+			{if isset($carrier)}
+			<b>{l s='Carrier:' pdf='true'}</b><br />
+			{$carrier->name}<br />
+			<br />
+			{/if}			
 			<!-- / CUSTOMER INFORMATIONS -->
 		</td>
-		<td style="width: 80%; text-align: right">
+		<td style="width: 78%; text-align: right">
 			<table style="width: 100%">
 				<tr style="line-height:6px;">
 					<td style="text-align: left; background-color: #4D4D4D; color: #FFF; padding-left: 10px; font-weight: bold; width: 60%">{l s='ITEMS TO BE DELIVERED' pdf='true'}</td>

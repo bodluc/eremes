@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 16936 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -46,7 +45,7 @@ class HTMLTemplateSupplyOrderFormCore extends HTMLTemplate
 		$this->address_supplier = new Address(Address::getAddressIdBySupplierId((int)$supply_order->id_supplier));
 
 		// header informations
-		$this->date = Tools::displayDate($supply_order->date_add, (int)$this->supply_order->id_lang);
+		$this->date = Tools::displayDate($supply_order->date_add);
 		$this->title = HTMLTemplateSupplyOrderForm::l('Supply order form');
 	}
 
@@ -74,6 +73,22 @@ class HTMLTemplateSupplyOrderFormCore extends HTMLTemplate
 		));
 
 		return $this->smarty->fetch($this->getTemplate('supply-order'));
+	}
+
+	/**
+	 * Returns the invoice logo
+	 */
+	protected function getLogo()
+	{
+		$logo = '';
+
+		$physical_uri = Context::getContext()->shop->physical_uri.'img/';
+
+		if (Configuration::get('PS_LOGO_INVOICE', null, null, (int)Shop::getContextShopID()) != false && file_exists(_PS_IMG_DIR_.Configuration::get('PS_LOGO_INVOICE', null, null, (int)Shop::getContextShopID())))
+			$logo = _PS_IMG_DIR_.Configuration::get('PS_LOGO_INVOICE', null, null, (int)Shop::getContextShopID());
+		elseif (Configuration::get('PS_LOGO', null, null, (int)Shop::getContextShopID()) != false && file_exists(_PS_IMG_DIR_.Configuration::get('PS_LOGO', null, null, (int)Shop::getContextShopID())))
+			$logo = _PS_IMG_DIR_.Configuration::get('PS_LOGO', null, null, (int)Shop::getContextShopID());
+		return $logo;
 	}
 
 	/**
@@ -123,15 +138,22 @@ class HTMLTemplateSupplyOrderFormCore extends HTMLTemplate
 	public function getHeader()
 	{
 		$shop_name = Configuration::get('PS_SHOP_NAME');
-
+		$path_logo = $this->getLogo();
+		$width = $height = 0;
+		
+		if (!empty($path_logo))
+			list($width, $height) = getimagesize($path_logo);
+		
 		$this->smarty->assign(array(
-			'logo_path' => $this->getLogo(),
+			'logo_path' => $path_logo,
 			'img_ps_dir' => 'http://'.Tools::getMediaServer(_PS_IMG_)._PS_IMG_,
 			'img_update_time' => Configuration::get('PS_IMG_UPDATE_TIME'),
 			'title' => $this->title,
 			'reference' => $this->supply_order->reference,
 			'date' => $this->date,
-			'shop_name' => $shop_name
+			'shop_name' => $shop_name,
+			'width_logo' => $width,
+			'height_logo' => $height
 		));
 
 		return $this->smarty->fetch($this->getTemplate('supply-order-header'));
@@ -159,7 +181,7 @@ class HTMLTemplateSupplyOrderFormCore extends HTMLTemplate
 
 	/**
 	 * Rounds values of a SupplyOrderDetail object
-	 * @param array $collection
+	 * @param array|PrestaShopCollection $collection
 	 */
 	protected function roundSupplyOrderDetails(&$collection)
 	{

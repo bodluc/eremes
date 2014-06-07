@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,14 +19,14 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 13573 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
 class PdfOrderSlipControllerCore extends FrontController
 {
+	public $php_self = 'pdf-order-slip';
 	protected $display_header = false;
 	protected $display_footer = false;
 
@@ -42,10 +42,10 @@ class PdfOrderSlipControllerCore extends FrontController
 			$this->order_slip = new OrderSlip($_GET['id_order_slip']);
 
 		if (!isset($this->order_slip) || !Validate::isLoadedObject($this->order_slip))
-			die(Tools::displayError('Order return not found'));
+			die(Tools::displayError('Order return not found.'));
 
 		else if ($this->order_slip->id_customer != $this->context->customer->id)
-			die(Tools::displayError('Order return not found'));
+			die(Tools::displayError('Order return not found.'));
 
 	}
 

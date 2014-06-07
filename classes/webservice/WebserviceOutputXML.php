@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7040 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -124,6 +123,10 @@ class WebserviceOutputXMLCore implements WebserviceOutputInterface
 			if ($field['value'] != '')
 				$node_content .= '<![CDATA['.$field['value'].']]>';
 		}
+
+		if (isset($field['encode']))
+			$ret .= ' encode="'.$field['encode'].'"'; 
+			
 		if (isset($field['synopsis_details']) && !empty($field['synopsis_details']) && $this->schemaToDisplay !== 'blank')
 		{
 			foreach ($field['synopsis_details'] as $name => $detail)

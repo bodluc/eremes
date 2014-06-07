@@ -1,6 +1,6 @@
 <?php
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -19,8 +19,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 7040 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -48,6 +47,8 @@ class WebserviceOutputBuilderCore
 	protected $virtualFields = array();
 	protected $statusInt;
 	protected $wsParamOverrides;
+	
+	protected static $_cache_ws_parameters = array();
 
 	// Header properties
 	protected $headerParams = array(
@@ -132,8 +133,8 @@ class WebserviceOutputBuilderCore
 	}
 
 	/**
-	 * @param $key The normalized key expected for an http response
-	 * @param $value
+	 * @param string $key The normalized key expected for an http response
+	 * @param string $value
 	 * @throw WebserviceException if the key or the value are corrupted
 	 * 		  (use Validate::isCleanHtml method)
 	 * @return $this
@@ -284,7 +285,7 @@ class WebserviceOutputBuilderCore
 		if (is_null($this->wsResource))
 			throw new WebserviceException ('You must set web service resource for get the resources list.', array(82, 500));
 		$output = '';
-		$more_attr = array('shop_name' => htmlentities(Configuration::get('PS_SHOP_NAME')));
+		$more_attr = array('shop_name' => htmlspecialchars(Configuration::get('PS_SHOP_NAME')));
 		$output .= $this->objectRender->renderNodeHeader('api', array(), $more_attr);
 		foreach ($this->wsResource as $resourceName => $resource)
 		{
@@ -360,7 +361,11 @@ class WebserviceOutputBuilderCore
 			$type_of_view = self::VIEW_DETAILS;
 		}
 
-		$ws_params = $objects['empty']->getWebserviceParameters();
+		$class = get_class($objects['empty']);
+		if (!isset(WebserviceOutputBuilder::$_cache_ws_parameters[$class]))
+			WebserviceOutputBuilder::$_cache_ws_parameters[$class] = $objects['empty']->getWebserviceParameters();
+		$ws_params = WebserviceOutputBuilder::$_cache_ws_parameters[$class];
+
 		foreach ($this->wsParamOverrides AS $p)
 		{
 			$object = $p['object'];
@@ -377,7 +382,7 @@ class WebserviceOutputBuilderCore
 			{
 				if ($key !== 'empty')
 				{
-					if ($this->fieldsToDisplay  === 'minimum')
+					if ($this->fieldsToDisplay === 'minimum')
 						$output .= $this->renderEntityMinimum($object, $depth);
 					else
 						$output .= $this->renderEntity($object, $depth);
@@ -401,13 +406,17 @@ class WebserviceOutputBuilderCore
 	/**
 	 * Create the tree diagram with no details
 	 *
-	 * @param $object create by the entity
-	 * @param $depth the depth for the tree diagram
+	 * @param ObjectModel $object create by the entity
+	 * @param int $depth the depth for the tree diagram
 	 * @return string
 	 */
 	public function renderEntityMinimum($object, $depth)
 	{
-		$ws_params = $object->getWebserviceParameters();
+		$class = get_class($object);
+		if (!isset(WebserviceOutputBuilder::$_cache_ws_parameters[$class]))
+			WebserviceOutputBuilder::$_cache_ws_parameters[$class] = $object->getWebserviceParameters();
+		$ws_params = WebserviceOutputBuilder::$_cache_ws_parameters[$class];
+
 		$more_attr['id'] = $object->id;
 		$more_attr['xlink_resource'] = $this->wsUrl.$ws_params['objectsNodeName'].'/'.$object->id;
 		$output = $this->setIndent($depth).$this->objectRender->renderNodeHeader($ws_params['objectNodeName'], $ws_params, $more_attr, false);
@@ -417,8 +426,8 @@ class WebserviceOutputBuilderCore
 	/**
 	 * Build a schema blank or synopsis
 	 *
-	 * @param $object create by the entity
-	 * @param $ws_params webserviceParams from the entity
+	 * @param ObjectModel $object create by the entity
+	 * @param array $ws_params webserviceParams from the entity
 	 * @return string
 	 */
 	protected function renderSchema($object, $ws_params)
@@ -447,7 +456,12 @@ class WebserviceOutputBuilderCore
 	public function renderEntity($object, $depth)
 	{
 		$output = '';
-		$ws_params = $object->getWebserviceParameters();
+		
+		$class = get_class($object);
+		if (!isset(WebserviceOutputBuilder::$_cache_ws_parameters[$class]))
+			WebserviceOutputBuilder::$_cache_ws_parameters[$class] = $object->getWebserviceParameters();
+		$ws_params = WebserviceOutputBuilder::$_cache_ws_parameters[$class];
+		
 		foreach ($this->wsParamOverrides AS $p)
 		{
 			$o = $p['object'];
@@ -534,9 +548,10 @@ class WebserviceOutputBuilderCore
 		$field = $this->overrideSpecificField($ws_params['objectsNodeName'], $field_name, $field, $object, $ws_params);
 
 		// don't display informations for a not existant id
-		if (substr($field['sqlId'], 0, 3) == 'id_' && $field['value'] == 0)
+		if (substr($field['sqlId'], 0, 3) == 'id_' && !$field['value'])
 		{
-			$field['value'] = '';
+			if ($field['value'] === null)
+				$field['value'] = '';
 			// delete the xlink except for schemas
 			if (isset($field['xlink_resource']) && is_null($this->schemaToDisplay))
 				 unset($field['xlink_resource']);

@@ -1,5 +1,5 @@
 /*
-* 2007-2012 PrestaShop
+* 2007-2014 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,8 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 13512 $
+*  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registred Trademark & Property of PrestaShop SA
 */
@@ -124,7 +123,7 @@ $(document).ready(function()
 		hideFilterValueAction(this);
 	});
 
-	// To be sure there is no other events attached to the selectPrductSort, change the ID
+	// To be sure there is no other events attached to the selectProductSort, change the ID
 	var id = 1;
 	while ($('#selectPrductSort').length) { // Because ids are duplicated
 		// Unbind event change on #selectPrductSort
@@ -135,8 +134,18 @@ $(document).ready(function()
 		$('label[for=selectPrductSort]').attr('for', 'selectPrductSort'+id);
 		id++;
 	}
+
+	while ($('#selectProductSort').length) { // Because ids are duplicated
+		// Unbind event change on #selectProductSort
+		$('#selectProductSort').unbind('change');
+		$('#selectProductSort').attr('onchange', '');
+		$('#selectProductSort').addClass('selectProductSort');
+		$('#selectProductSort').attr('id', 'selectProductSort'+id);
+		$('label[for=selectProductSort]').attr('for', 'selectProductSort'+id);
+		id++;
+	}
 	
-	// Since 1.5, event is add to .selectProductSort and not to #selectPrductSort
+	// Since 1.5, event is add to .selectProductSort and not to #selectProductSort
 	setTimeout(function() {
 		$('.selectProductSort').unbind('change');
 	}, 100);
@@ -231,12 +240,11 @@ function initLayered()
 
 function paginationButton() {
 	$('#pagination a').not(':hidden').each(function () {
-		if ($(this).attr('href').search('&p=') == -1) {
-			var page = 1;
-		}
-		else {
-			var page = $(this).attr('href').replace(/^.*&p=(\d+).*$/, '$1');
-		}
+		if ($(this).attr('href').search(/[&|\?]p=/) == -1)
+		    var page = 1;
+		else
+		    var page = $(this).attr('href').replace(/^.*[&|\?]p=(\d+).*$/, '$1');
+
 		var location = window.location.href.replace(/#.*$/, '');
 		$(this).attr('href', location+current_friendly_url.replace(/\/page-(\d+)/, '')+'/page-'+page);
 	});
@@ -320,8 +328,10 @@ function openCloseFilter()
 function stopAjaxQuery() {
 	if (typeof(ajaxQueries) == 'undefined')
 		ajaxQueries = new Array();
-	for(i = 0; i < ajaxQueries.length; i++)
-		ajaxQueries[i].abort();
+	for(i = 0; i < ajaxQueries.length; i++) {
+		if (typeof ajaxQueries[i] != 'undefined')
+			ajaxQueries[i].abort();
+	}		
 	ajaxQueries = new Array();
 }
 
@@ -539,7 +549,7 @@ function getUrlParams()
 function updateProductUrl()
 {
 	// Adding the filters to URL product
-	if (typeof(param_product_url) != 'undefined') {
+	if (typeof(param_product_url) != 'undefined' && param_product_url != '' && param_product_url !='#') {
 		$.each($('ul#product_list li.ajax_block_product .product_img_link,'+
 				'ul#product_list li.ajax_block_product h3 a,'+
 				'ul#product_list li.ajax_block_product .product_desc a,'+
