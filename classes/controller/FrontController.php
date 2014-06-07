@@ -487,8 +487,7 @@ class FrontControllerCore extends Controller
 			'HOOK_TOP' => Hook::exec('displayTop'),
 			'HOOK_LEFT_COLUMN' => ($this->display_column_left ? Hook::exec('displayLeftColumn') : ''),
 			'HOOK_RIGHT_COLUMN' => ($this->display_column_right ? Hook::exec('displayRightColumn', array('cart' => $this->context->cart)) : ''),
-            'HOOK_FOOTER' => Hook::exec('displayFooter'),
-			'HOOK_SLIDER' => Hook::exec('displaySlider')
+			'HOOK_FOOTER' => Hook::exec('displayFooter')
 		));
 
 		$this->context->smarty->assign('css_files', $this->css_files);
@@ -753,14 +752,12 @@ class FrontControllerCore extends Controller
 		$this->addCSS(_THEME_CSS_DIR_.'global.css', 'all');
 		$this->addjquery();
 		$this->addjqueryPlugin('easing');
-        $this->addjqueryPlugin('autocomplete');
-        $this->addJS(_PS_JS_DIR_.'tools.js');
-        $this->addjqueryPlugin('fancybox');
-        $this->addJS(_PS_JS_DIR_.'front.js');
+		$this->addJS(_PS_JS_DIR_.'tools.js');
 
 		if (Tools::isSubmit('live_edit') && Tools::getValue('ad') && Tools::getAdminToken('AdminModulesPositions'.(int)Tab::getIdFromClassName('AdminModulesPositions').(int)Tools::getValue('id_employee')))
 		{
 			$this->addJqueryUI('ui.sortable');
+			$this->addjqueryPlugin('fancybox');
 			$this->addJS(_PS_JS_DIR_.'hookLiveEdit.js');
 			$this->addCSS(_PS_CSS_DIR_.'jquery.fancybox-1.3.4.css', 'all'); // @TODO
 		}
@@ -794,8 +791,7 @@ class FrontControllerCore extends Controller
 	public function initFooter()
 	{
 		$this->context->smarty->assign(array(
-            'HOOK_FOOTER' => Hook::exec('displayFooter'),
-			'HOOK_SLIDER' => Hook::exec('displaySlider'),
+			'HOOK_FOOTER' => Hook::exec('displayFooter'),
 			'conditions' => Configuration::get('PS_CONDITIONS'),
 			'id_cgv' => Configuration::get('PS_CONDITIONS_CMS_ID'),
 			'PS_SHOP_NAME' => Configuration::get('PS_SHOP_NAME'),

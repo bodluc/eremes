@@ -20,12 +20,10 @@
 *
 *  @author PrestaShop SA <contact@prestashop.com>
 *  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 17284 $
+*  @version  Release: $Revision: 17342 $
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
-
-include('AdminRMS.php');
 
 class AdminControllerCore extends Controller
 {
@@ -1318,7 +1316,7 @@ class AdminControllerCore extends Controller
 			'link' => $this->context->link,
 			'shop_name' => Configuration::get('PS_SHOP_NAME'),
 			'base_url' => $this->context->shop->getBaseURL(),
-			'tab' => $tab,
+			'tab' => $tab, // Deprecated, this tab is declared in the foreach, so it's the last tab in the foreach
 			'current_parent_id' => (int)Tab::getCurrentParentId(),
 			'tabs' => $tabs,
 			'install_dir_exists' => file_exists(_PS_ADMIN_DIR_.'/../install'),
@@ -1430,10 +1428,7 @@ class AdminControllerCore extends Controller
 		if (!($this->fields_list && is_array($this->fields_list)))
 			return false;
 		$this->getList($this->context->language->id);
-         RMS::getPriceHurtNetto($this->_list);
-        //bodek
-        
-        
+
 		// Empty list is ok
 		if (!is_array($this->_list))
 			return false;
@@ -1591,15 +1586,13 @@ class AdminControllerCore extends Controller
 
 		$this->addJquery();
 		$this->addjQueryPlugin(array('cluetip', 'hoverIntent', 'scrollTo', 'alerts', 'chosen'));
-        $this->addjqueryPlugin('fancybox');
-        
+
 		$this->addJS(array(
 			_PS_JS_DIR_.'admin.js',
 			_PS_JS_DIR_.'toggle.js',
 			_PS_JS_DIR_.'tools.js',
 			_PS_JS_DIR_.'ajax.js',
-            _PS_JS_DIR_.'toolbar.js',
-            _PS_JS_DIR_.'rmsadmin.js'
+			_PS_JS_DIR_.'toolbar.js'
 		));
 
 		if (!Tools::getValue('submitFormAjax'))

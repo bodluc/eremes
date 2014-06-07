@@ -131,9 +131,8 @@ class LinkCore
 		if ($dispatcher->hasKeyword('product_rule', $id_lang, 'categories'))
 		{
 			$cats = array();
-			foreach ($product->getParentCategories() as $cat) {
+			foreach ($product->getParentCategories() as $cat)
 				$cats[] = $cat['link_rewrite'];
-            }
 			$params['categories'] = implode('/', $cats);
 		}
 		$anchor = $ipa ? $product->getAnchor($ipa) : '';
@@ -165,17 +164,6 @@ class LinkCore
 		$params['rewrite'] = (!$alias) ? $category->link_rewrite : $alias;
 		$params['meta_keywords'] =	Tools::str2url($category->meta_keywords);
 		$params['meta_title'] = Tools::str2url($category->meta_title);
-        
-        $dispatcher = Dispatcher::getInstance();
-        if ($dispatcher->hasKeyword('product_rule', $id_lang, 'categories'))
-        {
-            $cats = array();
-            foreach (array_reverse($category->getParentsCategories()) as $cat) 
-            {
-                $cats[] = $cat['link_rewrite'];
-            }
-            $params['categories'] = implode('/', $cats);
-        }
 
 		// Selected filters is used by the module blocklayered
 		$selected_filters = is_null($selected_filters) ? Tools::getValue('selected_filters') : $selected_filters;
@@ -187,29 +175,10 @@ class LinkCore
 			$rule = 'layered_rule';
 			$params['selected_filters'] = $selected_filters;
 		}
-        
-           
-                
+
 		return $url.Dispatcher::getInstance()->createUrl($rule, $id_lang, $params, $this->allow);
 	}
 
-    public static function getAllCategories($categoryId) {
-    
-    $p = new Product();
-    $p->id_category_default = $categoryId;
-    
-        
-            $cats = array();
-            foreach ($p->getParentCategories() as $cat) {
-                if ($cat['name'] == 'Root') 
-                    continue;
-                $cats[] = $cat['link_rewrite'];
-            }
-            $link = implode('/', $cats);
-            
-            return $link;
-    }
-    
 	/**
 	 * Create a link to a CMS category
 	 *

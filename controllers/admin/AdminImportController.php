@@ -729,9 +729,6 @@ class AdminImportControllerCore extends AdminController
 		if (Tools::getValue('truncate')) //if you choose to truncate table before import the column id is remove from the CSV file.
 			unset($res['id']);
 
-           // $res['description'] = base64_decode($res['description']);
-            $res['description_short'] = base64_decode($res['description_short']);
-
 		return $res;
 	}
 
@@ -1462,7 +1459,7 @@ class AdminImportControllerCore extends AdminController
 			$info['shop'] = explode($this->multiple_value_separator, $info['shop']);
 			if (!isset($info['shop']) || !count($info['shop']))
 				$info['shop'] = Shop::getContextListShopID();
-
+				
 			$id_shop_list = array();
 			foreach ($info['shop'] as $shop)
 				if (!is_numeric($shop))

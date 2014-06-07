@@ -20,7 +20,7 @@
 *
 *  @author PrestaShop SA <contact@prestashop.com>
 *  @copyright  2007-2012 PrestaShop SA
-*  @version  Release: $Revision: 17057 $
+*  @version  Release: $Revision: 17357 $
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -905,7 +905,6 @@ class ShopCore extends ObjectModel
 		$asso_table = Shop::getAssoTable($table);
 		if ($asso_table === false || $asso_table['type'] != 'shop')
 			return;
-
 		$sql = (($inner_join) ? ' INNER' : ' LEFT').' JOIN '._DB_PREFIX_.$table.'_shop '.$table_alias.'
 		ON ('.$table_alias.'.id_'.$table.' = '.$alias.'.id_'.$table;
 		if ((int)self::$context_id_shop)

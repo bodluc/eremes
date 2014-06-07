@@ -251,10 +251,8 @@ class BackupCore
 						$s = '(';
 						
 						foreach ($row as $field => $value)
-						{   
-                            //lucas
-							$tmp = "'".pSQL($value,1)."',";
-                            //lucas
+						{
+							$tmp = "'".pSQL($value)."',";
 							if ($tmp != "'',")
 								$s .= $tmp;
 							else

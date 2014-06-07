@@ -46,23 +46,12 @@ class DispatcherCore
 	 * @var array List of default routes
 	 */
 	public $default_routes = array(
-        'old_product_rule' => array(
-            'controller' =>    'product',
-            'rule' =>        '{category}/{id}-{rewrite}.html',
-            'keywords' => array(
-                'id' =>                array('regexp' => '[0-9]+', 'param' => 'id_product'),
-                'rewrite' =>        array('regexp' => '[_a-zA-Z0-9-\pL]*'),
-                'meta_keywords' =>    array('regexp' => '[_a-zA-Z0-9-\pL]*'),
-                'meta_title' =>        array('regexp' => '[_a-zA-Z0-9-\pL]*'),
-                'category' =>        array('regexp' => '[_a-zA-Z0-9-\pL]*'),
-            ),
-        ),
 		'product_rule' => array(
 			'controller' =>	'product',
-			'rule' =>		'{categories}/p/{rewrite}',
+			'rule' =>		'{category:/}{id}-{rewrite}{-:ean13}.html',
 			'keywords' => array(
 				'id' =>				array('regexp' => '[0-9]+', 'param' => 'id_product'),
-				'rewrite' =>		array('regexp' => '[_a-zA-Z0-9-\.,\pL]*'),
+				'rewrite' =>		array('regexp' => '[_a-zA-Z0-9-\pL]*'),
 				'ean13' =>			array('regexp' => '[0-9\pL]*'),
 				'category' =>		array('regexp' => '[_a-zA-Z0-9-\pL]*'),
 				'categories' =>		array('regexp' => '[/_a-zA-Z0-9-\pL]*'),
@@ -89,13 +78,12 @@ class DispatcherCore
 		),
 		'category_rule' => array(
 			'controller' =>	'category',
-			'rule' =>		'{categories}/',
+			'rule' =>		'{id}-{rewrite}',
 			'keywords' => array(
 				'id' =>				array('regexp' => '[0-9]+', 'param' => 'id_category'),
 				'rewrite' =>		array('regexp' => '[_a-zA-Z0-9-\pL]*'),
 				'meta_keywords' =>	array('regexp' => '[_a-zA-Z0-9-\pL]*'),
 				'meta_title' =>		array('regexp' => '[_a-zA-Z0-9-\pL]*'),
-                'categories' =>     array('regexp' => '[/_a-zA-Z0-9-\pL]*'),
 			),
 		),
 		'supplier_rule' => array(
@@ -110,7 +98,7 @@ class DispatcherCore
 		),
 		'manufacturer_rule' => array(
 			'controller' =>	'manufacturer',
-			'rule' =>		'car-audio/marka/{rewrite}',
+			'rule' =>		'{id}_{rewrite}',
 			'keywords' => array(
 				'id' =>				array('regexp' => '[0-9]+', 'param' => 'id_manufacturer'),
 				'rewrite' =>		array('regexp' => '[_a-zA-Z0-9-\pL]*'),
@@ -614,9 +602,6 @@ class DispatcherCore
 				}
 			}
 			$url = preg_replace('#\{([^{}]+:)?[a-z0-9_]+?(:[^{}])?\}#', '', $url);
-            
-            //rms
-            
 			if (count($add_param))
 				$url .= '?'.http_build_query($add_param, '', '&');
 		}
@@ -636,8 +621,8 @@ class DispatcherCore
 			$url = 'index.php?'.$query;
 			
 		}
-         return   $this->removePlChar($url.$anchor);
-		
+
+		return $url.$anchor;
 	}
 
 	/**
@@ -676,22 +661,13 @@ class DispatcherCore
 				$this->addRoute($this->empty_route['routeID'], $this->empty_route['rule'], $this->empty_route['controller'], Context::getContext()->language->id);
 
 			if (isset($this->routes[Context::getContext()->language->id]))
-				foreach ($this->routes[Context::getContext()->language->id] as $route) 
-                {
+				foreach ($this->routes[Context::getContext()->language->id] as $route)
 					if (preg_match($route['regexp'], $this->request_uri, $m))
 					{
 						// Route found ! Now fill $_GET with parameters of uri
 						foreach ($m as $k => $v)
 							if (!is_numeric($k))
 								$_GET[$k] = $v;
-                                
-                          switch ($route['controller']) {
-                            case 'product' :  isset($_GET['id_product']) ? null :  $_GET['id_product']=$this->getProductId(array_pop($m),Context::getContext()->language->id);
-                                break;
-                            case "category" : $_GET['id_category'] = $this->getCategoryId($m[1],Context::getContext()->language->id);  
-                                break;
-                            case "manufacturer" : $_GET['id_manufacturer'] = $this->getManufactureId($m[1],Context::getContext()->language->id);
-                        }
 	
 						$controller = $route['controller'] ? $route['controller'] : $_GET['controller'];
 						if (!empty($route['params']))
@@ -710,7 +686,6 @@ class DispatcherCore
 							$this->front_controller = self::FC_MODULE;
 						break;
 					}
-                }     
 
 			if ($controller == 'index' || $this->request_uri == '/index.php')
 				$controller = $this->default_controller;
@@ -724,10 +699,7 @@ class DispatcherCore
 		$_GET['controller'] = $this->controller;
 		return $this->controller;
 	}
-    
-  
-    
-    
+
 	/**
 	 * Get list of all available FO controllers
 	 *
