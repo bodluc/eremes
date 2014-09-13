@@ -1,0 +1,52 @@
+div.bgmenu {
+    background:                 url("../image/menu.png") repeat-x scroll center bottom transparent;
+}
+ 
+div#block_top_menu > ul > li > a:after {
+    background:                 url("../image/menu_li_after.png") no-repeat scroll left top transparent;
+    height:                     48px;
+    position:                   absolute;
+    width:                      48px;
+    content:                    "";
+    top:                        0px;
+    right:                      0px;
+}
+div#block_top_menu > ul > li > a:before {
+    background:                 url("../image/menu_li_before.png") repeat scroll 0px 0px transparent;
+    content:                    "";
+    width:                      48px;
+    height:                     48px;
+    position:                   absolute;
+    top:                        0px;
+    left:                       -43px;
+}
+div#block_top_menu > ul > li > a:hover {
+    background:                 url("../image/menu_li_hover.png") repeat scroll 0% 0% rgb(217, 24, 32);
+}
+div#block_top_menu > ul > li > a:hover:before {
+    background:                 url("../image/menu_li_before_hover.png") repeat scroll 0% 0% transparent;
+}
+div#block_top_menu > ul > li > a:hover:after {
+    background:                 url("../image/menu_li_after_hover.png") repeat scroll 0% 0% transparent;
+}
+div#block_top_menu li a {
+    background:                 url("../image/menu_li.png") repeat-x scroll 0px top rgb(87, 87, 87);
+}
+ html {
+     font-size:                  62.5%;
+ }
+ 
+nav .container {
+    background:                 none repeat scroll 0% 0% black;
+}
+#header .nav div.container {
+    height:                     48px;
+    padding-top:                0px;
+}
+.nav div.container {
+    background:                 url("../image/toprow.png") no-repeat scroll center center transparent;
+}
+ 
+div#block_top_menu {
+    padding:                    5px 0px 5px 45px;
+} 

@@ -1,0 +1,94 @@
+/* God I hate Microsoft! */
+.product-filter .product-compare {
+	margin-top:2px;
+	}
+.product-filter .display {
+	  float:right;
+	  margin-top:0px;
+	  }
+  /************************* table wishlist ****************/
+.table td {
+	padding:8px
+	}
+.price {
+	font-size:18px;
+	line-height:22px;
+	}
+.price .price-old {
+	font-size:14px;
+	line-height:17px;
+	}
+.box-product .price {
+	width:94px;
+	padding:4px 0 4px 10px
+	}
+.related {
+		padding: 0 88px
+	}
+
+.product-list .cart-button {
+	float:left;
+	margin-left:20px;
+	margin-top:53px;
+	width:auto;
+	position:static;
+	}
+.product-list .price {
+	float:left;
+	color:#ff6f28;
+	position:relative;
+	margin-top:20px;
+	font-size:28px;
+	line-height:normal;
+	background:none;
+	padding:0px;
+	width:auto
+}
+.product-list .price-tax {
+	font-weight: normal;
+	font-family:'Arial';
+	font-size:13px;
+	color:#ff6f28;
+	position:static;
+	top:auto
+}
+footer .icon-phone {display:none;}
+header .links a {
+	padding:11px 4px 14px;
+	font-size:12px;
+	}
+.fluid_container .camera_caption {top:20px !important; width:450px; right:20px; display:inline;}
+header div.phone {
+	clear:left
+	}
+.fluid_container .camera_caption {top:20px !important; max-width:450px}
+header div.phone {
+	float:none;
+	}
+	.login-content .heading h2 {
+	  font-size:13px;
+	  }
+	.login-content .heading i {
+		font-size:20px;
+		}
+header #logo a img {
+	width:auto
+	}
+.banner>div:hover img {
+	transform: scale(1.1,1.1); 
+	-o-transform: scale(1.1,1.1);
+	-moz-transform: scale(1.1,1.1);
+	-webkit-transform: scale(1.1,1.1);
+	}
+.banner>div:hover .s-desc{
+	border-left-width:0px;
+	border-right:23px solid #ff6f28;
+	}
+.product-grid li {
+	position:relative;
+	}
+.product-grid .price {
+	right:0px;
+	float:right;
+	width:115px;
+	}

@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Magna aliqua.</title>
+<base  />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"../cdn-cgi/nexp/dokv=88e434a982/default.htm"},atok:"c8b428125d1d8b85556265ea36adca2d",petok:"ce87215decd8cbba53fb18e2cf80f5d77f7fa96a-1410586232-1800",zone:"template-help.com",rocket:"0",apps:{"abetterbrowser":{"ie":"7"},"ga_key":{"ua":"UA-7078796-5","ga_bs":"2"}}}];!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="../../ajax.cloudflare.com/cdn-cgi/nexp/dokv=97fb4d042e/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
+//]]>
+</script>
+<link href="image/data/favicon.png" rel="icon" />
+<link href="index.php@route=product_2Fproduct&product_id=28" rel="canonical" />
+
+<script>
+    if (navigator.userAgent.match(/Android/i)) {
+        var viewport = document.querySelector("meta[name=viewport]");
+    }
+ if(navigator.userAgent.match(/Android/i)){
+    window.scrollTo(0,1);
+ }
+</script> 
+ 
+
+<link href="catalog/view/theme/theme275/stylesheet/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/cloud-zoom.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/stylesheet/stylesheet.css" />
+<link href="catalog/view/theme/theme275/stylesheet/font-awesome.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/slideshow.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/jquery.prettyPhoto.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/camera.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/superfish.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/responsive.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/photoswipe.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
+<link href='../../fonts.googleapis.com/css@family=Open+Sans_3A300,400,600,700,800' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery.cycle.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
+<!--[if IE]>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/fancybox/jquery.fancybox-1.3.4-iefix.js"></script>
+<![endif]-->
+<!--[if IE]>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 8]><div style='clear:both;height:59px;padding:0 15px 0 15px;position:relative;z-index:10000;text-align:center;'><a href="../../www.microsoft.com/windows/internet-explorer/default.aspx@ocid=ie6_countdown_bannercode"><img src="../../storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+<script type="text/javascript" src="catalog/view/theme/theme275/js/bootstrap/bootstrap.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/common.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/jQuery.equalHeights.js"></script>
+<script type="text/JavaScript" src="catalog/view/theme/theme275/js/cloud-zoom.1.0.2.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/jscript_zjquery.anythingslider.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/script.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/jquery.mobile-events.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/superfish.js"></script>
+<!--[if !IE]>
+<script type="text/javascript" src="catalog/view/theme/theme275/js//sl/jquery.mobile.customized.min.js"></script>
+<![endif]-->
+<!--[if IE]>
+<script type="text/javascript" src="catalog/view/theme/theme275/js//sl/jscript_zjquery.anythingslider.js"></script>
+<![endif]-->
+<script type="text/javascript" src="catalog/view/theme/theme275/js/sl/camera.js"></script>
+
+<!-- bx-slider -->
+<script type="text/javascript" language="javascript" src="catalog/view/theme/theme275/js/bxslider/jquery.bxslider.js"></script>
+<!-- photo swipe -->
+<script type="text/javascript" language="javascript" src="catalog/view/theme/theme275/js/photo-swipe/klass.min.js"></script>
+<script type="text/javascript" language="javascript" src="catalog/view/theme/theme275/js/photo-swipe/code.photoswipe.jquery-3.0.5.js"></script>
+
+<script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox-min.js"></script>
+<!--[if  IE 8]>
+	<style>
+		.success, #header #cart .content  { border:1px solid #e7e7e7;}
+	</style>
+<![endif]-->
+
+<!--[if  IE 8]>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/stylesheet/ie7.css" />
+<![endif]-->
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/stylesheet/ie6.css" />
+<script type="text/javascript" src="catalog/view/javascript/DD_belatedPNG_0.0.8a-min.js"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('#logo img');
+</script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/stylesheet/livesearch.css"/>
+<!--ipt type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-7078796-5']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</scri-->
+</head>
+<body class="product-product"><a id="hidden" href="default.htm"></a>
+
+<div class="swipe-left"></div>
+<div id="body">
+<div class="swipe">
+	<div class="swipe-menu">
+		<ul class="links">
+			 <li class="first"><a class="" href="index.php@route=common_2Fhome"><i class="icon-home"></i>Home</a></li>
+			<li><a class="" href="index.php@route=account_2Fwishlist" id="wishlist-total"><i class="icon-star"></i>Wish List (0)</a></li>
+			<li><a class="" href="index.php@route=account_2Faccount"><i class="icon-user"></i>My Account</a></li>
+			<li><a class="" href="index.php@route=checkout_2Fcart"><i class="icon-shopping-cart"></i>Shopping Cart</a></li>
+			<li><a class="" href="index.php@route=checkout_2Fcheckout"><i class="icon-check"></i>Checkout</a></li>
+						<li class="login_h"><a href="index.php@route=account_2Flogin"><i class="icon-chevron-sign-right"></i>Login</a></li> <li><a href="index.php@route=account_2Fregister"><i class="icon-chevron-sign-right"></i>Create an account</a></li>  					</ul>
+				<div id="currency" class="header-button">
+	<div>
+		<div class="heading-1"><i class="icon-money"></i>Currency<i class="icon-chevron-sign-down"></i></div>
+		<div class="heading">
+																					$<i class="icon-chevron-sign-down"></i>
+										</div>
+	</div>
+		<ul>
+			<form action="http://livedemo00.template-help.com/opencart_47093/index.php?route=module/currency" method="post" enctype="multipart/form-data">
+															<li><a title="Euro" onClick="$('input[name=\'currency_code\']').attr('value', 'EUR').submit(); $(this).parent().parent().submit();"><span>€</span></a></li>
+																							<li><a title="Pound Sterling" onClick="$('input[name=\'currency_code\']').attr('value', 'GBP').submit(); $(this).parent().parent().submit();"><span>£</span></a></li>
+																							<li><a title="US Dollar"><span class="act">$</span></a></li>
+														<input type="hidden" name="currency_code" value="" />
+			<input type="hidden" name="redirect" value="http://livedemo00.template-help.com/opencart_47093/index.php?route=product/product&amp;product_id=28" />
+			</form>
+		</ul>
+			
+	</div>
+
+				<ul class="foot">
+						<li><a href="index.php@route=information_2Finformation&information_id=4">About Us</a></li>
+						<li><a href="index.php@route=information_2Finformation&information_id=6">Delivery Information</a></li>
+						<li><a href="index.php@route=information_2Finformation&information_id=3">Privacy Policy</a></li>
+						<li><a href="index.php@route=information_2Finformation&information_id=5">Terms &amp; Conditions</a></li>
+					</ul>
+				<ul class="foot foot-1">
+			<li><a href="index.php@route=information_2Fcontact">Contact Us</a></li>
+			<li><a href="index.php@route=account_2Freturn_2Finsert">Returns</a></li>
+			<li><a href="index.php@route=information_2Fsitemap">Site Map</a></li>
+		</ul>
+		<ul class="foot foot-2">
+			<li><a href="index.php@route=product_2Fmanufacturer">Brands</a></li>
+			<li><a href="index.php@route=account_2Fvoucher">Gift Vouchers</a></li>
+			<li><a href="index.php@route=affiliate_2Faccount">Affiliates</a></li>
+			<li><a href="index.php@route=product_2Fspecial">Specials</a></li>
+		</ul>
+		<ul class="foot foot-3">
+			<li><a href="index.php@route=account_2Forder">Order History</a></li>
+			<li><a href="index.php@route=account_2Fnewsletter">Newsletter</a></li>
+		</ul>
+	</div>
+</div>
+<div id="page">
+<div id="shadow">
+<div class="shadow"></div>
+<header id="header">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div class="toprow-1">
+					<a class="swipe-control" href="#"><i class="icon-reorder"></i></a>
+					<div class="top-search">
+						<i class="icon-search"></i>
+					</div>
+				</div>
+				<div class="toprow">
+					
+					<div id="currency" class="header-button">
+	<div>
+		<div class="heading-1"><i class="icon-money"></i>Currency<i class="icon-chevron-sign-down"></i></div>
+		<div class="heading">
+																					$<i class="icon-chevron-sign-down"></i>
+										</div>
+	</div>
+		<ul>
+			<form action="http://livedemo00.template-help.com/opencart_47093/index.php?route=module/currency" method="post" enctype="multipart/form-data">
+															<li><a title="Euro" onClick="$('input[name=\'currency_code\']').attr('value', 'EUR').submit(); $(this).parent().parent().submit();"><span>€</span></a></li>
+																							<li><a title="Pound Sterling" onClick="$('input[name=\'currency_code\']').attr('value', 'GBP').submit(); $(this).parent().parent().submit();"><span>£</span></a></li>
+																							<li><a title="US Dollar"><span class="act">$</span></a></li>
+														<input type="hidden" name="currency_code" value="" />
+			<input type="hidden" name="redirect" value="http://livedemo00.template-help.com/opencart_47093/index.php?route=product/product&amp;product_id=28" />
+			</form>
+		</ul>
+			
+	</div>
+
+										<ul class="links">
+						 <li class="first"><a class="" href="index.php@route=common_2Fhome"><i class="icon-chevron-sign-right"></i>Home</a></li>
+						<li><a class="" href="index.php@route=account_2Fwishlist" id="wishlist-total"><i class="icon-chevron-sign-right"></i>Wish List (0)</a></li>
+						<li><a class="" href="index.php@route=account_2Faccount"><i class="icon-chevron-sign-right"></i>My Account</a></li>
+						<li><a class="" href="index.php@route=checkout_2Fcart"><i class="icon-chevron-sign-right"></i>Shopping Cart</a></li>
+						<li><a class="" href="index.php@route=checkout_2Fcheckout"><i class="icon-chevron-sign-right"></i>Checkout</a></li>
+														<li class="login_h"><a href="index.php@route=account_2Flogin"><i class="icon-chevron-sign-right"></i>Login</a></li> <li><a href="index.php@route=account_2Fregister"><i class="icon-chevron-sign-right"></i>Create an account</a></li>  													</ul>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<div class="relative">
+									<div id="logo"><a href="index.php@route=common_2Fhome"><img src="image/data/logo.png" title="Car audio" alt="Car audio" /></a></div>
+								<div id="search">
+					<label>Search</label>
+					<div class="inner">
+						<div class="button-search"><i class="icon-search"></i></div>
+						<input  type="text" name="search" placeholder="Search" value="" />
+					</div>
+				</div>
+				<div class="cart-position">
+					<div class="cart-inner"><div id="cart" >
+
+  <div class="heading">
+	<span class="link_a"> 
+		<i class="icon-shopping-cart"></i>
+		<b>Cart</b>
+		<span class="sc-button"></span>
+		<span id="cart-total2">0</span>
+		<span id="cart-total">0 item(s)</span>
+		<i class="icon-chevron-sign-down"></i>
+		<span class="clear"></span>
+		</span>
+	</div>
+	
+  <div class="content">
+  <div class="content-scroll">
+	
+		<div class="empty">Your shopping cart is empty!</div>
+	  </div>
+  </div>
+</div>
+</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+				<div id="menu-gadget">
+		<div class="row">
+			<div class="span12">
+				
+				
+					<div id="menu-icon">Categories</div>
+					<ul id="nav" class="sf-menu-phone">
+												<li ><a href="index.php@route=product_2Fcategory&path=25">ACCESSORIES</a>
+													</li>
+												<li ><a href="index.php@route=product_2Fcategory&path=57">AMPLIFIERS</a>
+													</li>
+												<li ><a href="index.php@route=product_2Fcategory&path=17">HEADPHONES</a>
+													</li>
+												<li class="parent"><a href="index.php@route=product_2Fcategory&path=20">IN DASH RECEIVERS</a>
+												
+																<ul>
+																																																<li >
+																											<a href="index.php@route=product_2Fcategory&path=20_30">Ctetur adipisicing </a>
+																</li>
+																																																<li >
+																											<a href="index.php@route=product_2Fcategory&path=20_29">Lorem ipsum dolor</a>
+																</li>
+																																																<li >
+																											<a href="index.php@route=product_2Fcategory&path=20_31">Sed do eiusmod</a>
+																</li>
+																								</ul>
+																				</li>
+												<li ><a href="index.php@route=product_2Fcategory&path=24">SPEAKERS</a>
+													</li>
+												<li ><a href="index.php@route=product_2Fcategory&path=59">SUBWOOFERS</a>
+													</li>
+											</ul>
+				</div>
+				
+			</div>
+		</div>
+			</div>
+			<div id="menu">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<script type="text/javascript">
+						$(document).ready(function(){
+						
+							$('.menu ul li').last().addClass('last');
+							$('.menu ul li li').last().addClass('last');
+						});
+					</script>
+					<ul  class="menu">
+																								<li class="cat_1">
+												<a href="index.php@route=product_2Fcategory&path=25">ACCESSORIES</a>
+												</li>
+																		<li class="cat_2">
+												<a href="index.php@route=product_2Fcategory&path=57">AMPLIFIERS</a>
+												</li>
+																		<li class="cat_3">
+												<a href="index.php@route=product_2Fcategory&path=17">HEADPHONES</a>
+												</li>
+																		<li class="cat_4">
+												<a href="index.php@route=product_2Fcategory&path=20">IN DASH RECEIVERS</a>
+											
+																<ul>
+																																																<li>
+																											<a class="screenshot1"  href="index.php@route=product_2Fcategory&path=20_30">Ctetur adipisicing </a>
+																</li>
+																																																<li>
+																											<a class="screenshot1"  href="index.php@route=product_2Fcategory&path=20_29">Lorem ipsum dolor</a>
+																</li>
+																																																<li>
+																											<a class="screenshot1"  href="index.php@route=product_2Fcategory&path=20_31">Sed do eiusmod</a>
+																</li>
+																								</ul>
+																				</li>
+																		<li class="cat_5">
+												<a href="index.php@route=product_2Fcategory&path=24">SPEAKERS</a>
+												</li>
+																		<li class="cat_6">
+												<a href="index.php@route=product_2Fcategory&path=59">SUBWOOFERS</a>
+												</li>
+											</ul>
+					
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	</header>
+<section>
+
+<div id="container">
+<p id="back-top"> <a href="#top"><span></span></a> </p>
+<div class="container">
+<div id="notification"></div>
+<div class="row">
+<div class="span9">
+	<div class="row">
+<div class="span9  " id="content">	<div class="breadcrumb">
+		<a href="index.php@route=common_2Fhome">Home</a>
+		 &raquo; <a href="index.php@route=product_2Fproduct&product_id=28">Magna aliqua.</a>
+		</div>
+	<div class="product-info">
+		<div class="row">
+
+		<div class="span3">
+			<h1 class="view">Magna aliqua.</h1>
+	
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+		var myPhotoSwipe = $("#gallery a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false, captionAndToolbarAutoHideDelay:0 });
+		});
+	</script>
+	
+		<div id="full_gallery">
+		<ul id="gallery">
+			<li><a href="image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png" data-something="something" data-another-thing="anotherthing"><img src="image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png" title="Magna aliqua." alt="Magna aliqua." /></a></li>						<li><a href="image/cache/data/Kenwood Excelon KDC-X994 3 copy-600x600.png" data-something="something1" data-another-thing="anotherthing1"><img src="image/cache/data/Kenwood Excelon KDC-X994 3 copy-600x600.png" alt="Magna aliqua." /></a></li>
+							<li><a href="image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png" data-something="something1" data-another-thing="anotherthing1"><img src="image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png" alt="Magna aliqua." /></a></li>
+							<li><a href="image/cache/data/Kenwood Excelon KDC-X994 2 copy-600x600.png" data-something="something1" data-another-thing="anotherthing1"><img src="image/cache/data/Kenwood Excelon KDC-X994 2 copy-600x600.png" alt="Magna aliqua." /></a></li>
+						</ul>
+		
+	</div>
+	
+				<div id="default_gallery" class="left spacing">
+						<div class="zoom-top">
+				<a href="image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png" title="Magna aliqua."  data-gal="prettyPhoto[gallery1]" >
+					<img src="" title="Magna aliqua." alt="Magna aliqua." />
+				</a>
+			</div>
+									<div class="zoom-top">
+				<a href="image/cache/data/Kenwood Excelon KDC-X994 3 copy-600x600.png" title="Magna aliqua."  data-gal="prettyPhoto[gallery1]" >
+					<img src="" title="Magna aliqua." alt="Magna aliqua." />
+				</a>
+			</div>
+						<div class="zoom-top">
+				<a href="image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png" title="Magna aliqua."  data-gal="prettyPhoto[gallery1]" >
+					<img src="" title="Magna aliqua." alt="Magna aliqua." />
+				</a>
+			</div>
+						<div class="zoom-top">
+				<a href="image/cache/data/Kenwood Excelon KDC-X994 2 copy-600x600.png" title="Magna aliqua."  data-gal="prettyPhoto[gallery1]" >
+					<img src="" title="Magna aliqua." alt="Magna aliqua." />
+				</a>
+			</div>
+									<div class="image"> 
+				<a href="image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png" title="Magna aliqua." class = 'cloud-zoom' id='zoom1' rel="position: 'right'" >
+					<img src="image/cache/data/Kenwood Excelon KDC-X994 1 copy-270x270.png" title="Magna aliqua." alt="Magna aliqua." />
+				</a>
+				<a href="image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png" title="Magna aliqua.">
+				<!--<img id="image" src="http://livedemo00.template-help.com/opencart_47093/image/cache/data/Kenwood Excelon KDC-X994 1 copy-270x270.png" title="Magna aliqua." alt="Magna aliqua." />-->
+				</a>
+			</div>
+						
+							<div class="image-additional">
+					<ul id="image-additional">
+						<li>
+							<a href="image/cache/data/Kenwood Excelon KDC-X994 2 copy-600x600.png" title="Magna aliqua." class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: 'http://livedemo00.template-help.com/opencart_47093/image/cache/data/Kenwood Excelon KDC-X994 1 copy-270x270.png' "><img src="image/cache/data/Kenwood Excelon KDC-X994 1 copy-270x270.png" title="Magna aliqua." alt="Magna aliqua." /></a>
+						</li>
+												
+						 <li>
+							<a href="image/cache/data/Kenwood Excelon KDC-X994 3 copy-600x600.png" title="Magna aliqua." class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: 'http://livedemo00.template-help.com/opencart_47093/image/cache/data/Kenwood Excelon KDC-X994 3 copy-600x600.png' ">
+								<img src="image/cache/data/Kenwood Excelon KDC-X994 3 copy-270x270.png" title="Magna aliqua." alt="Magna aliqua." />
+							</a>
+						</li>
+												
+						 <li>
+							<a href="image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png" title="Magna aliqua." class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: 'http://livedemo00.template-help.com/opencart_47093/image/cache/data/Kenwood Excelon KDC-X994 1 copy-600x600.png' ">
+								<img src="image/cache/data/Kenwood Excelon KDC-X994 1 copy-270x270.png" title="Magna aliqua." alt="Magna aliqua." />
+							</a>
+						</li>
+												
+						 <li>
+							<a href="image/cache/data/Kenwood Excelon KDC-X994 2 copy-600x600.png" title="Magna aliqua." class="cloud-zoom-gallery" rel="useZoom: 'zoom1', smallImage: 'http://livedemo00.template-help.com/opencart_47093/image/cache/data/Kenwood Excelon KDC-X994 2 copy-600x600.png' ">
+								<img src="image/cache/data/Kenwood Excelon KDC-X994 2 copy-270x270.png" title="Magna aliqua." alt="Magna aliqua." />
+							</a>
+						</li>
+											</ul>
+					<div class="clear"></div>
+				</div>
+					</div>
+				</div>
+	<div class="span6">
+		<h1>Magna aliqua.</h1>
+	  <div class="description">
+		<div class="product-section">
+						<span>Brand:</span> <a href="index.php@route=product_2Fmanufacturer_2Finfo&manufacturer_id=9">Excepteur sint</a><br />
+						<span>Product Code:</span> Product 1<br />
+						<span>Reward Points:</span> 400<br />
+						<span>Availability:</span><div class="prod-stock">In Stock</div>
+		</div>
+		
+	  	  <div class="price">
+		<span class="text-price">Price:</span>
+				<span class="price-new">$119.50</span>
+						<span class="price-tax">Ex Tax: $100.00</span>
+						<span class="reward"><small>Price in reward points: 200</small></span>
+					  </div>
+	  	   	  	  <div class="cart">
+		<div class="prod-row">
+			<div class="cart-top">
+				<div class="cart-top-padd form-inline">
+					<label>Qty:						<input class="q-mini" type="text" name="quantity" size="2" value="1" />
+						<input class="q-mini" type="hidden" name="product_id" size="2" value="28" />
+					</label>
+					<a id="button-cart" class="button-prod" ><i class="icon-shopping-cart"></i>Add to Cart</a>
+				</div>
+				<div class="extra-button">
+					<div class="wishlist">
+						<a   onclick="addToWishList('28');" title="Add to Wish List"><i class="icon-star"></i><span>Add to Wish List</span></a>
+					</div>
+					<div class="compare">
+						<a   onclick="addToCompare('28');" title="Add to Compare"><i class="icon-bar-chart"></i><span>Add to Compare</span></a>
+					</div>
+				</div>
+				<div class="clear"></div>
+							</div>
+		</div>
+		</div>
+		<div class="clear"></div>
+				<div class="review">
+			<div>
+				<img src="catalog/view/theme/theme275/image/stars-0.png" alt="0 reviews" />&nbsp;&nbsp;
+				<div class="btn-rew">
+					<a onclick="document.getElementById('tab-review').scrollIntoView();">0 reviews</a>
+					<a onclick="document.getElementById('tab-review').scrollIntoView();"><i class="icon-pencil"></i>Write a review</a>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+				<div class="clear"></div>
+		<div class="share">
+			<!-- AddThis Button BEGIN -->
+			<span class='st_facebook_hcount' displayText='Facebook'></span>
+			<span class='st_twitter_hcount' displayText='Tweet'></span>
+			<span class='st_googleplus_hcount' displayText='Google +'></span>
+			<span class='st_pinterest_hcount' displayText='Pinterest'></span>
+			<script type="text/javascript" src="../../w.sharethis.com/button/buttons.js"></script>
+			<script type="text/javascript">stLight.options({publisher: "00fa5650-86c7-427f-b3c6-dfae37250d99", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+			<!-- AddThis Button END -->
+		</div>
+	</div>
+  </div>
+  </div>
+	<div class="tabs">
+		<div class="tab-heading">
+			Description		</div>
+		<div class="tab-content">
+			<p><strong>Our products</strong> are the perfect combination of the latest fashion trends, real durability and flexibility. You know that nowadays music is one of the main spheres in our society. It is a gigantic machine of production different goods for mental satisfaction. <strong>It is a real mainstream;</strong> moreover - it is a modern religion.</p>
+
+<p>It doesn’t matter what kind of a music you listen because tastes differ but we have collected all possible music-related goods in our store</p>
+		</div>
+	</div>
+			<div class="tabs" id="tab-review">
+		<div class="tab-heading">
+			Reviews (0)		</div>
+		<div class="tab-content">
+			<div id="review"></div>
+			<h2 id="review-title">Write a review</h2>
+			<label>Your Name:</label>
+			<input type="text" name="name" value="" />
+			<br />
+			<br />
+			<label>Your Review:</label>
+			<textarea name="text" cols="40" rows="8" style="width: 93%;"></textarea>
+			<div class="clear"></div>
+			<span style="font-size: 11px;"><span style="color: #FF0000;">Note:</span> HTML is not translated!</span><br />
+			<br />
+			<label class="inline">Rating:</label>
+			<div class="form-inline border">
+				<span class="radio">Bad</span>&nbsp;
+				<input type="radio" name="rating" value="1" />
+				&nbsp;
+				<input type="radio" name="rating" value="2" />
+				&nbsp;
+				<input type="radio" name="rating" value="3" />
+				&nbsp;
+				<input type="radio" name="rating" value="4" />
+				&nbsp;
+				<input type="radio" name="rating" value="5" />
+				&nbsp; <span class="radio">Good</span><br />
+			</div>
+			
+			<label>Enter the code in the box below:</label>
+			<input type="text" name="captcha" value="" />
+			
+			<img src="index.php@route=product_2Fproduct_2Fcaptcha" alt="" id="captcha" />
+			<br />
+			<div class="buttons">
+			<div><a id="button-review" class="button-cont-right">Continue<i class="icon-circle-arrow-right"></i></a></div>
+			</div>
+		</div>
+	</div>
+		  
+  </div>
+    <h1 class="style-1 mt0">Related Products</h1>
+  <div  class="related">
+	<div class="box-product"> 
+		<ul class="related-slider">
+						<li class="related-info">
+						<div class="image">
+				<a href="index.php@route=product_2Fproduct&product_id=31"><img id="img_31" src="image/cache/data/Alpine SWD-1600 Aktiv Subwoofer 1 copy-170x170.png" alt="Dolor sit amet conse" /></a>
+				
+			</div>
+						<div class="name"><a href="index.php@route=product_2Fproduct&product_id=31">Dolor sit amet conse</a></div>
+							<div class="price">
+								<span class="price-new">$87.78</span><span class="price-old">$96.00</span>
+								</div>
+							<div class="cart-button">
+				<div class="cart">
+					<a title="Add to Cart" onclick="addToCart('31');" class="button ">
+						<!--<i class="icon-shopping-cart"></i>-->
+						<span>Add to Cart</span>
+					</a>
+				</div>
+				<!--<a href="<b>Notice</b>: Use of undefined constant php - assumed 'php' in <b>/var/www/html/wwwroot/opencart_47093/catalog/view/theme/theme275/template/product/product.tpl</b> on line <b>461</b>" class="button details"><span><b>Notice</b>: Use of undefined constant php - assumed 'php' in <b>/var/www/html/wwwroot/opencart_47093/catalog/view/theme/theme275/template/product/product.tpl</b> on line <b>461</b></span></a>-->
+				<div class="wishlist"><a class="tooltip-2" title="Add to Wish List"  onclick="addToWishList('31');"><i class="icon-star"></i><span>Add to Wish List</span></a></div>
+				<div class="compare"><a class="tooltip-2" title="Add to Compare"  onclick="addToCompare('31');"><i class="icon-bar-chart"></i><span>Add to Compare</span></a></div>
+				<span class="clear"></span>
+			</div>
+			<div class="rating">
+						</div>
+			</li>
+						<li class="related-info">
+						<div class="image">
+				<a href="index.php@route=product_2Fproduct&product_id=42"><img id="img_42" src="image/cache/data/Kenwood DPX-502-UY 1 copy-170x170.png" alt="Lorem ipsum dolor sit" /></a>
+				
+			</div>
+						<div class="name"><a href="index.php@route=product_2Fproduct&product_id=42">Lorem ipsum dolor sit</a></div>
+							<div class="price">
+								<span class="price-new">$107.75</span><span class="price-old">$119.50</span>
+								</div>
+							<div class="cart-button">
+				<div class="cart">
+					<a title="Add to Cart" onclick="addToCart('42');" class="button ">
+						<!--<i class="icon-shopping-cart"></i>-->
+						<span>Add to Cart</span>
+					</a>
+				</div>
+				<!--<a href="<b>Notice</b>: Use of undefined constant php - assumed 'php' in <b>/var/www/html/wwwroot/opencart_47093/catalog/view/theme/theme275/template/product/product.tpl</b> on line <b>461</b>" class="button details"><span><b>Notice</b>: Use of undefined constant php - assumed 'php' in <b>/var/www/html/wwwroot/opencart_47093/catalog/view/theme/theme275/template/product/product.tpl</b> on line <b>461</b></span></a>-->
+				<div class="wishlist"><a class="tooltip-2" title="Add to Wish List"  onclick="addToWishList('42');"><i class="icon-star"></i><span>Add to Wish List</span></a></div>
+				<div class="compare"><a class="tooltip-2" title="Add to Compare"  onclick="addToCompare('42');"><i class="icon-bar-chart"></i><span>Add to Compare</span></a></div>
+				<span class="clear"></span>
+			</div>
+			<div class="rating">
+						</div>
+			</li>
+						<li class="related-info">
+						<div class="image">
+				<a href="index.php@route=product_2Fproduct&product_id=45"><img id="img_45" src="image/cache/data/Alpine PKG-2000P 1 copy-170x170.png" alt="Dolor sit amet" /></a>
+				
+			</div>
+						<div class="name"><a href="index.php@route=product_2Fproduct&product_id=45">Dolor sit amet</a></div>
+							<div class="price">
+								<span class="price-new">$199.00</span><span class="price-old">$200.00</span>
+								</div>
+							<div class="cart-button">
+				<div class="cart">
+					<a title="Add to Cart" onclick="addToCart('45');" class="button ">
+						<!--<i class="icon-shopping-cart"></i>-->
+						<span>Add to Cart</span>
+					</a>
+				</div>
+				<!--<a href="<b>Notice</b>: Use of undefined constant php - assumed 'php' in <b>/var/www/html/wwwroot/opencart_47093/catalog/view/theme/theme275/template/product/product.tpl</b> on line <b>461</b>" class="button details"><span><b>Notice</b>: Use of undefined constant php - assumed 'php' in <b>/var/www/html/wwwroot/opencart_47093/catalog/view/theme/theme275/template/product/product.tpl</b> on line <b>461</b></span></a>-->
+				<div class="wishlist"><a class="tooltip-2" title="Add to Wish List"  onclick="addToWishList('45');"><i class="icon-star"></i><span>Add to Wish List</span></a></div>
+				<div class="compare"><a class="tooltip-2" title="Add to Compare"  onclick="addToCompare('45');"><i class="icon-bar-chart"></i><span>Add to Compare</span></a></div>
+				<span class="clear"></span>
+			</div>
+			<div class="rating">
+						</div>
+			</li>
+					</ul>
+		</div>
+  </div>
+    </div>
+  	</div>
+</div>
+<aside class="span3" id="column-right">
+    <div class="box info" id="compare">
+	<div class="box-heading">Product Comparison</div>
+	<div class="box-content">
+				<div class="product-compare"><a class="button" href="index.php@route=product_2Fcompare"><span>Product Compare</span></a></div>
+	</div>
+</div>
+
+    <script type="text/javascript">
+		(function($){$.fn.equalHeights=function(minHeight,maxHeight){tallest=(minHeight)?minHeight:0;this.each(function(){if($(this).height()>tallest){tallest=$(this).height()}});if((maxHeight)&&tallest>maxHeight)tallest=maxHeight;return this.each(function(){$(this).height(tallest)})}})(jQuery)
+	$(window).load(function(){
+		if($(".maxheight-best").length){
+		$(".maxheight-best").equalHeights()}
+	})
+</script>
+<div class="box bestsellers">
+  <div class="box-heading">Bestsellers</div>
+  <div class="box-content">
+	<div class="box-product">
+		<ul class="row">
+		  		  			<li class="first-in-line last_line span3">
+				<div class="image2">
+					<a href="index.php@route=product_2Fproduct&product_id=40"><img id="img_40" src="image/cache/data/DUAL XDVD9101 Multimedia Head Unit 1 copy-180x180.png" alt="Ipsum dolor" /></a>					
+				</div>
+				<div class="inner">
+					<div class="f-left">
+						<div class="name maxheight-best"><a href="index.php@route=product_2Fproduct&product_id=40">Ipsum dolor</a></div>
+												<div class="price">
+														<span class="price-new">$118.33</span><span class="price-old">$120.68</span>
+													</div>
+												<!--							<div class="description">Our products are the perfect combination of the latest fashion trends,...</div>
+						-->
+					</div>
+					<!--<div class="cart-button">
+						<div class="cart"><a title="Add to Cart" data-id="40;" class="button addToCart"><i class="icon-shopping-cart"></i><span>Add to Cart</span></a></div>
+						<a href="http://livedemo00.template-help.com/opencart_47093/index.php?route=product/product&amp;product_id=40" class="button details"><span>Details</span></a>
+						
+						<div class="compare"><a class="tooltip-1" title="Add to compare"  onclick="addToCompare('40');"><i class="icon-bar-chart"></i><span>Add to compare</span></a></div>
+						<div class="wishlist"><a class="tooltip-1" title="Add to wishlist"  onclick="addToWishList('40');"><i class="icon-star"></i><span>Add to wishlist</span></a></div>
+						<span class="clear"></span>
+					</div>-->
+					<div class="clear"></div>
+					<div class="rating">
+											</div>
+				</div>
+				<div class="clear"></div>
+			  </li>
+		  		</ul>
+	</div>
+  </div>
+</div>
+    <script type="text/javascript">
+		(function($){$.fn.equalHeights=function(minHeight,maxHeight){tallest=(minHeight)?minHeight:0;this.each(function(){if($(this).height()>tallest){tallest=$(this).height()}});if((maxHeight)&&tallest>maxHeight)tallest=maxHeight;return this.each(function(){$(this).height(tallest)})}})(jQuery)
+	$(window).load(function(){
+		if($(".maxheight").length){
+		$(".maxheight").equalHeights()}
+	})
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+$(function(){
+$('.new-products  li ').last().addClass('last');
+});
+}); 
+</script>
+	<div class="box new-products">
+		<div class="box-heading">Latest</div>
+		<div class="box-content">
+			<div class="box-product">
+				<ul class="row">
+		  		  						<li class="first-in-line last_line span3">
+							<div class="image2">
+								<a href="index.php@route=product_2Fproduct&product_id=50"><img src="image/cache/data/BOSS CAP10 10 FARAD CAPACITOR 1 copy-180x180.png" alt="Esse cillum dolore" /></a>								
+							</div>
+							<div class="inner">
+								<div class="f-left">
+									<div class="name maxheight"><a href="index.php@route=product_2Fproduct&product_id=50">Esse cillum dolore</a></div>
+																		<div class="price">
+																				<span class="price-new">$588.33</span><span class="price-old">$589.50</span>
+																			</div>
+																		<!--										<div class="description">Our products are the perfect combination of the latest fashion trends,...</div>
+									-->
+								</div>
+								<!--<div class="cart-button">
+									<div class="cart"><a title="Add to Cart" data-id="50;" class="button addToCart"><i class="icon-shopping-cart"></i><span>Add to Cart</span></a></div>
+									<a href="http://livedemo00.template-help.com/opencart_47093/index.php?route=product/product&amp;product_id=50" class="button details"><span>Details</span></a>
+									
+									<div class="compare"><a class="tooltip-1" title="Add to compare"  onclick="addToCompare('50');"><i class="icon-bar-chart"></i><span>Add to compare</span></a></div>
+									<div class="wishlist"><a class="tooltip-1" title="Add to wishlist"  onclick="addToWishList('50');"><i class="icon-star"></i><span>Add to wishlist</span></a></div>
+									<span class="clear"></span>
+								</div>-->
+								<div class="clear"></div>
+								<div class="rating">
+																</div>
+							</div>
+								<div class="clear"></div>
+						</li>
+									</ul>
+			</div>
+		</div>
+	</div>  </aside>
+<script type="text/javascript"><!--
+$(document).ready(function() {
+	$('.colorbox').colorbox({
+		overlayClose: true,
+		opacity: 0.5,
+		rel: "colorbox"
+	});
+});
+//--></script> 
+<script type="text/javascript"><!--
+  
+  $('select[name="profile_id"], input[name="quantity"]').change(function(){
+    $.ajax({
+		url: 'index.php?route=product/product/getRecurringDescription',
+		type: 'post',
+		data: $('input[name="product_id"], input[name="quantity"], select[name="profile_id"]'),
+		dataType: 'json',
+        beforeSend: function() {
+            $('#profile-description').html('');
+        },
+		success: function(json) {
+			$('.success, .warning, .attention, information, .error').remove();
+            
+			if (json['success']) {
+                $('#profile-description').html(json['success']);
+			}	
+		}
+	});
+});
+  
+$('#button-cart').bind('click', function() {
+	$.ajax({
+		url: 'index.php?route=checkout/cart/add',
+		type: 'post',
+		data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
+		dataType: 'json',
+		success: function(json) {
+			$('.success, .warning, .attention, information, .error').remove();
+			
+			if (json['error']) {
+				if (json['error']['option']) {
+					for (i in json['error']['option']) {
+						$('#option-' + i).after('<span class="error">' + json['error']['option'][i] + '</span>');
+					}
+				}
+				if (json['error']['profile']) {
+                    $('select[name="profile_id"]').after('<span class="error">' + json['error']['profile'] + '</span>');
+                }
+			} 
+			
+			if (json['success']) {
+				$('#notification').html('<div class="success" style="display: none;">' + json['success'] + '<span><i class="icon-remove-sign"></i></span></div>');
+					
+				$('.success').fadeIn('slow');
+					
+				$('#cart-total').html(json['total']);
+				$('#cart-total2').html(json['total']);
+				$('#cart').load('index.php?route=module/cart #cart > *');
+				$('html, body').animate({ scrollTop: 0 }, 'slow'); 
+			}	
+			setTimeout(function() {$('.success').fadeOut(1000)},3000)
+		}
+	});
+});
+//--></script>
+<script type="text/javascript"><!--
+$('#review .pagination a').live('click', function() {
+	$('#review').fadeOut('slow');
+		
+	$('#review').load(this.href);
+	
+	$('#review').fadeIn('slow');
+	
+	return false;
+});			
+
+$('#review').load('index.php@route=product_2Fproduct_2Freview&product_id=28');
+
+$('#button-review').bind('click', function() {
+	$.ajax({
+		url: 'index.php@route=product_2Fproduct_2Fwrite&product_id=28',
+		type: 'post',
+		dataType: 'json',
+		data: 'name=' + encodeURIComponent($('input[name=\'name\']').val()) + '&text=' + encodeURIComponent($('textarea[name=\'text\']').val()) + '&rating=' + encodeURIComponent($('input[name=\'rating\']:checked').val() ? $('input[name=\'rating\']:checked').val() : '') + '&captcha=' + encodeURIComponent($('input[name=\'captcha\']').val()),
+		beforeSend: function() {
+			$('.success, .warning').remove();
+			$('#button-review').attr('disabled', true);
+			$('#review-title').after('<div class="attention"><img src="catalog/view/theme/theme275/image/loading.gif" alt="" /> Please Wait!</div>');
+		},
+		complete: function() {
+			$('#button-review').attr('disabled', false);
+			$('.attention').remove();
+		},
+		success: function(data) {
+			if (data['error']) {
+				$('#review-title').after('<div class="warning">' + data['error'] + '</div>');
+			}
+			
+			if (data['success']) {
+				$('#review-title').after('<div class="success">' + data['success'] + '</div>');
+								
+				$('input[name=\'name\']').val('');
+				$('textarea[name=\'text\']').val('');
+				$('input[name=\'rating\']:checked').attr('checked', '');
+				$('input[name=\'captcha\']').val('');
+			}
+		}
+	});
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('#tabs a').tabs();
+//--></script> 
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-timepicker-addon.js"></script> 
+<script type="text/javascript"><!--
+$(document).ready(function() {
+	if ($.browser.msie && $.browser.version == 6) {
+		$('.date, .datetime, .time').bgIframe();
+	}
+
+	$('.date').datepicker({dateFormat: 'yy-mm-dd'});
+	$('.datetime').datetimepicker({
+		dateFormat: 'yy-mm-dd',
+		timeFormat: 'h:m'
+	});
+	$('.time').timepicker({timeFormat: 'h:m'});
+});
+//--></script> 
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+</section>
+<footer>
+	<div class="container">
+		<div class="row">
+						<div class="span3">
+				<h3>Information</h3>
+				<ul>
+								<li><a href="index.php@route=information_2Finformation&information_id=4">About Us</a></li>
+								<li><a href="index.php@route=information_2Finformation&information_id=6">Delivery Information</a></li>
+								<li><a href="index.php@route=information_2Finformation&information_id=3">Privacy Policy</a></li>
+								<li><a href="index.php@route=information_2Finformation&information_id=5">Terms &amp; Conditions</a></li>
+								</ul>
+			</div>
+						<div class="span3">
+				<h3>Customer Service</h3>
+				<ul>
+				<li><a href="index.php@route=information_2Fcontact">Contact Us</a></li>
+				<li><a href="index.php@route=account_2Freturn_2Finsert">Returns</a></li>
+				<li><a href="index.php@route=information_2Fsitemap">Site Map</a></li>
+				</ul>
+			</div>
+			<div class="span3">
+				<h3>Extras</h3>
+				<ul>
+				<li><a href="index.php@route=product_2Fmanufacturer">Brands</a></li>
+				<li><a href="index.php@route=account_2Fvoucher">Gift Vouchers</a></li>
+				<li><a href="index.php@route=affiliate_2Faccount">Affiliates</a></li>
+				<li><a href="index.php@route=product_2Fspecial">Specials</a></li>
+				</ul>
+			</div>
+			<div class="span3">
+				<h3>My Account</h3>
+				<ul>
+				<li><a href="index.php@route=account_2Faccount">My Account</a></li>
+				<li><a href="index.php@route=account_2Forder">Order History</a></li>
+				<li><a href="index.php@route=account_2Fwishlist">Wish List</a></li>
+				<li><a href="index.php@route=account_2Fnewsletter">Newsletter</a></li>
+				</ul>
+			</div>
+
+		</div>
+		
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div id="powered">
+					Powered By <a href="../../www.opencart.com/default.htm">OpenCart</a><br /> Car audio &copy; 2014<!-- [[%FOOTER_LINK]] -->
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<script type="text/javascript" 	src="catalog/view/theme/theme275/js/livesearch.js"></script>
+</div>
+</div>
+</div>
+<script type="text/javascript">/* CloudFlare analytics upgrade */
+</script>
+</body></html>

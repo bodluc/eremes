@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>IN DASH RECEIVERS</title>
+<base  />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Example of category description" />
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"../cdn-cgi/nexp/dokv=88e434a982/default.htm"},atok:"c8b428125d1d8b85556265ea36adca2d",petok:"085c96d787c74806404035955dc47fc176a0ea42-1410586220-1800",zone:"template-help.com",rocket:"0",apps:{"abetterbrowser":{"ie":"7"},"ga_key":{"ua":"UA-7078796-5","ga_bs":"2"}}}];!function(a,b){a=document.createElement("script"),b=document.getElementsByTagName("script")[0],a.async=!0,a.src="../../ajax.cloudflare.com/cdn-cgi/nexp/dokv=97fb4d042e/cloudflare.min.js",b.parentNode.insertBefore(a,b)}()}}catch(e){};
+//]]>
+</script>
+<link href="image/data/favicon.png" rel="icon" />
+
+<script>
+    if (navigator.userAgent.match(/Android/i)) {
+        var viewport = document.querySelector("meta[name=viewport]");
+    }
+ if(navigator.userAgent.match(/Android/i)){
+    window.scrollTo(0,1);
+ }
+</script> 
+ 
+
+<link href="catalog/view/theme/theme275/stylesheet/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/cloud-zoom.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/stylesheet/stylesheet.css" />
+<link href="catalog/view/theme/theme275/stylesheet/font-awesome.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/slideshow.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/jquery.prettyPhoto.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/camera.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/superfish.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/responsive.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/photoswipe.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/theme275/stylesheet/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+<link href='../../fonts.googleapis.com/css@family=Open+Sans_3A300,400,600,700,800' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
+<script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<script type="text/javascript" src="catalog/view/javascript/jquery/colorbox/jquery.colorbox.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery.cycle.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
+<!--[if IE]>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/fancybox/jquery.fancybox-1.3.4-iefix.js"></script>
+<![endif]-->
+<!--[if IE]>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 8]><div style='clear:both;height:59px;padding:0 15px 0 15px;position:relative;z-index:10000;text-align:center;'><a href="../../www.microsoft.com/windows/internet-explorer/default.aspx@ocid=ie6_countdown_bannercode"><img src="../../storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+<script type="text/javascript" src="catalog/view/theme/theme275/js/bootstrap/bootstrap.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/common.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/jQuery.equalHeights.js"></script>
+<script type="text/JavaScript" src="catalog/view/theme/theme275/js/cloud-zoom.1.0.2.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/jscript_zjquery.anythingslider.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/script.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/jquery.mobile-events.js"></script>
+<script type="text/javascript" src="catalog/view/theme/theme275/js/superfish.js"></script>
+<!--[if !IE]>
+<script type="text/javascript" src="catalog/view/theme/theme275/js//sl/jquery.mobile.customized.min.js"></script>
+<![endif]-->
+<!--[if IE]>
+<script type="text/javascript" src="catalog/view/theme/theme275/js//sl/jscript_zjquery.anythingslider.js"></script>
+<![endif]-->
+<script type="text/javascript" src="catalog/view/theme/theme275/js/sl/camera.js"></script>
+
+<!-- bx-slider -->
+<script type="text/javascript" language="javascript" src="catalog/view/theme/theme275/js/bxslider/jquery.bxslider.js"></script>
+<!-- photo swipe -->
+<script type="text/javascript" language="javascript" src="catalog/view/theme/theme275/js/photo-swipe/klass.min.js"></script>
+<script type="text/javascript" language="javascript" src="catalog/view/theme/theme275/js/photo-swipe/code.photoswipe.jquery-3.0.5.js"></script>
+
+<script type="text/javascript" src="catalog/view/javascript/jquery/jquery.total-storage.min.js"></script>
+<!--[if  IE 8]>
+	<style>
+		.success, #header #cart .content  { border:1px solid #e7e7e7;}
+	</style>
+<![endif]-->
+
+<!--[if  IE 8]>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/stylesheet/ie7.css" />
+<![endif]-->
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/stylesheet/ie6.css" />
+<script type="text/javascript" src="catalog/view/javascript/DD_belatedPNG_0.0.8a-min.js"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('#logo img');
+</script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/theme275/stylesheet/livesearch.css"/>
+<!--ipt type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-7078796-5']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</scri-->
+</head>
+<body class="product-category"><a id="hidden" href="default.htm"></a>
+
+<div class="swipe-left"></div>
+<div id="body">
+<div class="swipe">
+	<div class="swipe-menu">
+		<ul class="links">
+			 <li class="first"><a class="" href="index.php@route=common_2Fhome"><i class="icon-home"></i>Home</a></li>
+			<li><a class="" href="index.php@route=account_2Fwishlist" id="wishlist-total"><i class="icon-star"></i>Wish List (0)</a></li>
+			<li><a class="" href="index.php@route=account_2Faccount"><i class="icon-user"></i>My Account</a></li>
+			<li><a class="" href="index.php@route=checkout_2Fcart"><i class="icon-shopping-cart"></i>Shopping Cart</a></li>
+			<li><a class="" href="index.php@route=checkout_2Fcheckout"><i class="icon-check"></i>Checkout</a></li>
+						<li class="login_h"><a href="index.php@route=account_2Flogin"><i class="icon-chevron-sign-right"></i>Login</a></li> <li><a href="index.php@route=account_2Fregister"><i class="icon-chevron-sign-right"></i>Create an account</a></li>  					</ul>
+				<div id="currency" class="header-button">
+	<div>
+		<div class="heading-1"><i class="icon-money"></i>Currency<i class="icon-chevron-sign-down"></i></div>
+		<div class="heading">
+																					$<i class="icon-chevron-sign-down"></i>
+										</div>
+	</div>
+		<ul>
+			<form action="http://livedemo00.template-help.com/opencart_47093/index.php?route=module/currency" method="post" enctype="multipart/form-data">
+															<li><a title="Euro" onClick="$('input[name=\'currency_code\']').attr('value', 'EUR').submit(); $(this).parent().parent().submit();"><span>€</span></a></li>
+																							<li><a title="Pound Sterling" onClick="$('input[name=\'currency_code\']').attr('value', 'GBP').submit(); $(this).parent().parent().submit();"><span>£</span></a></li>
+																							<li><a title="US Dollar"><span class="act">$</span></a></li>
+														<input type="hidden" name="currency_code" value="" />
+			<input type="hidden" name="redirect" value="http://livedemo00.template-help.com/opencart_47093/index.php?route=product/category&amp;path=20" />
+			</form>
+		</ul>
+			
+	</div>
+
+				<ul class="foot">
+						<li><a href="index.php@route=information_2Finformation&information_id=4">About Us</a></li>
+						<li><a href="index.php@route=information_2Finformation&information_id=6">Delivery Information</a></li>
+						<li><a href="index.php@route=information_2Finformation&information_id=3">Privacy Policy</a></li>
+						<li><a href="index.php@route=information_2Finformation&information_id=5">Terms &amp; Conditions</a></li>
+					</ul>
+				<ul class="foot foot-1">
+			<li><a href="index.php@route=information_2Fcontact">Contact Us</a></li>
+			<li><a href="index.php@route=account_2Freturn_2Finsert">Returns</a></li>
+			<li><a href="index.php@route=information_2Fsitemap">Site Map</a></li>
+		</ul>
+		<ul class="foot foot-2">
+			<li><a href="index.php@route=product_2Fmanufacturer">Brands</a></li>
+			<li><a href="index.php@route=account_2Fvoucher">Gift Vouchers</a></li>
+			<li><a href="index.php@route=affiliate_2Faccount">Affiliates</a></li>
+			<li><a href="index.php@route=product_2Fspecial">Specials</a></li>
+		</ul>
+		<ul class="foot foot-3">
+			<li><a href="index.php@route=account_2Forder">Order History</a></li>
+			<li><a href="index.php@route=account_2Fnewsletter">Newsletter</a></li>
+		</ul>
+	</div>
+</div>
+<div id="page">
+<div id="shadow">
+<div class="shadow"></div>
+<header id="header">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div class="toprow-1">
+					<a class="swipe-control" href="#"><i class="icon-reorder"></i></a>
+					<div class="top-search">
+						<i class="icon-search"></i>
+					</div>
+				</div>
+				<div class="toprow">
+					
+					<div id="currency" class="header-button">
+	<div>
+		<div class="heading-1"><i class="icon-money"></i>Currency<i class="icon-chevron-sign-down"></i></div>
+		<div class="heading">
+																					$<i class="icon-chevron-sign-down"></i>
+										</div>
+	</div>
+		<ul>
+			<form action="http://livedemo00.template-help.com/opencart_47093/index.php?route=module/currency" method="post" enctype="multipart/form-data">
+															<li><a title="Euro" onClick="$('input[name=\'currency_code\']').attr('value', 'EUR').submit(); $(this).parent().parent().submit();"><span>€</span></a></li>
+																							<li><a title="Pound Sterling" onClick="$('input[name=\'currency_code\']').attr('value', 'GBP').submit(); $(this).parent().parent().submit();"><span>£</span></a></li>
+																							<li><a title="US Dollar"><span class="act">$</span></a></li>
+														<input type="hidden" name="currency_code" value="" />
+			<input type="hidden" name="redirect" value="http://livedemo00.template-help.com/opencart_47093/index.php?route=product/category&amp;path=20" />
+			</form>
+		</ul>
+			
+	</div>
+
+										<ul class="links">
+						 <li class="first"><a class="" href="index.php@route=common_2Fhome"><i class="icon-chevron-sign-right"></i>Home</a></li>
+						<li><a class="" href="index.php@route=account_2Fwishlist" id="wishlist-total"><i class="icon-chevron-sign-right"></i>Wish List (0)</a></li>
+						<li><a class="" href="index.php@route=account_2Faccount"><i class="icon-chevron-sign-right"></i>My Account</a></li>
+						<li><a class="" href="index.php@route=checkout_2Fcart"><i class="icon-chevron-sign-right"></i>Shopping Cart</a></li>
+						<li><a class="" href="index.php@route=checkout_2Fcheckout"><i class="icon-chevron-sign-right"></i>Checkout</a></li>
+														<li class="login_h"><a href="index.php@route=account_2Flogin"><i class="icon-chevron-sign-right"></i>Login</a></li> <li><a href="index.php@route=account_2Fregister"><i class="icon-chevron-sign-right"></i>Create an account</a></li>  													</ul>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<div class="relative">
+									<div id="logo"><a href="index.php@route=common_2Fhome"><img src="image/data/logo.png" title="Car audio" alt="Car audio" /></a></div>
+								<div id="search">
+					<label>Search</label>
+					<div class="inner">
+						<div class="button-search"><i class="icon-search"></i></div>
+						<input  type="text" name="search" placeholder="Search" value="" />
+					</div>
+				</div>
+				<div class="cart-position">
+					<div class="cart-inner"><div id="cart" >
+
+  <div class="heading">
+	<span class="link_a"> 
+		<i class="icon-shopping-cart"></i>
+		<b>Cart</b>
+		<span class="sc-button"></span>
+		<span id="cart-total2">0</span>
+		<span id="cart-total">0 item(s)</span>
+		<i class="icon-chevron-sign-down"></i>
+		<span class="clear"></span>
+		</span>
+	</div>
+	
+  <div class="content">
+  <div class="content-scroll">
+	
+		<div class="empty">Your shopping cart is empty!</div>
+	  </div>
+  </div>
+</div>
+</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+				<div id="menu-gadget">
+		<div class="row">
+			<div class="span12">
+				
+				
+					<div id="menu-icon">Categories</div>
+					<ul id="nav" class="sf-menu-phone">
+												<li ><a href="index.php@route=product_2Fcategory&path=25">ACCESSORIES</a>
+													</li>
+												<li ><a href="index.php@route=product_2Fcategory&path=57">AMPLIFIERS</a>
+													</li>
+												<li ><a href="index.php@route=product_2Fcategory&path=17">HEADPHONES</a>
+													</li>
+												<li class="parent"><a href="index.php@route=product_2Fcategory&path=20">IN DASH RECEIVERS</a>
+												
+																<ul>
+																																																<li >
+																											<a href="index.php@route=product_2Fcategory&path=20_30">Ctetur adipisicing </a>
+																</li>
+																																																<li >
+																											<a href="index.php@route=product_2Fcategory&path=20_29">Lorem ipsum dolor</a>
+																</li>
+																																																<li >
+																											<a href="index.php@route=product_2Fcategory&path=20_31">Sed do eiusmod</a>
+																</li>
+																								</ul>
+																				</li>
+												<li ><a href="index.php@route=product_2Fcategory&path=24">SPEAKERS</a>
+													</li>
+												<li ><a href="index.php@route=product_2Fcategory&path=59">SUBWOOFERS</a>
+													</li>
+											</ul>
+				</div>
+				
+			</div>
+		</div>
+			</div>
+			<div id="menu">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<script type="text/javascript">
+						$(document).ready(function(){
+						
+							$('.menu ul li').last().addClass('last');
+							$('.menu ul li li').last().addClass('last');
+						});
+					</script>
+					<ul  class="menu">
+																								<li class="cat_1">
+												<a href="index.php@route=product_2Fcategory&path=25">ACCESSORIES</a>
+												</li>
+																		<li class="cat_2">
+												<a href="index.php@route=product_2Fcategory&path=57">AMPLIFIERS</a>
+												</li>
+																		<li class="cat_3">
+												<a href="index.php@route=product_2Fcategory&path=17">HEADPHONES</a>
+												</li>
+																		<li class="active cat_4">
+												<a href="index.php@route=product_2Fcategory&path=20">IN DASH RECEIVERS</a>
+											
+																<ul>
+																																																<li>
+																											<a class="screenshot1"  href="index.php@route=product_2Fcategory&path=20_30">Ctetur adipisicing </a>
+																</li>
+																																																<li>
+																											<a class="screenshot1"  href="index.php@route=product_2Fcategory&path=20_29">Lorem ipsum dolor</a>
+																</li>
+																																																<li>
+																											<a class="screenshot1"  href="index.php@route=product_2Fcategory&path=20_31">Sed do eiusmod</a>
+																</li>
+																								</ul>
+																				</li>
+																		<li class="cat_5">
+												<a href="index.php@route=product_2Fcategory&path=24">SPEAKERS</a>
+												</li>
+																		<li class="cat_6">
+												<a href="index.php@route=product_2Fcategory&path=59">SUBWOOFERS</a>
+												</li>
+											</ul>
+					
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	</header>
+<section>
+
+<div id="container">
+<p id="back-top"> <a href="#top"><span></span></a> </p>
+<div class="container">
+<div id="notification"></div>
+<div class="row">
+<div class="span9">
+	<div class="row">
+<div class="span9  " id="content">  <div class="breadcrumb">
+		<a href="index.php@route=common_2Fhome">Home</a>
+		 &raquo; <a href="index.php@route=product_2Fcategory&path=20">IN DASH RECEIVERS</a>
+	  </div>
+  <h1 class="style-1">IN DASH RECEIVERS</h1>
+    <div class="category-info">
+	<!---->
+		<p><strong>Our products</strong> are the perfect combination of the latest fashion trends, real durability and flexibility. You know that nowadays music is one of the main spheres in our society. It is a gigantic machine of production different goods for mental satisfaction. <strong>It is a real mainstream;</strong> moreover - it is a modern religion.</p>
+
+<p>It doesn’t matter what kind of a music you listen because tastes differ but we have collected all possible music-related goods in our store.</p>
+	  </div>
+      <div class="box subcat">
+	<div class="box-heading">Refine Search</div>
+	<div class="box-content">
+		
+		<div class="box-product box-subcat">
+			<ul class="row">												<li class="cat-height  span2">
+										<div class="image"><a href="index.php@route=product_2Fcategory&path=20_30"><img src="image/cache/data/Alpine IVA-D106 - In-Dash DVD-CD-MP3-WMA-DivX AV Receiver 1 copy-170x170.png" alt="Ctetur adipisicing  (5)" /></a></div>
+										<div class="name subcatname"><a href="index.php@route=product_2Fcategory&path=20_30">Ctetur adipisicing  (5)</a></div>
+				</li>
+												<li class="cat-height  span2">
+										<div class="image"><a href="index.php@route=product_2Fcategory&path=20_29"><img src="image/cache/data/Alpine PKG-1000P 1 copy-170x170.png" alt="Lorem ipsum dolor (7)" /></a></div>
+										<div class="name subcatname"><a href="index.php@route=product_2Fcategory&path=20_29">Lorem ipsum dolor (7)</a></div>
+				</li>
+												<li class="cat-height  span2">
+										<div class="image"><a href="index.php@route=product_2Fcategory&path=20_31"><img src="image/cache/data/Boss CH4330 1 copy-170x170.png" alt="Sed do eiusmod (4)" /></a></div>
+										<div class="name subcatname"><a href="index.php@route=product_2Fcategory&path=20_31">Sed do eiusmod (4)</a></div>
+				</li>
+							</ul>
+		</div>
+	</div>
+  </div>
+      <div class="product-filter">
+		<div class="sort"><b>Sort By:</b>
+	  <select onchange="location = this.value;">
+						<option value="index.php@route=product_2Fcategory&path=20&sort=p.sort_order&order=ASC" selected="selected">Default</option>
+								<option value="index.php@route=product_2Fcategory&path=20&sort=pd.name&order=ASC">Name (A - Z)</option>
+								<option value="index.php@route=product_2Fcategory&path=20&sort=pd.name&order=DESC">Name (Z - A)</option>
+								<option value="index.php@route=product_2Fcategory&path=20&sort=p.price&order=ASC">Price (Low &gt; High)</option>
+								<option value="index.php@route=product_2Fcategory&path=20&sort=p.price&order=DESC">Price (High &gt; Low)</option>
+								<option value="index.php@route=product_2Fcategory&path=20&sort=rating&order=DESC">Rating (Highest)</option>
+								<option value="index.php@route=product_2Fcategory&path=20&sort=rating&order=ASC">Rating (Lowest)</option>
+								<option value="index.php@route=product_2Fcategory&path=20&sort=p.model&order=ASC">Model (A - Z)</option>
+								<option value="index.php@route=product_2Fcategory&path=20&sort=p.model&order=DESC">Model (Z - A)</option>
+					  </select>
+	</div>
+	<div class="limit"><b>Show:</b>
+	  <select onchange="location = this.value;">
+						<option value="index.php@route=product_2Fcategory&path=20&limit=6" selected="selected">6</option>
+								<option value="index.php@route=product_2Fcategory&path=20&limit=25">25</option>
+								<option value="index.php@route=product_2Fcategory&path=20&limit=50">50</option>
+								<option value="index.php@route=product_2Fcategory&path=20&limit=75">75</option>
+								<option value="index.php@route=product_2Fcategory&path=20&limit=100">100</option>
+					  </select>
+	</div>
+  <div class="product-compare"><a href="index.php@route=product_2Fcompare" id="compare-total">Product Compare (0)</a></div>
+	<div class="display"><b>Display:</b> List  <a onclick="display('grid');">Grid</a></div>
+  </div>
+
+  <div class="product-grid">
+	<ul class="row">
+						<li class="span3 first-in-line">
+				<div class="image"><a href="index.php@route=product_2Fproduct&path=20&product_id=43"><img id="img_43" src="image/cache/data/Alpine IVA-D106 - In-Dash DVD-CD-MP3-WMA-DivX AV Receiver 1 copy-180x180.png" title="Acicte magna ipsum dolor" alt="Acicte magna ipsum dolor" /></a></div>
+	  		<div class="name"><a href="index.php@route=product_2Fproduct&path=20&product_id=43">Acicte magna ipsum dolor</a></div>
+		<div class="description">Our products are the perfect combination of the latest fashion trends, real durability and flexibility. You know that nowadays music is one of the main spheres in our society. It is a gigantic machine of production different goods for mental satisfaction. It is a real mainstream; moreover - it is a ..</div>
+				<div class="price">
+				<span class="price-tax">Ex Tax: $499.00</span>
+				<span class="price-new">$588.33</span>
+		<span class="price-old">$589.50</span> 
+				</div>
+				<div class="cart-button">
+			<div class="cart"><a onclick="addToCart('43');" class="button" title="Add to Cart"><!--<i class="icon-shopping-cart"></i>--><span>Add to Cart</span></a></div>
+			<div class="wishlist"><a class="tooltip-1 " title="Add to Wish List"  onclick="addToWishList('43');"><i class="icon-star"></i></a></div>
+			<div class="compare"><a class="tooltip-1" title="Add to Compare"  onclick="addToCompare('43');"><i class="icon-bar-chart"></i></a></div>
+			<div class="clear"></div>
+		</div>
+		<div class="rating">
+					</div>
+	</li>
+						<li class="span3 ">
+				<div class="image"><a href="index.php@route=product_2Fproduct&path=20&product_id=29"><img id="img_29" src="image/cache/data/Alpine PKG-1000P 1 copy-180x180.png" title="Aperce sit conse" alt="Aperce sit conse" /></a></div>
+	  		<div class="name"><a href="index.php@route=product_2Fproduct&path=20&product_id=29">Aperce sit conse</a></div>
+		<div class="description">Our products are the perfect combination of the latest fashion trends, real durability and flexibility. You know that nowadays music is one of the main spheres in our society. It is a gigantic machine of production different goods for mental satisfaction. It is a real mainstream; moreover - it is a ..</div>
+				<div class="price">
+				<span class="price-tax">Ex Tax: $200.00</span>
+				<span class="price-new">$237.00</span>
+		<span class="price-old">$330.99</span> 
+				</div>
+				<div class="cart-button">
+			<div class="cart"><a onclick="addToCart('29');" class="button" title="Add to Cart"><!--<i class="icon-shopping-cart"></i>--><span>Add to Cart</span></a></div>
+			<div class="wishlist"><a class="tooltip-1 " title="Add to Wish List"  onclick="addToWishList('29');"><i class="icon-star"></i></a></div>
+			<div class="compare"><a class="tooltip-1" title="Add to Compare"  onclick="addToCompare('29');"><i class="icon-bar-chart"></i></a></div>
+			<div class="clear"></div>
+		</div>
+		<div class="rating">
+					</div>
+	</li>
+						<li class="span3 last-in-line">
+				<div class="image"><a href="index.php@route=product_2Fproduct&path=20&product_id=45"><img id="img_45" src="image/cache/data/Alpine PKG-2000P 1 copy-180x180.png" title="Dolor sit amet" alt="Dolor sit amet" /></a></div>
+	  		<div class="name"><a href="index.php@route=product_2Fproduct&path=20&product_id=45">Dolor sit amet</a></div>
+		<div class="description">Our products are the perfect combination of the latest fashion trends, real durability and flexibility. You know that nowadays music is one of the main spheres in our society. It is a gigantic machine of production different goods for mental satisfaction. It is a real mainstream; moreover - it is a ..</div>
+				<div class="price">
+				<span class="price-tax">Ex Tax: $199.00</span>
+				<span class="price-new">$199.00</span>
+		<span class="price-old">$200.00</span> 
+				</div>
+				<div class="cart-button">
+			<div class="cart"><a onclick="addToCart('45');" class="button" title="Add to Cart"><!--<i class="icon-shopping-cart"></i>--><span>Add to Cart</span></a></div>
+			<div class="wishlist"><a class="tooltip-1 " title="Add to Wish List"  onclick="addToWishList('45');"><i class="icon-star"></i></a></div>
+			<div class="compare"><a class="tooltip-1" title="Add to Compare"  onclick="addToCompare('45');"><i class="icon-bar-chart"></i></a></div>
+			<div class="clear"></div>
+		</div>
+		<div class="rating">
+					</div>
+	</li>
+						<li class="span3 first-in-line">
+				<div class="image"><a href="index.php@route=product_2Fproduct&path=20&product_id=36"><img id="img_36" src="image/cache/data/Alpine iDA-X305S - Digital Media Receiver 1 copy-180x180.png" title="Ecco enswom sucaal" alt="Ecco enswom sucaal" /></a></div>
+	  		<div class="name"><a href="index.php@route=product_2Fproduct&path=20&product_id=36">Ecco enswom sucaal</a></div>
+		<div class="description">Our products are the perfect combination of the latest fashion trends, real durability and flexibility. You know that nowadays music is one of the main spheres in our society. It is a gigantic machine of production different goods for mental satisfaction. It is a real mainstream; moreover - it is a ..</div>
+				<div class="price">
+				<span class="price-tax">Ex Tax: $100.00</span>
+						$119.50				</div>
+				<div class="cart-button">
+			<div class="cart"><a onclick="addToCart('36');" class="button" title="Add to Cart"><!--<i class="icon-shopping-cart"></i>--><span>Add to Cart</span></a></div>
+			<div class="wishlist"><a class="tooltip-1 " title="Add to Wish List"  onclick="addToWishList('36');"><i class="icon-star"></i></a></div>
+			<div class="compare"><a class="tooltip-1" title="Add to Compare"  onclick="addToCompare('36');"><i class="icon-bar-chart"></i></a></div>
+			<div class="clear"></div>
+		</div>
+		<div class="rating">
+					</div>
+	</li>
+						<li class="span3 ">
+				<div class="image"><a href="index.php@route=product_2Fproduct&path=20&product_id=33"><img id="img_33" src="image/cache/data/Alpine iXA-W404 - Digital Media Receiver 1 copy-180x180.png" title="Ecco enswom sucaal Ecco enswom sucaal" alt="Ecco enswom sucaal Ecco enswom sucaal" /></a></div>
+	  		<div class="name"><a href="index.php@route=product_2Fproduct&path=20&product_id=33">Ecco enswom sucaal Ecco enswom sucaal</a></div>
+		<div class="description">Our products are the perfect combination of the latest fashion trends, real durability and flexibility. You know that nowadays music is one of the main spheres in our society. It is a gigantic machine of production different goods for mental satisfaction. It is a real mainstream; moreover - it is a ..</div>
+				<div class="price">
+				<span class="price-tax">Ex Tax: $200.00</span>
+						$237.00				</div>
+				<div class="cart-button">
+			<div class="cart"><a onclick="addToCart('33');" class="button" title="Add to Cart"><!--<i class="icon-shopping-cart"></i>--><span>Add to Cart</span></a></div>
+			<div class="wishlist"><a class="tooltip-1 " title="Add to Wish List"  onclick="addToWishList('33');"><i class="icon-star"></i></a></div>
+			<div class="compare"><a class="tooltip-1" title="Add to Compare"  onclick="addToCompare('33');"><i class="icon-bar-chart"></i></a></div>
+			<div class="clear"></div>
+		</div>
+		<div class="rating">
+					</div>
+	</li>
+						<li class="span3 last-in-line">
+				<div class="image"><a href="index.php@route=product_2Fproduct&path=20&product_id=35"><img id="img_35" src="image/cache/data/Alpine iXA-W407 - Digital Media Receiver 1 copy-180x180.png" title="Eiusmod tempor" alt="Eiusmod tempor" /></a></div>
+	  		<div class="name"><a href="index.php@route=product_2Fproduct&path=20&product_id=35">Eiusmod tempor</a></div>
+		<div class="description">Our products are the perfect combination of the latest fashion trends, real durability and flexibility. You know that nowadays music is one of the main spheres in our society. It is a gigantic machine of production different goods for mental satisfaction. It is a real mainstream; moreover - it is a ..</div>
+				<div class="price">
+				<span class="price-tax">Ex Tax: $100.00</span>
+						$119.50				</div>
+				<div class="cart-button">
+			<div class="cart"><a onclick="addToCart('35');" class="button" title="Add to Cart"><!--<i class="icon-shopping-cart"></i>--><span>Add to Cart</span></a></div>
+			<div class="wishlist"><a class="tooltip-1 " title="Add to Wish List"  onclick="addToWishList('35');"><i class="icon-star"></i></a></div>
+			<div class="compare"><a class="tooltip-1" title="Add to Compare"  onclick="addToCompare('35');"><i class="icon-bar-chart"></i></a></div>
+			<div class="clear"></div>
+		</div>
+		<div class="rating">
+					</div>
+	</li>
+			 </ul>
+  </div>
+  
+  <div class="pagination"><div class="links"> <b>1</b>  <a href="index.php@route=product_2Fcategory&path=20&page=2">2</a>  <a href="index.php@route=product_2Fcategory&path=20&page=3">3</a>  <a href="index.php@route=product_2Fcategory&path=20&page=2">&gt;</a> <a href="index.php@route=product_2Fcategory&path=20&page=3">&gt;|</a> </div><div class="results">Showing 1 to 6 of 14 (3 Pages)</div></div>
+      </div>
+  	</div>
+</div>
+<aside class="span3" id="column-right">
+    <div class="box info" id="compare">
+	<div class="box-heading">Product Comparison</div>
+	<div class="box-content">
+				<div class="product-compare"><a class="button" href="index.php@route=product_2Fcompare"><span>Product Compare</span></a></div>
+	</div>
+</div>
+
+    <div class="box box-filter">
+  <div class="box-heading">Refine Search</div>
+  <div class="box-content">
+    <ul class="box-filter ">
+            <li><span id="filter-group1">Lorem ipsum</span>
+        <ul>
+                              <li>
+            <input type="checkbox" value="1" id="filter1" />
+            <label class="checkbox" for="filter1">Cras dignissim (8)              
+            </label>
+          </li>
+                                        <li>
+            <input type="checkbox" value="2" id="filter2" />
+            <label class="checkbox" for="filter2">Quisque ullamcorper (3)              
+            </label>
+          </li>
+                                        <li>
+            <input type="checkbox" value="3" id="filter3" />
+            <label class="checkbox" for="filter3">Dolre sit amet (9)              
+            </label>
+          </li>
+                                        <li>
+            <input type="checkbox" value="4" id="filter4" />
+            <label class="checkbox" for="filter4">Nam a ipsum (9)              
+            </label>
+          </li>
+                            </ul>
+      </li>
+          </ul>
+    <a id="button-filter" class="button"><span>Refine Search</span></a>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#button-filter').bind('click', function() {
+	filter = [];
+	
+	$('.box-filter input[type=\'checkbox\']:checked').each(function(element) {
+		filter.push(this.value);
+	});
+	
+	location = 'index.php@route=product_2Fcategory&path=20&filter=' + filter.join(',');
+});
+//--></script> 
+    <script type="text/javascript">
+	$(function(){
+		$('.info-list li').last().addClass('last');
+	});
+</script>
+<div class="box info">
+  <div class="box-heading">Information</div>
+  <div class="box-content">
+  	
+    <ul class="info-list">
+            <li><a href="index.php@route=information_2Finformation&information_id=4">About Us</a></li>
+            <li><a href="index.php@route=information_2Finformation&information_id=6">Delivery Information</a></li>
+            <li><a href="index.php@route=information_2Finformation&information_id=3">Privacy Policy</a></li>
+            <li><a href="index.php@route=information_2Finformation&information_id=5">Terms &amp; Conditions</a></li>
+            <li><a href="index.php@route=information_2Fcontact">Contact Us</a></li>
+      <li><a href="index.php@route=information_2Fsitemap">Site Map</a></li>
+    </ul>
+  </div>
+</div>
+    <script type="text/javascript">
+		(function($){$.fn.equalHeights=function(minHeight,maxHeight){tallest=(minHeight)?minHeight:0;this.each(function(){if($(this).height()>tallest){tallest=$(this).height()}});if((maxHeight)&&tallest>maxHeight)tallest=maxHeight;return this.each(function(){$(this).height(tallest)})}})(jQuery)
+	$(window).load(function(){
+		if($(".maxheight-best").length){
+		$(".maxheight-best").equalHeights()}
+	})
+</script>
+<div class="box bestsellers">
+  <div class="box-heading">Bestsellers</div>
+  <div class="box-content">
+	<div class="box-product">
+		<ul class="row">
+		  		  			<li class="first-in-line last_line span3">
+				<div class="image2">
+					<a href="index.php@route=product_2Fproduct&product_id=40"><img id="img_40" src="image/cache/data/DUAL XDVD9101 Multimedia Head Unit 1 copy-180x180.png" alt="Ipsum dolor" /></a>					
+				</div>
+				<div class="inner">
+					<div class="f-left">
+						<div class="name maxheight-best"><a href="index.php@route=product_2Fproduct&product_id=40">Ipsum dolor</a></div>
+												<div class="price">
+														<span class="price-new">$118.33</span><span class="price-old">$120.68</span>
+													</div>
+												<!--							<div class="description">Our products are the perfect combination of the latest fashion trends,...</div>
+						-->
+					</div>
+					<!--<div class="cart-button">
+						<div class="cart"><a title="Add to Cart" data-id="40;" class="button addToCart"><i class="icon-shopping-cart"></i><span>Add to Cart</span></a></div>
+						<a href="http://livedemo00.template-help.com/opencart_47093/index.php?route=product/product&amp;product_id=40" class="button details"><span>Details</span></a>
+						
+						<div class="compare"><a class="tooltip-1" title="Add to compare"  onclick="addToCompare('40');"><i class="icon-bar-chart"></i><span>Add to compare</span></a></div>
+						<div class="wishlist"><a class="tooltip-1" title="Add to wishlist"  onclick="addToWishList('40');"><i class="icon-star"></i><span>Add to wishlist</span></a></div>
+						<span class="clear"></span>
+					</div>-->
+					<div class="clear"></div>
+					<div class="rating">
+											</div>
+				</div>
+				<div class="clear"></div>
+			  </li>
+		  		</ul>
+	</div>
+  </div>
+</div>
+    <script type="text/javascript">
+		(function($){$.fn.equalHeights=function(minHeight,maxHeight){tallest=(minHeight)?minHeight:0;this.each(function(){if($(this).height()>tallest){tallest=$(this).height()}});if((maxHeight)&&tallest>maxHeight)tallest=maxHeight;return this.each(function(){$(this).height(tallest)})}})(jQuery)
+	$(window).load(function(){
+		if($(".maxheight").length){
+		$(".maxheight").equalHeights()}
+	})
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+$(function(){
+$('.new-products  li ').last().addClass('last');
+});
+}); 
+</script>
+	<div class="box new-products">
+		<div class="box-heading">Latest</div>
+		<div class="box-content">
+			<div class="box-product">
+				<ul class="row">
+		  		  						<li class="first-in-line last_line span3">
+							<div class="image2">
+								<a href="index.php@route=product_2Fproduct&product_id=50"><img src="image/cache/data/BOSS CAP10 10 FARAD CAPACITOR 1 copy-180x180.png" alt="Esse cillum dolore" /></a>								
+							</div>
+							<div class="inner">
+								<div class="f-left">
+									<div class="name maxheight"><a href="index.php@route=product_2Fproduct&product_id=50">Esse cillum dolore</a></div>
+																		<div class="price">
+																				<span class="price-new">$588.33</span><span class="price-old">$589.50</span>
+																			</div>
+																		<!--										<div class="description">Our products are the perfect combination of the latest fashion trends,...</div>
+									-->
+								</div>
+								<!--<div class="cart-button">
+									<div class="cart"><a title="Add to Cart" data-id="50;" class="button addToCart"><i class="icon-shopping-cart"></i><span>Add to Cart</span></a></div>
+									<a href="http://livedemo00.template-help.com/opencart_47093/index.php?route=product/product&amp;product_id=50" class="button details"><span>Details</span></a>
+									
+									<div class="compare"><a class="tooltip-1" title="Add to compare"  onclick="addToCompare('50');"><i class="icon-bar-chart"></i><span>Add to compare</span></a></div>
+									<div class="wishlist"><a class="tooltip-1" title="Add to wishlist"  onclick="addToWishList('50');"><i class="icon-star"></i><span>Add to wishlist</span></a></div>
+									<span class="clear"></span>
+								</div>-->
+								<div class="clear"></div>
+								<div class="rating">
+																</div>
+							</div>
+								<div class="clear"></div>
+						</li>
+									</ul>
+			</div>
+		</div>
+	</div>    <script type="text/javascript">
+	if ($('.container').width() > 723) {
+		(function($){$.fn.equalHeights=function(minHeight,maxHeight){tallest=(minHeight)?minHeight:0;this.each(function(){if($(this).height()>tallest){tallest=$(this).height()}});if((maxHeight)&&tallest>maxHeight)tallest=maxHeight;return this.each(function(){$(this).height(tallest)})}})(jQuery)
+	$(window).load(function(){
+		if($(".maxheight-spec").length){
+		$(".maxheight-spec").equalHeights()}
+	});
+	};
+</script>
+<div class="box specials">
+  <div class="box-heading special-heading">Specials</div>
+  <div class="box-content">
+	<div class="box-product">
+		<ul class="row">
+		  		  			<li class="first-in-line last_line span3">
+				<div class="image2">
+					<a href="index.php@route=product_2Fproduct&product_id=43"><img id="img_43" src="image/cache/data/Alpine IVA-D106 - In-Dash DVD-CD-MP3-WMA-DivX AV Receiver 1 copy-180x180.png" alt="Acicte magna ipsum dolor" /></a>				</div>
+				<div class="inner">
+					<div class="f-left">
+						
+						<div class="name maxheight-spec"><a href="index.php@route=product_2Fproduct&product_id=43">Acicte magna ipsum dolor</a></div>
+												<div class="price">
+														<span class="price-new">$588.33</span><span class="price-old">$589.50</span>
+													</div>
+												<!--							<div class="description">Our products are the perfect combination of the latest fashion trends,...</div>
+						-->
+						</div>
+						<!--<div class="cart-button">
+							<div class="cart">
+								<a title="Add to cart" data-id="43;" class="button addToCart">
+									<i class="icon-shopping-cart"></i>
+									<span>Add to cart</span>
+								</a>
+							</div>
+							<a href="http://livedemo00.template-help.com/opencart_47093/index.php?route=product/product&amp;product_id=43" class="button details"><span>Details</span></a>
+							
+							<div class="compare">
+								<a class="tooltip-1" title="Add to compare"  onclick="addToCompare('43');">
+									<i class="icon-bar-chart"></i>
+									<span>Add to compare</span>
+								</a>
+							</div>
+							<div class="wishlist">
+								<a class="tooltip-1" title="Add to wishlist"  onclick="addToWishList('43');">
+									<i class="icon-star"></i>
+									<span>Add to wishlist</span>
+								</a>
+							</div>
+							<span class="clear"></span>
+						</div>-->
+					<div class="clear"></div>
+									</div>
+				<div class="clear"></div>
+			</li>
+		  	   </ul>
+	</div>
+  </div>
+</div>
+  </aside>
+
+<script type="text/javascript"><!--
+function display(view) {
+	if (view == 'list') {
+		$('.product-grid ').attr('class', 'product-list');
+		$('.product-list ul').removeClass('row');
+		$('.product-list ul li').removeClass('span3');
+		$('.product-list ul li').each(function(index, element) {
+			html = '';
+					html += '<div class="row">';
+			var image = $(element).find('.image').html();
+			
+			if (image != null) {
+				html += '<div class="image span2">' + image + '</div>';
+			}
+			html += '<div class="left span7">';
+				html += '<div class="name">' + $(element).find('.name').html() + '</div>';
+				html += '<div class="description">' + $(element).find('.description').html() + '</div>';
+				var price = $(element).find('.price').html();
+				if (price != null) {
+					html += '<div class="price">' + price  + '</div>';
+				}
+				html += '<div class="cart-button">';
+				html += '<div class="cart">' + $(element).find('.cart').html() + '</div>';
+				html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';
+				html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';
+				html += '<div class="clear">' + $(element).find('.clear').html() + '</div>';
+				html += '</div>';
+				var rating = $(element).find('.rating').html();
+				if (rating != null) {
+					html += '<div class="rating">' + rating + '</div>';
+				}
+				html += '</div>';
+				html += '</div>';
+			
+
+						
+			$(element).html(html);
+		});		
+		
+		$('.display').html('<b>Display:</b> <div id="list_b"><i class="icon-list"></i></div> <a id="grid_a" onclick="display(\'grid\');"><i class="icon-th"></i></a>');
+		
+		$.totalStorage('display', 'list'); 
+	} else {
+		$('.product-list').attr('class', 'product-grid');
+		$('.product-grid ul').addClass('row');
+		$('.product-grid ul li').addClass('span3');
+		$('.product-grid ul li').each(function(index, element) {
+			html = '';
+					
+			var image = $(element).find('.image').html();
+			
+			if (image != null) {
+				html += '<div class="image">' + image + '</div>';
+			}
+			html += '<div class="left">';
+		
+			
+			
+			
+			html += '<div class="name">' + $(element).find('.name').html() + '</div>';
+			var price = $(element).find('.price').html();
+			
+			if (price != null) {
+				html += '<div class="price">' + price  + '</div>';
+			}
+			html += '<div class="description">' + $(element).find('.description').html() + '</div>';
+			
+			
+			html += '<div class="cart-button">';
+			html += '<div class="cart">' + $(element).find('.cart').html() + '</div>';
+			html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';
+			html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';
+			html += '<div class="clear">' + $(element).find('.clear').html() + '</div>';
+			html += '</div>';
+			var rating = $(element).find('.rating').html();
+			
+			if (rating != null) {
+				html += '<div class="rating">' + rating + '</div>';
+			}
+			
+			html += '</div>';
+			$(element).html(html);
+		});	
+					
+		$('.display').html('<b>Display:</b> <a id="list_a" onclick="display(\'list\');"><i class="icon-list"></i></a>  <div id="grid_b"><i class="icon-th"></i></i></div>');
+		
+		$.totalStorage('display', 'grid');
+	}
+	if ($('body').width() > 940) {
+	// tooltip demo
+		$('.tooltip-toggle').tooltip({
+		selector: "a[data-toggle=tooltip]"
+		})
+		$('.tooltip-1').tooltip({
+			placement:'bottom'
+		})
+		$('.tooltip-2').tooltip({
+			placement:'top'
+		})
+		}
+	
+}
+
+view = $.totalStorage('display');
+
+if (view) {
+	display(view);
+} else {
+	display('grid');
+}
+//--></script> 
+<!--<script type="text/javascript">
+		(function($){$.fn.equalHeights=function(minHeight,maxHeight){tallest=(minHeight)?minHeight:0;this.each(function(){if($(this).height()>tallest){tallest=$(this).height()}});if((maxHeight)&&tallest>maxHeight)tallest=maxHeight;return this.each(function(){$(this).height(tallest)})}})(jQuery)
+	$(window).load(function(){
+		if($(".cat-height").length){
+		$(".cat-height").equalHeights()}
+	})
+</script>-->
+
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+</section>
+<footer>
+	<div class="container">
+		<div class="row">
+						<div class="span3">
+				<h3>Information</h3>
+				<ul>
+								<li><a href="index.php@route=information_2Finformation&information_id=4">About Us</a></li>
+								<li><a href="index.php@route=information_2Finformation&information_id=6">Delivery Information</a></li>
+								<li><a href="index.php@route=information_2Finformation&information_id=3">Privacy Policy</a></li>
+								<li><a href="index.php@route=information_2Finformation&information_id=5">Terms &amp; Conditions</a></li>
+								</ul>
+			</div>
+						<div class="span3">
+				<h3>Customer Service</h3>
+				<ul>
+				<li><a href="index.php@route=information_2Fcontact">Contact Us</a></li>
+				<li><a href="index.php@route=account_2Freturn_2Finsert">Returns</a></li>
+				<li><a href="index.php@route=information_2Fsitemap">Site Map</a></li>
+				</ul>
+			</div>
+			<div class="span3">
+				<h3>Extras</h3>
+				<ul>
+				<li><a href="index.php@route=product_2Fmanufacturer">Brands</a></li>
+				<li><a href="index.php@route=account_2Fvoucher">Gift Vouchers</a></li>
+				<li><a href="index.php@route=affiliate_2Faccount">Affiliates</a></li>
+				<li><a href="index.php@route=product_2Fspecial">Specials</a></li>
+				</ul>
+			</div>
+			<div class="span3">
+				<h3>My Account</h3>
+				<ul>
+				<li><a href="index.php@route=account_2Faccount">My Account</a></li>
+				<li><a href="index.php@route=account_2Forder">Order History</a></li>
+				<li><a href="index.php@route=account_2Fwishlist">Wish List</a></li>
+				<li><a href="index.php@route=account_2Fnewsletter">Newsletter</a></li>
+				</ul>
+			</div>
+
+		</div>
+		
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div id="powered">
+					Powered By <a href="../../www.opencart.com/default.htm">OpenCart</a><br /> Car audio &copy; 2014<!-- [[%FOOTER_LINK]] -->
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<script type="text/javascript" 	src="catalog/view/theme/theme275/js/livesearch.js"></script>
+</div>
+</div>
+</div>
+<script type="text/javascript">/* CloudFlare analytics upgrade */
+</script>
+</body></html>
