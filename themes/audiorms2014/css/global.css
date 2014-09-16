@@ -1,4 +1,7 @@
 @charset "UTF-8";
+div.bgmenu {
+    background:                 url("../image/menu.png") repeat-x scroll center bottom transparent;
+}
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin:                     0px;
     padding:                    0px;
@@ -247,7 +250,6 @@ img {
 .img-responsive {
     display:                    block;
     max-width:                  100%;
-    height:                     auto;
 }
 .img-rounded {
     border-radius:              6px;
@@ -278,7 +280,6 @@ img {
 hr {
     margin-top:                 18px;
     margin-bottom:              18px;
-    border-right:               0px none;
     border-width:               1px 0px 0px;
     border-style:               solid none none;
     border-color:               rgb(238, 238, 238) -moz-use-text-color -moz-use-text-color;
@@ -649,7 +650,7 @@ nav .container {
         width:                  25%;
         }
     .col-sm-4, header .row #header_logo {
-        width:                  33.3333%;
+        width:                  33.333%;
         }
     .col-sm-5 {
         width:                  41.6667%;
@@ -3098,30 +3099,6 @@ a.thumbnail:hover, a.thumbnail:focus {
 .alert-danger .alert-link {
     color:                      rgb(230, 230, 230);
 }
-@keyframes "progress-bar-stripes" {
-    0% {
-        background-position:    40px 0px;
-        }
-    100% {
-        background-position:    0px 0px;
-        }
-}
-@keyframes "progress-bar-stripes" {
-    0% {
-        background-position:    40px 0px;
-        }
-    100% {
-        background-position:    0px 0px;
-        }
-}
-@keyframes "progress-bar-stripes" {
-    0% {
-        background-position:    40px 0px;
-        }
-    100% {
-        background-position:    0px 0px;
-        }
-}
 .progress {
     overflow:                   hidden;
     height:                     18px;
@@ -3990,16 +3967,6 @@ th.visible-print, td.visible-print {
         display:                none ! important;
         }
 }
-@font-face {
-    font-family:                FontAwesome;
-    font-weight:                normal;
-    font-style:                 normal;
-    text-decoration:            inherit;
-}
-[class^="icon-"]:before, [class*=" icon-"]:before {
-    text-decoration:            inherit;
-    display:                    inline-block;
-}
 .icon-large:before {
     vertical-align:             -10%;
     font-size:                  1.33333em;
@@ -4172,30 +4139,6 @@ a [class^="icon-"], a [class*=" icon-"] {
 a .icon-stack, a .icon-spin {
     display:                    inline-block;
     text-decoration:            none;
-}
-@keyframes "spin" {
-    0% {
-        transform:              rotate(0deg);
-        }
-    100% {
-        transform:              rotate(359deg);
-        }
-}
-@keyframes "spin" {
-    0% {
-        transform:              rotate(0deg);
-        }
-    100% {
-        transform:              rotate(359deg);
-        }
-}
-@keyframes "spin" {
-    0% {
-        transform:              rotate(0deg);
-        }
-    100% {
-        transform:              rotate(359deg);
-        }
 }
 .icon-rotate-90:before {
     transform:                  rotate(90deg);
@@ -6599,7 +6542,6 @@ ul.step li {
     text-align:                 left;
     border-width:               1px 1px 1px 0px;
     border-style:               solid;
-    border-left:                0px solid;
     -moz-border-top-colors:     none;
     -moz-border-right-colors:   none;
     -moz-border-bottom-colors:  none;
@@ -8372,11 +8314,4 @@ div.star.star_hover:after {
 }
 .btn-pinterest i {
     color:                      rgb(206, 31, 33);
-}
-.btn-pinterest:hover {
-    color:                      white;
-    background-color:           rgb(206, 31, 33);
-}
-.btn-pinterest:hover i {
-    color:                      white;
 }

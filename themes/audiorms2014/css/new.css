@@ -1,7 +1,6 @@
 div.bgmenu {
     background:                 url("../image/menu.png") repeat-x scroll center bottom transparent;
 }
- 
 div#block_top_menu > ul > li > a:after {
     background:                 url("../image/menu_li_after.png") no-repeat scroll left top transparent;
     height:                     48px;
@@ -32,10 +31,6 @@ div#block_top_menu > ul > li > a:hover:after {
 div#block_top_menu li a {
     background:                 url("../image/menu_li.png") repeat-x scroll 0px top rgb(87, 87, 87);
 }
- html {
-     font-size:                  62.5%;
- }
- 
 nav .container {
     background:                 none repeat scroll 0% 0% black;
 }
@@ -46,7 +41,7 @@ nav .container {
 .nav div.container {
     background:                 url("../image/toprow.png") no-repeat scroll center center transparent;
 }
- 
 div#block_top_menu {
     padding:                    5px 0px 5px 45px;
-} 
+    z-index:                    0;
+}
