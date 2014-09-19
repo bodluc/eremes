@@ -138,6 +138,7 @@
 		<module name="merchantware"/>
 		<module name="mondialrelay"/>
 		<module name="moneybookers"/>
+		<module name="netreviews"/>
 		<module name="nqgatewayneteven"/>
 		<module name="ogone"/>
 		<module name="pagseguro"/>

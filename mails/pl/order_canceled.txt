@@ -3,13 +3,13 @@
 
 Witaj {firstname} {lastname}, 
 
-Twoje zamówienie o numerze {order_name} z {shop_name} zostało
-anulowane. 
+Your order with the reference {order_name} from {shop_name} has
+been canceled. 
 
-Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
-"Historia zamówień" [{history_url}] na koncie
-klienta klikając w "Moje konto"
-[{my_account_url}] w naszym sklepie. 
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w "Historia
+zamówień" [{history_url}] logując się do konta
+klienta "Moje konto" [{my_account_url}] w naszym
+sklepie. 
 
 Jeśli posiadasz konto gościa, możesz śledzić swoje
 zamówienie w sekcji "Śledzenie Zamówienia"

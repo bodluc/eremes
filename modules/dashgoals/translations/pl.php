@@ -25,14 +25,15 @@ $_MODULE['<{dashgoals}prestashop>dashgoals_7c103c9bbbaecee07ca898ed65667cbf'] = 
 $_MODULE['<{dashgoals}prestashop>dashgoals_eb233580dc419f03df5905f175606e4d'] = 'Cel ustalony:';
 $_MODULE['<{dashgoals}prestashop>config_254f642527b45bc260048e30704edb39'] = 'Konfiguracja';
 $_MODULE['<{dashgoals}prestashop>config_e7935ae6c516d89405ec532359d2d75a'] = 'Ruch';
-$_MODULE['<{dashgoals}prestashop>config_e4c3da18c66c0147144767efeb59198f'] = 'Stopień Konwersji';
-$_MODULE['<{dashgoals}prestashop>config_8c804960da61b637c548c951652b0cac'] = 'Średnia wartość koszyka';
+$_MODULE['<{dashgoals}prestashop>config_e4c3da18c66c0147144767efeb59198f'] = 'Kurs wymiany';
+$_MODULE['<{dashgoals}prestashop>config_8c804960da61b637c548c951652b0cac'] = 'Średnia ilość koszyków';
 $_MODULE['<{dashgoals}prestashop>config_11ff9f68afb6b8b5b8eda218d7c83a65'] = 'Sprzedaż';
 $_MODULE['<{dashgoals}prestashop>config_c9cc8cce247e49bae79f15173ce97354'] = 'Zapisz';
-$_MODULE['<{dashgoals}prestashop>dashboard_zone_two_791d8672c108dc2fdf9989373bbf4484'] = 'Twoja prognoza';
+$_MODULE['<{dashgoals}prestashop>dashboard_zone_two_89c1265be62d3ba835a3d963db5956b0'] = 'Prognoza';
+$_MODULE['<{dashgoals}prestashop>dashboard_zone_two_f1206f9fadc5ce41694f69129aecac26'] = 'Konfiguruj';
 $_MODULE['<{dashgoals}prestashop>dashboard_zone_two_e7935ae6c516d89405ec532359d2d75a'] = 'Ruch';
 $_MODULE['<{dashgoals}prestashop>dashboard_zone_two_3bb1503332637805beddb73a2dd1fe1b'] = 'Konwersja';
-$_MODULE['<{dashgoals}prestashop>dashboard_zone_two_8c804960da61b637c548c951652b0cac'] = 'Średnia wartość koszyka';
+$_MODULE['<{dashgoals}prestashop>dashboard_zone_two_8c804960da61b637c548c951652b0cac'] = 'Średnia ilość koszyków';
 $_MODULE['<{dashgoals}prestashop>dashboard_zone_two_11ff9f68afb6b8b5b8eda218d7c83a65'] = 'Sprzedaż';
 
 

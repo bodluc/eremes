@@ -37,7 +37,7 @@ class BlockWishList extends Module
 	{
 		$this->name = 'blockwishlist';
 		$this->tab = 'front_office_features';
-		$this->version = '0.10';
+		$this->version = '1.1.3';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
@@ -234,7 +234,16 @@ class BlockWishList extends Module
 
 	public function hookProductActions($params)
 	{
-		$this->smarty->assign('id_product', (int)(Tools::getValue('id_product')));
+		$cookie = $params['cookie'];
+
+		$this->smarty->assign(array(
+			'id_product' => (int)(Tools::getValue('id_product')),
+		));
+
+		if (isset($cookie->id_customer))
+			$this->smarty->assign(array(
+				'wishlists' => WishList::getByIdCustomer($cookie->id_customer),
+			));
 
 		return ($this->display(__FILE__, 'blockwishlist-extra.tpl'));
 	}

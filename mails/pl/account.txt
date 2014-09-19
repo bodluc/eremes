@@ -22,7 +22,7 @@ Ważne wskazówki bezpieczeństwa:
 * Jeśli podejrzewasz, że ktoś jest przy użyciu konta
 nielegalnie, prosimy o poinformowanie nas o tym natychmiast.
 
-Nie można składać zamówienia w naszym sklepie: {shop_name}
+You can now place orders on our shop: {shop_name}
 [{shop_url}] 
 
 {shop_name} [{shop_url}] wspierany przez

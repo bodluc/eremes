@@ -2,8 +2,8 @@
 <module>
 	<name>statssales</name>
 	<displayName><![CDATA[Sprzedaż i zam&oacute;wienia]]></displayName>
-	<version><![CDATA[1.2]]></version>
-	<description><![CDATA[Dodaje rozw&oacute;j sprzedaży i zam&oacute;wień według statusu.]]></description>
+	<version><![CDATA[1.2.1]]></version>
+	<description><![CDATA[Adds graphics presenting the evolution of sales and orders to the Stats dashboard.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[analytics_stats]]></tab>
 	<is_configurable>0</is_configurable>

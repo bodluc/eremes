@@ -3,8 +3,6 @@
 
 Witaj {name},
 
-Dziękujemy za utworzenie konta klienta na stronie {shop_name}. 
-
 Kliknij tutaj, aby zobaczyć ten element: {product}
 [{product_link}] 
 

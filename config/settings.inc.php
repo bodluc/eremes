@@ -1,6 +1,6 @@
 <?php
 define('_DB_SERVER_', 'localhost');
-define('_DB_NAME_', 'audiorms');
+define('_DB_NAME_', 'rms_devel');
 define('_DB_USER_', 'root');
 define('_DB_PASSWD_', 'root');
 define('_DB_PREFIX_', 'ps_');
@@ -14,6 +14,6 @@ define('_PS_DIRECTORY_', '/');
 define('_COOKIE_KEY_', 'hNaBX0Mr3ZGIes7mRDJ0yoQ431XcWNBPL2rvemyX1bKnnM0po72APpFB');
 define('_COOKIE_IV_', 'ZZbX3yYp');
 define('_PS_CREATION_DATE_', '2012-06-14');
-define('_PS_VERSION_', '1.6.0.6');
+define('_PS_VERSION_', '1.6.0.9');
 define('_RIJNDAEL_KEY_', 'OG1uZtd45MiwRE8rzNUdA0EQhWHJhm47');
 define('_RIJNDAEL_IV_', 'tZb0roYZuDbPQUmIGLbrDA==');

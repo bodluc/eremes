@@ -24,7 +24,7 @@
 *}
 <!-- MODULE Block cart -->
 {if isset($blockcart_top) && $blockcart_top}
-<div class="{if $PS_CATALOG_MODE} header_user_catalog{/if}">
+<div class="col-sm-4 clearfix{if $PS_CATALOG_MODE} header_user_catalog{/if}">
 {/if}
 	<div class="shopping_cart">
 		<a href="{$link->getPageLink($order_process, true)|escape:'html':'UTF-8'}" title="{l s='View my shopping cart' mod='blockcart'}" rel="nofollow">
@@ -239,10 +239,12 @@
 				<div class="layer_cart_row">
 					<strong class="dark">
 						{l s='Total products' mod='blockcart'}
-						{if $priceDisplay == 1}
-							{l s='(tax excl.)' mod='blockcart'}
-						{else}
-							{l s='(tax incl.)' mod='blockcart'}
+						{if $display_tax_label}
+							{if $priceDisplay == 1}
+								{l s='(tax excl.)' mod='blockcart'}
+							{else}
+								{l s='(tax incl.)' mod='blockcart'}
+							{/if}
 						{/if}
 					</strong>
 					<span class="ajax_block_products_total">
@@ -256,10 +258,12 @@
 					<div class="layer_cart_row">
 						<strong class="dark">
 							{l s='Wrapping' mod='blockcart'}
-							{if $priceDisplay == 1}
-								{l s='(tax excl.)' mod='blockcart'}
-							{else}
-								{l s='(tax incl.)' mod='blockcart'}
+							{if $display_tax_label}
+								{if $priceDisplay == 1}
+									{l s='(tax excl.)' mod='blockcart'}
+								{else}
+									{l s='(tax incl.)' mod='blockcart'}
+								{/if}
 							{/if}
 						</strong>
 						<span class="price cart_block_wrapping_cost">
@@ -273,7 +277,7 @@
 				{/if}
 				<div class="layer_cart_row">
 					<strong class="dark">
-						{l s='Total shipping' mod='blockcart'}&nbsp;{l s='(tax excl.)' mod='blockcart'}
+						{l s='Total shipping' mod='blockcart'}&nbsp;{if $display_tax_label}{if $priceDisplay == 1}{l s='(tax excl.)' mod='blockcart'}{else}{l s='(tax incl.)' mod='blockcart'}{/if}{/if}
 					</strong>
 					<span class="ajax_cart_shipping_cost">
 						{if $shipping_cost_float == 0}
@@ -292,10 +296,12 @@
 				<div class="layer_cart_row">	
 					<strong class="dark">
 						{l s='Total' mod='blockcart'}
-						{if $priceDisplay == 1}
-							{l s='(tax excl.)' mod='blockcart'}
-						{else}
-							{l s='(tax incl.)' mod='blockcart'}
+						{if $display_tax_label}
+							{if $priceDisplay == 1}
+								{l s='(tax excl.)' mod='blockcart'}
+							{else}
+								{l s='(tax incl.)' mod='blockcart'}
+							{/if}
 						{/if}
 					</strong>
 					<span class="ajax_block_cart_total">
@@ -328,7 +334,8 @@
 {/if}
 {strip}
 {addJsDef CUSTOMIZE_TEXTFIELD=$CUSTOMIZE_TEXTFIELD}
-{addJsDef img_dir=$img_dir|addslashes}
+{addJsDef img_dir=$img_dir|escape:'quotes':'UTF-8'}
+{addJsDef generated_date=$smarty.now|intval}
 {addJsDef ajax_allowed=$ajax_allowed|boolval}
 
 {addJsDefL name=customizationIdMessage}{l s='Customization #' mod='blockcart' js=1}{/addJsDefL}

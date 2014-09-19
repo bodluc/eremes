@@ -2,7 +2,7 @@
 <module>
 	<name>blockbestsellers</name>
 	<displayName><![CDATA[Blok najczęściej kupowanych]]></displayName>
-	<version><![CDATA[1.5.3]]></version>
+	<version><![CDATA[1.5.4]]></version>
 	<description><![CDATA[Dodaje blok wyświetlający najczęściej kupowane produkty.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[front_office_features]]></tab>

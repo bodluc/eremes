@@ -2,7 +2,7 @@
 <module>
 	<name>producttooltip</name>
 	<displayName><![CDATA[Podpowiedź produktu]]></displayName>
-	<version><![CDATA[1.1]]></version>
+	<version><![CDATA[1.2]]></version>
 	<description><![CDATA[Pokazuje informacje na stronie produktu: ile os&oacute;b go przegląda, kiedy ostatnio został sprzedany i kiedy po raz ostatni został dodany do koszyka.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[front_office_features]]></tab>

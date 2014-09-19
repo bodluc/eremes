@@ -2,7 +2,7 @@
 <module>
 	<name>blocklayered</name>
 	<displayName><![CDATA[Blok nakładania filtr&oacute;w nawigacyjnych]]></displayName>
-	<version><![CDATA[1.10.9]]></version>
+	<version><![CDATA[1.11]]></version>
 	<description><![CDATA[Wyświetla blok z filtrami nawigacyjnymi.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[front_office_features]]></tab>

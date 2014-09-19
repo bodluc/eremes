@@ -2,8 +2,8 @@
 <module>
 	<name>blockmyaccountfooter</name>
 	<displayName><![CDATA[Moje konto - blok do stopki Twojej strony]]></displayName>
-	<version><![CDATA[1.4]]></version>
-	<description><![CDATA[Wyświetla blok z linkami prowadzącymi do konta użytkownika.]]></description>
+	<version><![CDATA[1.5.1]]></version>
+	<description><![CDATA[Wyświetla blok z linkami relatywnymi dla konta klienta]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[front_office_features]]></tab>
 	<is_configurable>0</is_configurable>

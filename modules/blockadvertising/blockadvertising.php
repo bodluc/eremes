@@ -45,7 +45,7 @@ class BlockAdvertising extends Module
 	{
 		$this->name = 'blockadvertising';
 		$this->tab = 'advertising_marketing';
-		$this->version = '0.9';
+		$this->version = '0.9.1';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
@@ -95,7 +95,7 @@ class BlockAdvertising extends Module
 		)
 		{
 			// If there are no colums implemented by the template, throw an error and uninstall the module
-			$this->_errors[] = $this->l('This module need to be hooked in a column and your theme does not implement one');
+			$this->_errors[] = $this->l('This module needs to be hooked to a column, but your theme does not implement one');
 			parent::uninstall();
 
 			return false;
@@ -238,19 +238,19 @@ class BlockAdvertising extends Module
 				'input' => array(
 					array(
 						'type' => 'file',
-						'label' => $this->l('Block image'),
+						'label' => $this->l('Image for the advertisement'),
 						'name' => 'adv_img',
-						'desc' => $this->l('Image will be displayed as 155 pixels by 163 pixels.'),
+						'desc' => $this->l('The image will be displayed as 155 pixels by 163 pixels.'),
 						'thumb' => $this->context->link->protocol_content.$this->adv_img,
 					),
 					array(
 						'type' => 'text',
-						'label' => $this->l('Image link'),
+						'label' => $this->l('Target link for the image'),
 						'name' => 'adv_link',
 					),
 					array(
 						'type' => 'text',
-						'label' => $this->l('Title'),
+						'label' => $this->l('Name of the target link'),
 						'name' => 'adv_title',
 					),
 				),

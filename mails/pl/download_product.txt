@@ -11,10 +11,10 @@ poniższego linka(ów):
 
 {virtualproducts} 		 
 
-Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
-"Historia zamówień" [{history_url}] na koncie
-klienta klikając w "Moje konto"
-[{my_account_url}] w naszym sklepie. 
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w "Historia
+zamówień" [{history_url}] logując się do konta
+klienta "Moje konto" [{my_account_url}] w naszym
+sklepie. 
 
 Jeśli posiadasz konto gościa, możesz śledzić swoje
 zamówienie w sekcji "Śledzenie Zamówienia"

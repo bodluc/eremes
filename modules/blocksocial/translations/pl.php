@@ -9,13 +9,10 @@ $_MODULE['<{blocksocial}prestashop>blocksocial_f4f70727dc34561dfde1a3c529b6205c'
 $_MODULE['<{blocksocial}prestashop>blocksocial_76f8961bb8f4bb2b95c07650f30a7e7b'] = 'URL Facebooka';
 $_MODULE['<{blocksocial}prestashop>blocksocial_c162369096f0fe5784f05052ceee6b47'] = 'Twój fanpage na Facebooku.';
 $_MODULE['<{blocksocial}prestashop>blocksocial_bcca29e10968edaf6e0154d2339ad556'] = 'URL Twittera';
-$_MODULE['<{blocksocial}prestashop>blocksocial_1912cacf8a06a4eaa878c7313593715a'] = 'Twoje oficjalne konto na Twitterze.';
 $_MODULE['<{blocksocial}prestashop>blocksocial_1a530e4877d8d41f810d9d05f065722d'] = 'URL kanału RSS';
 $_MODULE['<{blocksocial}prestashop>blocksocial_672f301ddc5372b2477ed3c1d9322949'] = 'Twój wybrany kanał RSS (Twój blog, Twój sklep, itp.).';
 $_MODULE['<{blocksocial}prestashop>blocksocial_ad7198d676478ac70c3243c1d3446331'] = 'URL kanału YouTube';
 $_MODULE['<{blocksocial}prestashop>blocksocial_5817a34292f074f9f596de6cb3607540'] = 'Twój oficjalny kanał na YouTube.';
-$_MODULE['<{blocksocial}prestashop>blocksocial_85eac9d4572e285262a3e76130dcb4ea'] = 'URL Google Plus:';
-$_MODULE['<{blocksocial}prestashop>blocksocial_be1d482ea5d68e157ad2ebe18612a4b1'] = 'Twoja oficjalna strona Google Plus.';
 $_MODULE['<{blocksocial}prestashop>blocksocial_76abe3a162f22f63fae44d60fbe8f11b'] = 'URL Pinterest:';
 $_MODULE['<{blocksocial}prestashop>blocksocial_e158a81859319b5e442bc490b0e81af3'] = 'Twoje oficjalne konto na Pinterest.';
 $_MODULE['<{blocksocial}prestashop>blocksocial_c9cc8cce247e49bae79f15173ce97354'] = 'Zapisz';

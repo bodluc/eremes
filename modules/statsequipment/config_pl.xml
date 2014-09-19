@@ -2,7 +2,7 @@
 <module>
 	<name>statsequipment</name>
 	<displayName><![CDATA[Przeglądarki i systemy operacyjne]]></displayName>
-	<version><![CDATA[1.2]]></version>
+	<version><![CDATA[1.2.1]]></version>
 	<description><![CDATA[Dodaje zakładkę zawierającą wykresy dotyczące przeglądarki i użytkowania systemu operacyjnego do statystyki na tablicy.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[analytics_stats]]></tab>

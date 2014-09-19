@@ -3,10 +3,12 @@
 
 Hi, 
 
+Message from {shop_name} 
+
 {firstname} {lastname} indicated you may want to see his/her
 wishlist: {wishlist}
 
-{wishlist} [{message}] 		 
+{wishlist} [{message}] 
 
 {shop_name} [{shop_url}] powered by
 PrestaShop(tm) [http://www.prestashop.com/] 

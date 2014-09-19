@@ -28,7 +28,7 @@ div#block_top_menu > ul > li > a:hover:before {
 div#block_top_menu > ul > li > a:hover:after {
     background:                 url("../image/menu_li_after_hover.png") repeat scroll 0% 0% transparent;
 }
-div#block_top_menu li a {
+div#block_top_menu > UL > li > a {
     background:                 url("../image/menu_li.png") repeat-x scroll 0px top rgb(87, 87, 87);
 }
 nav .container {

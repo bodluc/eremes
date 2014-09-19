@@ -55,7 +55,6 @@
 <module name="prestafraud" position="12"/>
 </tab>
 <tab class_name="AdminInvoices" display_type="slider_list">
-<module name="m4pdf" position="1"/>
 <module name="neotaxesupdater" position="2"/>
 <module name="ordertaxprofitreport" position="3"/>
 <module name="illicopresta" position="4"/>

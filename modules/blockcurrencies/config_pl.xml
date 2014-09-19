@@ -2,8 +2,8 @@
 <module>
 	<name>blockcurrencies</name>
 	<displayName><![CDATA[Blok walut]]></displayName>
-	<version><![CDATA[0.3]]></version>
-	<description><![CDATA[Dodaje blok pozwalający klientom wybrać ich preferowaną walutę.]]></description>
+	<version><![CDATA[0.3.1]]></version>
+	<description><![CDATA[Dodaj blok wyboru waluty]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[front_office_features]]></tab>
 	<is_configurable>0</is_configurable>

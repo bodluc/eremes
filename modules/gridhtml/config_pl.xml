@@ -2,7 +2,7 @@
 <module>
 	<name>gridhtml</name>
 	<displayName><![CDATA[Wyświetlanie prostej tabeli HTML]]></displayName>
-	<version><![CDATA[1.2]]></version>
+	<version><![CDATA[1.2.1]]></version>
 	<description><![CDATA[Pozw&oacute;l systemowi statystyk na wyświetlanie danych w tabeli.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[administration]]></tab>

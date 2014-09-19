@@ -3,7 +3,7 @@
 
 Witaj, 
 
-DZIĘKUJEMY ZA ZAPISANIE SIĘ DO NASZEGO NEWSLETTERA. 
+DZIĘKUJEMY ZA ZAPISANIE SIĘ DO NASZEGO NEWSLETTERA 
 
 {shop_name} [{shop_url}] wspierany przez
 PrestaShop(tm) [http://www.prestashop.com/] 

@@ -45,11 +45,18 @@
 		<link rel="shortcut icon" type="image/x-icon" href="{$favicon_url}?{$img_update_time}" />
 {if isset($css_files)}
 	{foreach from=$css_files key=css_uri item=media}
-		<link rel="stylesheet" href="{$css_uri}" type="text/css" media="{$media}" />
+		<link rel="stylesheet" href="{$css_uri|escape:'html':'UTF-8'}" type="text/css" media="{$media|escape:'html':'UTF-8'}" />
+	{/foreach}
+{/if}
+{if isset($js_defer) && !$js_defer && isset($js_files) && isset($js_def)}
+	{$js_def}
+	{foreach from=$js_files item=js_uri}
+	<script type="text/javascript" src="{$js_uri|escape:'html':'UTF-8'}"></script>
 	{/foreach}
 {/if}
 		{$HOOK_HEADER}
 		<link rel="stylesheet" href="http{if Tools::usingSecureMode()}s{/if}://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" type="text/css" media="all" />
+                <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
                 <link href="/themes/audiorms2014/css/new.css" rel="stylesheet"/>
 
@@ -58,11 +65,11 @@
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body{if isset($page_name)} id="{$page_name|escape:'html':'UTF-8'}"{/if} class="{if isset($page_name)}{$page_name|escape:'html':'UTF-8'}{/if}{if isset($body_classes) && $body_classes|@count} {implode value=$body_classes separator=' '}{/if}{if $hide_left_column} hide-left-column{/if}{if $hide_right_column} hide-right-column{/if}{if $content_only} content_only{/if} lang_{$lang_iso}">
-	{if !$content_only}
+	<body{if isset($page_name)} id="{$page_name|escape:'html':'UTF-8'}"{/if} class="{if isset($page_name)}{$page_name|escape:'html':'UTF-8'}{/if}{if isset($body_classes) && $body_classes|@count} {implode value=$body_classes separator=' '}{/if}{if $hide_left_column} hide-left-column{/if}{if $hide_right_column} hide-right-column{/if}{if isset($content_only) && $content_only} content_only{/if} lang_{$lang_iso}">
+	{if !isset($content_only) || !$content_only}
 		{if isset($restricted_country_mode) && $restricted_country_mode}
 			<div id="restricted-country">
-				<p>{l s='You cannot place a new order from your country.'} <span class="bold">{$geolocation_country}</span></p>
+				<p>{l s='You cannot place a new order from your country.'} <span class="bold">{$geolocation_country|escape:'html':'UTF-8'}</span></p>
 			</div>
 		{/if}
 		<div id="page">
@@ -103,12 +110,13 @@
 					{if $page_name !='index' && $page_name !='pagenotfound'}
 						{include file="$tpl_dir./breadcrumb.tpl"}
 					{/if}
-					<div class="row">
+					<div id="slider_row" class="row">
 						<div id="top_column" class="center_column col-xs-12 col-sm-12">{hook h="displayTopColumn"}</div>
 					</div>
 					<div class="row">
 						{if isset($left_column_size) && !empty($left_column_size)}
 						<div id="left_column" class="column col-xs-12 col-sm-{$left_column_size|intval}">{$HOOK_LEFT_COLUMN}</div>
 						{/if}
-						<div id="center_column" class="center_column col-xs-12 col-sm-{12 - $left_column_size - $right_column_size}">
+						{if isset($left_column_size) && isset($right_column_size)}{assign var='cols' value=(12 - $left_column_size - $right_column_size)}{else}{assign var='cols' value=12}{/if}
+						<div id="center_column" class="center_column col-xs-12 col-sm-{$cols|intval}">
 	{/if}

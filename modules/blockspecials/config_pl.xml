@@ -2,7 +2,7 @@
 <module>
 	<name>blockspecials</name>
 	<displayName><![CDATA[Blok promocji]]></displayName>
-	<version><![CDATA[1.1]]></version>
+	<version><![CDATA[1.1.1]]></version>
 	<description><![CDATA[Dodaje blok wyświetlający aktualnie przecenione produkty.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[pricing_promotion]]></tab>

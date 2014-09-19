@@ -20,10 +20,10 @@ DANE KONTA: {bankwire_details}
 
 ADRES BANKU: {bankwire_address} 		 
 
-Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji
-"Historia zamówień" [{history_url}] na koncie
-klienta klikając w "Moje konto"
-[{my_account_url}] w naszym sklepie. 
+Możesz obejrzeć swoje zamówienie i pobrać fakturę w "Historia
+zamówień" [{history_url}] logując się do konta
+klienta "Moje konto" [{my_account_url}] w naszym
+sklepie. 
 
 Jeśli masz konto Gościa, możesz śledzić swoje zamówienie za
 pośrednictwem sekcji "Śledzenie Gościa"

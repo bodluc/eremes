@@ -2,7 +2,7 @@
 <module>
 	<name>blockadvertising</name>
 	<displayName><![CDATA[Blok reklam]]></displayName>
-	<version><![CDATA[0.9]]></version>
+	<version><![CDATA[0.9.1]]></version>
 	<description><![CDATA[Dodaje blok z reklamami w wybranych sekcjach Twojego sklepu.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[advertising_marketing]]></tab>

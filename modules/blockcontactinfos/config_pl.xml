@@ -2,7 +2,7 @@
 <module>
 	<name>blockcontactinfos</name>
 	<displayName><![CDATA[Blok informacji kontaktowych]]></displayName>
-	<version><![CDATA[1.1]]></version>
+	<version><![CDATA[1.1.1]]></version>
 	<description><![CDATA[Ten moduł pozwoli Ci wyświetlić informacje kontaktowe Twojego sklepu w dopasowywalnym bloku.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[front_office_features]]></tab>

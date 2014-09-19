@@ -8,7 +8,7 @@ $_MODULE['<{blocknewproducts}prestashop>blocknewproducts_d3ee346c7f6560faa13622b
 $_MODULE['<{blocknewproducts}prestashop>blocknewproducts_b15e7271053fe9dd22d80db100179085'] = 'Ten moduł powinien być umieszczony w kolumnie, a Twój szablon ich nie posiada';
 $_MODULE['<{blocknewproducts}prestashop>blocknewproducts_1cd777247f2a6ed79534d4ace72d78ce'] = 'Proszę wypełnić pole "wyświetlane produkty".';
 $_MODULE['<{blocknewproducts}prestashop>blocknewproducts_73293a024e644165e9bf48f270af63a0'] = 'Nieprawidłowy numer.';
-$_MODULE['<{blocknewproducts}prestashop>blocknewproducts_c888438d14855d7d96a2724ee9c306bd'] = 'Ustawienia zaktualizowane';
+$_MODULE['<{blocknewproducts}prestashop>blocknewproducts_c888438d14855d7d96a2724ee9c306bd'] = 'Zaktualizowano ustawienia';
 $_MODULE['<{blocknewproducts}prestashop>blocknewproducts_f4f70727dc34561dfde1a3c529b6205c'] = 'Ustawienia';
 $_MODULE['<{blocknewproducts}prestashop>blocknewproducts_26986c3388870d4148b1b5375368a83d'] = 'Wyświetlane produkty';
 $_MODULE['<{blocknewproducts}prestashop>blocknewproducts_3ea7689283770958661c27c37275b89c'] = 'Ilość produktów do wyświetlenia w tym bloku';

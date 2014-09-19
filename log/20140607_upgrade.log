@@ -1,6 +1,0 @@
-*ERROR* 	2014/06/07 - 22:21:55: You already have the 1.6.0.6 version.
-*ERROR* 	2014/06/07 - 22:22:18: You already have the 1.6.0.6 version.
-*ERROR* 	2014/06/07 - 22:25:07: SQL query: 
-ALTER IGNORE TABLE `ps_meta` ADD UNIQUE (`page`)
-*ERROR* 	2014/06/07 - 22:25:07: SQL error: 
-Duplicate entry 'index' for key 'page'

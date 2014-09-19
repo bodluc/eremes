@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
 	<name>productscategory</name>
-	<displayName><![CDATA[Kategoria produkt&oacute;w]]></displayName>
-	<version><![CDATA[1.6]]></version>
-	<description><![CDATA[Wyświetla produkty z tej samej kategorii na stronie produktu.]]></description>
+	<displayName><![CDATA[Products in the same category]]></displayName>
+	<version><![CDATA[1.6.2]]></version>
+	<description><![CDATA[Adds a block on the product page that displays products from the same category.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[front_office_features]]></tab>
 	<is_configurable>1</is_configurable>

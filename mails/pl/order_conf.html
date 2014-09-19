@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 		<title>Wiadomość od {shop_name}</title>
 		
-
+		
 		<style>	@media only screen and (max-width: 300px){ 
 				body {
 					width:218px !important;
@@ -31,7 +31,7 @@
 				.table-recap table, .table-recap thead, .table-recap tbody, .table-recap th, .table-recap td, .table-recap tr { 
 					display: block !important; 
 				}
-				.table-recap{width: 293px !important;}
+				.table-recap{width: 295px !important;}
 				.table-recap tr td, .conf_body td{text-align:center !important;}
 				
 			}
@@ -45,7 +45,7 @@
 				.table {width:285px;margin:auto!important;}	
 				.logo, .titleblock, .linkbelow, .box, .footer, .space_footer{width:auto!important;display: block!important;}
 				
-				.table-recap{width: 285px!important;}
+				.table-recap{width: 295px!important;}
 				.table-recap tr td, .conf_body td{text-align:center!important;}	
 				.address{display: block !important;margin-bottom: 10px !important;}
 				.space_address{display: none !important;}	
@@ -114,7 +114,7 @@
 				<tbody>
 					<tr>
 						<td colspan="5" style="border:1px solid #D6D4D4;color:#777;padding:7px 0">
-							&nbsp;&nbsp;{products}
+							&nbsp;&nbsp;{products} 
 						</td>
 					</tr>
 					<tr>
@@ -330,9 +330,10 @@
 								<font size="2" face="Open-sans, sans-serif" color="#555454">
 									<p data-html-only="1" style="border-bottom:1px solid #D6D4D4;margin:3px 0 7px;text-transform:uppercase;font-weight:500;font-size:18px;padding-bottom:10px">
 										Adres dostawy									</p>
-									<span style="color:#777">
+									<span data-html-only="1" style="color:#777">
 										{delivery_block_html}
 									</span>
+									
 								</font>
 							</td>
 							<td width="10" style="padding:7px 0">&nbsp;</td>
@@ -348,9 +349,10 @@
 								<font size="2" face="Open-sans, sans-serif" color="#555454">
 									<p data-html-only="1" style="border-bottom:1px solid #D6D4D4;margin:3px 0 7px;text-transform:uppercase;font-weight:500;font-size:18px;padding-bottom:10px">
 										Adres do faktury									</p>
-									<span style="color:#777">
+									<span data-html-only="1" style="color:#777">
 										{invoice_block_html}
 									</span>
+									
 								</font>
 							</td>
 							<td width="10" style="padding:7px 0">&nbsp;</td>
@@ -368,7 +370,7 @@
 	<td class="linkbelow" style="padding:7px 0">
 		<font size="2" face="Open-sans, sans-serif" color="#555454">
 			<span>
-				Możesz obejrzeć swoje zamówienie i pobrać fakturę w sekcji <a href="{history_url}" style="color:#337ff1">"Historia zamówień"</a> na koncie klienta klikając w <a href="{my_account_url}" style="color:#337ff1">"Moje konto"</a> w naszym sklepie.			</span>
+				Możesz obejrzeć swoje zamówienie i pobrać fakturę w <a href="{history_url}" style="color:#337ff1">"Historia zamówień"</a> logując się do konta klienta <a href="{my_account_url}" style="color:#337ff1">"Moje konto"</a> w naszym sklepie.			</span>
 		</font>
 	</td>
 </tr>

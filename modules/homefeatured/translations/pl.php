@@ -13,7 +13,7 @@ $_MODULE['<{homefeatured}prestashop>homefeatured_d44168e17d91bac89aab3f38d8a4da8
 $_MODULE['<{homefeatured}prestashop>homefeatured_1b73f6b70a0fcd38bbc6a6e4b67e3010'] = 'Ustaw ilość produktów, które chcesz wyświetlić na stronie głównej (domyślnie: 8).';
 $_MODULE['<{homefeatured}prestashop>homefeatured_c9cc8cce247e49bae79f15173ce97354'] = 'Zapisz';
 $_MODULE['<{homefeatured}prestashop>homefeatured_ca7d973c26c57b69e0857e7a0332d545'] = 'Produkty polecane';
-$_MODULE['<{homefeatured}prestashop>homefeatured_03c2e7e41ffc181a4e84080b4710e81e'] = 'Nowe';
+$_MODULE['<{homefeatured}prestashop>homefeatured_03c2e7e41ffc181a4e84080b4710e81e'] = 'Nowy';
 $_MODULE['<{homefeatured}prestashop>homefeatured_d3da97e2d9aee5c8fbe03156ad051c99'] = 'Więcej';
 $_MODULE['<{homefeatured}prestashop>homefeatured_4351cfebe4b61d8aa5efa1d020710005'] = 'Zobacz';
 $_MODULE['<{homefeatured}prestashop>homefeatured_2d0f6b8300be19cf35e89e66f0677f95'] = 'Dodaj do koszyka';

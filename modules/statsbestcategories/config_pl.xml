@@ -2,7 +2,7 @@
 <module>
 	<name>statsbestcategories</name>
 	<displayName><![CDATA[Najlepsze kategorie]]></displayName>
-	<version><![CDATA[1.2]]></version>
+	<version><![CDATA[1.3]]></version>
 	<description><![CDATA[Dodaje listę najlepszych kategoriach do statystyki na tablicy.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[analytics_stats]]></tab>

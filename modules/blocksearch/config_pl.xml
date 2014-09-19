@@ -2,7 +2,7 @@
 <module>
 	<name>blocksearch</name>
 	<displayName><![CDATA[Blok prostego wyszukiwania]]></displayName>
-	<version><![CDATA[1.5]]></version>
+	<version><![CDATA[1.5.1]]></version>
 	<description><![CDATA[Dodaje blok z polem szybkiego wyszukiwania]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[search_filter]]></tab>

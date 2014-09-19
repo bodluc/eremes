@@ -2,7 +2,7 @@
 <module>
 	<name>blocklink</name>
 	<displayName><![CDATA[Blok własnych link&oacute;w]]></displayName>
-	<version><![CDATA[1.5.3]]></version>
+	<version><![CDATA[1.5.4]]></version>
 	<description><![CDATA[Dodaje blok z możliwością wstawienia własnych link&oacute;w do dowolnych stron.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[front_office_features]]></tab>

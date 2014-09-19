@@ -11,7 +11,7 @@ $_MODULE['<{blockcustomerprivacy}prestashop>blockcustomerprivacy_20015706a8cbd45
 $_MODULE['<{blockcustomerprivacy}prestashop>blockcustomerprivacy_fb32badede7c8613fddb8502d847c18b'] = 'Nie można założyć konta z powodu braku zgody na przetwarzanie danych osobowych.';
 $_MODULE['<{blockcustomerprivacy}prestashop>blockcustomerprivacy_f4f70727dc34561dfde1a3c529b6205c'] = 'Ustawienia';
 $_MODULE['<{blockcustomerprivacy}prestashop>blockcustomerprivacy_aafe06caae02aee29775402368a6d22c'] = 'Wiadomość o przetwarzaniu danych osobowych:';
-$_MODULE['<{blockcustomerprivacy}prestashop>blockcustomerprivacy_03e1a999dcdb904300ee1b1e767c83c9'] = 'Wiadomość o ochronie danych osobowych klienta zostanie wyświetlona w formularzu tworzenia konta.';
+$_MODULE['<{blockcustomerprivacy}prestashop>blockcustomerprivacy_03e1a999dcdb904300ee1b1e767c83c9'] = 'Wiadomość, która zostanie wyświetlona w formularzu zakładania nowego konta klienta';
 $_MODULE['<{blockcustomerprivacy}prestashop>blockcustomerprivacy_4df598f7b52577f4bc8d7d408c91eb1a'] = 'Wskazówki: Pamiętaj, że jeżeli tekst jest zbyt długi aby go wpisać bezpośrednio do formularza, może podać link do jednej z Twoich stron stworzonej za pomocą strony „CMS” w menu „Preferencje”.';
 $_MODULE['<{blockcustomerprivacy}prestashop>blockcustomerprivacy_c9cc8cce247e49bae79f15173ce97354'] = 'Zapisz';
 $_MODULE['<{blockcustomerprivacy}prestashop>blockcustomerprivacy_fb0440f9ca32a8b49eded51b09e70821'] = 'Ochrona danych osobowych';

@@ -36,7 +36,7 @@ class BlockLink extends Module
 	{
 		$this->name = 'blocklink';
 		$this->tab = 'front_office_features';
-		$this->version = '1.5.3';
+		$this->version = '1.5.4';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 

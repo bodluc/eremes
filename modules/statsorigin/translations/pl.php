@@ -17,7 +17,7 @@ $_MODULE['<{statsorigin}prestashop>statsorigin_c227be237c874ba6b2f8771d7b66b90e'
 $_MODULE['<{statsorigin}prestashop>statsorigin_ea87a2280d5cdb638a2727147a3dd85c'] = 'Partner z którym wymieniłaś/eś się linkami, żeby zwiększyć sprzedaż lub zachęcić nowych klientów';
 $_MODULE['<{statsorigin}prestashop>statsorigin_998e4c5c80f27dec552e99dfed34889a'] = 'Export CSV';
 $_MODULE['<{statsorigin}prestashop>statsorigin_96b0141273eabab320119c467cdcaf17'] = 'Razem';
-$_MODULE['<{statsorigin}prestashop>statsorigin_0bebf95ee829c33f34fde535ed4ed100'] = 'tylko bezpośrednie linki';
+$_MODULE['<{statsorigin}prestashop>statsorigin_0bebf95ee829c33f34fde535ed4ed100'] = 'tylko bezpośrednie linki ';
 $_MODULE['<{statsorigin}prestashop>statsorigin_450a7e38e636dd49f5dfb356f96d3996'] = '10 pierwszych stron';
 $_MODULE['<{statsorigin}prestashop>statsorigin_52ef9633d88a7480b3a938ff9eaa2a25'] = 'Inne';
 

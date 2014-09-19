@@ -2,7 +2,7 @@
 <module>
 	<name>trackingfront</name>
 	<displayName><![CDATA[Śledzenie - strona sklepu]]></displayName>
-	<version><![CDATA[1.5]]></version>
+	<version><![CDATA[1.7]]></version>
 	<description><![CDATA[Pozwala na dostęp do swoich statystyk. Zobacz Statystyki/Referencje.]]></description>
 	<author><![CDATA[PrestaShop]]></author>
 	<tab><![CDATA[shipping_logistics]]></tab>

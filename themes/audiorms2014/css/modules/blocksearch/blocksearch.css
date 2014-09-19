@@ -5,8 +5,8 @@
 }
 #search_block_top #searchbox {
     background:                 url("../../../image/bg-search.png") no-repeat scroll left top transparent;
-    width:                      460px;
     padding:                    5px 0px 5px 58px;
+    width:                      462px;
 }
 #search_block_top .btn.button-search {
     display:                    block;

@@ -54,15 +54,15 @@
 			</p>
 		</div>
 		<div id="right_intro">
-			<h4>{l s="Our Team is available to help you progress... Contact us now!" mod='gamification'}</h4><br/>
+			<h4>{l s="Our team is available to help. Contact us today!" mod='gamification'}</h4><br/>
 			<ul>
 				<li>
 					<img src="../modules/gamification/views/img/phone_icon.png" alt="{l s="Phone" mod='gamification'}" />
-					<span>{l s="By phone: +1 (888) 947.6543" mod='gamification'}</span>
+					<span>{l s="Call us: +1 (888) 947-6543" mod='gamification'}</span>
 				</li>
 				<li>
 					<img src="../modules/gamification/views/img/mail_icon.png" alt="{l s="Email" mod='gamification' mod='gamification'}" />
-					<a href="http://www.prestashop.com/en/contact-us">{l s="By e-mail" mod='gamification'}</a>
+					<a href="http://www.prestashop.com/en/contact-us?utm_source=gamification">{l s="Fill out a contact form" mod='gamification'}</a>
 				</li>
 			</ul>
 		</div>
@@ -74,7 +74,7 @@
 	</div>
 	&nbsp;
 </div>
-<div class="clear"></br></div>
+<div class="clear"><br/></div>
 
 {foreach from=$badges_type key=key item=type}
 <div class="panel">
@@ -87,16 +87,18 @@
 			<ul class="badge_list" id="list_{$key}" style="">
 				{foreach from=$type.badges item=badge}
 				<li class="badge_square badge_all {if $badge->validated}validated {else} not_validated{/if} group_{$badge->id_group} level_{$badge->group_position} " id="{$badge->id|intval}">
-					<div class="gamification_badges_img" data-placement="top" data-toggle="tooltip" data-original-title="{$badge->description|escape:html:'UTF-8'}"><img src="{$badge->getBadgeImgUrl()}"></div>
+					<div class="gamification_badges_img" data-placement="top" data-toggle="tooltip" data-original-title="{$badge->description|escape:html:'UTF-8'}"><img src="{$badge->getBadgeImgUrl()}" alt="{$badge->name|escape:html:'UTF-8'}" /></div>
 					<div class="gamification_badges_name">{$badge->name|escape:html:'UTF-8'}</div>
 				</li>
 				{foreachelse}
+				<li>
 					<div class="gamification_badges_name">{l s="No badge in this section" mod='gamification'}</div>
+				</li>
 				{/foreach}
 			</ul>
 		</div>
 		<p id="no_badge_{$key}" class="gamification_badges_name" style="display:none;text-align:center">{l s="No badge in this section" mod='gamification'}</p>
 	</div>
 </div>
-<div class="clear"></br></div>
+<div class="clear"><br/></div>
 {/foreach}

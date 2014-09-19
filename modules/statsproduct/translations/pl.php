@@ -37,8 +37,8 @@ $_MODULE['<{statsproduct}prestashop>statsproduct_49ee3087348e8d44e1feda191744398
 $_MODULE['<{statsproduct}prestashop>statsproduct_7bd5825a187064017975513b95d7f7de'] = 'Dostępna ilość na sprzedaż';
 $_MODULE['<{statsproduct}prestashop>statsproduct_e22269bb51f9f2394e148716babbafbb'] = 'Popularność';
 $_MODULE['<{statsproduct}prestashop>statsproduct_5e9613e58f3bdbc89b1fef07274c0877'] = 'Odwiedziny (x100)';
-$_MODULE['<{statsproduct}prestashop>statsproduct_287234a1ff35a314b5b6bc4e5828e745'] = 'Atrybuty (wartości)';
-$_MODULE['<{statsproduct}prestashop>statsproduct_27ce7f8b5623b2e2df568d64cf051607'] = 'Na stanie';
+$_MODULE['<{statsproduct}prestashop>statsproduct_287234a1ff35a314b5b6bc4e5828e745'] = 'Atrybuty';
+$_MODULE['<{statsproduct}prestashop>statsproduct_27ce7f8b5623b2e2df568d64cf051607'] = 'Magazyn';
 
 
 return $_MODULE;

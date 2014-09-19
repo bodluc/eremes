@@ -3,9 +3,6 @@
 global $_LANGMAIL;
 $_LANGMAIL = array();
 
-$_LANGMAIL['Your guest account has been transformed to customer account'] = 'Twoje konto gościa zostało przekształcone w konta klienta';
-$_LANGMAIL['Virtual product to download'] = 'Wirtualny produkt(y) dostępny do pobrania';
-$_LANGMAIL['New voucher regarding your order %s'] = 'Nowy kupon dla zamówienia %s';
 $_LANGMAIL['Order confirmation'] = 'Potwierdzenie zamówienia';
 $_LANGMAIL['Log: You have a new alert from your shop'] = 'Log: masz nowe ostrzeżenie z Twojego sklepu';
 $_LANGMAIL['Fwd: Customer message'] = 'TR: Wiadomość od klienta';
@@ -22,17 +19,17 @@ $_LANGMAIL['Your message has been correctly sent #ct%1$s #tc%2$s'] = 'Twoja wiad
 $_LANGMAIL['Your message has been correctly sent'] = 'Twoja wiadomość została prawidłowo wysłana';
 $_LANGMAIL['Message from contact form'] = 'Wiadomość  od';
 $_LANGMAIL['Message from a customer'] = 'Wiadomość od klienta';
-$_LANGMAIL['Password query confirmation'] = 'Nie pamiętasz hasła';
+$_LANGMAIL['Password query confirmation'] = 'Potwierdzenia prośby o hasło';
 $_LANGMAIL['Newsletter voucher'] = 'Voucher za newsletter';
-$_LANGMAIL['Newsletter confirmation'] = 'Potwierdzenie prenumeraty biuletynu';
+$_LANGMAIL['Newsletter confirmation'] = 'Potwierdzenie newslettera';
 $_LANGMAIL['Email verification'] = 'E-mail weryfikacyjny';
 $_LANGMAIL['Your wishlist\'s link'] = 'Twój link listy życzeń';
 $_LANGMAIL['Message from %1$s %2$s'] = 'Wiadomość od  %1$s %2$s';
-$_LANGMAIL['Your cart and your discount'] = 'Twój koszyk oraz Twój kupon rabatowy';
-$_LANGMAIL['Thanks for your order'] = 'Dziękujemy za dokonanie zamówienia!';
-$_LANGMAIL['You are one of our best customers'] = 'Jesteś jednym z naszych najlepszych klientów!';
-$_LANGMAIL['We miss you'] = 'Tęsknimy za tobą!';
-$_LANGMAIL['Product available'] = 'Produkt jest dostępny';
+$_LANGMAIL['Your cart and your discount'] = 'Twój koszyk i Twój kupon rabatowy';
+$_LANGMAIL['Thanks for your order'] = 'Dziękujemy za dokonanie zamówienia';
+$_LANGMAIL['You are one of our best customers'] = 'Jesteś jednym z naszych najlepszych klientów';
+$_LANGMAIL['We miss you'] = 'Tęsknimy za tobą';
+$_LANGMAIL['Product available'] = 'Dostępny produkt';
 $_LANGMAIL['New order : #%d - %s'] = 'Nowe zamówienie: #%d - %s';
 $_LANGMAIL['Product out of stock'] = 'Wyczerpanie zapasów';
 $_LANGMAIL['Stock coverage'] = 'Aktualne pokrycie stanu';

@@ -87,7 +87,7 @@ var moderation_active = {$moderation_active};
 			<a id="new_comment_tab_btn" class="open-comment-form" href="#new_comment_form">{l s='Be the first to write your review' mod='productcomments'} !</a>
 		</p>
 		{else}
-		<p class="align_center">{l s='No customer comments for the moment.' mod='productcomments'}</p>
+		<p class="align_center">{l s='No customer reviews for the moment.' mod='productcomments'}</p>
 		{/if}
 	{/if}	
 	</div>
@@ -95,7 +95,7 @@ var moderation_active = {$moderation_active};
 
 {if isset($product) && $product}
 <!-- Fancybox -->
-<div style="display: none;">
+<div style="display:none">
 	<div id="new_comment_form">
 		<form id="id_new_comment_form" action="#">
 			<h2 class="title">{l s='Write your review' mod='productcomments'}</h2>
@@ -110,11 +110,9 @@ var moderation_active = {$moderation_active};
 			{/if}
 			<div class="new_comment_form_content">
 				<h2>{l s='Write your review' mod='productcomments'}</h2>
-
-				<div id="new_comment_form_error" class="error" style="display: none; padding: 15px 25px">
+				<div id="new_comment_form_error" class="error" style="display:none;padding:15px 25px">
 					<ul></ul>
 				</div>
-
 				{if $criterions|@count > 0}
 					<ul id="criterions_list">
 					{foreach from=$criterions item='criterion'}
@@ -123,9 +121,9 @@ var moderation_active = {$moderation_active};
 							<div class="star_content">
 								<input class="star" type="radio" name="criterion[{$criterion.id_product_comment_criterion|round}]" value="1" />
 								<input class="star" type="radio" name="criterion[{$criterion.id_product_comment_criterion|round}]" value="2" />
-								<input class="star" type="radio" name="criterion[{$criterion.id_product_comment_criterion|round}]" value="3" checked="checked" />
+								<input class="star" type="radio" name="criterion[{$criterion.id_product_comment_criterion|round}]" value="3" />
 								<input class="star" type="radio" name="criterion[{$criterion.id_product_comment_criterion|round}]" value="4" />
-								<input class="star" type="radio" name="criterion[{$criterion.id_product_comment_criterion|round}]" value="5" />
+								<input class="star" type="radio" name="criterion[{$criterion.id_product_comment_criterion|round}]" value="5" checked="checked" />
 							</div>
 							<div class="clearfix"></div>
 						</li>

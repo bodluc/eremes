@@ -5,8 +5,8 @@
     height:                     55px;
     margin-top:                 46px;
     width:                      400px;
-    right:                      225px;
     z-index:                    1;
+    right:                      290px;
 }
 #header .shopping_cart > a:first-child:after {
     font-family:                "FontAwesome";
@@ -32,9 +32,9 @@ div.shopping_cart:before {
     background:                 url("/themes/audiorms2014/image/bg-cart-before.png") no-repeat scroll left top transparent;
     content:                    "";
     height:                     55px;
-    left:                       -55px;
     position:                   absolute;
     width:                      55px;
+    left:                       -55px;
 }
 .shopping_cart {
     width:                      270px;
